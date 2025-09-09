@@ -82457,7 +82457,7 @@ A.aiK.prototype={
 $1(a){var s,r,q,p=null,o=4*$.av().gbC(),n=8*$.av().gbn(),m=$.av()
 m=A.lb(4*Math.min(m.gbC(),m.gbn()))
 s=new A.cf(B.cw,0.3*$.av().gbC(),B.a7,-1)
-r=B.Js.nH(0.5)
+r=B.Js.nH(0.05)
 q=$.av()
 q=A.c([new A.bh(0,B.E,r,new A.h(2,2),3*Math.min(q.gbC(),q.gbn()))],t.E)
 r=$.av()
