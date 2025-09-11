@@ -1,0 +1,9 @@
+export 'about_view.dart';
+export 'educations_view.dart';
+export 'footer.dart';
+export 'home_view.dart';
+export 'profile_view.dart';
+export 'skills_view.dart';
+export 'widgets/custom_nav_drawer.dart';
+export 'widgets/nav_bar.dart';
+export 'work_experiences_view.dart';
