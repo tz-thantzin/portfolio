@@ -7,6 +7,7 @@ import '../../presentations/configs/constants.dart';
 import '../../presentations/configs/sizes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
 import '../../utils/style_theme.dart';
 import '../widgets/text/title_text.dart';
 import 'timeline_indicator.dart';
@@ -122,7 +123,7 @@ class _CompanyTitleAndPeriod extends StatelessWidget {
                 textHeightBehavior: textHeightBehavior,
                 overflow: TextOverflow.ellipsis,
               ),
-            SizedBox(height: s32.h),
+            SizedBox().verticalSpaceMassive,
           ],
         ),
       ],

@@ -6,6 +6,7 @@ import '../../models/education.dart';
 import '../../presentations/configs/sizes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
 import '../../utils/style_theme.dart';
 import '../widgets/text/title_text.dart';
 
@@ -24,7 +25,7 @@ class EducationSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           TitleText(context.localization.education),
-          verticalSpaceMassive,
+          SizedBox().verticalSpaceMassive,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: s40.w),
             child: Column(

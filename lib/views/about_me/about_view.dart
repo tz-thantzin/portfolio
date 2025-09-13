@@ -7,6 +7,7 @@ import '../../presentations/configs/duration.dart';
 import '../../presentations/configs/sizes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
 import '../widgets/animated_slide_widget.dart';
 import '../widgets/text/content_text.dart';
 import '../widgets/text/title_text.dart';
@@ -116,7 +117,7 @@ class AboutSectionState extends State<AboutSection>
                           ),
                   ],
                 ),
-                verticalSpaceMassive,
+                SizedBox().verticalSpaceMassive,
                 AnimatedSlideWidget(
                   animation: _technologyGridAnimation,
                   fadeAnimation: _fadeAnimation,

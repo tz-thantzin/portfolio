@@ -5,6 +5,7 @@ import '../../../presentations/configs/constants.dart';
 import '../../../presentations/configs/sizes.dart';
 import '../../../utils/extensions/context_ex.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
+import '../../../utils/extensions/widget_ex.dart';
 import '../../../utils/style_theme.dart';
 
 class NavBar extends StatelessWidget {
@@ -92,7 +93,7 @@ class NavBar extends StatelessWidget {
             ),
           ),
         ],
-        horizontalSpaceTiny,
+        SizedBox().horizontalSpaceTiny,
         DropdownButtonHideUnderline(
           child: DropdownButton<Locale>(
             value: locale ?? const Locale('en'),

@@ -9,6 +9,7 @@ import '../../presentations/configs/app_colors.dart';
 import '../../presentations/configs/duration.dart';
 import '../../presentations/configs/sizes.dart';
 import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
 import '../../view_models/home_view_model.dart';
 import 'text/caption_text.dart';
 
@@ -107,13 +108,13 @@ class _SocialBannerState extends State<SocialBanner>
             quarterTurns: 3,
             child: CaptionText(context.localization.follow_me),
           ),
-          verticalSpaceMedium,
+          SizedBox().verticalSpaceMedium,
           Container(
             width: 0.5.w,
             height: 100.h,
             color: kGrey300,
           ), // Straight Line
-          verticalSpaceMedium,
+          SizedBox().verticalSpaceMedium,
           for (int i = 0; i < contactList.length; i++)
             SlideTransition(
               position: _offsetAnimations[i],

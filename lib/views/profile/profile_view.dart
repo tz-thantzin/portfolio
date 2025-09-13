@@ -9,6 +9,7 @@ import '../../presentations/configs/duration.dart';
 import '../../presentations/configs/sizes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
 import '../../utils/style_theme.dart';
 import '../../view_models/home_view_model.dart';
 import '../home/widgets/snail_light_button.dart';
@@ -146,7 +147,7 @@ class _GreetingWidget extends StatelessWidget {
             textHeightBehavior: textHeightBehavior,
             style: AppTextStyle.subHeaderTextStyle(context),
           ),
-          verticalSpaceSmall,
+          SizedBox().verticalSpaceSmall,
           SelectableText.rich(
             TextSpan(
               children: localeCode == LanguageCode.ja.name

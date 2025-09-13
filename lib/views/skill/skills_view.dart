@@ -6,6 +6,7 @@ import '../../models/skill.dart';
 import '../../presentations/configs/app_colors.dart';
 import '../../presentations/configs/sizes.dart';
 import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
 import '../widgets/text/content_text.dart';
 import '../widgets/text/title_text.dart';
 
@@ -21,7 +22,7 @@ class SkillsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           LanguageAndTools(),
-          verticalSpaceEnormous,
+          SizedBox().verticalSpaceEnormous,
           WorkFlows(),
         ],
       ),
