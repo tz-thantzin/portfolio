@@ -3,9 +3,11 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../app_colors.dart';
-import '../../style_theme.dart';
-import '../../utils/constants.dart';
+import '../../../presentations/configs/app_colors.dart';
+import '../../../presentations/configs/duration.dart';
+import '../../../presentations/configs/sizes.dart';
+import '../../../utils/extensions/layout_adapter_ex.dart';
+import '../../../utils/style_theme.dart';
 
 class SnailLightButton extends StatefulWidget {
   final String label;
@@ -26,17 +28,14 @@ class _SnailLightButtonState extends State<SnailLightButton>
     with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late final AnimationController _controller;
 
-  BorderRadius get _radius => BorderRadius.circular(Sizes.sizeL.r);
+  BorderRadius get _radius => BorderRadius.circular(s24.r);
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 5000),
-    );
+    _controller = AnimationController(vsync: this, duration: duration5000);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) {
@@ -60,9 +59,6 @@ class _SnailLightButtonState extends State<SnailLightButton>
 
   @override
   Widget build(BuildContext context) {
-    final bool isMobile =
-        MediaQuery.of(context).size.width < Constants.desktopSize;
-
     return TickerMode(
       enabled: TickerMode.of(context),
       child: AnimatedBuilder(
@@ -81,15 +77,15 @@ class _SnailLightButtonState extends State<SnailLightButton>
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: <Color>[AppColors.indigo, AppColors.deepPurple],
+                      colors: <Color>[kPrimary, kSecondary],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
                     borderRadius: _radius,
                   ),
                   padding: EdgeInsets.symmetric(
-                    horizontal: isMobile ? Sizes.sizeS.w : Sizes.sizeXS.w,
-                    vertical: isMobile ? Sizes.sizeXS.h : Sizes.sizeS.h,
+                    horizontal: context.isMobile ? s8.w : s4.w,
+                    vertical: context.isMobile ? s4.h : s8.h,
                   ),
                   child: ElevatedButton.icon(
                     onPressed: widget.onPressed,
@@ -101,10 +97,9 @@ class _SnailLightButtonState extends State<SnailLightButton>
                     icon: widget.icon,
                     label: Text(
                       widget.label,
-                      style: AppTextStyle.buttonTextStyle(context).copyWith(
-                        color: AppColors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: AppTextStyle.buttonTextStyle(
+                        context,
+                      ).copyWith(color: kWhite, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

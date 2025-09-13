@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'constants.dart';
+import '../presentations/configs/constants.dart';
 
 class SessionUtil {
   final SharedPreferences _prefs;

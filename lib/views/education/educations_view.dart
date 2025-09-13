@@ -1,44 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../data/education_data.dart';
-import '../l10n/app_localizations.dart';
-import '../models/education.dart';
-import '../style_theme.dart';
-import '../utils/constants.dart';
-import 'widgets/text/title_text.dart';
+import '../../data/education_data.dart';
+import '../../models/education.dart';
+import '../../presentations/configs/sizes.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/style_theme.dart';
+import '../widgets/text/title_text.dart';
 
 class EducationSection extends StatelessWidget {
   const EducationSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final bool isMobile =
-        MediaQuery.of(context).size.width < Constants.desktopSize;
-
     final List<Education> items = educations(context);
 
     return Container(
-      padding: EdgeInsets.symmetric(
-        vertical: Paddings.paddingXXL.h,
-        horizontal: Paddings.paddingL.w,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s40.h),
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          TitleText(AppLocalizations.of(context)!.education),
-          SizedBox(height: Sizes.sizeXL.h),
+          TitleText(context.localization.education),
+          verticalSpaceMassive,
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: Sizes.sizeXXL.w),
+            padding: EdgeInsets.symmetric(horizontal: s40.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: items
-                  .map(
-                    (Education edu) =>
-                        _EducationItem(edu: edu, isMobile: isMobile),
-                  )
+                  .map((Education edu) => _EducationItem(edu: edu))
                   .toList(),
             ),
           ),
@@ -49,15 +41,14 @@ class EducationSection extends StatelessWidget {
 }
 
 class _EducationItem extends StatelessWidget {
-  const _EducationItem({required this.edu, required this.isMobile});
+  const _EducationItem({required this.edu});
 
   final Education edu;
-  final bool isMobile;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: Sizes.sizeL.h),
+      padding: EdgeInsets.only(bottom: s24.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -66,9 +57,8 @@ class _EducationItem extends StatelessWidget {
             period: edu.duration,
             titleStyle: AppTextStyle.blockTitleStyle(context),
             periodStyle: AppTextStyle.blockPeriodStyle(context),
-            isMobile: isMobile,
           ),
-          SizedBox(height: Sizes.sizeS.h),
+          SizedBox(height: s8.h),
           Text(
             edu.institution,
             style: AppTextStyle.blockSubTitleStyle(context),
@@ -87,14 +77,12 @@ class _TitlePeriodResponsive extends StatelessWidget {
     required this.period,
     required this.titleStyle,
     required this.periodStyle,
-    required this.isMobile,
   });
 
   final String title;
   final String period;
   final TextStyle titleStyle;
   final TextStyle periodStyle;
-  final bool isMobile;
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +100,7 @@ class _TitlePeriodResponsive extends StatelessWidget {
       softWrap: false,
     );
 
-    if (isMobile) {
+    if (context.isMobile) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[titleText, periodText],

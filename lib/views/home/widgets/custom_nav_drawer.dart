@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../l10n/app_localizations.dart';
-import '../../style_theme.dart';
-import '../../utils/constants.dart';
+import '../../../presentations/configs/constants.dart';
+import '../../../utils/extensions/context_ex.dart';
+import '../../../utils/style_theme.dart';
 
 class CustomNavigationDrawer extends StatelessWidget {
   final Function(String) onNavItemClicked;
@@ -36,35 +36,35 @@ class CustomNavigationDrawer extends StatelessWidget {
             children: <Widget>[
               ListTile(
                 title: Text(
-                  AppLocalizations.of(context)!.home,
+                  context.localization.home,
                   style: AppTextStyle.navItemTextStyle(context),
                 ),
                 onTap: () => onNavItemClicked(Constants.home),
               ),
               ListTile(
                 title: Text(
-                  AppLocalizations.of(context)!.about,
+                  context.localization.about,
                   style: AppTextStyle.navItemTextStyle(context),
                 ),
                 onTap: () => onNavItemClicked(Constants.about),
               ),
               ListTile(
                 title: Text(
-                  AppLocalizations.of(context)!.work_experience,
+                  context.localization.work_experience,
                   style: AppTextStyle.navItemTextStyle(context),
                 ),
                 onTap: () => onNavItemClicked(Constants.experience),
               ),
               ListTile(
                 title: Text(
-                  AppLocalizations.of(context)!.education,
+                  context.localization.education,
                   style: AppTextStyle.navItemTextStyle(context),
                 ),
                 onTap: () => onNavItemClicked(Constants.education),
               ),
               ListTile(
                 title: Text(
-                  AppLocalizations.of(context)!.skill,
+                  context.localization.skill,
                   style: AppTextStyle.navItemTextStyle(context),
                 ),
                 onTap: () => onNavItemClicked(Constants.skill),

@@ -2,9 +2,11 @@ import 'package:flutter/widgets.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/skill.dart';
+import '../utils/extensions/context_ex.dart';
 
 List<Workflow> workflows(BuildContext context) {
-  final AppLocalizations l10n = AppLocalizations.of(context)!;
+  final AppLocalizations l10n = context.localization;
+
   return l10n.workflows
       .split('|')
       .map((String desc) => Workflow(description: desc.trim()))

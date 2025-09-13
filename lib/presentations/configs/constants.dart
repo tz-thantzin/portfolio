@@ -13,7 +13,6 @@ class Constants {
   static const String skill = 'skill';
   static const String education = 'education';
   static const String experience = 'experience';
-  static const int desktopSize = 700;
   static const String myCV =
       'https://github.com/tz-thantzin/portfolio/blob/main/assets/pdf/ThantZin_CV.pdf';
   static const String myJpCV =

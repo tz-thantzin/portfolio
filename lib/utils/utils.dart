@@ -1,7 +1,7 @@
 import 'package:url_launcher/url_launcher.dart';
 import 'package:web/web.dart' as web;
 
-import 'constants.dart';
+import '../presentations/configs/constants.dart';
 import 'event_analytics.dart';
 
 void updateBrowserUrl(String section) {

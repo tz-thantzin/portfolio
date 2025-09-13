@@ -4,7 +4,8 @@ import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
 
-import '../utils/constants.dart';
+import '../presentations/configs/constants.dart';
+import '../presentations/configs/duration.dart';
 import '../utils/event_analytics.dart';
 import '../utils/session.dart';
 import '../utils/utils.dart';
@@ -25,7 +26,7 @@ class HomeViewModel extends ChangeNotifier {
 
   bool _isDrawerOpen = false;
   Timer? _debounceTimer;
-  String currentSelectedSection = '';
+  String _currentSelectedSection = '';
 
   bool _isNavigatingByClick = false;
 
@@ -33,6 +34,7 @@ class HomeViewModel extends ChangeNotifier {
   Locale? get locale => _locale;
 
   bool get isDrawerOpen => _isDrawerOpen;
+  String get currentSelectedSection => _currentSelectedSection;
 
   @override
   void dispose() {
@@ -89,19 +91,19 @@ class HomeViewModel extends ChangeNotifier {
     if (context != null) {
       Scrollable.ensureVisible(
         context,
-        duration: const Duration(milliseconds: 500),
+        duration: duration500,
         curve: Curves.easeInOut,
       );
     }
   }
 
   void handleNavigation(String section) {
-    if (section.isEmpty || section == currentSelectedSection) {
+    if (section.isEmpty || section == _currentSelectedSection) {
       return;
     }
 
     _isNavigatingByClick = true;
-    currentSelectedSection = section;
+    _currentSelectedSection = section;
     notifyListeners();
 
     switch (section) {
@@ -131,17 +133,17 @@ class HomeViewModel extends ChangeNotifier {
         break;
     }
 
-    Future<void>.delayed(const Duration(milliseconds: 800), () {
+    Future<void>.delayed(duration800, () {
       _isNavigatingByClick = false;
     });
   }
 
   void updateCurrentSectionOnScroll(String section) {
-    if (_isNavigatingByClick || section == currentSelectedSection) {
+    if (_isNavigatingByClick || section == _currentSelectedSection) {
       return;
     }
 
-    currentSelectedSection = section;
+    _currentSelectedSection = section;
     updateBrowserUrl(section);
     notifyListeners();
   }
@@ -156,7 +158,7 @@ class HomeViewModel extends ChangeNotifier {
 
       _debounceTimer?.cancel();
 
-      _debounceTimer = Timer(const Duration(milliseconds: 300), () {
+      _debounceTimer = Timer(duration300, () {
         handleNavigation(fragment);
       });
     }).toJS;
@@ -175,11 +177,6 @@ class HomeViewModel extends ChangeNotifier {
       parameters: <String, Object>{
         'timestamp': DateTime.now().toIso8601String(),
       },
-    );
-    print(
-      _locale?.languageCode == LanguageCode.ja.name
-          ? Constants.myJpCV
-          : Constants.myCV,
     );
     launchUrlExternal(
       _locale?.languageCode == LanguageCode.ja.name

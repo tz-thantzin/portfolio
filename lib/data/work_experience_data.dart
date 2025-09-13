@@ -2,9 +2,10 @@ import 'package:flutter/widgets.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/work_experience.dart';
+import '../utils/extensions/context_ex.dart';
 
 List<WorkExperience> experiences(BuildContext context) {
-  final AppLocalizations l10n = AppLocalizations.of(context)!;
+  final AppLocalizations l10n = context.localization;
 
   return <WorkExperience>[
     WorkExperience(

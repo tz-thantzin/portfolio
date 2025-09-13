@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-import '../l10n/app_localizations.dart';
-import '../style_theme.dart';
-import '../utils/constants.dart';
-import 'widgets/animated_slide_widget.dart';
-import 'widgets/technology_grid.dart';
-import 'widgets/text/content_text.dart';
-import 'widgets/text/title_text.dart';
+import '../../presentations/configs/constants.dart';
+import '../../presentations/configs/duration.dart';
+import '../../presentations/configs/sizes.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../widgets/animated_slide_widget.dart';
+import '../widgets/text/content_text.dart';
+import '../widgets/text/title_text.dart';
+import 'technology_grid.dart';
 
 class AboutSection extends StatefulWidget {
   const AboutSection({super.key});
@@ -29,10 +31,7 @@ class AboutSectionState extends State<AboutSection>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1000),
-    );
+    _controller = AnimationController(vsync: this, duration: duration1000);
 
     // Animation for the image (left to right)
     _aboutImageAnimation = Tween<Offset>(
@@ -66,8 +65,6 @@ class AboutSectionState extends State<AboutSection>
 
   @override
   Widget build(BuildContext context) {
-    final bool isMobile =
-        MediaQuery.of(context).size.width < Constants.desktopSize;
     return AnimatedBuilder(
       animation: _controller,
       builder: (BuildContext context, Widget? child) {
@@ -80,49 +77,46 @@ class AboutSectionState extends State<AboutSection>
             }
           },
           child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: Paddings.paddingXXL.h,
-              horizontal: Paddings.paddingL.w,
-            ),
+            padding: EdgeInsets.symmetric(vertical: s40.h, horizontal: s24.w),
             width: double.infinity,
             child: Column(
               children: <Widget>[
                 Flex(
-                  direction: isMobile ? Axis.vertical : Axis.horizontal,
+                  direction: context.isMobile ? Axis.vertical : Axis.horizontal,
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    isMobile
+                    context.isMobile
                         ? AnimatedSlideWidget(
                             animation: _aboutImageAnimation,
                             fadeAnimation: _fadeAnimation,
-                            child: _AboutImage(isMobile),
+                            child: _AboutImage(),
                           )
                         : Expanded(
                             flex: 1,
                             child: AnimatedSlideWidget(
                               animation: _aboutImageAnimation,
                               fadeAnimation: _fadeAnimation,
-                              child: _AboutImage(isMobile),
+                              child: _AboutImage(),
                             ),
                           ),
-                    isMobile
+                    context.isMobile
                         ? AnimatedSlideWidget(
                             animation: _messagesAnimation,
                             fadeAnimation: _fadeAnimation,
-                            child: _Messages(isMobile),
+                            child: _Messages(),
                           )
                         : Expanded(
                             flex: 2,
                             child: AnimatedSlideWidget(
                               animation: _messagesAnimation,
                               fadeAnimation: _fadeAnimation,
-                              child: _Messages(isMobile),
+                              child: _Messages(),
                             ),
                           ),
                   ],
                 ),
-                SizedBox(height: Sizes.sizeXL.h),
+                verticalSpaceMassive,
                 AnimatedSlideWidget(
                   animation: _technologyGridAnimation,
                   fadeAnimation: _fadeAnimation,
@@ -138,21 +132,20 @@ class AboutSectionState extends State<AboutSection>
 }
 
 class _Messages extends StatelessWidget {
-  const _Messages(this.isMobile);
-  final bool isMobile;
+  const _Messages();
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Sizes.sizeL.w),
+      padding: EdgeInsets.symmetric(horizontal: s24.w),
       child: Column(
-        crossAxisAlignment: isMobile
+        crossAxisAlignment: context.isMobile
             ? CrossAxisAlignment.center
             : CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          TitleText(AppLocalizations.of(context)!.about_me),
-          SizedBox(height: Sizes.sizeM.h),
-          ContentText(AppLocalizations.of(context)!.about_me_description),
+          TitleText(context.localization.about_me),
+          verticalSpaceMedium,
+          ContentText(context.localization.about_me_description),
         ],
       ),
     );
@@ -160,12 +153,11 @@ class _Messages extends StatelessWidget {
 }
 
 class _AboutImage extends StatelessWidget {
-  const _AboutImage(this.isMobile);
-  final bool isMobile;
+  const _AboutImage();
 
   @override
   Widget build(BuildContext context) {
-    final double? size = isMobile ? 250.r : 450.r;
+    final double? size = context.isMobile ? 250.r : 450.r;
     return SizedBox(
       height: size,
       child: AspectRatio(

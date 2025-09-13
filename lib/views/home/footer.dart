@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../style_theme.dart';
+import '../../utils/style_theme.dart';
 
 class FooterSection extends StatelessWidget {
   const FooterSection({super.key});

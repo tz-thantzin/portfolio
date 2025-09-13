@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import 'l10n/app_localizations.dart';
-import 'utils/constants.dart';
+import 'presentations/configs/constants.dart';
 import 'view_models/home_view_model.dart';
-import 'views/home_view.dart';
+import 'views/home/home_view.dart';
 
 class MyPortfolioApp extends StatelessWidget {
   const MyPortfolioApp({super.key});
@@ -19,7 +19,7 @@ class MyPortfolioApp extends StatelessWidget {
       minTextAdapt: false,
       splitScreenMode: true,
       builder: (_, __) => MaterialApp(
-        title: 'Thant Zin | Senior Mobile Application Developer',
+        title: 'Thant Zin',
         theme: ThemeData(
           useMaterial3: true,
           textTheme: _buildLocaleTextTheme(

@@ -4,11 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:web/web.dart' as web;
 
-import '../../view_models/home_view_model.dart';
-import '../style_theme.dart';
-import '../utils/constants.dart';
-import 'views.dart';
-import 'widgets/social_banner.dart';
+import '../../../view_models/home_view_model.dart';
+import '../../presentations/configs/constants.dart';
+import '../../presentations/configs/duration.dart';
+import '../../presentations/configs/sizes.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../views.dart';
+import '../widgets/social_banner.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -101,7 +103,7 @@ class _HomeViewState extends State<HomeView> {
         children: <Widget>[
           SingleChildScrollView(
             controller: _scrollController,
-            padding: EdgeInsets.symmetric(horizontal: Sizes.sizeM.w),
+            padding: EdgeInsets.symmetric(horizontal: s16.w),
             child: Column(
               children: List<Widget>.generate(
                 _sections.length,
@@ -156,7 +158,6 @@ class AnimatedSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double sectionHeight = MediaQuery.of(context).size.height - 60.h;
     final HomeViewModel homeViewModel = Provider.of<HomeViewModel>(
       context,
       listen: false,
@@ -173,14 +174,14 @@ class AnimatedSection extends StatelessWidget {
         }
       },
       child: Container(
-        constraints: BoxConstraints(minHeight: sectionHeight),
+        constraints: BoxConstraints(minHeight: context.sectionHeight),
         child: AnimatedOpacity(
           opacity: isVisible ? 1.0 : 0.0,
-          duration: const Duration(seconds: 2),
+          duration: duration2000,
           curve: Curves.easeOut,
           child: TweenAnimationBuilder<Offset>(
             tween: Tween<Offset>(begin: const Offset(0, 20), end: Offset.zero),
-            duration: const Duration(seconds: 2),
+            duration: duration2000,
             curve: Curves.easeOut,
             builder: (BuildContext context, Offset offset, Widget? child) {
               return Transform.translate(

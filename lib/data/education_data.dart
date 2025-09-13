@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/education.dart';
+import '../utils/extensions/context_ex.dart';
 
 List<Education> educations(BuildContext context) {
-  final AppLocalizations l10n = AppLocalizations.of(context)!;
+  final AppLocalizations l10n = context.localization;
 
   return <Education>[
     Education(

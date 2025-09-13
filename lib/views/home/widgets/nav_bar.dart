@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../l10n/app_localizations.dart';
-import '../../style_theme.dart';
-import '../../utils/constants.dart';
+import '../../../presentations/configs/constants.dart';
+import '../../../presentations/configs/sizes.dart';
+import '../../../utils/extensions/context_ex.dart';
+import '../../../utils/extensions/layout_adapter_ex.dart';
+import '../../../utils/style_theme.dart';
 
 class NavBar extends StatelessWidget {
   final Function(String) onNavItemClicked;
@@ -34,13 +36,10 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isMobile =
-        MediaQuery.of(context).size.width < Constants.desktopSize;
-
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
-      leading: isMobile
+      leading: context.isMobile
           ? Builder(
               builder: (BuildContext context) => IconButton(
                 icon: const Icon(Icons.menu, color: Colors.indigo),
@@ -49,54 +48,51 @@ class NavBar extends StatelessWidget {
             )
           : null,
       title: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: Paddings.paddingXXL.h,
-          horizontal: Paddings.paddingS.w,
-        ),
+        padding: EdgeInsets.symmetric(vertical: s40.h, horizontal: s8.w),
         child: Text(
           'Thant Zin',
           style: AppTextStyle.navTitleTextStyle(context),
         ),
       ),
       actions: <Widget>[
-        if (!isMobile) ...<Widget>[
+        if (!context.isMobile) ...<Widget>[
           TextButton(
             onPressed: () => onNavItemClicked(Constants.home),
             child: Text(
-              AppLocalizations.of(context)!.home,
+              context.localization.home,
               style: _navItemStyle(context, Constants.home),
             ),
           ),
           TextButton(
             onPressed: () => onNavItemClicked(Constants.about),
             child: Text(
-              AppLocalizations.of(context)!.about,
+              context.localization.about,
               style: _navItemStyle(context, Constants.about),
             ),
           ),
           TextButton(
             onPressed: () => onNavItemClicked(Constants.experience),
             child: Text(
-              AppLocalizations.of(context)!.work_experience,
+              context.localization.work_experience,
               style: _navItemStyle(context, Constants.experience),
             ),
           ),
           TextButton(
             onPressed: () => onNavItemClicked(Constants.education),
             child: Text(
-              AppLocalizations.of(context)!.education,
+              context.localization.education,
               style: _navItemStyle(context, Constants.education),
             ),
           ),
           TextButton(
             onPressed: () => onNavItemClicked(Constants.skill),
             child: Text(
-              AppLocalizations.of(context)!.skill,
+              context.localization.skill,
               style: _navItemStyle(context, Constants.skill),
             ),
           ),
         ],
-        SizedBox(width: Sizes.sizeXS.w),
+        horizontalSpaceTiny,
         DropdownButtonHideUnderline(
           child: DropdownButton<Locale>(
             value: locale ?? const Locale('en'),
@@ -147,7 +143,7 @@ class NavBar extends StatelessWidget {
         ),
 
         Container(
-          margin: EdgeInsets.only(right: Sizes.sizeS.w),
+          margin: EdgeInsets.only(right: s8.w),
           child: IconButton(
             icon: Icon(
               themeMode == ThemeMode.dark ? Icons.dark_mode : Icons.light_mode,

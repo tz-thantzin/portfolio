@@ -3,11 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../../app_colors.dart';
 import '../../data/contact_data.dart';
-import '../../l10n/app_localizations.dart';
 import '../../models/contact.dart';
-import '../../style_theme.dart';
+import '../../presentations/configs/app_colors.dart';
+import '../../presentations/configs/duration.dart';
+import '../../presentations/configs/sizes.dart';
+import '../../utils/extensions/context_ex.dart';
 import '../../view_models/home_view_model.dart';
 import 'text/caption_text.dart';
 
@@ -48,10 +49,7 @@ class _SocialBannerState extends State<SocialBanner>
 
     _controllers = List<AnimationController>.generate(
       contactList.length,
-      (int index) => AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: 800),
-      ),
+      (int index) => AnimationController(vsync: this, duration: duration800),
     );
 
     _offsetAnimations = _controllers
@@ -81,7 +79,7 @@ class _SocialBannerState extends State<SocialBanner>
 
   Future<void> _runStaggeredAnimations() async {
     for (int i = 0; i < _controllers.length; i++) {
-      await Future<void>.delayed(const Duration(milliseconds: 500));
+      await Future<void>.delayed(duration500);
       _controllers[i].forward();
     }
   }
@@ -101,28 +99,28 @@ class _SocialBannerState extends State<SocialBanner>
     return Container(
       width: 30.w,
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.only(left: Sizes.sizeS.w),
+      padding: EdgeInsets.only(left: s8.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           RotatedBox(
             quarterTurns: 3,
-            child: CaptionText(AppLocalizations.of(context)!.follow_me),
+            child: CaptionText(context.localization.follow_me),
           ),
-          SizedBox(height: Sizes.sizeM.h),
+          verticalSpaceMedium,
           Container(
             width: 0.5.w,
             height: 100.h,
-            color: AppColors.grey300,
+            color: kGrey300,
           ), // Straight Line
-          SizedBox(height: Sizes.sizeM.h),
+          verticalSpaceMedium,
           for (int i = 0; i < contactList.length; i++)
             SlideTransition(
               position: _offsetAnimations[i],
               child: FadeTransition(
                 opacity: _opacityAnimations[i],
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: Sizes.sizeS.h),
+                  padding: EdgeInsets.only(bottom: s8.h),
                   child: InkWell(
                     onTap: () => context
                         .read<HomeViewModel>()
@@ -130,7 +128,7 @@ class _SocialBannerState extends State<SocialBanner>
                     child: Icon(
                       _getIcon(contactList[i].name),
                       color: Colors.grey,
-                      size: Sizes.sizeL.r,
+                      size: s24.r,
                     ),
                   ),
                 ),

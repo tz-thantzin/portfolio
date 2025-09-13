@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
-import 'utils/constants.dart';
-
-bool _isDesktop(BuildContext context) {
-  final double width = MediaQuery.of(context).size.width;
-  return width >= Constants.desktopSize;
-}
+import '../presentations/configs/app_colors.dart';
+import 'extensions/layout_adapter_ex.dart';
 
 double _scaleFontSize(BuildContext context, double base) {
   const double desktopScale = 1.25;
-  return _isDesktop(context) ? base * desktopScale : base;
+  return context.isDesktop ? base * desktopScale : base;
 }
 
 const List<String> _fallbackFonts = <String>['NotoSansJP', 'NotoSansThai'];
@@ -28,7 +23,7 @@ class AppTextStyle {
     fontFamily: 'MulishLocal',
     fontFamilyFallback: _fallbackFonts,
     fontWeight: FontWeight.w500,
-    color: AppColors.indigo,
+    color: kPrimary,
     fontSize: _scaleFontSize(context, 11),
   );
 
@@ -131,14 +126,14 @@ class AppTextStyle {
     fontFamily: 'MulishLocal',
     fontFamilyFallback: _fallbackFonts,
     fontSize: _scaleFontSize(context, 14),
-    color: AppColors.white,
+    color: kWhite,
   );
 
   static TextStyle navDrawerTitleTextStyle(BuildContext context) => TextStyle(
     fontFamily: 'MulishLocal',
     fontFamilyFallback: _fallbackFonts,
     fontSize: _scaleFontSize(context, 16),
-    color: AppColors.white,
+    color: kWhite,
     fontWeight: FontWeight.w600,
   );
 
@@ -149,22 +144,4 @@ class AppTextStyle {
         fontSize: _scaleFontSize(context, 14),
         color: Colors.white70,
       );
-}
-
-class Paddings {
-  static const int paddingXS = 4;
-  static const int paddingS = 8;
-  static const int paddingM = 16;
-  static const int paddingL = 24;
-  static const int paddingXL = 32;
-  static const int paddingXXL = 40;
-}
-
-class Sizes {
-  static const int sizeXS = 4;
-  static const int sizeS = 8;
-  static const int sizeM = 16;
-  static const int sizeL = 24;
-  static const int sizeXL = 32;
-  static const int sizeXXL = 40;
 }

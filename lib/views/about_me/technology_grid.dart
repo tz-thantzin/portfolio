@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../app_colors.dart';
-import '../../l10n/app_localizations.dart';
-import '../../style_theme.dart';
-import '../../utils/constants.dart';
-import 'text/tag_text.dart';
-import 'text/title_text.dart';
+import '../../presentations/configs/app_colors.dart';
+import '../../presentations/configs/constants.dart';
+import '../../presentations/configs/sizes.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../widgets/text/tag_text.dart';
+import '../widgets/text/title_text.dart';
 
 class TechnologyGrid extends StatelessWidget {
   TechnologyGrid({super.key});
@@ -14,28 +14,25 @@ class TechnologyGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Sizes.sizeS.w),
+      padding: EdgeInsets.symmetric(horizontal: s8.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          TitleText(AppLocalizations.of(context)!.technologies),
-          SizedBox(height: Sizes.sizeM.h),
+          TitleText(context.localization.technologies),
+          SizedBox(height: s16.h),
           Wrap(
             spacing: 2.w,
             runSpacing: 8.h,
             children: technologies.map((String tech) {
               return Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Sizes.sizeXS.w,
-                  vertical: Sizes.sizeS.h,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: s4.w, vertical: s8.h),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.r),
-                  border: Border.all(color: AppColors.indigo, width: 0.3.w),
+                  border: Border.all(color: kPrimary, width: 0.3.w),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                      color: AppColors.grey500.withValues(alpha: 0.05),
+                      color: kGrey500.withValues(alpha: 0.05),
                       blurRadius: 3.r,
                       offset: Offset(2, 2),
                     ),
@@ -44,11 +41,7 @@ class TechnologyGrid extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Icon(
-                      Icons.arrow_right,
-                      size: 20.r,
-                      color: AppColors.indigo,
-                    ),
+                    Icon(Icons.arrow_right, size: 20.r, color: kPrimary),
                     TagText(tech),
                   ],
                 ),

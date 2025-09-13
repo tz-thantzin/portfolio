@@ -3,13 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-import '../app_colors.dart';
-import '../l10n/app_localizations.dart';
-import '../style_theme.dart';
-import '../utils/constants.dart';
-import '../view_models/home_view_model.dart';
-import 'widgets/animated_slide_widget.dart';
-import 'widgets/snail_light_button.dart';
+import '../../presentations/configs/app_colors.dart';
+import '../../presentations/configs/constants.dart';
+import '../../presentations/configs/duration.dart';
+import '../../presentations/configs/sizes.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/style_theme.dart';
+import '../../view_models/home_view_model.dart';
+import '../home/widgets/snail_light_button.dart';
+import '../widgets/animated_slide_widget.dart';
 
 class ProfileSection extends StatefulWidget {
   const ProfileSection({super.key});
@@ -29,10 +32,7 @@ class _ProfileSectionState extends State<ProfileSection>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 1000),
-      vsync: this,
-    );
+    _controller = AnimationController(duration: duration1000, vsync: this);
 
     // Animation for the greeting message (left to right)
     _greetingOffsetAnimation = Tween<Offset>(
@@ -61,9 +61,6 @@ class _ProfileSectionState extends State<ProfileSection>
 
   @override
   Widget build(BuildContext context) {
-    final bool isMobile =
-        MediaQuery.of(context).size.width < Constants.desktopSize;
-
     return AnimatedBuilder(
       animation: _controller,
       builder: (BuildContext context, Widget? child) {
@@ -76,43 +73,40 @@ class _ProfileSectionState extends State<ProfileSection>
             }
           },
           child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: Paddings.paddingXXL.h,
-              horizontal: Paddings.paddingL.w,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s40.h),
             child: Flex(
-              direction: isMobile ? Axis.vertical : Axis.horizontal,
-              mainAxisAlignment: isMobile
+              direction: context.isMobile ? Axis.vertical : Axis.horizontal,
+              mainAxisAlignment: context.isMobile
                   ? MainAxisAlignment.center
                   : MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                isMobile
+                context.isMobile
                     ? AnimatedSlideWidget(
                         animation: _greetingOffsetAnimation,
                         fadeAnimation: _fadeAnimation,
-                        child: _GreetingWidget(isMobile: isMobile),
+                        child: _GreetingWidget(),
                       )
                     : Expanded(
                         flex: 2,
                         child: AnimatedSlideWidget(
                           animation: _greetingOffsetAnimation,
                           fadeAnimation: _fadeAnimation,
-                          child: _GreetingWidget(isMobile: isMobile),
+                          child: _GreetingWidget(),
                         ),
                       ),
-                isMobile
+                context.isMobile
                     ? AnimatedSlideWidget(
                         animation: _profileOffsetAnimation,
                         fadeAnimation: _fadeAnimation,
-                        child: _ProfileImage(isMobile),
+                        child: _ProfileImage(),
                       )
                     : Expanded(
                         flex: 1,
                         child: AnimatedSlideWidget(
                           animation: _profileOffsetAnimation,
                           fadeAnimation: _fadeAnimation,
-                          child: _ProfileImage(isMobile),
+                          child: _ProfileImage(),
                         ),
                       ),
               ],
@@ -125,8 +119,7 @@ class _ProfileSectionState extends State<ProfileSection>
 }
 
 class _GreetingWidget extends StatelessWidget {
-  final bool isMobile;
-  const _GreetingWidget({required this.isMobile});
+  const _GreetingWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -141,55 +134,55 @@ class _GreetingWidget extends StatelessWidget {
     );
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Sizes.sizeL.w),
+      padding: EdgeInsets.symmetric(horizontal: s24.w),
       child: Column(
-        crossAxisAlignment: isMobile
+        crossAxisAlignment: context.isMobile
             ? CrossAxisAlignment.center
             : CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SelectableText(
-            AppLocalizations.of(context)!.hi,
+            context.localization.hi,
             textHeightBehavior: textHeightBehavior,
             style: AppTextStyle.subHeaderTextStyle(context),
           ),
-          SizedBox(height: Sizes.sizeS.h),
+          verticalSpaceSmall,
           SelectableText.rich(
             TextSpan(
               children: localeCode == LanguageCode.ja.name
                   ? <InlineSpan>[
                       TextSpan(
-                        text: AppLocalizations.of(context)!.thantzin,
+                        text: context.localization.thantzin,
                         style: AppTextStyle.headerTextStyle(context),
                       ),
                       TextSpan(
-                        text: AppLocalizations.of(context)!.i_am,
+                        text: context.localization.i_am,
                         style: AppTextStyle.subHeaderTextStyle(context),
                       ),
                     ]
                   : <InlineSpan>[
                       TextSpan(
-                        text: AppLocalizations.of(context)!.i_am,
+                        text: context.localization.i_am,
                         style: AppTextStyle.subHeaderTextStyle(context),
                       ),
                       TextSpan(
-                        text: AppLocalizations.of(context)!.thantzin,
+                        text: context.localization.thantzin,
                         style: AppTextStyle.headerTextStyle(context),
                       ),
                     ],
             ),
             textHeightBehavior: textHeightBehavior,
           ),
-          SizedBox(height: Sizes.sizeS.h),
+          SizedBox(height: s8.h),
           SelectableText(
-            AppLocalizations.of(context)!.senior_mobile_developer,
+            context.localization.senior_mobile_developer,
             textHeightBehavior: textHeightBehavior,
             style: AppTextStyle.descriptionTextStyle(context),
           ),
-          SizedBox(height: Sizes.sizeXL.h),
+          SizedBox(height: s32.h),
           SnailLightButton(
-            label: AppLocalizations.of(context)!.download_resume,
-            icon: Icon(Icons.download_rounded, color: AppColors.white),
+            label: context.localization.download_resume,
+            icon: Icon(Icons.download_rounded, color: kWhite),
             onPressed: context.read<HomeViewModel>().onDownloadResumeBtnPressed,
           ),
         ],
@@ -199,12 +192,11 @@ class _GreetingWidget extends StatelessWidget {
 }
 
 class _ProfileImage extends StatelessWidget {
-  final bool isMobile;
-  const _ProfileImage(this.isMobile);
+  const _ProfileImage();
 
   @override
   Widget build(BuildContext context) {
-    final double? size = isMobile ? 250.r : 450.r;
+    final double? size = context.isMobile ? 250.h : 450.h;
 
     return SizedBox(
       height: size,

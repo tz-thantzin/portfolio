@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../style_theme.dart';
+import '../../../utils/style_theme.dart';
 
 class ContentText extends StatelessWidget {
   final String data;
