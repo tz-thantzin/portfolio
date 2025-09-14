@@ -10,7 +10,7 @@ import '../../../view_models/home_view_model.dart';
 import '../../presentations/configs/constants.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
-import '../home/widgets/snail_light_button.dart';
+import 'widgets/snail_light_button.dart';
 
 class GreetingWidget extends StatelessWidget {
   const GreetingWidget({super.key});

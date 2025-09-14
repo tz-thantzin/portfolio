@@ -50,6 +50,7 @@ class _ProfileSectionState extends State<ProfileSection>
 
   @override
   void dispose() {
+    VisibilityDetectorController.instance.forget(Key('profile_section'));
     _controller.dispose();
     super.dispose();
   }

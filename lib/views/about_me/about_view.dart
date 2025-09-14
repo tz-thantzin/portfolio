@@ -60,6 +60,8 @@ class AboutSectionState extends State<AboutSection>
 
   @override
   void dispose() {
+    VisibilityDetectorController.instance.forget(Key('about_section'));
+
     _controller.dispose();
     super.dispose();
   }

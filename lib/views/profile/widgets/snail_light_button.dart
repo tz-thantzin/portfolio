@@ -43,7 +43,7 @@ class _SnailLightButtonState extends State<SnailLightButton>
       if (!mounted) {
         return;
       }
-      if (TickerMode.of(context)) {
+      if (TickerMode.of(context) && !_controller.isAnimating) {
         _controller.repeat();
       }
     });
@@ -52,6 +52,9 @@ class _SnailLightButtonState extends State<SnailLightButton>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    if (_controller.isAnimating) {
+      _controller.stop();
+    }
     _controller.dispose();
     super.dispose();
   }
@@ -68,6 +71,9 @@ class _SnailLightButtonState extends State<SnailLightButton>
         child: AnimatedBuilder(
           animation: _controller,
           builder: (BuildContext context, _) {
+            if (!mounted) {
+              return const SizedBox.shrink();
+            }
             return Padding(
               padding: const EdgeInsets.all(3),
               child: ClipRRect(
@@ -124,12 +130,17 @@ class _SnailLightButtonContent extends StatelessWidget {
       ),
       child: ElevatedButton.icon(
         onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          shape: RoundedRectangleBorder(borderRadius: radius),
-          padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s12.h),
-        ),
+        style:
+            ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
+              shape: RoundedRectangleBorder(borderRadius: radius),
+              padding: EdgeInsets.symmetric(horizontal: s12.w, vertical: s12.h),
+            ).copyWith(
+              // remove splash / hover colors
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
+              surfaceTintColor: WidgetStateProperty.all(Colors.transparent),
+            ),
         icon: icon,
         label: Text(
           label,
