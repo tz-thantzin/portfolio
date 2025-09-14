@@ -178,6 +178,7 @@ class HomeViewModel extends ChangeNotifier {
         'timestamp': DateTime.now().toIso8601String(),
       },
     );
+
     launchUrlExternal(
       _locale?.languageCode == LanguageCode.ja.name
           ? Constants.myJpCV

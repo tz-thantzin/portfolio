@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const Color kPrimary = Colors.indigo;
 const Color kSecondary = Colors.deepPurple;
 const Color kWhite = Colors.white;
+const Color kBlack = Colors.black;
 const Color kTransparent = Colors.transparent;
 
 // ===== support colors =====

@@ -10,7 +10,7 @@ import '../../../view_models/home_view_model.dart';
 import '../../presentations/configs/constants.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
-import 'widgets/snail_light_button.dart';
+import 'widgets/wave_button.dart';
 
 class GreetingWidget extends StatelessWidget {
   const GreetingWidget({super.key});
@@ -67,17 +67,19 @@ class GreetingWidget extends StatelessWidget {
             ),
             textHeightBehavior: textHeightBehavior,
           ),
-          SizedBox(height: s8.h),
+          SizedBox().verticalSpaceSmall,
           SelectableText(
             context.localization.senior_mobile_developer,
             textHeightBehavior: textHeightBehavior,
             style: AppTextStyle.descriptionTextStyle(context),
           ),
-          SizedBox(height: s32.h),
-          SnailLightButton(
+          SizedBox().verticalSpaceMassive,
+          WaveButton(
             label: context.localization.download_resume,
             icon: const Icon(Icons.download_rounded, color: kWhite),
-            onPressed: context.read<HomeViewModel>().onDownloadResumeBtnPressed,
+            onPressed: () async {
+              context.read<HomeViewModel>().onDownloadResumeBtnPressed();
+            },
           ),
         ],
       ),
