@@ -13,6 +13,7 @@ class SnailLightButton extends StatefulWidget {
   final String label;
   final Widget? icon;
   final VoidCallback? onPressed;
+
   const SnailLightButton({
     required this.label,
     super.key,
@@ -27,6 +28,7 @@ class SnailLightButton extends StatefulWidget {
 class _SnailLightButtonState extends State<SnailLightButton>
     with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late final AnimationController _controller;
+  bool _isHovered = false;
 
   BorderRadius get _radius => BorderRadius.circular(s24.r);
 
@@ -50,63 +52,91 @@ class _SnailLightButtonState extends State<SnailLightButton>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    if (_controller.isAnimating) {
-      _controller.stop();
-    }
     _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return TickerMode(
-      enabled: TickerMode.of(context),
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (BuildContext context, _) {
-          return Padding(
-            padding: const EdgeInsets.all(3),
-            child: ClipRRect(
-              borderRadius: _radius,
-              child: CustomPaint(
-                foregroundPainter: _SnailBorderPainter(
-                  progress: _controller.isAnimating ? _controller.value : 0.0,
-                  borderRadius: _radius,
-                  strokeWidth: 3,
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: <Color>[kPrimary, kSecondary],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedScale(
+        scale: _isHovered ? 1.05 : 1.0,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOut,
+        child: AnimatedBuilder(
+          animation: _controller,
+          builder: (BuildContext context, _) {
+            return Padding(
+              padding: const EdgeInsets.all(3),
+              child: ClipRRect(
+                borderRadius: _radius,
+                child: CustomPaint(
+                  foregroundPainter: _SnailBorderPainter(
+                    progress: _controller.isAnimating ? _controller.value : 0.0,
                     borderRadius: _radius,
+                    strokeWidth: 3,
                   ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: context.isMobile ? s8.w : s4.w,
-                    vertical: context.isMobile ? s4.h : s8.h,
-                  ),
-                  child: ElevatedButton.icon(
-                    onPressed: widget.onPressed,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                      shape: RoundedRectangleBorder(borderRadius: _radius),
-                    ),
+                  child: _SnailLightButtonContent(
+                    label: widget.label,
                     icon: widget.icon,
-                    label: Text(
-                      widget.label,
-                      style: AppTextStyle.buttonTextStyle(
-                        context,
-                      ).copyWith(color: kWhite, fontWeight: FontWeight.bold),
-                    ),
+                    onPressed: widget.onPressed,
+                    radius: _radius,
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _SnailLightButtonContent extends StatelessWidget {
+  final String label;
+  final Widget? icon;
+  final VoidCallback? onPressed;
+  final BorderRadius radius;
+
+  const _SnailLightButtonContent({
+    required this.label,
+    required this.radius,
+    this.icon,
+    this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: <Color>[kPrimary, kSecondary],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: radius,
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: context.isMobile ? s8.w : s4.w,
+        vertical: context.isMobile ? s4.h : s8.h,
+      ),
+      child: ElevatedButton.icon(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(borderRadius: radius),
+          padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s12.h),
+        ),
+        icon: icon,
+        label: Text(
+          label,
+          style: AppTextStyle.buttonTextStyle(
+            context,
+          ).copyWith(color: kWhite, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
@@ -143,12 +173,12 @@ class _SnailBorderPainter extends CustomPainter {
     final SweepGradient gradient = SweepGradient(
       startAngle: 0,
       endAngle: 2 * math.pi,
-      colors: <Color>[
-        const Color(0x00FFFFFF),
-        const Color(0xF2FFFFFF),
-        const Color(0x00FFFFFF),
+      colors: const <Color>[
+        Color(0x00FFFFFF),
+        Color(0xF2FFFFFF),
+        Color(0x00FFFFFF),
       ],
-      stops: const <double>[0.0, 0.06, 0.12], // short bright segment
+      stops: const <double>[0.0, 0.06, 0.12],
       transform: GradientRotation(progress * 2 * math.pi),
     );
 

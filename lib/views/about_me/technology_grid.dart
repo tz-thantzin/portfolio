@@ -5,6 +5,7 @@ import '../../presentations/configs/app_colors.dart';
 import '../../presentations/configs/constants.dart';
 import '../../presentations/configs/sizes.dart';
 import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
 import '../widgets/text/tag_text.dart';
 import '../widgets/text/title_text.dart';
 
@@ -20,7 +21,7 @@ class TechnologyGrid extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           TitleText(context.localization.technologies),
-          SizedBox(height: s16.h),
+          SizedBox().verticalSpaceMedium,
           Wrap(
             spacing: 2.w,
             runSpacing: 8.h,

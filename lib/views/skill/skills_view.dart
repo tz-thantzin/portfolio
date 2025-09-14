@@ -44,7 +44,7 @@ class LanguageAndTools extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           TitleText(context.localization.programming_languages_tools),
-          SizedBox(height: s32.h),
+          SizedBox().verticalSpaceMassive,
           Wrap(
             spacing: s8.w,
             runSpacing: s16.h,
@@ -97,7 +97,7 @@ class WorkFlows extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         TitleText(context.localization.workflows_title),
-        verticalSpaceMassive,
+        SizedBox().verticalSpaceMassive,
         Column(
           children: items
               .map((Workflow workflow) => _WorkflowItem(workflow))
@@ -120,7 +120,7 @@ class _WorkflowItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           const Icon(Icons.check_circle_outline, color: Colors.green),
-          SizedBox(width: s8.w),
+          SizedBox().horizontalSpaceSmall,
           Expanded(child: ContentText(workflow.description)),
         ],
       ),

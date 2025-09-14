@@ -145,7 +145,7 @@ class _Messages extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           TitleText(context.localization.about_me),
-          verticalSpaceMedium,
+          SizedBox().verticalSpaceMedium,
           ContentText(context.localization.about_me_description),
         ],
       ),

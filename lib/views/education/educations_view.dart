@@ -59,7 +59,7 @@ class _EducationItem extends StatelessWidget {
             titleStyle: AppTextStyle.blockTitleStyle(context),
             periodStyle: AppTextStyle.blockPeriodStyle(context),
           ),
-          SizedBox(height: s8.h),
+          SizedBox().verticalSpaceSmall,
           Text(
             edu.institution,
             style: AppTextStyle.blockSubTitleStyle(context),

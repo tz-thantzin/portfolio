@@ -29,7 +29,7 @@ class WorkExperienceSection extends StatelessWidget {
         runSpacing: s32.h,
         children: <Widget>[
           TitleText(context.localization.work_experience),
-          verticalSpaceLarge,
+          SizedBox().verticalSpaceLarge,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: s40.w),
             child: context.isMobile
@@ -79,7 +79,7 @@ class _TimelineItem extends StatelessWidget {
             offset: Offset(0, titleStyle.fontSize! * 0.35),
             child: TimeLineIndicator(drawLineBelow: drawLineBelow),
           ),
-          horizontalSpaceMedium,
+          SizedBox().horizontalSpaceMedium,
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(bottom: drawLineBelow ? 0 : s24.h),
