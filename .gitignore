@@ -47,3 +47,10 @@ node_modules/
 package-lock.json
 npm-debug.log
 .env
+
+# Firebase local cache
+.firebase/
+
+# Build outputs
+build/
+functions/node_modules/
