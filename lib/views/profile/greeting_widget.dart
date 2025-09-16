@@ -2,26 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../../presentations/configs/app_colors.dart';
-import '../../../presentations/configs/sizes.dart';
+import '../../../presentations/configs/constant_colors.dart';
+import '../../../presentations/configs/constant_sizes.dart';
 import '../../../utils/extensions/context_ex.dart';
-import '../../../utils/style_theme.dart';
 import '../../../view_models/home_view_model.dart';
-import '../../presentations/configs/constants.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/theme_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
-import 'widgets/wave_button.dart';
+import 'widgets/shadow_button.dart';
+import 'widgets/typewrite_text.dart';
 
 class GreetingWidget extends StatelessWidget {
   const GreetingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final String? localeCode = context
-        .read<HomeViewModel>()
-        .locale
-        ?.languageCode;
-
     final TextHeightBehavior textHeightBehavior = const TextHeightBehavior(
       applyHeightToFirstAscent: false,
       applyHeightToLastDescent: false,
@@ -38,43 +33,32 @@ class GreetingWidget extends StatelessWidget {
           SelectableText(
             context.localization.hi,
             textHeightBehavior: textHeightBehavior,
-            style: AppTextStyle.subHeaderTextStyle(context),
+            style: context.subHeaderTextStyle.copyWith(color: kGrey1000),
           ),
           SizedBox().verticalSpaceSmall,
-          SelectableText.rich(
-            TextSpan(
-              children: localeCode == LanguageCode.ja.name
-                  ? <InlineSpan>[
-                      TextSpan(
-                        text: context.localization.thantzin,
-                        style: AppTextStyle.headerTextStyle(context),
-                      ),
-                      TextSpan(
-                        text: context.localization.i_am,
-                        style: AppTextStyle.subHeaderTextStyle(context),
-                      ),
-                    ]
-                  : <InlineSpan>[
-                      TextSpan(
-                        text: context.localization.i_am,
-                        style: AppTextStyle.subHeaderTextStyle(context),
-                      ),
-                      TextSpan(
-                        text: context.localization.thantzin,
-                        style: AppTextStyle.headerTextStyle(context),
-                      ),
-                    ],
-            ),
-            textHeightBehavior: textHeightBehavior,
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SelectableText(
+                context.localization.i_am,
+                style: context.subHeaderTextStyle.copyWith(color: kGrey1000),
+              ),
+              TypewriterText(
+                context.localization.thantzin,
+                style: context.headerTextStyle.copyWith(color: kIndigo),
+              ),
+            ],
           ),
           SizedBox().verticalSpaceSmall,
           SelectableText(
             context.localization.senior_mobile_developer,
             textHeightBehavior: textHeightBehavior,
-            style: AppTextStyle.descriptionTextStyle(context),
+            style: context.descriptionTextStyle.copyWith(color: kGrey900),
           ),
           SizedBox().verticalSpaceMassive,
-          WaveButton(
+          ShadowButton(
             label: context.localization.download_resume,
             icon: const Icon(Icons.download_rounded, color: kWhite),
             onPressed: () async {

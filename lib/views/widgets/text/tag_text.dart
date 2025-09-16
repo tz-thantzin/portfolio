@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/style_theme.dart';
+import '../../../utils/extensions/theme_ex.dart';
 
 class TagText extends StatelessWidget {
   final String data;
@@ -8,6 +8,6 @@ class TagText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SelectableText(data, style: AppTextStyle.tagTextStyle(context));
+    return SelectableText(data, style: context.tagTextStyle);
   }
 }

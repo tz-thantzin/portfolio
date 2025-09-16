@@ -1,39 +1,26 @@
 import 'package:flutter/material.dart';
 
-final GlobalKey<State<StatefulWidget>> homeKey = GlobalKey();
-final GlobalKey<State<StatefulWidget>> aboutKey = GlobalKey();
-final GlobalKey<State<StatefulWidget>> skillKey = GlobalKey();
-final GlobalKey<State<StatefulWidget>> educationKey = GlobalKey();
-final GlobalKey<State<StatefulWidget>> experienceKey = GlobalKey();
-final GlobalKey<State<StatefulWidget>> contactKey = GlobalKey();
-
-class Constants {
-  static const String home = 'home';
-  static const String about = 'about';
-  static const String skill = 'skill';
-  static const String education = 'education';
-  static const String experience = 'experience';
-  static const String myCV =
-      'https://drive.google.com/file/d/1vocF0dz_r7ZHgdnguebKDXjmNeu-2rPM/view?usp=sharing';
-  static const String myJpCV =
-      'https://drive.google.com/file/d/1qwjYYE_1FoVPl-CoV_s_hoaPMW6PC1OG/view?usp=sharing';
-}
-
 class EventType {
-  static const String hireMe = 'hire_me';
+  static const String downloadResume = 'download_resume';
+  static const String projectView = 'project_view';
   static const String launchUrl = 'launch_url';
 }
 
-class PrefKey {
-  static const String themeMode = 'theme_mode';
-  static const String locale = 'locale';
-}
+final GlobalKey<State<StatefulWidget>> homeKey = GlobalKey();
+final GlobalKey<State<StatefulWidget>> aboutKey = GlobalKey();
+final GlobalKey<State<StatefulWidget>> skillKey = GlobalKey();
+final GlobalKey<State<StatefulWidget>> experienceKey = GlobalKey();
+final GlobalKey<State<StatefulWidget>> portfolioKey = GlobalKey();
+final GlobalKey<State<StatefulWidget>> educationKey = GlobalKey();
 
-class ImagePath {
-  static const String codingImagePath = 'assets/images/home.png';
-  static const String codingGIFPath = 'assets/images/coding.gif';
-  static const String aboutMeImagePath = 'assets/images/about_me.png';
-}
+const String kHome = 'home';
+const String kAbout = 'about';
+const String kSkill = 'skill';
+const String kEducation = 'education';
+const String kExperience = 'experience';
+const String kPortfolio = 'portfolio';
+const String myCV =
+    'https://drive.google.com/file/d/1vocF0dz_r7ZHgdnguebKDXjmNeu-2rPM/view?usp=sharing';
 
 final List<String> technologies = <String>[
   'Flutter (Dart)',
@@ -59,5 +46,3 @@ final List<String> technologies = <String>[
   'SQLite',
   '2C2P Payment',
 ];
-
-enum LanguageCode { en, ja, th }

@@ -24,9 +24,9 @@ List<WorkExperience> experiences(BuildContext context) {
       company: l10n.senior_dev_company,
     ),
     WorkExperience(
-      title: l10n.junior_dev_title,
-      period: l10n.junior_dev_period,
-      company: l10n.junior_dev_company,
+      title: l10n.mid_senior_dev_title,
+      period: l10n.mid_senior_dev_period,
+      company: l10n.mid_senior_dev_company,
     ),
     WorkExperience(
       title: l10n.research_leader_title,

@@ -7,31 +7,16 @@ import 'package:web/web.dart' as web;
 import '../presentations/configs/constants.dart';
 import '../presentations/configs/duration.dart';
 import '../utils/event_analytics.dart';
-import '../utils/session.dart';
 import '../utils/utils.dart';
 
 class HomeViewModel extends ChangeNotifier {
-  HomeViewModel({required SessionUtil sessionUtil})
-    : _sessionUtil = sessionUtil,
-      super() {
-    _loadLocale();
-    _loadThemeMode();
-  }
-
   late JSFunction _hashChangeListener;
-  final SessionUtil _sessionUtil;
-
-  ThemeMode _themeMode = ThemeMode.light;
-  Locale? _locale;
 
   bool _isDrawerOpen = false;
   Timer? _debounceTimer;
   String _currentSelectedSection = '';
 
   bool _isNavigatingByClick = false;
-
-  ThemeMode get themeMode => _themeMode;
-  Locale? get locale => _locale;
 
   bool get isDrawerOpen => _isDrawerOpen;
   String get currentSelectedSection => _currentSelectedSection;
@@ -40,36 +25,6 @@ class HomeViewModel extends ChangeNotifier {
   void dispose() {
     removeHashChangeListener();
     super.dispose();
-  }
-
-  Future<void> _loadThemeMode() async {
-    final String? theme = _sessionUtil.getThemeMode();
-    _themeMode = theme == 'dark' ? ThemeMode.dark : ThemeMode.light;
-    notifyListeners();
-  }
-
-  Future<void> toggleTheme() async {
-    _themeMode = _themeMode == ThemeMode.dark
-        ? ThemeMode.light
-        : ThemeMode.dark;
-    await _sessionUtil.saveThemeMode(
-      _themeMode == ThemeMode.dark ? 'dark' : 'light',
-    );
-    notifyListeners();
-  }
-
-  Future<void> _loadLocale() async {
-    final String? savedLocale = _sessionUtil.getLocale();
-    if (savedLocale != null) {
-      _locale = Locale(savedLocale);
-    }
-    notifyListeners();
-  }
-
-  Future<void> setLocale(Locale locale) async {
-    _locale = locale;
-    await _sessionUtil.saveLocale(locale.languageCode);
-    notifyListeners();
   }
 
   void cancelTimers() {
@@ -107,28 +62,32 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
 
     switch (section) {
-      case Constants.home:
-        updateBrowserUrl(Constants.home);
+      case kHome:
+        updateBrowserUrl(kHome);
         scrollToSection(homeKey);
         break;
-      case Constants.about:
-        updateBrowserUrl(Constants.about);
+      case kAbout:
+        updateBrowserUrl(kAbout);
         scrollToSection(aboutKey);
         break;
-      case Constants.experience:
-        updateBrowserUrl(Constants.experience);
+      case kExperience:
+        updateBrowserUrl(kExperience);
         scrollToSection(experienceKey);
         break;
-      case Constants.education:
-        updateBrowserUrl(Constants.education);
+      case kPortfolio:
+        updateBrowserUrl(kPortfolio);
+        scrollToSection(portfolioKey);
+        break;
+      case kEducation:
+        updateBrowserUrl(kEducation);
         scrollToSection(educationKey);
         break;
-      case Constants.skill:
-        updateBrowserUrl(Constants.skill);
+      case kSkill:
+        updateBrowserUrl(kSkill);
         scrollToSection(skillKey);
         break;
       default:
-        updateBrowserUrl(Constants.home);
+        updateBrowserUrl(kHome);
         scrollToSection(homeKey);
         break;
     }
@@ -173,17 +132,25 @@ class HomeViewModel extends ChangeNotifier {
 
   void onDownloadResumeBtnPressed() {
     EventAnalytics.sentEvent(
-      eventName: EventType.hireMe,
+      eventName: EventType.downloadResume,
       parameters: <String, Object>{
         'timestamp': DateTime.now().toIso8601String(),
       },
     );
 
-    launchUrlExternal(
-      _locale?.languageCode == LanguageCode.ja.name
-          ? Constants.myJpCV
-          : Constants.myCV,
+    launchUrlExternal(myCV);
+  }
+
+  void onProjectView(String path) {
+    EventAnalytics.sentEvent(
+      eventName: EventType.downloadResume,
+      parameters: <String, Object>{
+        'timestamp': DateTime.now().toIso8601String(),
+        'path': path,
+      },
     );
+
+    launchUrlExternal(path);
   }
 
   void onContactMePressed(String url) {

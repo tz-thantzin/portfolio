@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../presentations/configs/sizes.dart';
+import '../../presentations/configs/constant_sizes.dart';
 
 const double _tiny = s4;
 const double _small = s8;

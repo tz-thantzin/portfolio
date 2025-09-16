@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:portfolio/views/portfolio/portfolio_view.dart';
 import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:web/web.dart' as web;
 
 import '../../../view_models/home_view_model.dart';
+import '../../presentations/configs/constant_images.dart';
 import '../../presentations/configs/constants.dart';
-import '../../presentations/configs/duration.dart';
-import '../../presentations/configs/sizes.dart';
 import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
 import '../views.dart';
-import '../widgets/social_banner.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -27,27 +26,32 @@ class _HomeViewState extends State<HomeView> {
   final List<_SectionConfig> _sections = <_SectionConfig>[
     _SectionConfig(
       key: homeKey,
-      sectionName: Constants.home,
+      sectionName: kHome,
       child: const ProfileSection(),
     ),
     _SectionConfig(
       key: aboutKey,
-      sectionName: Constants.about,
+      sectionName: kAbout,
       child: const AboutSection(),
     ),
     _SectionConfig(
       key: experienceKey,
-      sectionName: Constants.experience,
+      sectionName: kExperience,
       child: const WorkExperienceSection(),
     ),
     _SectionConfig(
+      key: portfolioKey,
+      sectionName: kPortfolio,
+      child: const PortfolioView(),
+    ),
+    _SectionConfig(
       key: educationKey,
-      sectionName: Constants.education,
+      sectionName: kEducation,
       child: const EducationSection(),
     ),
     _SectionConfig(
       key: skillKey,
-      sectionName: Constants.skill,
+      sectionName: kSkill,
       child: const SkillsSection(),
     ),
   ];
@@ -84,42 +88,47 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.h),
+        preferredSize: Size.fromHeight(context.appBarHeight),
         child: Consumer<HomeViewModel>(
           builder: (_, HomeViewModel homeViewModel, __) => NavBar(
             onNavItemClicked: homeViewModel.handleNavigation,
-            toggleTheme: homeViewModel.toggleTheme,
             toggleNavDrawer: homeViewModel.toggleDrawer,
-            themeMode: homeViewModel.themeMode,
-            locale: homeViewModel.locale,
-            setLocale: homeViewModel.setLocale,
             selectedSection: homeViewModel.currentSelectedSection,
+            scrollController: _scrollController,
           ),
         ),
       ),
-      bottomNavigationBar: const FooterSection(),
       body: Stack(
         children: <Widget>[
+          Image.asset(
+            kProfileBg,
+            width: double.infinity,
+            height: context.screenHeight,
+            fit: BoxFit.cover,
+          ),
           SingleChildScrollView(
             controller: _scrollController,
-            padding: EdgeInsets.symmetric(horizontal: s16.w),
+            padding: EdgeInsets.zero,
             child: Column(
-              children: List<Widget>.generate(
-                _sections.length,
-                (int index) => AnimatedSection(
-                  key: ValueKey<String>('section_$index'),
-                  sectionKey: _sections[index].key,
-                  sectionName: _sections[index].sectionName,
-                  index: index,
-                  isVisible: _visibleList[index],
-                  onVisible: () => setState(() => _visibleList[index] = true),
-                  child: _sections[index].child,
+              children: [
+                ...List<Widget>.generate(
+                  _sections.length,
+                  (int index) => SectionWrapper(
+                    key: ValueKey<String>('section_$index'),
+                    sectionKey: _sections[index].key,
+                    sectionName: _sections[index].sectionName,
+                    index: index,
+                    isVisible: _visibleList[index],
+                    onVisible: () => setState(() => _visibleList[index] = true),
+                    child: _sections[index].child,
+                  ),
                 ),
-              ),
+                const FooterSection(),
+              ],
             ),
           ),
-          Container(width: 30.w, child: const SocialBanner()),
           Consumer<HomeViewModel>(
             builder: (_, HomeViewModel homeViewModel, __) => Visibility(
               visible: homeViewModel.isDrawerOpen,
@@ -138,7 +147,7 @@ class _HomeViewState extends State<HomeView> {
   }
 }
 
-class AnimatedSection extends StatelessWidget {
+class SectionWrapper extends StatelessWidget {
   final Widget child;
   final Key sectionKey;
   final String sectionName;
@@ -146,7 +155,7 @@ class AnimatedSection extends StatelessWidget {
   final bool isVisible;
   final VoidCallback onVisible;
 
-  const AnimatedSection({
+  const SectionWrapper({
     required this.child,
     required this.sectionKey,
     required this.sectionName,
@@ -169,30 +178,14 @@ class AnimatedSection extends StatelessWidget {
         if (info.visibleFraction > 0.2 && !isVisible) {
           onVisible();
         }
-        if (info.visibleFraction > 0.75) {
+        if (info.visibleFraction > 0.55) {
           homeViewModel.updateCurrentSectionOnScroll(sectionName);
         }
       },
       child: Container(
+        key: sectionKey,
         constraints: BoxConstraints(minHeight: context.sectionHeight),
-        child: AnimatedOpacity(
-          opacity: isVisible ? 1.0 : 0.0,
-          duration: duration2000,
-          curve: Curves.easeOut,
-          child: TweenAnimationBuilder<Offset>(
-            tween: Tween<Offset>(begin: const Offset(0, 20), end: Offset.zero),
-            duration: duration2000,
-            curve: Curves.easeOut,
-            builder: (BuildContext context, Offset offset, Widget? child) {
-              return Transform.translate(
-                key: sectionKey,
-                offset: offset,
-                child: child,
-              );
-            },
-            child: child,
-          ),
-        ),
+        child: child,
       ),
     );
   }

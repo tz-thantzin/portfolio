@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:portfolio/utils/extensions/theme_ex.dart';
 
 import '../../data/education_data.dart';
 import '../../models/education.dart';
-import '../../presentations/configs/sizes.dart';
+import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_sizes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
-import '../../utils/style_theme.dart';
 import '../widgets/text/title_text.dart';
 
 class EducationSection extends StatelessWidget {
@@ -18,8 +19,10 @@ class EducationSection extends StatelessWidget {
     final List<Education> items = educations(context);
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s40.h),
       width: double.infinity,
+      constraints: BoxConstraints(minHeight: context.screenHeight),
+      color: kPrimary,
+      padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s40.h),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -56,13 +59,13 @@ class _EducationItem extends StatelessWidget {
           _TitlePeriodResponsive(
             title: edu.degree,
             period: edu.duration,
-            titleStyle: AppTextStyle.blockTitleStyle(context),
-            periodStyle: AppTextStyle.blockPeriodStyle(context),
+            titleStyle: context.blockTitleStyle,
+            periodStyle: context.blockPeriodStyle,
           ),
           SizedBox().verticalSpaceSmall,
           Text(
             edu.institution,
-            style: AppTextStyle.blockSubTitleStyle(context),
+            style: context.blockSubTitleStyle,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

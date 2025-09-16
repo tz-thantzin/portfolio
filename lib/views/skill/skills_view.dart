@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../data/skills_data.dart';
 import '../../models/skill.dart';
-import '../../presentations/configs/app_colors.dart';
-import '../../presentations/configs/sizes.dart';
+import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_sizes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
 import '../widgets/text/content_text.dart';
@@ -15,8 +15,11 @@ class SkillsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s40.h),
+    return Container(
+      width: double.infinity,
+      constraints: BoxConstraints(minHeight: context.screenHeight),
+      color: kPrimary,
+      padding: EdgeInsets.symmetric(vertical: s40.h, horizontal: s24.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

@@ -17,9 +17,9 @@ class DefaultFirebaseOptions {
     apiKey: 'AIzaSyD4TK4PYa2mKD5RRL97T2uUo_tP8hNsRQU',
     appId: '1:1071941194582:web:826a2c8a2c9bc4b65bfcf7',
     messagingSenderId: '1071941194582',
-    projectId: 'thantzin-portfolio',
-    authDomain: 'thantzin-portfolio.firebaseapp.com',
-    storageBucket: 'thantzin-portfolio.firebasestorage.app',
+    projectId: 'thantzin-portfolios',
+    authDomain: 'thantzin-portfolios.firebaseapp.com',
+    storageBucket: 'thantzin-portfolios.firebasestorage.app',
     measurementId: 'G-QCT12515WH',
   );
 }

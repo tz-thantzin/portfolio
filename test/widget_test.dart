@@ -24,7 +24,6 @@ void main() {
   setUp(() {
     mockHomeViewModel = MockHomeViewModel();
     VisibilityDetectorController.instance.updateInterval = Duration.zero;
-    when(() => mockHomeViewModel.toggleTheme()).thenAnswer((_) async {});
 
     when(() => mockHomeViewModel.setupHashChangeListener()).thenAnswer((
       _,
@@ -32,7 +31,6 @@ void main() {
       mockHomeViewModel.cancelTimers();
     });
 
-    when(() => mockHomeViewModel.themeMode).thenReturn(ThemeMode.light);
     when(() => mockHomeViewModel.isDrawerOpen).thenReturn(false);
 
     when(() => mockHomeViewModel.handleNavigation(any())).thenReturn(null);

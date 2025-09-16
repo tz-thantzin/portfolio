@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
-import '../../presentations/configs/sizes.dart';
+import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../widgets/animated_slide_widget.dart';
 import 'greeting_widget.dart';
 import 'profile_image.dart';
+import 'social_banner.dart';
 
 class ProfileSection extends StatefulWidget {
   const ProfileSection({super.key});
@@ -68,43 +70,69 @@ class _ProfileSectionState extends State<ProfileSection>
               _hasAnimated = true;
             }
           },
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s40.h),
-            child: Flex(
-              direction: context.isMobile ? Axis.vertical : Axis.horizontal,
-              mainAxisAlignment: context.isMobile
-                  ? MainAxisAlignment.center
-                  : MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
+          child: Container(
+            constraints: BoxConstraints(minHeight: context.screenHeight),
+            alignment: Alignment.center,
+            child: Stack(
               children: <Widget>[
-                context.isMobile
-                    ? AnimatedSlideWidget(
-                        animation: _greetingOffsetAnimation,
-                        fadeAnimation: _fadeAnimation,
-                        child: const GreetingWidget(),
-                      )
-                    : Expanded(
-                        flex: 2,
-                        child: AnimatedSlideWidget(
-                          animation: _greetingOffsetAnimation,
-                          fadeAnimation: _fadeAnimation,
-                          child: const GreetingWidget(),
-                        ),
-                      ),
-                context.isMobile
-                    ? AnimatedSlideWidget(
-                        animation: _profileOffsetAnimation,
-                        fadeAnimation: _fadeAnimation,
-                        child: const ProfileImage(),
-                      )
-                    : Expanded(
-                        flex: 1,
-                        child: AnimatedSlideWidget(
-                          animation: _profileOffsetAnimation,
-                          fadeAnimation: _fadeAnimation,
-                          child: const ProfileImage(),
-                        ),
-                      ),
+                Visibility(
+                  visible: !context.isMobile,
+                  child: Container(
+                    margin: EdgeInsets.only(top: context.appBarHeight),
+                    padding: EdgeInsets.symmetric(vertical: s40.h),
+                    width: context.isDesktop ? 30.w : 45.w,
+                    child: const SocialBanner(),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: s24.w,
+                    vertical: s40.h,
+                  ),
+                  alignment: Alignment.center,
+                  child: Flex(
+                    direction: context.isMobile
+                        ? Axis.vertical
+                        : Axis.horizontal,
+                    mainAxisAlignment: context.isMobile
+                        ? MainAxisAlignment.center
+                        : MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      context.isMobile
+                          ? AnimatedSlideWidget(
+                              animation: _greetingOffsetAnimation,
+                              fadeAnimation: _fadeAnimation,
+                              child: const GreetingWidget(),
+                            )
+                          : Expanded(
+                              flex: 2,
+                              child: AnimatedSlideWidget(
+                                animation: _greetingOffsetAnimation,
+                                fadeAnimation: _fadeAnimation,
+                                child: const GreetingWidget(),
+                              ),
+                            ),
+                      context.isMobile
+                          ? AnimatedSlideWidget(
+                              animation: _profileOffsetAnimation,
+                              fadeAnimation: _fadeAnimation,
+                              child: const ProfileImage(),
+                            )
+                          : Expanded(
+                              flex: 2,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: s24.w),
+                                child: AnimatedSlideWidget(
+                                  animation: _profileOffsetAnimation,
+                                  fadeAnimation: _fadeAnimation,
+                                  child: const ProfileImage(),
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
