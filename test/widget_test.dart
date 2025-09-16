@@ -38,7 +38,7 @@ void main() {
     when(() => mockHomeViewModel.scrollToSection(any())).thenReturn(null);
   });
 
-  Widget _buildTestableWidget() {
+  Widget buildTestableWidget() {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       minTextAdapt: true,
@@ -51,7 +51,7 @@ void main() {
   }
 
   testWidgets('App loads and navigates sections', (WidgetTester tester) async {
-    await tester.pumpWidget(_buildTestableWidget());
+    await tester.pumpWidget(buildTestableWidget());
     await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
     // Check that MyPortfolioApp is loaded

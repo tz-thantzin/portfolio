@@ -68,11 +68,14 @@ class _NavBarState extends State<NavBar> {
     final Color textColor = context.isDesktop ? _getTextColor() : kWhite;
 
     return AppBar(
-      automaticallyImplyLeading: false,
       elevation: 0,
       backgroundColor: context.isDesktop ? _getAppBarColor(context) : kPrimary,
+      automaticallyImplyLeading: false,
       title: Padding(
-        padding: EdgeInsets.symmetric(horizontal: s42.w),
+        padding: EdgeInsets.only(
+          left: context.isMobile ? s38.w : s42.w,
+          right: context.isMobile ? s0.w : s42.w,
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -157,7 +160,6 @@ class _NavBarState extends State<NavBar> {
           ],
         ),
       ),
-      actions: <Widget>[],
     );
   }
 }

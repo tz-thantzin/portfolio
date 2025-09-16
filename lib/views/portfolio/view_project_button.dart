@@ -19,7 +19,6 @@ class _ViewProjectButtonState extends State<ViewProjectButton> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: s150.w,
       height: s40.h,
       child: MouseRegion(
         onEnter: (_) => setState(() => _isButtonHovered = true),

@@ -1,40 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
-
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="ThantZin's portfolio">
 
-  <!-- iOS meta tags & icons -->
+  <!-- iOS meta tags -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="thantzin_port">
+  <meta name="apple-mobile-web-app-title" content="Portfolio">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="icons/Icon-192.png"/>
 
-  <title>Thant Zin</title>
+  <title>My Portfolio</title>
   <link rel="manifest" href="manifest.json">
 
+  <script>
+    var serviceWorkerVersion = null;
+  </script>
+
+  <script src="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.js"></script>
+  <link rel="preload" href="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.wasm" as="fetch" crossOrigin="anonymous">
+  <script src="flutter.js" defer></script>
+
+  <!-- Lottie -->
+  <script src="https://unpkg.com/lottie-web@latest/build/player/lottie.min.js"></script>
+
+  <!-- Styles -->
+  <style>
+    html {
+      background: #F4F4EF;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .loading-label {
+      font-size: 18px;
+      color: #000;
+      margin-top: 16px;
+    }
+  </style>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+<!-- Loader -->
+<div class="loading" id="loader">
+  <div id="loader-icon" style="width:200px;height:200px;margin:auto;"></div>
+  <p class="loading-label"></p>
+</div>
+
+<script>
+  // 🔹 Loader configuration
+  const loaderConfig = {
+    // Nature-themed Lottie animation
+    iconUrl: "https://assets10.lottiefiles.com/packages/lf20_hu9cd9.json",
+    texts: [
+      "Discovering new ways of making you wait...",
+      "Still faster than Windows update...",
+      "Hold on, finishing a cup of coffee...",
+      "Don't panic, just count to infinity..."
+    ]
+  };
+
+  // Load Lottie animation
+  lottie.loadAnimation({
+    container: document.getElementById("loader-icon"),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: loaderConfig.iconUrl
+  });
+
+  // Animate texts
+  const element = document.querySelector('.loading-label');
+  let i = 0;
+  element.innerHTML = loaderConfig.texts[0];
+  setInterval(() => {
+    i = (i + 1) % loaderConfig.texts.length;
+    element.innerHTML = loaderConfig.texts[i];
+  }, 2000); // change text every 2 seconds
+
+  // 🔹 Replace loader when Flutter app is ready
+  window.addEventListener('load', function(ev) {
+    _flutter.loader.loadEntrypoint({
+      serviceWorker: { serviceWorkerVersion: serviceWorkerVersion },
+      onEntrypointLoaded: function(engineInitializer) {
+        engineInitializer.initializeEngine().then(function(appRunner) {
+          const loader = document.getElementById("loader");
+          loader.remove();
+          appRunner.runApp();
+        });
+      }
+    });
+  });
+</script>
 </body>
 </html>

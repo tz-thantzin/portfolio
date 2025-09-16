@@ -38,7 +38,7 @@ class _ProjectImageState extends State<ProjectImage> {
                 maxHeight: context.screenHeight * 0.8,
               ),
               child: AspectRatio(
-                aspectRatio: 1,
+                aspectRatio: 0.5,
                 child: Image.asset(
                   widget.project.imagePath!,
                   fit: BoxFit.contain,
