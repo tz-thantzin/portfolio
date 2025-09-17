@@ -11,6 +11,7 @@ const Color kTransparent = Colors.transparent;
 const Color kIndigo = Colors.indigo;
 const Color kDeepPurple = Colors.deepPurple;
 const Color kRed = Colors.red;
+const Color kGreen = Colors.green;
 final Color kRed100 = Colors.red.shade100;
 const Color kTomato = Color(0xFFFA523C);
 

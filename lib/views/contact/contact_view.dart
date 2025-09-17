@@ -120,7 +120,7 @@ class _ContactViewState extends State<ContactView>
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Message sent successfully!"),
-          backgroundColor: Colors.green,
+          backgroundColor: kGreen,
           duration: Duration(seconds: 2),
         ),
       );
@@ -128,7 +128,7 @@ class _ContactViewState extends State<ContactView>
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Failed to send message. "),
-          backgroundColor: Colors.red,
+          backgroundColor: kRed,
           duration: Duration(seconds: 2),
         ),
       );
@@ -149,7 +149,7 @@ class _ContactViewState extends State<ContactView>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TitleText(context.localization.get_in_touch),
-              SizedBox(height: s24.h),
+              SizedBox().verticalSpaceLarge,
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.all(s16.w),
@@ -266,7 +266,7 @@ class _ContactViewState extends State<ContactView>
                       ],
                     ),
 
-                    SizedBox(height: s16.h),
+                    SizedBox().verticalSpaceMedium,
 
                     // Send Button
                     Align(
