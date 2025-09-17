@@ -2,25 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-import '../../presentations/configs/constants.dart';
+import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
-import '../../presentations/configs/sizes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
 import '../widgets/animated_slide_widget.dart';
-import '../widgets/text/content_text.dart';
-import '../widgets/text/title_text.dart';
+import 'about_image.dart';
+import 'about_message.dart';
 import 'technology_grid.dart';
 
-class AboutSection extends StatefulWidget {
-  const AboutSection({super.key});
+class AboutView extends StatefulWidget {
+  const AboutView({super.key});
 
   @override
-  State<AboutSection> createState() => AboutSectionState();
+  State<AboutView> createState() => AboutViewState();
 }
 
-class AboutSectionState extends State<AboutSection>
+class AboutViewState extends State<AboutView>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _aboutImageAnimation;
@@ -80,8 +80,10 @@ class AboutSectionState extends State<AboutSection>
             }
           },
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: s40.h, horizontal: s24.w),
             width: double.infinity,
+            constraints: BoxConstraints(minHeight: context.screenHeight),
+            color: kPrimary,
+            padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s40.h),
             child: Column(
               children: <Widget>[
                 Flex(
@@ -93,28 +95,28 @@ class AboutSectionState extends State<AboutSection>
                         ? AnimatedSlideWidget(
                             animation: _aboutImageAnimation,
                             fadeAnimation: _fadeAnimation,
-                            child: _AboutImage(),
+                            child: AboutImage(),
                           )
                         : Expanded(
                             flex: 1,
                             child: AnimatedSlideWidget(
                               animation: _aboutImageAnimation,
                               fadeAnimation: _fadeAnimation,
-                              child: _AboutImage(),
+                              child: AboutImage(),
                             ),
                           ),
                     context.isMobile
                         ? AnimatedSlideWidget(
                             animation: _messagesAnimation,
                             fadeAnimation: _fadeAnimation,
-                            child: _Messages(),
+                            child: AboutMessages(),
                           )
                         : Expanded(
                             flex: 2,
                             child: AnimatedSlideWidget(
                               animation: _messagesAnimation,
                               fadeAnimation: _fadeAnimation,
-                              child: _Messages(),
+                              child: AboutMessages(),
                             ),
                           ),
                   ],
@@ -130,43 +132,6 @@ class AboutSectionState extends State<AboutSection>
           ),
         );
       },
-    );
-  }
-}
-
-class _Messages extends StatelessWidget {
-  const _Messages();
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: s24.w),
-      child: Column(
-        crossAxisAlignment: context.isMobile
-            ? CrossAxisAlignment.center
-            : CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          TitleText(context.localization.about_me),
-          SizedBox().verticalSpaceMedium,
-          ContentText(context.localization.about_me_description),
-        ],
-      ),
-    );
-  }
-}
-
-class _AboutImage extends StatelessWidget {
-  const _AboutImage();
-
-  @override
-  Widget build(BuildContext context) {
-    final double? size = context.isMobile ? 250.r : 450.r;
-    return SizedBox(
-      height: size,
-      child: AspectRatio(
-        aspectRatio: 1,
-        child: Image.asset(ImagePath.aboutMeImagePath, fit: BoxFit.contain),
-      ),
     );
   }
 }

@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/presentations/configs/constant_colors.dart';
 
-import '../../../utils/style_theme.dart';
+import '../../../utils/extensions/theme_ex.dart';
 
 class TitleText extends StatelessWidget {
   final String data;
-  const TitleText(this.data, {super.key});
+  final Color? textColor;
+  final double fontSize;
+  const TitleText(
+    this.data, {
+    this.textColor = kTomato,
+    this.fontSize = 20,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SelectableText(
       data,
-      style: AppTextStyle.titleTextStyle(context),
+      style: context.titleTextStyle.copyWith(
+        color: textColor,
+        fontSize: context.scaleFontSize(fontSize),
+        fontWeight: FontWeight.w300,
+      ),
       textAlign: TextAlign.center,
     );
   }

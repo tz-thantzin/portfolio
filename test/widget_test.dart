@@ -24,7 +24,6 @@ void main() {
   setUp(() {
     mockHomeViewModel = MockHomeViewModel();
     VisibilityDetectorController.instance.updateInterval = Duration.zero;
-    when(() => mockHomeViewModel.toggleTheme()).thenAnswer((_) async {});
 
     when(() => mockHomeViewModel.setupHashChangeListener()).thenAnswer((
       _,
@@ -32,7 +31,6 @@ void main() {
       mockHomeViewModel.cancelTimers();
     });
 
-    when(() => mockHomeViewModel.themeMode).thenReturn(ThemeMode.light);
     when(() => mockHomeViewModel.isDrawerOpen).thenReturn(false);
 
     when(() => mockHomeViewModel.handleNavigation(any())).thenReturn(null);
@@ -40,7 +38,7 @@ void main() {
     when(() => mockHomeViewModel.scrollToSection(any())).thenReturn(null);
   });
 
-  Widget _buildTestableWidget() {
+  Widget buildTestableWidget() {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       minTextAdapt: true,
@@ -53,7 +51,7 @@ void main() {
   }
 
   testWidgets('App loads and navigates sections', (WidgetTester tester) async {
-    await tester.pumpWidget(_buildTestableWidget());
+    await tester.pumpWidget(buildTestableWidget());
     await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
     // Check that MyPortfolioApp is loaded

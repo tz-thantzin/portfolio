@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:portfolio/presentations/configs/constant_colors.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import 'package:portfolio/utils/extensions/theme_ex.dart';
 
 import '../../../presentations/configs/constants.dart';
 import '../../../utils/extensions/context_ex.dart';
-import '../../../utils/style_theme.dart';
 
-class CustomNavigationDrawer extends StatelessWidget {
+class CustomNavigationDrawer extends StatefulWidget {
   final Function(String) onNavItemClicked;
   final VoidCallback onCloseDrawer;
+
   const CustomNavigationDrawer({
     required this.onNavItemClicked,
     required this.onCloseDrawer,
@@ -15,61 +17,71 @@ class CustomNavigationDrawer extends StatelessWidget {
   });
 
   @override
+  State<CustomNavigationDrawer> createState() => _CustomNavigationDrawerState();
+}
+
+class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
         GestureDetector(
-          onTap: onCloseDrawer, // Dismiss on tap outside
-          child: Container(color: Colors.transparent),
+          onTap: widget.onCloseDrawer,
+          child: Container(color: kTransparent),
         ),
         Container(
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            boxShadow: <BoxShadow>[
-              BoxShadow(color: Colors.black26, blurRadius: 6.r),
-            ],
-          ),
-          child: ListView(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  context.localization.home,
-                  style: AppTextStyle.navItemTextStyle(context),
+          width: context.screenWidth,
+          decoration: BoxDecoration(color: kPrimary),
+          margin: EdgeInsets.only(top: context.appBarHeight),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    context.localization.home,
+                    style: context.navItemTextStyle.copyWith(color: kWhite),
+                  ),
+                  onTap: () => widget.onNavItemClicked(kHome),
                 ),
-                onTap: () => onNavItemClicked(Constants.home),
-              ),
-              ListTile(
-                title: Text(
-                  context.localization.about,
-                  style: AppTextStyle.navItemTextStyle(context),
+                ListTile(
+                  title: Text(
+                    context.localization.about,
+                    style: context.navItemTextStyle.copyWith(color: kWhite),
+                  ),
+                  onTap: () => widget.onNavItemClicked(kAbout),
                 ),
-                onTap: () => onNavItemClicked(Constants.about),
-              ),
-              ListTile(
-                title: Text(
-                  context.localization.work_experience,
-                  style: AppTextStyle.navItemTextStyle(context),
+                ListTile(
+                  title: Text(
+                    context.localization.work_experience,
+                    style: context.navItemTextStyle.copyWith(color: kWhite),
+                  ),
+                  onTap: () => widget.onNavItemClicked(kExperience),
                 ),
-                onTap: () => onNavItemClicked(Constants.experience),
-              ),
-              ListTile(
-                title: Text(
-                  context.localization.education,
-                  style: AppTextStyle.navItemTextStyle(context),
+                ListTile(
+                  title: Text(
+                    context.localization.portfolio,
+                    style: context.navItemTextStyle.copyWith(color: kWhite),
+                  ),
+                  onTap: () => widget.onNavItemClicked(kPortfolio),
                 ),
-                onTap: () => onNavItemClicked(Constants.education),
-              ),
-              ListTile(
-                title: Text(
-                  context.localization.skill,
-                  style: AppTextStyle.navItemTextStyle(context),
+                ListTile(
+                  title: Text(
+                    context.localization.skill,
+                    style: context.navItemTextStyle.copyWith(color: kWhite),
+                  ),
+                  onTap: () => widget.onNavItemClicked(kSkill),
                 ),
-                onTap: () => onNavItemClicked(Constants.skill),
-              ),
-            ],
+                ListTile(
+                  title: Text(
+                    context.localization.contact,
+                    style: context.navItemTextStyle.copyWith(color: kWhite),
+                  ),
+                  onTap: () => widget.onNavItemClicked(kContact),
+                ),
+              ],
+            ),
           ),
         ),
       ],

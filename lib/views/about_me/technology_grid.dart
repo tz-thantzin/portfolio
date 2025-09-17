@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../presentations/configs/app_colors.dart';
+import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/constants.dart';
-import '../../presentations/configs/sizes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
 import '../widgets/text/tag_text.dart';
@@ -23,18 +23,19 @@ class TechnologyGrid extends StatelessWidget {
           TitleText(context.localization.technologies),
           SizedBox().verticalSpaceMedium,
           Wrap(
-            spacing: 2.w,
-            runSpacing: 8.h,
+            spacing: s2.w,
+            runSpacing: s8.h,
             children: technologies.map((String tech) {
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: s4.w, vertical: s8.h),
                 decoration: BoxDecoration(
+                  color: kGrey100,
                   borderRadius: BorderRadius.circular(4.r),
-                  border: Border.all(color: kPrimary, width: 0.3.w),
+                  border: Border.all(color: kIndigo, width: s03.w),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                      color: kGrey500.withValues(alpha: 0.05),
-                      blurRadius: 3.r,
+                      color: kGrey200.withValues(alpha: 0.05),
+                      blurRadius: s10.r,
                       offset: Offset(2, 2),
                     ),
                   ],
@@ -42,7 +43,7 @@ class TechnologyGrid extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Icon(Icons.arrow_right, size: 20.r, color: kPrimary),
+                    Icon(Icons.arrow_right, size: s20.r, color: kPrimary),
                     TagText(tech),
                   ],
                 ),

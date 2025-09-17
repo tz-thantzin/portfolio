@@ -6,8 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
-import 'app_localizations_ja.dart';
-import 'app_localizations_th.dart';
 
 // ignore_for_file: type=lint
 
@@ -92,9 +90,7 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
-    Locale('en'),
-    Locale('ja'),
-    Locale('th')
+    Locale('en')
   ];
 
   /// No description provided for @hi.
@@ -112,7 +108,7 @@ abstract class AppLocalizations {
   /// No description provided for @thantzin.
   ///
   /// In en, this message translates to:
-  /// **' Thant Zin'**
+  /// **'Thant Zin'**
   String get thantzin;
 
   /// No description provided for @home.
@@ -133,12 +129,6 @@ abstract class AppLocalizations {
   /// **'Experience'**
   String get work_experience;
 
-  /// No description provided for @education.
-  ///
-  /// In en, this message translates to:
-  /// **'Education'**
-  String get education;
-
   /// No description provided for @skill.
   ///
   /// In en, this message translates to:
@@ -157,6 +147,24 @@ abstract class AppLocalizations {
   /// **'Download Resume'**
   String get download_resume;
 
+  /// No description provided for @creative_mobile_app_developer.
+  ///
+  /// In en, this message translates to:
+  /// **'Creative Mobile App Developer '**
+  String get creative_mobile_app_developer;
+
+  /// No description provided for @year_of_work_experience.
+  ///
+  /// In en, this message translates to:
+  /// **'11+'**
+  String get year_of_work_experience;
+
+  /// No description provided for @years_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Years of \nSuccess'**
+  String get years_success;
+
   /// No description provided for @senior_mobile_developer.
   ///
   /// In en, this message translates to:
@@ -169,6 +177,12 @@ abstract class AppLocalizations {
   /// **'About Me'**
   String get about_me;
 
+  /// No description provided for @i_am_developer.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m Mobile App Developer'**
+  String get i_am_developer;
+
   /// No description provided for @about_me_description.
   ///
   /// In en, this message translates to:
@@ -180,60 +194,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Technologies I have worked with:'**
   String get technologies;
-
-  /// No description provided for @education1_degree.
-  ///
-  /// In en, this message translates to:
-  /// **'Business English'**
-  String get education1_degree;
-
-  /// No description provided for @education1_institution.
-  ///
-  /// In en, this message translates to:
-  /// **'Southeast Bangkok University'**
-  String get education1_institution;
-
-  /// No description provided for @education1_duration.
-  ///
-  /// In en, this message translates to:
-  /// **'Present'**
-  String get education1_duration;
-
-  /// No description provided for @education2_degree.
-  ///
-  /// In en, this message translates to:
-  /// **'Diploma in English Language'**
-  String get education2_degree;
-
-  /// No description provided for @education2_institution.
-  ///
-  /// In en, this message translates to:
-  /// **'SEAMEO CHAT, Yangon'**
-  String get education2_institution;
-
-  /// No description provided for @education2_duration.
-  ///
-  /// In en, this message translates to:
-  /// **'2018 – 2020'**
-  String get education2_duration;
-
-  /// No description provided for @education3_degree.
-  ///
-  /// In en, this message translates to:
-  /// **'Bachelor of Computer Science'**
-  String get education3_degree;
-
-  /// No description provided for @education3_institution.
-  ///
-  /// In en, this message translates to:
-  /// **'University of Computer Studies Yangon'**
-  String get education3_institution;
-
-  /// No description provided for @education3_duration.
-  ///
-  /// In en, this message translates to:
-  /// **'2010 – 2013'**
-  String get education3_duration;
 
   /// No description provided for @programming_languages_tools.
   ///
@@ -307,23 +267,23 @@ abstract class AppLocalizations {
   /// **'Nov 2017 – Oct 2019'**
   String get senior_dev_period;
 
-  /// No description provided for @junior_dev_title.
+  /// No description provided for @mid_senior_dev_title.
   ///
   /// In en, this message translates to:
-  /// **'Junior Mobile Application Developer'**
-  String get junior_dev_title;
+  /// **'Mid-Senior Mobile Application Developer'**
+  String get mid_senior_dev_title;
 
-  /// No description provided for @junior_dev_company.
+  /// No description provided for @mid_senior_dev_company.
   ///
   /// In en, this message translates to:
   /// **'TechFun Myanmar Co., Ltd., Yangon'**
-  String get junior_dev_company;
+  String get mid_senior_dev_company;
 
-  /// No description provided for @junior_dev_period.
+  /// No description provided for @mid_senior_dev_period.
   ///
   /// In en, this message translates to:
   /// **'Apr 2016 – Oct 2017'**
-  String get junior_dev_period;
+  String get mid_senior_dev_period;
 
   /// No description provided for @research_leader_title.
   ///
@@ -360,6 +320,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'May 2014 – Sep 2015'**
   String get software_engineer_period;
+
+  /// No description provided for @portfolio.
+  ///
+  /// In en, this message translates to:
+  /// **'Portfolio'**
+  String get portfolio;
+
+  /// No description provided for @view_project.
+  ///
+  /// In en, this message translates to:
+  /// **'View Project'**
+  String get view_project;
+
+  /// No description provided for @contact.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get contact;
+
+  /// No description provided for @get_in_touch.
+  ///
+  /// In en, this message translates to:
+  /// **'Get in touch'**
+  String get get_in_touch;
+
+  /// No description provided for @schedule_appointment.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule an Appointment'**
+  String get schedule_appointment;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -371,7 +361,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'ja', 'th'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -383,8 +373,6 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en': return AppLocalizationsEn();
-    case 'ja': return AppLocalizationsJa();
-    case 'th': return AppLocalizationsTh();
   }
 
   throw FlutterError(

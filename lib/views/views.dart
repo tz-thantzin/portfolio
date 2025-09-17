@@ -1,9 +1,10 @@
 export 'about_me/about_view.dart';
-export 'education/educations_view.dart';
+export 'contact/contact_view.dart';
 export 'home/footer.dart';
 export 'home/home_view.dart';
 export 'home/widgets/custom_nav_drawer.dart';
 export 'home/widgets/nav_bar.dart';
+export 'portfolio/portfolio_view.dart';
 export 'profile/profile_view.dart';
 export 'skill/skills_view.dart';
 export 'work_experience/work_experiences_view.dart';

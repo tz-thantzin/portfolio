@@ -15,7 +15,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get i_am => 'I\'m';
 
   @override
-  String get thantzin => ' Thant Zin';
+  String get thantzin => 'Thant Zin';
 
   @override
   String get home => 'Home';
@@ -27,9 +27,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get work_experience => 'Experience';
 
   @override
-  String get education => 'Education';
-
-  @override
   String get skill => 'Skills';
 
   @override
@@ -39,43 +36,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get download_resume => 'Download Resume';
 
   @override
+  String get creative_mobile_app_developer => 'Creative Mobile App Developer ';
+
+  @override
+  String get year_of_work_experience => '11+';
+
+  @override
+  String get years_success => 'Years of \nSuccess';
+
+  @override
   String get senior_mobile_developer => 'Senior Mobile Application Developer | Team Lead';
 
   @override
   String get about_me => 'About Me';
 
   @override
+  String get i_am_developer => 'I\'m Mobile App Developer';
+
+  @override
   String get about_me_description => 'I am an experienced mobile application developer with over 11 years of expertise in Flutter and iOS development. Throughout my career, I have successfully led teams, delivering high-quality, user-friendly applications. I enjoy solving complex technical challenges and mentoring team members to achieve their full potential. My focus is on creating elegant, performant, and maintainable apps that provide exceptional user experiences.';
 
   @override
   String get technologies => 'Technologies I have worked with:';
-
-  @override
-  String get education1_degree => 'Business English';
-
-  @override
-  String get education1_institution => 'Southeast Bangkok University';
-
-  @override
-  String get education1_duration => 'Present';
-
-  @override
-  String get education2_degree => 'Diploma in English Language';
-
-  @override
-  String get education2_institution => 'SEAMEO CHAT, Yangon';
-
-  @override
-  String get education2_duration => '2018 – 2020';
-
-  @override
-  String get education3_degree => 'Bachelor of Computer Science';
-
-  @override
-  String get education3_institution => 'University of Computer Studies Yangon';
-
-  @override
-  String get education3_duration => '2010 – 2013';
 
   @override
   String get programming_languages_tools => 'Programming Languages & Tools';
@@ -114,13 +96,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get senior_dev_period => 'Nov 2017 – Oct 2019';
 
   @override
-  String get junior_dev_title => 'Junior Mobile Application Developer';
+  String get mid_senior_dev_title => 'Mid-Senior Mobile Application Developer';
 
   @override
-  String get junior_dev_company => 'TechFun Myanmar Co., Ltd., Yangon';
+  String get mid_senior_dev_company => 'TechFun Myanmar Co., Ltd., Yangon';
 
   @override
-  String get junior_dev_period => 'Apr 2016 – Oct 2017';
+  String get mid_senior_dev_period => 'Apr 2016 – Oct 2017';
 
   @override
   String get research_leader_title => 'Researching Leader';
@@ -139,4 +121,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get software_engineer_period => 'May 2014 – Sep 2015';
+
+  @override
+  String get portfolio => 'Portfolio';
+
+  @override
+  String get view_project => 'View Project';
+
+  @override
+  String get contact => 'Contact';
+
+  @override
+  String get get_in_touch => 'Get in touch';
+
+  @override
+  String get schedule_appointment => 'Schedule an Appointment';
 }

@@ -1,160 +1,167 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
 
+import '../../../presentations/configs/constant_colors.dart';
+import '../../../presentations/configs/constant_sizes.dart';
 import '../../../presentations/configs/constants.dart';
-import '../../../presentations/configs/sizes.dart';
 import '../../../utils/extensions/context_ex.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
-import '../../../utils/extensions/widget_ex.dart';
-import '../../../utils/style_theme.dart';
+import '../../../utils/extensions/theme_ex.dart';
 
-class NavBar extends StatelessWidget {
+class NavBar extends StatefulWidget {
   final Function(String) onNavItemClicked;
-  final VoidCallback toggleTheme;
   final VoidCallback toggleNavDrawer;
-  final ValueChanged<Locale> setLocale;
-  final ThemeMode themeMode;
-  final Locale? locale;
   final String selectedSection;
+  final ScrollController scrollController;
 
   const NavBar({
     required this.onNavItemClicked,
-    required this.toggleTheme,
     required this.toggleNavDrawer,
-    required this.themeMode,
-    required this.setLocale,
     required this.selectedSection,
-    this.locale,
+    required this.scrollController,
     super.key,
   });
 
+  @override
+  State<NavBar> createState() => _NavBarState();
+}
+
+class _NavBarState extends State<NavBar> {
+  double scrollOffset = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    setState(() {
+      scrollOffset = widget.scrollController.offset;
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.scrollController.removeListener(_onScroll);
+    super.dispose();
+  }
+
+  Color _getAppBarColor(BuildContext context) {
+    final double opacity = (scrollOffset / 200).clamp(0.0, 1.0);
+    return kPrimary.withValues(alpha: opacity);
+  }
+
   TextStyle _navItemStyle(BuildContext context, String sectionKey) {
-    final bool isSelected = selectedSection == sectionKey;
+    final bool isSelected = widget.selectedSection == sectionKey;
     return isSelected
-        ? AppTextStyle.navItemSelectedTextStyle(context)
-        : AppTextStyle.navItemTextStyle(context);
+        ? context.navItemSelectedTextStyle
+        : context.navItemTextStyle;
+  }
+
+  Color _getTextColor() {
+    return scrollOffset < 200 ? kPrimary : kWhite;
   }
 
   @override
   Widget build(BuildContext context) {
+    final Color textColor = context.isDesktop ? _getTextColor() : kWhite;
+
     return AppBar(
+      elevation: 0,
+      backgroundColor: context.isDesktop ? _getAppBarColor(context) : kPrimary,
       automaticallyImplyLeading: false,
-      backgroundColor: Colors.transparent,
-      leading: context.isMobile
-          ? Builder(
-              builder: (BuildContext context) => IconButton(
-                icon: const Icon(Icons.menu, color: Colors.indigo),
-                onPressed: toggleNavDrawer,
-              ),
-            )
-          : null,
-      title: Container(
-        padding: EdgeInsets.symmetric(vertical: s40.h, horizontal: s8.w),
-        child: Text(
-          'Thant Zin',
-          style: AppTextStyle.navTitleTextStyle(context),
+      title: Padding(
+        padding: EdgeInsets.only(
+          left: context.isMobile ? s38.w : s42.w,
+          right: context.isMobile ? s0.w : s42.w,
         ),
-      ),
-      actions: <Widget>[
-        if (!context.isMobile) ...<Widget>[
-          TextButton(
-            onPressed: () => onNavItemClicked(Constants.home),
-            child: Text(
-              context.localization.home,
-              style: _navItemStyle(context, Constants.home),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Thant Zin',
+              style: context.navTitleTextStyle.copyWith(
+                color: textColor,
+                fontWeight: FontWeight.w800,
+              ),
             ),
-          ),
-          TextButton(
-            onPressed: () => onNavItemClicked(Constants.about),
-            child: Text(
-              context.localization.about,
-              style: _navItemStyle(context, Constants.about),
-            ),
-          ),
-          TextButton(
-            onPressed: () => onNavItemClicked(Constants.experience),
-            child: Text(
-              context.localization.work_experience,
-              style: _navItemStyle(context, Constants.experience),
-            ),
-          ),
-          TextButton(
-            onPressed: () => onNavItemClicked(Constants.education),
-            child: Text(
-              context.localization.education,
-              style: _navItemStyle(context, Constants.education),
-            ),
-          ),
-          TextButton(
-            onPressed: () => onNavItemClicked(Constants.skill),
-            child: Text(
-              context.localization.skill,
-              style: _navItemStyle(context, Constants.skill),
-            ),
-          ),
-        ],
-        SizedBox().horizontalSpaceTiny,
-        DropdownButtonHideUnderline(
-          child: DropdownButton<Locale>(
-            value: locale ?? const Locale('en'),
-            focusColor: Colors.transparent,
-            dropdownColor: Theme.of(context).cardColor,
-            items: <DropdownMenuItem<Locale>>[
-              DropdownMenuItem<Locale>(
-                value: const Locale('en'),
-                child: Row(
-                  children: <Widget>[
-                    const Text('🇺🇸'),
-                    const SizedBox(width: 6),
-                    Text(
-                      'English',
-                      style: AppTextStyle.navItemTextStyle(context),
-                    ),
-                  ],
+            Spacer(),
+            if (context.isMobile)
+              IconButton(
+                icon: Icon(Icons.menu, color: textColor),
+                onPressed: widget.toggleNavDrawer,
+              )
+            else ...<Widget>[
+              TextButton(
+                onPressed: () => widget.onNavItemClicked(kHome),
+                child: Text(
+                  context.localization.home,
+                  style: _navItemStyle(
+                    context,
+                    kHome,
+                  ).copyWith(color: textColor),
                 ),
               ),
-              DropdownMenuItem<Locale>(
-                value: const Locale('ja'),
-                child: Row(
-                  children: <Widget>[
-                    const Text('🇯🇵'),
-                    const SizedBox(width: 6),
-                    Text('日本語', style: AppTextStyle.navItemTextStyle(context)),
-                  ],
+              TextButton(
+                onPressed: () => widget.onNavItemClicked(kAbout),
+                child: Text(
+                  context.localization.about,
+                  style: _navItemStyle(
+                    context,
+                    kAbout,
+                  ).copyWith(color: textColor),
                 ),
               ),
-              DropdownMenuItem<Locale>(
-                value: const Locale('th'),
-                child: Row(
-                  children: <Widget>[
-                    const Text('🇹🇭'),
-                    const SizedBox(width: 6),
-                    Text('ไทย', style: AppTextStyle.navItemTextStyle(context)),
-                  ],
+              TextButton(
+                onPressed: () => widget.onNavItemClicked(kExperience),
+                child: Text(
+                  context.localization.work_experience,
+                  style: _navItemStyle(
+                    context,
+                    kExperience,
+                  ).copyWith(color: textColor),
+                ),
+              ),
+              TextButton(
+                onPressed: () => widget.onNavItemClicked(kPortfolio),
+                child: Text(
+                  context.localization.portfolio,
+                  style: _navItemStyle(
+                    context,
+                    kPortfolio,
+                  ).copyWith(color: textColor),
+                ),
+              ),
+
+              TextButton(
+                onPressed: () => widget.onNavItemClicked(kSkill),
+                child: Text(
+                  context.localization.skill,
+                  style: _navItemStyle(
+                    context,
+                    kSkill,
+                  ).copyWith(color: textColor),
+                ),
+              ),
+              TextButton(
+                onPressed: () => widget.onNavItemClicked(kContact),
+                child: Text(
+                  context.localization.contact,
+                  style: _navItemStyle(
+                    context,
+                    kContact,
+                  ).copyWith(color: textColor),
                 ),
               ),
             ],
-            onChanged: (Locale? newLocale) {
-              if (newLocale != null) {
-                setLocale(newLocale);
-              }
-              FocusScope.of(context).unfocus();
-            },
-          ),
+            SizedBox().horizontalSpaceSmall,
+          ],
         ),
-
-        Container(
-          margin: EdgeInsets.only(right: s8.w),
-          child: IconButton(
-            icon: Icon(
-              themeMode == ThemeMode.dark ? Icons.dark_mode : Icons.light_mode,
-              color: Colors.indigo,
-            ),
-            onPressed: toggleTheme,
-            tooltip: themeMode == ThemeMode.dark ? 'Dark Mode' : 'Light Mode',
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

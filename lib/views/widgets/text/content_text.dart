@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-
-import '../../../utils/style_theme.dart';
+import 'package:portfolio/utils/extensions/theme_ex.dart';
 
 class ContentText extends StatelessWidget {
   final String data;
-  const ContentText(this.data, {super.key});
-
+  final Color? textColor;
+  final double fontSize;
+  const ContentText(this.data, {this.textColor, this.fontSize = 14, super.key});
   @override
   Widget build(BuildContext context) {
-    return SelectableText(data, style: AppTextStyle.contentTextStyle(context));
+    return SelectableText(
+      data,
+      style: context.contentTextStyle.copyWith(
+        color: textColor,
+        fontSize: context.scaleFontSize(fontSize),
+      ),
+    );
   }
 }
