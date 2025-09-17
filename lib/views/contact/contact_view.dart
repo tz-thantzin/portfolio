@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/contact/widgets/animated_text_field.dart';
 import 'package:portfolio/views/contact/widgets/hover_slide_button.dart';
@@ -166,12 +167,18 @@ class _ContactViewState extends State<ContactView>
                     ),
                     SizedBox().verticalSpaceSmall,
 
-                    // Friendly Name + Job Row
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    Wrap(
+                      spacing: s8.w,
+                      runSpacing: s12.h,
+                      alignment: WrapAlignment.start,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
                         ContentText("Hi there! I'm ", textColor: kBlack),
-                        Expanded(
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minWidth: context.isMobile ? s100.w : s50.w,
+                            maxWidth: context.isMobile ? s150.w : s100.w,
+                          ),
                           child: AnimatedUnderlineTextField(
                             hintText: "Your name",
                             controller: _nameController,
@@ -186,9 +193,13 @@ class _ContactViewState extends State<ContactView>
                             },
                           ),
                         ),
-                        SizedBox(width: s8.w),
+
                         ContentText("and I’m looking for ", textColor: kBlack),
-                        Expanded(
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minWidth: context.isMobile ? s100.w : s50.w,
+                            maxWidth: context.isMobile ? s150.w : s100.w,
+                          ),
                           child: AnimatedUnderlineTextField(
                             hintText: "Job type",
                             controller: _jobController,
@@ -204,15 +215,13 @@ class _ContactViewState extends State<ContactView>
                           ),
                         ),
                         ContentText(".", textColor: kBlack),
-                      ],
-                    ),
-                    SizedBox(height: s16.h),
 
-                    // Email Row
-                    Row(
-                      children: [
                         ContentText("Reach me at ", textColor: kBlack),
-                        Expanded(
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minWidth: context.isMobile ? s100.w : s50.w,
+                            maxWidth: context.isMobile ? s150.w : s100.w,
+                          ),
                           child: AnimatedUnderlineTextField(
                             hintText: "Your email",
                             controller: _emailController,
@@ -229,34 +238,34 @@ class _ContactViewState extends State<ContactView>
                           ),
                         ),
                         ContentText("!", textColor: kBlack),
-                      ],
-                    ),
-                    SizedBox(height: s16.h),
 
-                    // Message Column
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
                         ContentText(
                           "Any additional info or special requests?",
                           textColor: kBlack,
                         ),
-                        AnimatedUnderlineTextField(
-                          hintText: "Your message",
-                          controller: _messageController,
-                          focusNode: _messageFocus,
-                          isMultiline: true,
-                          underlineColor: vm.messageError != null
-                              ? kRed
-                              : kPrimary,
-                          validator: (_) => vm.messageError,
-                          onChanged: (value) => vm.message = value,
-                          onEditingComplete: () {
-                            vm.message = _messageController.text;
-                          },
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minWidth: context.isMobile ? s150.w : s100.w,
+                            maxWidth: context.isMobile ? s200.w : s150.w,
+                          ),
+                          child: AnimatedUnderlineTextField(
+                            hintText: "Your message",
+                            controller: _messageController,
+                            focusNode: _messageFocus,
+                            isMultiline: true,
+                            underlineColor: vm.messageError != null
+                                ? kRed
+                                : kPrimary,
+                            validator: (_) => vm.messageError,
+                            onChanged: (value) => vm.message = value,
+                            onEditingComplete: () {
+                              vm.message = _messageController.text;
+                            },
+                          ),
                         ),
                       ],
                     ),
+
                     SizedBox(height: s16.h),
 
                     // Send Button

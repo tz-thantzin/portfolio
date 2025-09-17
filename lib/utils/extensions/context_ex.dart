@@ -8,4 +8,11 @@ extension ContextX on BuildContext {
   double get screenHeight => MediaQuery.of(this).size.height;
   double get sectionHeight => MediaQuery.of(this).size.height - 60.h;
   AppLocalizations get localization => AppLocalizations.of(this)!;
+
+  double percentWidth(double percent) => screenWidth * (percent / 100);
+  double percentHeight(double percent) => screenHeight * (percent / 100);
+  SizedBox percentSizedBox({double? pWidth, double? pHeight}) => SizedBox(
+    width: percentWidth(pWidth ?? 0),
+    height: percentHeight(pHeight ?? 0),
+  );
 }
