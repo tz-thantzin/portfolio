@@ -32,14 +32,14 @@ class _ViewProjectButtonState extends State<ViewProjectButton> {
                   text: widget.title,
                   style: context.buttonTextStyle.copyWith(
                     fontSize: 12.5,
-                    color: _isButtonHovered ? kIndigo : Colors.white,
+                    color: _isButtonHovered ? kIndigo : kWhite,
                   ),
                 ),
                 TextSpan(
                   text: '→',
                   style: context.buttonTextStyle.copyWith(
                     fontSize: 12.5,
-                    color: _isButtonHovered ? kIndigo : Colors.white,
+                    color: _isButtonHovered ? kIndigo : kWhite,
                   ),
                 ),
               ],

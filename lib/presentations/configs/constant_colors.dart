@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const Color kPrimary = Color(0xFF242439);
 const Color kSecondary = Colors.deepPurple;
 const Color kWhite = Colors.white;
+const Color kWhite70 = Colors.white70;
 const Color kBlack = Colors.black;
 final Color kBlue = Colors.blueAccent.shade200;
 const Color kTransparent = Colors.transparent;

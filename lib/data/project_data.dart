@@ -4,7 +4,7 @@ import 'package:portfolio/presentations/configs/constant_images.dart';
 List<Project> projects() {
   return <Project>[
     Project(
-      projectName: 'My Animation Text',
+      projectName: 'My Animated Text',
       description:
           'A Flutter package that provides customizable animated text widgets, enabling dynamic and engaging text effects for apps.',
       imagePath: kAnimatedText,

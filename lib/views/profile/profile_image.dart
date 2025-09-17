@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_images.dart';
@@ -26,7 +27,7 @@ class _DesktopView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double size = 450.h;
+    final double size = s450.h;
     return SizedBox(
       width: size,
       height: size,
@@ -37,20 +38,20 @@ class _DesktopView extends StatelessWidget {
             height: size,
             child: AspectRatio(
               aspectRatio: 1,
-              child: Image.asset(kTypingIcon, fit: BoxFit.contain),
+              child: SvgPicture.asset(kTypingIcon, fit: BoxFit.contain),
             ),
           ),
 
           Positioned(
-            top: 60.h,
+            top: s60.h,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: s8.w, vertical: s8.h),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: kWhite,
                 borderRadius: BorderRadius.circular(s16.r),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
+                    color: kBlack.withValues(alpha: 0.05),
                     spreadRadius: 2,
                     blurRadius: 5,
                     offset: const Offset(0, 3),
@@ -61,7 +62,10 @@ class _DesktopView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  TitleText(context.localization.year_of_work_experience),
+                  TitleText(
+                    context.localization.year_of_work_experience,
+                    fontSize: s26,
+                  ),
                   SizedBox().horizontalSpaceTiny,
                   CaptionText(context.localization.years_success),
                 ],
@@ -71,11 +75,12 @@ class _DesktopView extends StatelessWidget {
 
           // Circling text positioned directly inside Stack
           Positioned(
+            top: s280.h,
             left: s62.w,
             child: CirclingText(
               context.localization.creative_mobile_app_developer,
-              radius: 40,
-              textStyle: context.circlingTextStyle.copyWith(color: kIndigo),
+              radius: s40,
+              textStyle: context.circlingTextStyle.copyWith(color: kWhite),
             ),
           ),
         ],
@@ -94,7 +99,7 @@ class _MobileView extends StatelessWidget {
       height: size,
       child: AspectRatio(
         aspectRatio: 1,
-        child: Image.asset(kTypingIcon, fit: BoxFit.contain),
+        child: SvgPicture.asset(kTypingIcon, fit: BoxFit.contain),
       ),
     );
   }

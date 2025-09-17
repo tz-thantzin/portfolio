@@ -6,7 +6,13 @@ import '../../../utils/extensions/theme_ex.dart';
 class TitleText extends StatelessWidget {
   final String data;
   final Color? textColor;
-  const TitleText(this.data, {this.textColor = kTomato, super.key});
+  final double fontSize;
+  const TitleText(
+    this.data, {
+    this.textColor = kTomato,
+    this.fontSize = 20,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +20,7 @@ class TitleText extends StatelessWidget {
       data,
       style: context.titleTextStyle.copyWith(
         color: textColor,
+        fontSize: context.scaleFontSize(fontSize),
         fontWeight: FontWeight.w300,
       ),
       textAlign: TextAlign.center,

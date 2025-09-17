@@ -43,7 +43,7 @@ class _PortfolioViewState extends State<PortfolioView> {
             final direction = i % 2 == 0 ? Direction.right : Direction.left;
 
             return Padding(
-              padding: EdgeInsets.only(bottom: s24.h),
+              padding: EdgeInsets.only(bottom: s38.h),
               child: ProjectCard(
                 projectList[i],
                 gradient: gradient,

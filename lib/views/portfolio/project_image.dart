@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/models/project.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/views/portfolio/project_card.dart';
+
+import '../../presentations/configs/constant_sizes.dart';
 
 class ProjectImage extends StatefulWidget {
   final Project project;
@@ -33,10 +36,11 @@ class _ProjectImageState extends State<ProjectImage> {
             scale: _isHovered ? 1.5 : 1.0,
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeOut,
-            child: ConstrainedBox(
+            child: Container(
               constraints: BoxConstraints(
                 maxHeight: context.screenHeight * 0.8,
               ),
+              padding: EdgeInsets.symmetric(horizontal: s16.w),
               child: AspectRatio(
                 aspectRatio: 0.5,
                 child: Image.asset(

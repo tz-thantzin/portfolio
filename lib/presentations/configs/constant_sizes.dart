@@ -38,6 +38,7 @@ const double s180 = 180.0;
 const double s200 = 200.0;
 const double s220 = 220.0;
 const double s250 = 250.0;
+const double s280 = 280.0;
 const double s300 = 300.0;
 const double s350 = 350.0;
 const double s400 = 400.0;

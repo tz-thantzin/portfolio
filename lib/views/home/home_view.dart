@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/presentations/configs/constant_colors.dart';
 import 'package:portfolio/views/portfolio/portfolio_view.dart';
 import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -184,7 +185,11 @@ class SectionWrapper extends StatelessWidget {
       },
       child: Container(
         key: sectionKey,
+        width: double.infinity,
         constraints: BoxConstraints(minHeight: context.sectionHeight),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: kGrey500)),
+        ),
         child: child,
       ),
     );

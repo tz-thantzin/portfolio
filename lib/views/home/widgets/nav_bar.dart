@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
 
 import '../../../presentations/configs/constant_colors.dart';
 import '../../../presentations/configs/constant_sizes.dart';
@@ -156,7 +157,7 @@ class _NavBarState extends State<NavBar> {
                 ),
               ),
             ],
-            SizedBox(width: s8.w),
+            SizedBox().horizontalSpaceSmall,
           ],
         ),
       ),

@@ -17,22 +17,16 @@
   <title>My Portfolio</title>
   <link rel="manifest" href="manifest.json">
 
-  <script>
-    var serviceWorkerVersion = null;
-  </script>
-
-  <script src="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.js"></script>
-  <link rel="preload" href="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.wasm" as="fetch" crossOrigin="anonymous">
-  <script src="flutter.js" defer></script>
+  <!-- Flutter engine & config -->
+  <script>{{flutter_js}}</script>
+  <script>{{flutter_build_config}}</script>
 
   <!-- Lottie -->
   <script src="https://unpkg.com/lottie-web@latest/build/player/lottie.min.js"></script>
 
   <!-- Styles -->
   <style>
-    html {
-      background: #F4F4EF;
-    }
+    html { background: #F4F4EF; }
     body {
       display: flex;
       align-items: center;
@@ -42,8 +36,7 @@
     }
     .loading {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
     }
@@ -62,9 +55,8 @@
 </div>
 
 <script>
-  // 🔹 Loader configuration
+  // Loader configuration
   const loaderConfig = {
-    // Nature-themed Lottie animation
     iconUrl: "https://assets10.lottiefiles.com/packages/lf20_hu9cd9.json",
     texts: [
       "Discovering new ways of making you wait...",
@@ -90,19 +82,21 @@
   setInterval(() => {
     i = (i + 1) % loaderConfig.texts.length;
     element.innerHTML = loaderConfig.texts[i];
-  }, 2000); // change text every 2 seconds
+  }, 2000);
 
-  // 🔹 Replace loader when Flutter app is ready
-  window.addEventListener('load', function(ev) {
-    _flutter.loader.loadEntrypoint({
-      serviceWorker: { serviceWorkerVersion: serviceWorkerVersion },
-      onEntrypointLoaded: function(engineInitializer) {
-        engineInitializer.initializeEngine().then(function(appRunner) {
-          const loader = document.getElementById("loader");
-          loader.remove();
-          appRunner.runApp();
-        });
+  // ✅ Modern Flutter initialization (3.35.3)
+  window.addEventListener('load', function() {
+    _flutter.loader.load({
+      serviceWorker: { serviceWorkerVersion: "{{flutter_service_worker_version}}" }
+    }).then(function(engineInitializer) {
+      return engineInitializer.initializeEngine();
+    }).then(function(appRunner) {
+      const loader = document.getElementById("loader");
+
+      if (loader) {
+        loader.remove();
       }
+      appRunner.runApp();
     });
   });
 </script>

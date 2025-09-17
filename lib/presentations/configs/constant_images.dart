@@ -1,7 +1,7 @@
 const String baseImagesPath = 'assets/images';
 const String kProfileBg = '$baseImagesPath/home_bg.jpg';
 const String kAboutMeIcon = '$baseImagesPath/about_me.png';
-const String kTypingIcon = '$baseImagesPath/home.png';
+const String kTypingIcon = '$baseImagesPath/developer_activity.svg';
 
 const String baseIconsPath = 'assets/icons';
 const String kFlutterIcon = '$baseIconsPath/flutter_icon.png';

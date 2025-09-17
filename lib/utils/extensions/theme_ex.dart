@@ -4,7 +4,7 @@ import '../../presentations/configs/constant_colors.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 
 extension ThemeEx on BuildContext {
-  double _scaleFontSize(double base) {
+  double scaleFontSize(double base) {
     const double desktopScale = 1.25;
     return isDesktop ? base * desktopScale : base;
   }
@@ -92,14 +92,14 @@ extension ThemeEx on BuildContext {
     fontFamily: 'MulishLocal',
     fontWeight: FontWeight.bold,
     color: kBlue,
-    fontSize: _scaleFontSize(16),
+    fontSize: scaleFontSize(16),
   );
 
   TextStyle get navItemTextStyle => TextStyle(
     fontFamily: 'MulishLocal',
     fontWeight: FontWeight.w500,
     color: kBlue,
-    fontSize: _scaleFontSize(11),
+    fontSize: scaleFontSize(11),
   );
 
   TextStyle get navItemSelectedTextStyle =>
@@ -107,104 +107,104 @@ extension ThemeEx on BuildContext {
 
   TextStyle get headerTextStyle => TextStyle(
     fontFamily: 'RobotoCondensedLocal',
-    fontSize: _scaleFontSize(32),
+    fontSize: scaleFontSize(32),
     color: colorScheme.primary,
     fontWeight: FontWeight.bold,
   );
 
   TextStyle get subHeaderTextStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(20),
+    fontSize: scaleFontSize(20),
     color: colorScheme.onSurface,
     fontWeight: FontWeight.bold,
   );
 
   TextStyle get circlingTextStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(14),
+    fontSize: scaleFontSize(14),
     color: colorScheme.primary,
     fontWeight: FontWeight.bold,
   );
 
   TextStyle get descriptionTextStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(14),
+    fontSize: scaleFontSize(14),
     color: colorScheme.onSurface.withValues(alpha: 0.6),
   );
 
   TextStyle get titleTextStyle => TextStyle(
     fontFamily: 'BungeeLocal',
-    fontSize: _scaleFontSize(20),
+    fontSize: scaleFontSize(20),
     color: kBlue,
     fontWeight: FontWeight.bold,
   );
 
   TextStyle get contentTextStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(14),
+    fontSize: scaleFontSize(14),
     color: colorScheme.onSurface,
   );
 
   TextStyle get captionTextStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(11),
+    fontSize: scaleFontSize(11),
     color: colorScheme.onSurface,
   );
 
   TextStyle get tagTextStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(10),
+    fontSize: scaleFontSize(10),
     color: colorScheme.primary,
   );
 
   TextStyle get blockTitleStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(14),
+    fontSize: scaleFontSize(14),
     fontWeight: FontWeight.w600,
     color: colorScheme.onSurface,
   );
 
   TextStyle get blockSubTitleStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(12),
+    fontSize: scaleFontSize(12),
     fontWeight: FontWeight.normal,
     color: colorScheme.onSurface,
   );
 
   TextStyle get blockPeriodStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(10),
+    fontSize: scaleFontSize(10),
     color: colorScheme.onSurface.withValues(alpha: 0.6),
   );
 
   TextStyle get footerTextStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(10),
+    fontSize: scaleFontSize(10),
     color: colorScheme.onSurface.withValues(alpha: 0.5),
   );
 
   TextStyle get blockDescriptionStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(12),
+    fontSize: scaleFontSize(12),
     color: colorScheme.onSurface.withValues(alpha: 0.6),
   );
 
   TextStyle get buttonTextStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(14),
+    fontSize: scaleFontSize(14),
     color: kWhite,
   );
 
   TextStyle get navDrawerTitleTextStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(16),
+    fontSize: scaleFontSize(16),
     color: kWhite,
     fontWeight: FontWeight.w600,
   );
 
   TextStyle get navDrawerDescriptionTextStyle => TextStyle(
     fontFamily: 'MulishLocal',
-    fontSize: _scaleFontSize(14),
-    color: Colors.white70,
+    fontSize: scaleFontSize(14),
+    color: kWhite70,
   );
 }
