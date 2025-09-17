@@ -1,49 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:portfolio/data/contact_data.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/contact.dart';
+import '../../models/social.dart';
 import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../view_models/home_view_model.dart';
 
 class FooterSection extends StatelessWidget {
   const FooterSection({super.key});
 
-  IconData? _getIcon(String name) {
-    switch (name.toLowerCase()) {
-      case 'email':
-        return Icons.email;
-      case 'linkedin':
-        return FontAwesomeIcons.linkedin;
-      case 'github':
-        return FontAwesomeIcons.github;
-      default:
-        return Icons.link;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final List<Contact> contactList = footerContacts();
+    final List<Social> contactList = contacts();
 
     return Container(
       color: kFooterBg,
-      alignment: Alignment.bottomCenter,
+      alignment: Alignment.center,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s16.h),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              '© 2025 Thant Zin. All rights reserved.',
-              style: context.footerTextStyle,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox().verticalSpaceMedium,
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -54,30 +37,48 @@ class FooterSection extends StatelessWidget {
                   onTap: () => context.read<HomeViewModel>().onContactMePressed(
                     contactList[i].link,
                   ),
-                  child: SizedBox(
-                    width: s40.r,
-                    height: s40.r * 1.1,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        // Animated background circle
-                        Container(
-                          width: s40.r,
-                          height: s40.r,
-                          decoration: BoxDecoration(shape: BoxShape.circle),
-                        ),
-                        // Icon
-                        Icon(
-                          _getIcon(contactList[i].name),
-                          color: kGrey300,
-                          size: s30.r,
-                        ),
-                      ],
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: s8.w),
+                    child: SizedBox(
+                      width: s40.r,
+                      height: s40.r * 1.1,
+                      child: Icon(
+                        contactList[i].icon,
+                        color: kGrey300,
+                        size: s30.r,
+                      ),
                     ),
                   ),
                 );
               }),
             ),
+            SizedBox().verticalSpaceMedium,
+            Text(
+              '© 2025 Thant Zin. All rights reserved.',
+              style: context.footerTextStyle,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox().verticalSpaceMedium,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                Text(
+                  'Built using ',
+                  style: context.footerTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+                FlutterLogo(size: 14),
+                Text(
+                  " with ",
+                  style: context.footerTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+                Icon(FontAwesomeIcons.solidHeart, size: s14.r, color: kRed),
+              ],
+            ),
+            SizedBox().verticalSpaceMedium,
           ],
         ),
       ),

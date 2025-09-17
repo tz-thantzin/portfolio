@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/skills_data.dart';
 import '../../models/skill.dart';
 import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/widget_ex.dart';

@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setUrlStrategy(const HashUrlStrategy());
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.web);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(MyPortfolioMain());
 }

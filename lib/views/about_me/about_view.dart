@@ -13,14 +13,14 @@ import 'about_image.dart';
 import 'about_message.dart';
 import 'technology_grid.dart';
 
-class AboutSection extends StatefulWidget {
-  const AboutSection({super.key});
+class AboutView extends StatefulWidget {
+  const AboutView({super.key});
 
   @override
-  State<AboutSection> createState() => AboutSectionState();
+  State<AboutView> createState() => AboutViewState();
 }
 
-class AboutSectionState extends State<AboutSection>
+class AboutViewState extends State<AboutView>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _aboutImageAnimation;

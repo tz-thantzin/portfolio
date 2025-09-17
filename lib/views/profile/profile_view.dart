@@ -11,14 +11,14 @@ import 'greeting_widget.dart';
 import 'profile_image.dart';
 import 'social_banner.dart';
 
-class ProfileSection extends StatefulWidget {
-  const ProfileSection({super.key});
+class ProfileView extends StatefulWidget {
+  const ProfileView({super.key});
 
   @override
-  State<ProfileSection> createState() => _ProfileSectionState();
+  State<ProfileView> createState() => _ProfileViewState();
 }
 
-class _ProfileSectionState extends State<ProfileSection>
+class _ProfileViewState extends State<ProfileView>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _greetingOffsetAnimation;

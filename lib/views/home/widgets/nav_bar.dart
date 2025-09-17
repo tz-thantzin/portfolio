@@ -136,16 +136,7 @@ class _NavBarState extends State<NavBar> {
                   ).copyWith(color: textColor),
                 ),
               ),
-              TextButton(
-                onPressed: () => widget.onNavItemClicked(kEducation),
-                child: Text(
-                  context.localization.education,
-                  style: _navItemStyle(
-                    context,
-                    kEducation,
-                  ).copyWith(color: textColor),
-                ),
-              ),
+
               TextButton(
                 onPressed: () => widget.onNavItemClicked(kSkill),
                 child: Text(
@@ -153,6 +144,16 @@ class _NavBarState extends State<NavBar> {
                   style: _navItemStyle(
                     context,
                     kSkill,
+                  ).copyWith(color: textColor),
+                ),
+              ),
+              TextButton(
+                onPressed: () => widget.onNavItemClicked(kContact),
+                child: Text(
+                  context.localization.contact,
+                  style: _navItemStyle(
+                    context,
+                    kContact,
                   ).copyWith(color: textColor),
                 ),
               ),

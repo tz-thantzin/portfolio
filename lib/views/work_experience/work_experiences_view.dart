@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/views/work_experience/work_info.dart';
 
-import '../../data/work_experience_data.dart';
 import '../../models/work_experience.dart';
 import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
@@ -13,8 +13,8 @@ import '../../utils/extensions/widget_ex.dart';
 import '../widgets/text/title_text.dart';
 import 'timeline_indicator.dart';
 
-class WorkExperienceSection extends StatelessWidget {
-  const WorkExperienceSection({super.key});
+class WorkExperienceView extends StatelessWidget {
+  const WorkExperienceView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/presentations/configs/duration.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/contact_data.dart';
-import '../../models/contact.dart';
+import '../../models/social.dart';
 import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../view_models/home_view_model.dart';
 
@@ -21,23 +20,6 @@ class _SocialBannerState extends State<SocialBanner>
     with TickerProviderStateMixin {
   late final List<AnimationController> _bgControllers;
   late final List<Animation<double>> _bgScaleAnimations;
-
-  IconData? _getIcon(String name) {
-    switch (name.toLowerCase()) {
-      case 'email':
-        return Icons.email;
-      case 'linkedin':
-        return FontAwesomeIcons.linkedin;
-      case 'facebook':
-        return FontAwesomeIcons.facebook;
-      case 'instagram':
-        return FontAwesomeIcons.instagram;
-      case 'github':
-        return FontAwesomeIcons.github;
-      default:
-        return Icons.link;
-    }
-  }
 
   @override
   void initState() {
@@ -85,7 +67,7 @@ class _SocialBannerState extends State<SocialBanner>
 
   @override
   Widget build(BuildContext context) {
-    final List<Contact> contactList = contacts();
+    final List<Social> contactList = contacts();
 
     return Container(
       alignment: Alignment.centerLeft,
@@ -130,11 +112,7 @@ class _SocialBannerState extends State<SocialBanner>
                         ),
                       ),
                       // Icon
-                      Icon(
-                        _getIcon(contactList[i].name),
-                        color: kGrey700,
-                        size: s24.r,
-                      ),
+                      Icon(contactList[i].icon, color: kGrey700, size: s24.r),
                     ],
                   ),
                 ),

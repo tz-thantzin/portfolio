@@ -27,9 +27,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get work_experience => 'Experience';
 
   @override
-  String get education => 'Education';
-
-  @override
   String get skill => 'Skills';
 
   @override
@@ -61,33 +58,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get technologies => 'Technologies I have worked with:';
-
-  @override
-  String get education1_degree => 'Business English';
-
-  @override
-  String get education1_institution => 'Southeast Bangkok University';
-
-  @override
-  String get education1_duration => 'Present';
-
-  @override
-  String get education2_degree => 'Diploma in English Language';
-
-  @override
-  String get education2_institution => 'SEAMEO CHAT, Yangon';
-
-  @override
-  String get education2_duration => '2018 – 2020';
-
-  @override
-  String get education3_degree => 'Bachelor of Computer Science';
-
-  @override
-  String get education3_institution => 'University of Computer Studies Yangon';
-
-  @override
-  String get education3_duration => '2010 – 2013';
 
   @override
   String get programming_languages_tools => 'Programming Languages & Tools';
@@ -157,4 +127,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get view_project => 'View Project';
+
+  @override
+  String get contact => 'Contact';
+
+  @override
+  String get get_in_touch => 'Get in touch';
+
+  @override
+  String get schedule_appointment => 'Schedule an Appointment';
 }

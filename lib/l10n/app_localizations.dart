@@ -129,12 +129,6 @@ abstract class AppLocalizations {
   /// **'Experience'**
   String get work_experience;
 
-  /// No description provided for @education.
-  ///
-  /// In en, this message translates to:
-  /// **'Education'**
-  String get education;
-
   /// No description provided for @skill.
   ///
   /// In en, this message translates to:
@@ -200,60 +194,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Technologies I have worked with:'**
   String get technologies;
-
-  /// No description provided for @education1_degree.
-  ///
-  /// In en, this message translates to:
-  /// **'Business English'**
-  String get education1_degree;
-
-  /// No description provided for @education1_institution.
-  ///
-  /// In en, this message translates to:
-  /// **'Southeast Bangkok University'**
-  String get education1_institution;
-
-  /// No description provided for @education1_duration.
-  ///
-  /// In en, this message translates to:
-  /// **'Present'**
-  String get education1_duration;
-
-  /// No description provided for @education2_degree.
-  ///
-  /// In en, this message translates to:
-  /// **'Diploma in English Language'**
-  String get education2_degree;
-
-  /// No description provided for @education2_institution.
-  ///
-  /// In en, this message translates to:
-  /// **'SEAMEO CHAT, Yangon'**
-  String get education2_institution;
-
-  /// No description provided for @education2_duration.
-  ///
-  /// In en, this message translates to:
-  /// **'2018 – 2020'**
-  String get education2_duration;
-
-  /// No description provided for @education3_degree.
-  ///
-  /// In en, this message translates to:
-  /// **'Bachelor of Computer Science'**
-  String get education3_degree;
-
-  /// No description provided for @education3_institution.
-  ///
-  /// In en, this message translates to:
-  /// **'University of Computer Studies Yangon'**
-  String get education3_institution;
-
-  /// No description provided for @education3_duration.
-  ///
-  /// In en, this message translates to:
-  /// **'2010 – 2013'**
-  String get education3_duration;
 
   /// No description provided for @programming_languages_tools.
   ///
@@ -392,6 +332,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View Project'**
   String get view_project;
+
+  /// No description provided for @contact.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get contact;
+
+  /// No description provided for @get_in_touch.
+  ///
+  /// In en, this message translates to:
+  /// **'Get in touch'**
+  String get get_in_touch;
+
+  /// No description provided for @schedule_appointment.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule an Appointment'**
+  String get schedule_appointment;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

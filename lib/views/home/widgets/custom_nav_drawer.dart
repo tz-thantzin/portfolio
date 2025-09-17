@@ -68,17 +68,17 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
                 ),
                 ListTile(
                   title: Text(
-                    context.localization.education,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kEducation),
-                ),
-                ListTile(
-                  title: Text(
                     context.localization.skill,
                     style: context.navItemTextStyle.copyWith(color: kWhite),
                   ),
                   onTap: () => widget.onNavItemClicked(kSkill),
+                ),
+                ListTile(
+                  title: Text(
+                    context.localization.contact,
+                    style: context.navItemTextStyle.copyWith(color: kWhite),
+                  ),
+                  onTap: () => widget.onNavItemClicked(kContact),
                 ),
               ],
             ),

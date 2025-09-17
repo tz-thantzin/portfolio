@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:portfolio/data/project_data.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/portfolio/project_card.dart';
 
 import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../widgets/text/title_text.dart';
 

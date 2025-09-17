@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1071941194582",
+    "project_id": "thantzin-portfolio",
+    "storage_bucket": "thantzin-portfolio.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071941194582:android:95328f01fdcf21a15bfcf7",
+        "android_client_info": {
+          "package_name": "com.example.portfolio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPgE2Eiub0zgy558ObH44fZELj7dcyBjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071941194582:android:5833c346ca8b12825bfcf7",
+        "android_client_info": {
+          "package_name": "io.github.thantzin_port"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPgE2Eiub0zgy558ObH44fZELj7dcyBjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

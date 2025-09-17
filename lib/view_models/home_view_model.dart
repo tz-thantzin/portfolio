@@ -78,13 +78,13 @@ class HomeViewModel extends ChangeNotifier {
         updateBrowserUrl(kPortfolio);
         scrollToSection(portfolioKey);
         break;
-      case kEducation:
-        updateBrowserUrl(kEducation);
-        scrollToSection(educationKey);
-        break;
       case kSkill:
         updateBrowserUrl(kSkill);
         scrollToSection(skillKey);
+        break;
+      case kContact:
+        updateBrowserUrl(kContact);
+        scrollToSection(contactKey);
         break;
       default:
         updateBrowserUrl(kHome);

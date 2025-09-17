@@ -10,6 +10,7 @@ import '../../presentations/configs/constant_images.dart';
 import '../../presentations/configs/constants.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
+import '../contact/contact_view.dart';
 import '../views.dart';
 
 class HomeView extends StatefulWidget {
@@ -28,17 +29,17 @@ class _HomeViewState extends State<HomeView> {
     _SectionConfig(
       key: homeKey,
       sectionName: kHome,
-      child: const ProfileSection(),
+      child: const ProfileView(),
     ),
     _SectionConfig(
       key: aboutKey,
       sectionName: kAbout,
-      child: const AboutSection(),
+      child: const AboutView(),
     ),
     _SectionConfig(
       key: experienceKey,
       sectionName: kExperience,
-      child: const WorkExperienceSection(),
+      child: const WorkExperienceView(),
     ),
     _SectionConfig(
       key: portfolioKey,
@@ -46,14 +47,14 @@ class _HomeViewState extends State<HomeView> {
       child: const PortfolioView(),
     ),
     _SectionConfig(
-      key: educationKey,
-      sectionName: kEducation,
-      child: const EducationSection(),
-    ),
-    _SectionConfig(
       key: skillKey,
       sectionName: kSkill,
       child: const SkillsSection(),
+    ),
+    _SectionConfig(
+      key: contactKey,
+      sectionName: kContact,
+      child: const ContactView(),
     ),
   ];
 
@@ -93,7 +94,7 @@ class _HomeViewState extends State<HomeView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(context.appBarHeight),
         child: Consumer<HomeViewModel>(
-          builder: (_, HomeViewModel homeViewModel, __) => NavBar(
+          builder: (_, HomeViewModel homeViewModel, _) => NavBar(
             onNavItemClicked: homeViewModel.handleNavigation,
             toggleNavDrawer: homeViewModel.toggleDrawer,
             selectedSection: homeViewModel.currentSelectedSection,
@@ -131,7 +132,7 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
           Consumer<HomeViewModel>(
-            builder: (_, HomeViewModel homeViewModel, __) => Visibility(
+            builder: (_, HomeViewModel homeViewModel, _) => Visibility(
               visible: homeViewModel.isDrawerOpen,
               child: CustomNavigationDrawer(
                 onCloseDrawer: homeViewModel.closeDrawer,

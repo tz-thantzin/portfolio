@@ -44,6 +44,15 @@ const LinearGradient kOrangeGradient = LinearGradient(
   end: Alignment.bottomRight,
 );
 
+const LinearGradient kSoftTealGradient = LinearGradient(
+  colors: <Color>[
+    Color(0xFFE0F7FA), // Light teal
+    Color(0xFFB2EBF2), // Soft aqua
+  ],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
 // ===== support colors =====
 const Color kGrey25 = Color(0xFFFCFCFC); //Grey/25 | #FCFCFC
 const Color kGrey100 = Color(0xFFF2F2F2); //Grey/100 | #F2F2F2

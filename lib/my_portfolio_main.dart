@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:portfolio/data/data_sources/contact_datasource.dart';
+import 'package:portfolio/data/repositories/contact_impl.dart';
+import 'package:portfolio/domain/use_cases/contact_usecase.dart';
+import 'package:portfolio/view_models/contact_view_model.dart';
 import 'package:provider/provider.dart';
 
 import 'l10n/app_localizations.dart';
@@ -12,8 +17,19 @@ class MyPortfolioMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<HomeViewModel>(
-      create: (_) => HomeViewModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<HomeViewModel>(create: (_) => HomeViewModel()),
+        ChangeNotifierProvider<ContactViewModel>(
+          create: (_) => ContactViewModel(
+            ContactUseCase(
+              ContactImpl(
+                ContactDatasource(firestore: FirebaseFirestore.instance),
+              ),
+            ),
+          ),
+        ),
+      ],
       child: const MyPortfolioApp(),
     );
   }
