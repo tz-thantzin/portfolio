@@ -100,6 +100,20 @@ List<Project> projects() {
       imagePath: kMyf,
       github: 'https://github.com/tz-thantzin/my_flyn_ios_swiftui',
     ),
+    Project(
+      projectName: 'M-Ratex Flutter',
+      description:
+          'A Flutter-based foreign currency application developed as a personal project.',
+      imagePath: kMRate,
+      github: 'https://github.com/tz-thantzin/myan_ratex',
+    ),
+    Project(
+      projectName: 'M-Ratex Swift',
+      description:
+          'A Swift-based foreign currency application developed as a personal project.',
+      imagePath: kMRate,
+      github: 'https://github.com/tz-thantzin/m-ratex-ios',
+    ),
   ];
 }
 

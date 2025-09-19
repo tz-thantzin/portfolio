@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/views/work_experience/work_info.dart';
 
 import '../../models/work_experience.dart';
@@ -24,16 +23,22 @@ class WorkExperienceView extends StatelessWidget {
       width: double.infinity,
       constraints: BoxConstraints(minHeight: context.screenHeight),
       color: kPrimary,
-      padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s40.h),
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(s100),
+        vertical: context.autoAdaptive(s65),
+      ),
       child: Wrap(
         alignment: WrapAlignment.center,
         runAlignment: WrapAlignment.center,
-        runSpacing: s32.h,
+        runSpacing: context.autoAdaptive(s32),
         children: <Widget>[
           TitleText(context.localization.work_experience),
           SizedBox().verticalSpaceLarge,
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: s40.w),
+            padding: EdgeInsets.symmetric(
+              horizontal: context.autoAdaptive(s40),
+            ),
             child: context.isMobile
                 ? Column(children: _buildTimelineItems(items))
                 : Wrap(
@@ -74,13 +79,15 @@ class _TimelineItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Transform.translate(
-            offset: Offset(0, context.blockTitleStyle.fontSize! * 0.35),
+            offset: Offset(0, context.titleLarge.fontSize! * 0.35),
             child: TimeLineIndicator(drawLineBelow: drawLineBelow),
           ),
           SizedBox().horizontalSpaceMedium,
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(bottom: drawLineBelow ? 0 : s24.h),
+              padding: EdgeInsets.only(
+                bottom: drawLineBelow ? 0 : context.autoAdaptive(s24),
+              ),
               child: CompanyTitleAndPeriod(experience: experience),
             ),
           ),

@@ -24,6 +24,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get about => 'About';
 
   @override
+  String get see_my_work => 'See My Works';
+
+  @override
   String get work_experience => 'Experience';
 
   @override
@@ -33,7 +36,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get follow_me => 'Follow Me';
 
   @override
-  String get download_resume => 'Download Resume';
+  String get download_resume => 'Resume';
 
   @override
   String get creative_mobile_app_developer => 'Creative Mobile App Developer ';
@@ -136,4 +139,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get schedule_appointment => 'Schedule an Appointment';
+
+  @override
+  String get go_home => 'Go Home';
+
+  @override
+  String get page_not_found => 'Page Not Found';
 }

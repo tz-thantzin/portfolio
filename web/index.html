@@ -1,110 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <base href="$FLUTTER_BASE_HREF">
+  <base href="/">
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description"
+        content="Portfolio website for Thant Zin Portfolio. This portfolio showcases his skills & expertise, experience, achievements and hobbies.">
 
-  <!-- iOS meta tags -->
+  <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Portfolio">
+  <meta name="apple-mobile-web-app-title" content="Thant Zin Portfolio">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="icons/Icon-192.png"/>
+  <link rel="shortcut icon" type="image/png" href="icons/Icon-192.png"/>
 
-  <title>My Portfolio</title>
+  <title>Thant Zin Portfolio</title>
   <link rel="manifest" href="manifest.json">
-
-  <script>
-    var serviceWorkerVersion = null;
-  </script>
-
-  <script src="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.js"></script>
-  <link rel="preload" href="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.wasm" as="fetch" crossOrigin="anonymous">
-  <script src="flutter.js" defer></script>
-
-  <!-- Lottie -->
-  <script src="https://unpkg.com/lottie-web@latest/build/player/lottie.min.js"></script>
-
-  <!-- Styles -->
-  <style>
-    html {
-      background: #F4F4EF;
-    }
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .loading {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-    .loading-label {
-      font-size: 18px;
-      color: #000;
-      margin-top: 16px;
-    }
-  </style>
-</head>
-<body>
-<!-- Loader -->
-<div class="loading" id="loader">
-  <div id="loader-icon" style="width:200px;height:200px;margin:auto;"></div>
-  <p class="loading-label"></p>
-</div>
-
-<script>
-  // 🔹 Loader configuration
-  const loaderConfig = {
-    // Nature-themed Lottie animation
-    iconUrl: "https://assets10.lottiefiles.com/packages/lf20_hu9cd9.json",
-    texts: [
-      "Discovering new ways of making you wait...",
-      "Still faster than Windows update...",
-      "Hold on, finishing a cup of coffee...",
-      "Don't panic, just count to infinity..."
-    ]
-  };
-
-  // Load Lottie animation
-  lottie.loadAnimation({
-    container: document.getElementById("loader-icon"),
-    renderer: 'svg',
-    loop: true,
-    autoplay: true,
-    path: loaderConfig.iconUrl
-  });
-
-  // Animate texts
-  const element = document.querySelector('.loading-label');
-  let i = 0;
-  element.innerHTML = loaderConfig.texts[0];
-  setInterval(() => {
-    i = (i + 1) % loaderConfig.texts.length;
-    element.innerHTML = loaderConfig.texts[i];
-  }, 2000); // change text every 2 seconds
-
-  // 🔹 Replace loader when Flutter app is ready
-  window.addEventListener('load', function(ev) {
-    _flutter.loader.loadEntrypoint({
-      serviceWorker: { serviceWorkerVersion: serviceWorkerVersion },
-      onEntrypointLoaded: function(engineInitializer) {
-        engineInitializer.initializeEngine().then(function(appRunner) {
-          const loader = document.getElementById("loader");
-          loader.remove();
-          appRunner.runApp();
-        });
+  <script type="application/javascript">
+    function openLink(url, target, isAsync=false) {
+      var is_safari = /^(?!.*chrome).*safari/i.test(navigator.userAgent.toLowerCase());
+      if (is_safari && isAsync) {
+        window.location.href = url;
+      } else {
+        window.open(url, target);
       }
+    }
+  </script>
+</head>
+<body id="app-container">
+<!-- This script installs service_worker.js to provide PWA functionality to
+     application. For more information, see:
+     https://developers.google.com/web/fundamentals/primers/service-workers -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('flutter_service_worker.js');
     });
-  });
+  }
 </script>
+<script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>

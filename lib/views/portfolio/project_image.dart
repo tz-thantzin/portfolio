@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/models/project.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/views/portfolio/project_card.dart';
 
 import '../../presentations/configs/constant_sizes.dart';
@@ -30,6 +30,7 @@ class _ProjectImageState extends State<ProjectImage> {
             ? Alignment.centerLeft
             : Alignment.centerRight,
         child: MouseRegion(
+          key: ValueKey('MouseRegion_Portfolio_Project'),
           onEnter: (_) => setState(() => _isHovered = true),
           onExit: (_) => setState(() => _isHovered = false),
           child: AnimatedScale(
@@ -40,7 +41,9 @@ class _ProjectImageState extends State<ProjectImage> {
               constraints: BoxConstraints(
                 maxHeight: context.screenHeight * 0.8,
               ),
-              padding: EdgeInsets.symmetric(horizontal: s16.w),
+              padding: EdgeInsets.symmetric(
+                horizontal: context.autoAdaptive(s16),
+              ),
               child: AspectRatio(
                 aspectRatio: 0.5,
                 child: Image.asset(

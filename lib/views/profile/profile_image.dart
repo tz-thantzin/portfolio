@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
+import 'package:portfolio/views/widgets/text/content_text.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_images.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/theme_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
-import '../widgets/text/caption_text.dart';
 import '../widgets/text/title_text.dart';
-import 'widgets/circling_text.dart';
 
 class ProfileImage extends StatelessWidget {
   const ProfileImage({super.key});
@@ -27,28 +23,30 @@ class _DesktopView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double size = s450.h;
+    final double size = context.autoAdaptive(s350);
+
     return SizedBox(
       width: size,
       height: size,
       child: Stack(
         children: <Widget>[
-          // Base image
           SizedBox(
             height: size,
             child: AspectRatio(
               aspectRatio: 1,
-              child: SvgPicture.asset(kTypingIcon, fit: BoxFit.contain),
+              child: Image.asset(kTZ, fit: BoxFit.contain),
             ),
           ),
-
           Positioned(
-            top: s60.h,
+            top: context.autoAdaptive(40),
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: s8.w, vertical: s8.h),
+              padding: EdgeInsets.symmetric(
+                horizontal: context.autoAdaptive(8),
+                vertical: context.autoAdaptive(8),
+              ),
               decoration: BoxDecoration(
                 color: kWhite,
-                borderRadius: BorderRadius.circular(s16.r),
+                borderRadius: BorderRadius.circular(context.autoAdaptive(16)),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
                     color: kBlack.withValues(alpha: 0.05),
@@ -60,27 +58,20 @@ class _DesktopView extends StatelessWidget {
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   TitleText(
                     context.localization.year_of_work_experience,
-                    fontSize: s26,
+                    fontSize: context.autoAdaptive(s20),
                   ),
                   SizedBox().horizontalSpaceTiny,
-                  CaptionText(context.localization.years_success),
+                  ContentText(
+                    context.localization.years_success,
+                    fontSize: context.autoAdaptive(s10),
+                    textColor: kPrimary,
+                  ),
                 ],
               ),
-            ),
-          ),
-
-          // Circling text positioned directly inside Stack
-          Positioned(
-            top: s280.h,
-            left: s62.w,
-            child: CirclingText(
-              context.localization.creative_mobile_app_developer,
-              radius: s40,
-              textStyle: context.circlingTextStyle.copyWith(color: kWhite),
             ),
           ),
         ],
@@ -94,12 +85,13 @@ class _MobileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double size = 250.h;
+    final double size = context.autoAdaptive(s350);
+
     return SizedBox(
       height: size,
       child: AspectRatio(
         aspectRatio: 1,
-        child: SvgPicture.asset(kTypingIcon, fit: BoxFit.contain),
+        child: Image.asset(kTZ, fit: BoxFit.contain),
       ),
     );
   }

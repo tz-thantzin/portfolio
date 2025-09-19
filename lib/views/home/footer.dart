@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +22,10 @@ class FooterSection extends StatelessWidget {
       color: kFooterBg,
       alignment: Alignment.center,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s16.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: context.autoAdaptive(s24),
+          vertical: context.autoAdaptive(s16),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -38,14 +41,16 @@ class FooterSection extends StatelessWidget {
                     contactList[i].link,
                   ),
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: s8.w),
+                    margin: EdgeInsets.symmetric(
+                      horizontal: context.autoAdaptive(s8),
+                    ),
                     child: SizedBox(
-                      width: s40.r,
-                      height: s40.r * 1.1,
+                      width: context.autoAdaptive(s20),
+                      height: context.autoAdaptive(s20),
                       child: Icon(
                         contactList[i].icon,
                         color: kGrey300,
-                        size: s30.r,
+                        size: context.autoAdaptive(s20),
                       ),
                     ),
                   ),
@@ -55,7 +60,7 @@ class FooterSection extends StatelessWidget {
             SizedBox().verticalSpaceMedium,
             Text(
               '© 2025 Thant Zin. All rights reserved.',
-              style: context.footerTextStyle,
+              style: context.bodySmall.copyWith(color: kGrey300),
               textAlign: TextAlign.center,
             ),
             SizedBox().verticalSpaceMedium,
@@ -66,16 +71,20 @@ class FooterSection extends StatelessWidget {
               children: [
                 Text(
                   'Built using ',
-                  style: context.footerTextStyle,
+                  style: context.bodySmall.copyWith(color: kGrey300),
                   textAlign: TextAlign.center,
                 ),
                 FlutterLogo(size: 14),
                 Text(
                   " with ",
-                  style: context.footerTextStyle,
+                  style: context.bodySmall.copyWith(color: kGrey300),
                   textAlign: TextAlign.center,
                 ),
-                Icon(FontAwesomeIcons.solidHeart, size: s14.r, color: kRed),
+                Icon(
+                  FontAwesomeIcons.solidHeart,
+                  size: context.autoAdaptive(s14),
+                  color: kRed,
+                ),
               ],
             ),
             SizedBox().verticalSpaceMedium,

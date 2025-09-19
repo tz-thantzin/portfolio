@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:portfolio/presentations/configs/duration.dart';
 
 import '../../presentations/configs/constant_images.dart';
 import '../../presentations/configs/constant_sizes.dart';
@@ -10,7 +10,7 @@ class AboutImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return context.isDesktop ? _DesktopView() : _MobileView();
+    return context.isDesktop ? const _DesktopView() : const _MobileView();
   }
 }
 
@@ -28,7 +28,7 @@ class _DesktopViewState extends State<_DesktopView> {
 
   @override
   Widget build(BuildContext context) {
-    final double size = s450.h;
+    final double size = context.autoAdaptive(s250);
 
     return SizedBox(
       width: size,
@@ -46,48 +46,63 @@ class _DesktopViewState extends State<_DesktopView> {
 
           // Flutter Icon
           Positioned(
-            top: s96.h,
-            left: -20.w,
+            top: context.autoAdaptive(s80),
+            left: context.autoAdaptive(s20),
             child: MouseRegion(
+              key: ValueKey('MouseRegion_Flutter_Icon'),
               onEnter: (_) => setState(() => _isFlutterHovered = true),
               onExit: (_) => setState(() => _isFlutterHovered = false),
               child: AnimatedScale(
                 scale: _isFlutterHovered ? 1.5 : 1.0,
-                duration: const Duration(milliseconds: 300),
+                duration: duration300,
                 curve: Curves.easeOut,
-                child: Image.asset(kFlutterIcon, width: s70.w, height: s70.h),
+                child: Image.asset(
+                  kFlutterIcon,
+                  width: context.autoAdaptive(s42),
+                  height: context.autoAdaptive(s42),
+                ),
               ),
             ),
           ),
 
           // Swift Icon
           Positioned(
-            top: s18.h,
-            left: s48.w,
+            top: context.autoAdaptive(s20),
+            left: context.autoAdaptive(s180),
             child: MouseRegion(
+              key: ValueKey('MouseRegion_Swift_Icon'),
               onEnter: (_) => setState(() => _isSwiftHovered = true),
               onExit: (_) => setState(() => _isSwiftHovered = false),
               child: AnimatedScale(
                 scale: _isSwiftHovered ? 1.5 : 1.0,
-                duration: const Duration(milliseconds: 300),
+                duration: duration300,
                 curve: Curves.easeOut,
-                child: Image.asset(kSwiftIcon, width: s70.w, height: s70.h),
+                child: Image.asset(
+                  kSwiftIcon,
+                  width: context.autoAdaptive(s42),
+                  height: context.autoAdaptive(s42),
+                ),
               ),
             ),
           ),
 
           // Firebase Icon
           Positioned(
-            top: s300.h,
-            left: s20.w,
+            top: context.autoAdaptive(s150),
+            left: context.autoAdaptive(s100),
             child: MouseRegion(
+              key: ValueKey('MouseRegion_Firebase_Icon'),
               onEnter: (_) => setState(() => _isFirebaseHovered = true),
               onExit: (_) => setState(() => _isFirebaseHovered = false),
               child: AnimatedScale(
                 scale: _isFirebaseHovered ? 1.5 : 1.0,
-                duration: const Duration(milliseconds: 300),
+                duration: duration300,
                 curve: Curves.easeOut,
-                child: Image.asset(kFirebaseIcon, width: s70.w, height: s70.h),
+                child: Image.asset(
+                  kFirebaseIcon,
+                  width: context.autoAdaptive(s42),
+                  height: context.autoAdaptive(s42),
+                ),
               ),
             ),
           ),
@@ -102,7 +117,7 @@ class _MobileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double size = s250.h;
+    final double size = context.autoAdaptive(s250);
     return SizedBox(
       height: size,
       child: AspectRatio(

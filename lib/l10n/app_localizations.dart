@@ -123,6 +123,12 @@ abstract class AppLocalizations {
   /// **'About'**
   String get about;
 
+  /// No description provided for @see_my_work.
+  ///
+  /// In en, this message translates to:
+  /// **'See My Works'**
+  String get see_my_work;
+
   /// No description provided for @work_experience.
   ///
   /// In en, this message translates to:
@@ -144,7 +150,7 @@ abstract class AppLocalizations {
   /// No description provided for @download_resume.
   ///
   /// In en, this message translates to:
-  /// **'Download Resume'**
+  /// **'Resume'**
   String get download_resume;
 
   /// No description provided for @creative_mobile_app_developer.
@@ -350,6 +356,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Schedule an Appointment'**
   String get schedule_appointment;
+
+  /// No description provided for @go_home.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Home'**
+  String get go_home;
+
+  /// No description provided for @page_not_found.
+  ///
+  /// In en, this message translates to:
+  /// **'Page Not Found'**
+  String get page_not_found;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

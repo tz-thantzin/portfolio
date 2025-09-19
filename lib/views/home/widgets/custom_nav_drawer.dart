@@ -23,6 +23,10 @@ class CustomNavigationDrawer extends StatefulWidget {
 class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
   @override
   Widget build(BuildContext context) {
+    final double drawerWidth = context.autoAdaptive(
+      250,
+    ); // responsive drawer width
+
     return Stack(
       children: <Widget>[
         GestureDetector(
@@ -30,61 +34,44 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
           child: Container(color: kTransparent),
         ),
         Container(
-          width: context.screenWidth,
+          width: drawerWidth,
           decoration: BoxDecoration(color: kPrimary),
           margin: EdgeInsets.only(top: context.appBarHeight),
+          padding: EdgeInsets.symmetric(
+            vertical: context.autoAdaptive(16),
+            horizontal: context.autoAdaptive(12),
+          ),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                ListTile(
-                  title: Text(
-                    context.localization.home,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kHome),
+                _navItem(context, context.localization.home, kHome),
+                _navItem(context, context.localization.about, kAbout),
+                _navItem(
+                  context,
+                  context.localization.work_experience,
+                  kExperience,
                 ),
-                ListTile(
-                  title: Text(
-                    context.localization.about,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kAbout),
-                ),
-                ListTile(
-                  title: Text(
-                    context.localization.work_experience,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kExperience),
-                ),
-                ListTile(
-                  title: Text(
-                    context.localization.portfolio,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kPortfolio),
-                ),
-                ListTile(
-                  title: Text(
-                    context.localization.skill,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kSkill),
-                ),
-                ListTile(
-                  title: Text(
-                    context.localization.contact,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kContact),
-                ),
+                _navItem(context, context.localization.portfolio, kPortfolio),
+                _navItem(context, context.localization.skill, kSkill),
+                _navItem(context, context.localization.contact, kContact),
               ],
             ),
           ),
         ),
       ],
+    );
+  }
+
+  Widget _navItem(BuildContext context, String title, String route) {
+    return ListTile(
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(8),
+        vertical: context.autoAdaptive(4),
+      ),
+      title: Text(title, style: context.bodyMedium.copyWith(color: kWhite)),
+      onTap: () => widget.onNavItemClicked(route),
     );
   }
 }

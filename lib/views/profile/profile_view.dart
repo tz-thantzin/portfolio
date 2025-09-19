@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:portfolio/utils/extensions/context_ex.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
 import '../widgets/animated_slide_widget.dart';
-import 'greeting_widget.dart';
+import 'intro_widget.dart';
 import 'profile_image.dart';
 import 'social_banner.dart';
 
@@ -31,19 +31,16 @@ class _ProfileViewState extends State<ProfileView>
     super.initState();
     _controller = AnimationController(duration: duration1000, vsync: this);
 
-    // Greeting message animation (left → right)
     _greetingOffsetAnimation = Tween<Offset>(
       begin: const Offset(-1.0, 0.0),
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
-    // Profile image animation (right → left)
     _profileOffsetAnimation = Tween<Offset>(
       begin: const Offset(1.0, 0.0),
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
-    // Shared fade animation
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -52,7 +49,7 @@ class _ProfileViewState extends State<ProfileView>
 
   @override
   void dispose() {
-    VisibilityDetectorController.instance.forget(Key('profile_section'));
+    VisibilityDetectorController.instance.forget(const Key('profile_section'));
     _controller.dispose();
     super.dispose();
   }
@@ -61,10 +58,10 @@ class _ProfileViewState extends State<ProfileView>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller,
-      builder: (BuildContext context, Widget? child) {
+      builder: (context, child) {
         return VisibilityDetector(
           key: const Key('profile_section'),
-          onVisibilityChanged: (VisibilityInfo info) {
+          onVisibilityChanged: (info) {
             if (info.visibleFraction > 0.2 && !_hasAnimated && mounted) {
               _controller.forward();
               _hasAnimated = true;
@@ -75,20 +72,18 @@ class _ProfileViewState extends State<ProfileView>
             alignment: Alignment.center,
             child: Stack(
               children: <Widget>[
-                Visibility(
-                  visible: !context.isMobile,
-                  child: Container(
-                    margin: EdgeInsets.only(top: context.appBarHeight),
-                    padding: EdgeInsets.symmetric(vertical: s40.h),
-                    width: context.isDesktop ? 30.w : 45.w,
+                if (!context.isMobile)
+                  Container(
+                    height: context.screenHeight,
+                    alignment: Alignment.centerLeft,
                     child: const SocialBanner(),
                   ),
-                ),
                 Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: s24.w,
-                    vertical: s40.h,
+                    horizontal: context.autoAdaptive(s100),
+                    vertical: context.autoAdaptive(s65),
                   ),
+                  height: context.screenHeight,
                   alignment: Alignment.center,
                   child: Flex(
                     direction: context.isMobile
@@ -103,31 +98,31 @@ class _ProfileViewState extends State<ProfileView>
                           ? AnimatedSlideWidget(
                               animation: _greetingOffsetAnimation,
                               fadeAnimation: _fadeAnimation,
-                              child: const GreetingWidget(),
+                              child: const IntroWidget(),
                             )
                           : Expanded(
                               flex: 2,
                               child: AnimatedSlideWidget(
                                 animation: _greetingOffsetAnimation,
                                 fadeAnimation: _fadeAnimation,
-                                child: const GreetingWidget(),
+                                child: const IntroWidget(),
                               ),
                             ),
+                      SizedBox().verticalSpaceLarge,
                       context.isMobile
                           ? AnimatedSlideWidget(
                               animation: _profileOffsetAnimation,
                               fadeAnimation: _fadeAnimation,
                               child: const ProfileImage(),
                             )
-                          : Expanded(
-                              flex: 2,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: s24.w),
-                                child: AnimatedSlideWidget(
-                                  animation: _profileOffsetAnimation,
-                                  fadeAnimation: _fadeAnimation,
-                                  child: const ProfileImage(),
-                                ),
+                          : Padding(
+                              padding: EdgeInsets.only(
+                                left: context.autoAdaptive(24),
+                              ),
+                              child: AnimatedSlideWidget(
+                                animation: _profileOffsetAnimation,
+                                fadeAnimation: _fadeAnimation,
+                                child: const ProfileImage(),
                               ),
                             ),
                     ],

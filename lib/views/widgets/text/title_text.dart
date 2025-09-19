@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/presentations/configs/constant_colors.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 
 import '../../../utils/extensions/theme_ex.dart';
 
@@ -18,9 +19,9 @@ class TitleText extends StatelessWidget {
   Widget build(BuildContext context) {
     return SelectableText(
       data,
-      style: context.titleTextStyle.copyWith(
+      style: context.titleLarge.copyWith(
         color: textColor,
-        fontSize: context.scaleFontSize(fontSize),
+        fontSize: context.autoAdaptive(fontSize),
         fontWeight: FontWeight.w300,
       ),
       textAlign: TextAlign.center,

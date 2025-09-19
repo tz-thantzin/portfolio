@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:portfolio/models/skill.dart';
+import 'package:portfolio/presentations/configs/constant_colors.dart';
+import 'package:portfolio/presentations/configs/constant_data.dart';
+import 'package:portfolio/utils/extensions/context_ex.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
+import 'package:portfolio/views/widgets/text/content_text.dart';
+import 'package:portfolio/views/widgets/text/title_text.dart';
 
-import '../../models/skill.dart';
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
-import '../widgets/text/content_text.dart';
-import '../widgets/text/title_text.dart';
 
-class SkillsSection extends StatelessWidget {
-  const SkillsSection({super.key});
+class SkillsView extends StatelessWidget {
+  const SkillsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +19,18 @@ class SkillsSection extends StatelessWidget {
       width: double.infinity,
       constraints: BoxConstraints(minHeight: context.screenHeight),
       color: kPrimary,
-      padding: EdgeInsets.symmetric(vertical: s40.h, horizontal: s24.w),
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(s100),
+        vertical: context.autoAdaptive(s65),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          LanguageAndTools(),
+          const LanguageAndTools(),
           SizedBox().verticalSpaceEnormous,
-          WorkFlows(),
+          const WorkFlows(),
         ],
       ),
     );
@@ -41,7 +45,7 @@ class LanguageAndTools extends StatelessWidget {
     final List<Skill> skills = languagesAndTools(context);
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: s40.w),
+      padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(40)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,8 +53,8 @@ class LanguageAndTools extends StatelessWidget {
           TitleText(context.localization.programming_languages_tools),
           SizedBox().verticalSpaceMassive,
           Wrap(
-            spacing: s8.w,
-            runSpacing: s16.h,
+            spacing: context.autoAdaptive(8),
+            runSpacing: context.autoAdaptive(16),
             alignment: WrapAlignment.center,
             children: skills.map((Skill skill) {
               return _SkillItem(iconPath: skill.iconPath, name: skill.name);
@@ -73,14 +77,14 @@ class _SkillItem extends StatelessWidget {
     return Tooltip(
       message: name,
       child: Container(
-        width: 70.r,
-        height: 70.r,
-        padding: EdgeInsets.all(s16.r),
+        width: context.autoAdaptive(s55),
+        height: context.autoAdaptive(s55),
+        padding: EdgeInsets.all(context.autoAdaptive(s16)),
         decoration: BoxDecoration(
           color: kWhite,
-          borderRadius: BorderRadius.circular(s8.r),
+          borderRadius: BorderRadius.circular(context.autoAdaptive(s8)),
           boxShadow: const <BoxShadow>[
-            BoxShadow(color: kGrey100, blurRadius: 6, offset: Offset(2, 2)),
+            BoxShadow(color: kGrey500, blurRadius: 3, offset: Offset(2, 2)),
           ],
         ),
         child: Image.asset(iconPath, fit: BoxFit.contain),
@@ -118,7 +122,10 @@ class _WorkflowItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: s40.w, vertical: s8.h),
+      padding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(40),
+        vertical: context.autoAdaptive(8),
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[

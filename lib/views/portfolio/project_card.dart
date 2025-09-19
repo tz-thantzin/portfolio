@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/view_models/home_view_model.dart';
 import 'package:portfolio/views/portfolio/project_image.dart';
-import 'package:portfolio/views/portfolio/view_project_button.dart';
+import 'package:portfolio/views/widgets/animated_text_button.dart';
 import 'package:portfolio/views/widgets/text/content_text.dart';
 import 'package:provider/provider.dart';
 
@@ -47,7 +47,7 @@ class _ProjectCardState extends State<ProjectCard> {
     ];
 
     return SizedBox(
-      height: s350.h,
+      height: context.autoAdaptive(s280),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -55,9 +55,12 @@ class _ProjectCardState extends State<ProjectCard> {
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: widget.gradient,
-              borderRadius: BorderRadius.circular(s24.r),
+              borderRadius: BorderRadius.circular(context.autoAdaptive(s24)),
             ),
-            padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s32.h),
+            padding: EdgeInsets.symmetric(
+              horizontal: context.autoAdaptive(s24),
+              vertical: context.autoAdaptive(s32),
+            ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: children,
@@ -87,7 +90,7 @@ class _ProjectCardState extends State<ProjectCard> {
         ),
         if (widget.project.github != null) ...[
           SizedBox().verticalSpaceSmall,
-          ViewProjectButton(
+          AnimatedTextButton(
             context.localization.view_project,
             onPressed: () => context.read<HomeViewModel>().onProjectView(
               widget.project.github!,
@@ -95,7 +98,7 @@ class _ProjectCardState extends State<ProjectCard> {
           ),
         ],
         if (widget.project.pubDev != null) ...[
-          ViewProjectButton(
+          AnimatedTextButton(
             'Pub Dev',
             onPressed: () => context.read<HomeViewModel>().onProjectView(
               widget.project.pubDev!,

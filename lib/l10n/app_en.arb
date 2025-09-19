@@ -5,10 +5,11 @@
   "thantzin" : "Thant Zin",
   "home": "Home",
   "about": "About",
+  "see_my_work": "See My Works",
   "work_experience": "Experience",
   "skill": "Skills",
   "follow_me": "Follow Me",
-  "download_resume": "Download Resume",
+  "download_resume": "Resume",
   "creative_mobile_app_developer": "Creative Mobile App Developer ",
   "year_of_work_experience": "11+",
   "years_success": "Years of \nSuccess",
@@ -42,5 +43,7 @@
   "view_project" : "View Project",
   "contact" : "Contact",
   "get_in_touch": "Get in touch",
-  "schedule_appointment" : "Schedule an Appointment"
+  "schedule_appointment" : "Schedule an Appointment",
+  "go_home": "Go Home",
+  "page_not_found": "Page Not Found"
 }

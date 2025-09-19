@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/presentations/configs/constant_colors.dart';
-import 'package:portfolio/views/portfolio/portfolio_view.dart';
 import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:web/web.dart' as web;
@@ -10,7 +9,6 @@ import '../../presentations/configs/constant_images.dart';
 import '../../presentations/configs/constants.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
-import '../contact/contact_view.dart';
 import '../views.dart';
 
 class HomeView extends StatefulWidget {
@@ -49,7 +47,7 @@ class _HomeViewState extends State<HomeView> {
     _SectionConfig(
       key: skillKey,
       sectionName: kSkill,
-      child: const SkillsSection(),
+      child: const SkillsView(),
     ),
     _SectionConfig(
       key: contactKey,

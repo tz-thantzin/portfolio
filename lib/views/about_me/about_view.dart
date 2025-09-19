@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../presentations/configs/constant_colors.dart';
@@ -46,7 +45,7 @@ class AboutViewState extends State<AboutView>
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
-    // Animation for the message (bottom to top)
+    // Animation for the grid (bottom to top)
     _technologyGridAnimation = Tween<Offset>(
       begin: const Offset(0.0, 1.0),
       end: Offset.zero,
@@ -60,8 +59,7 @@ class AboutViewState extends State<AboutView>
 
   @override
   void dispose() {
-    VisibilityDetectorController.instance.forget(Key('about_section'));
-
+    VisibilityDetectorController.instance.forget(const Key('about_section'));
     _controller.dispose();
     super.dispose();
   }
@@ -72,7 +70,7 @@ class AboutViewState extends State<AboutView>
       animation: _controller,
       builder: (BuildContext context, Widget? child) {
         return VisibilityDetector(
-          key: Key('about_section'),
+          key: const Key('about_section'),
           onVisibilityChanged: (VisibilityInfo info) {
             if (info.visibleFraction > 0.2 && !_hasAnimated && mounted) {
               _controller.forward();
@@ -83,7 +81,11 @@ class AboutViewState extends State<AboutView>
             width: double.infinity,
             constraints: BoxConstraints(minHeight: context.screenHeight),
             color: kPrimary,
-            padding: EdgeInsets.symmetric(horizontal: s24.w, vertical: s40.h),
+            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(
+              horizontal: context.autoAdaptive(s100),
+              vertical: context.autoAdaptive(s65),
+            ),
             child: Column(
               children: <Widget>[
                 Flex(
@@ -95,28 +97,28 @@ class AboutViewState extends State<AboutView>
                         ? AnimatedSlideWidget(
                             animation: _aboutImageAnimation,
                             fadeAnimation: _fadeAnimation,
-                            child: AboutImage(),
+                            child: const AboutImage(),
                           )
                         : Expanded(
                             flex: 1,
                             child: AnimatedSlideWidget(
                               animation: _aboutImageAnimation,
                               fadeAnimation: _fadeAnimation,
-                              child: AboutImage(),
+                              child: const AboutImage(),
                             ),
                           ),
                     context.isMobile
                         ? AnimatedSlideWidget(
                             animation: _messagesAnimation,
                             fadeAnimation: _fadeAnimation,
-                            child: AboutMessages(),
+                            child: const AboutMessages(),
                           )
                         : Expanded(
                             flex: 2,
                             child: AnimatedSlideWidget(
                               animation: _messagesAnimation,
                               fadeAnimation: _fadeAnimation,
-                              child: AboutMessages(),
+                              child: const AboutMessages(),
                             ),
                           ),
                   ],

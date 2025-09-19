@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/presentations/configs/duration.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/social.dart';
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
@@ -26,40 +25,34 @@ class _SocialBannerState extends State<SocialBanner>
     super.initState();
     final contactList = contacts();
 
-    // Create animation controllers for each icon's background
-    _bgControllers = List<AnimationController>.generate(
+    _bgControllers = List.generate(
       contactList.length,
-      (int index) => AnimationController(vsync: this, duration: duration500),
+      (index) => AnimationController(vsync: this, duration: duration500),
     );
 
-    // Scale animations from 0 to 1.2
     _bgScaleAnimations = _bgControllers
         .map(
-          (AnimationController controller) =>
-              Tween<double>(begin: 0, end: 1.2).animate(
-                CurvedAnimation(parent: controller, curve: Curves.easeInOut),
-              ),
+          (controller) => Tween<double>(begin: 0, end: 1.2).animate(
+            CurvedAnimation(parent: controller, curve: Curves.easeInOut),
+          ),
         )
         .toList();
 
-    // Start the sequential background animation
     _runSequentialBackgroundAnimation();
   }
 
   Future<void> _runSequentialBackgroundAnimation() async {
-    for (final AnimationController controller in _bgControllers) {
+    for (final controller in _bgControllers) {
       await controller.forward();
-      await Future<void>.delayed(duration200);
+      await Future.delayed(duration200);
       await controller.reverse();
     }
-
-    // Repeat indefinitely
     _runSequentialBackgroundAnimation();
   }
 
   @override
   void dispose() {
-    for (final AnimationController controller in _bgControllers) {
+    for (final controller in _bgControllers) {
       controller.dispose();
     }
     super.dispose();
@@ -67,23 +60,28 @@ class _SocialBannerState extends State<SocialBanner>
 
   @override
   Widget build(BuildContext context) {
-    final List<Social> contactList = contacts();
+    final contactList = contacts();
 
     return Container(
       alignment: Alignment.centerLeft,
-      margin: EdgeInsets.only(left: s8.w),
+      margin: EdgeInsets.only(left: context.autoAdaptive(s16)),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: s2.w, vertical: s8.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: context.autoAdaptive(s4),
+          vertical: context.autoAdaptive(s8),
+        ),
         decoration: BoxDecoration(
           color: kGrey100,
-          borderRadius: BorderRadius.circular(s24.r),
+          borderRadius: BorderRadius.circular(context.autoAdaptive(24)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: List<Widget>.generate(contactList.length, (int i) {
+          children: List.generate(contactList.length, (i) {
             return Padding(
               padding: EdgeInsets.only(
-                bottom: i == contactList.length - 1 ? 0 : s8.h,
+                bottom: i == contactList.length - 1
+                    ? 0
+                    : context.autoAdaptive(8),
               ),
               child: InkWell(
                 borderRadius: BorderRadius.circular(50),
@@ -91,19 +89,18 @@ class _SocialBannerState extends State<SocialBanner>
                   contactList[i].link,
                 ),
                 child: SizedBox(
-                  width: s40.r,
-                  height: s40.r * 1.1,
+                  width: context.autoAdaptive(s24),
+                  height: context.autoAdaptive(s24) * 1.1,
                   child: Stack(
                     alignment: Alignment.center,
                     children: <Widget>[
-                      // Animated background circle
                       AnimatedBuilder(
                         animation: _bgScaleAnimations[i],
                         builder: (_, child) => Transform.scale(
                           scale: _bgScaleAnimations[i].value,
                           child: Container(
-                            width: s40.r,
-                            height: s40.r,
+                            width: context.autoAdaptive(s24),
+                            height: context.autoAdaptive(s24),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: kBlue.withValues(alpha: 0.2),
@@ -111,8 +108,11 @@ class _SocialBannerState extends State<SocialBanner>
                           ),
                         ),
                       ),
-                      // Icon
-                      Icon(contactList[i].icon, color: kGrey700, size: s24.r),
+                      Icon(
+                        contactList[i].icon,
+                        color: kGrey700,
+                        size: context.autoAdaptive(s18),
+                      ),
                     ],
                   ),
                 ),

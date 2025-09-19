@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 
 import '../../../presentations/configs/constant_colors.dart';
@@ -56,8 +55,8 @@ class _NavBarState extends State<NavBar> {
   TextStyle _navItemStyle(BuildContext context, String sectionKey) {
     final bool isSelected = widget.selectedSection == sectionKey;
     return isSelected
-        ? context.navItemSelectedTextStyle
-        : context.navItemTextStyle;
+        ? context.bodyMedium.copyWith(fontWeight: superBold)
+        : context.bodyMedium;
   }
 
   Color _getTextColor() {
@@ -74,8 +73,8 @@ class _NavBarState extends State<NavBar> {
       automaticallyImplyLeading: false,
       title: Padding(
         padding: EdgeInsets.only(
-          left: context.isMobile ? s38.w : s42.w,
-          right: context.isMobile ? s0.w : s42.w,
+          left: context.autoAdaptive(s42),
+          right: context.isMobile ? s0 : context.autoAdaptive(s42),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,7 +83,7 @@ class _NavBarState extends State<NavBar> {
           children: [
             Text(
               'Thant Zin',
-              style: context.navTitleTextStyle.copyWith(
+              style: context.bodyMedium.copyWith(
                 color: textColor,
                 fontWeight: FontWeight.w800,
               ),
@@ -93,6 +92,7 @@ class _NavBarState extends State<NavBar> {
             if (context.isMobile)
               IconButton(
                 icon: Icon(Icons.menu, color: textColor),
+                padding: EdgeInsets.zero,
                 onPressed: widget.toggleNavDrawer,
               )
             else ...<Widget>[

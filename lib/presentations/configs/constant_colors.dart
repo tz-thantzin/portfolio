@@ -5,6 +5,8 @@ const Color kSecondary = Colors.deepPurple;
 const Color kWhite = Colors.white;
 const Color kWhite70 = Colors.white70;
 const Color kBlack = Colors.black;
+const Color kBlack100 = Color(0xFF303030);
+const Color kBlueAccent = Colors.blueAccent;
 final Color kBlue = Colors.blueAccent.shade200;
 const Color kTransparent = Colors.transparent;
 

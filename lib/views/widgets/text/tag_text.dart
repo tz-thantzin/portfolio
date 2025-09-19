@@ -8,6 +8,6 @@ class TagText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SelectableText(data, style: context.tagTextStyle);
+    return SelectableText(data, style: context.bodySmall);
   }
 }

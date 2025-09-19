@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:portfolio/views/contact/widgets/animated_text_field.dart';
-import 'package:portfolio/views/contact/widgets/hover_slide_button.dart';
+import 'package:portfolio/views/widgets/animated_slide_button.dart';
+import 'package:portfolio/views/widgets/animated_text_field.dart';
 import 'package:portfolio/views/widgets/text/content_text.dart';
 import 'package:provider/provider.dart';
 
@@ -58,7 +57,7 @@ class _ContactViewState extends State<ContactView>
       duration: const Duration(milliseconds: 300),
     );
 
-    // Validate when focus is lost
+    // Focus listeners for animations + validation
     _nameFocus.addListener(() {
       _nameFocus.hasFocus
           ? _nameAnimationController.forward()
@@ -110,13 +109,11 @@ class _ContactViewState extends State<ContactView>
     bool hasSent = await vm.sendMessage();
 
     if (hasSent) {
-      // Clear the fields
       _nameController.clear();
       _jobController.clear();
       _emailController.clear();
       _messageController.clear();
 
-      // Show success snackbar
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Message sent successfully!"),
@@ -127,7 +124,7 @@ class _ContactViewState extends State<ContactView>
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Failed to send message. "),
+          content: Text("Failed to send message."),
           backgroundColor: kRed,
           duration: Duration(seconds: 2),
         ),
@@ -143,7 +140,11 @@ class _ContactViewState extends State<ContactView>
           width: double.infinity,
           constraints: BoxConstraints(minHeight: context.screenHeight),
           color: kPrimary,
-          padding: EdgeInsets.symmetric(vertical: s40.h, horizontal: s24.w),
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(
+            horizontal: context.autoAdaptive(s100),
+            vertical: context.autoAdaptive(s65),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -152,10 +153,12 @@ class _ContactViewState extends State<ContactView>
               SizedBox().verticalSpaceLarge,
               Container(
                 width: double.infinity,
-                padding: EdgeInsets.all(s16.w),
+                padding: EdgeInsets.all(context.autoAdaptive(s16)),
                 decoration: BoxDecoration(
                   gradient: kSoftTealGradient,
-                  borderRadius: BorderRadius.circular(s16.r),
+                  borderRadius: BorderRadius.circular(
+                    context.autoAdaptive(s16),
+                  ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,16 +171,19 @@ class _ContactViewState extends State<ContactView>
                     SizedBox().verticalSpaceSmall,
 
                     Wrap(
-                      spacing: s8.w,
-                      runSpacing: s12.h,
+                      spacing: context.autoAdaptive(s8),
+                      runSpacing: context.autoAdaptive(s12),
                       alignment: WrapAlignment.start,
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        ContentText("Hi there! I'm ", textColor: kBlack),
+                        ContentText(
+                          "Hi there! I hope you are doing well. I'm ",
+                          textColor: kBlack,
+                        ),
                         ConstrainedBox(
                           constraints: BoxConstraints(
-                            minWidth: context.isMobile ? s100.w : s50.w,
-                            maxWidth: context.isMobile ? s150.w : s100.w,
+                            minWidth: context.autoAdaptive(s150),
+                            maxWidth: context.autoAdaptive(s250),
                           ),
                           child: AnimatedUnderlineTextField(
                             hintText: "Your name",
@@ -197,8 +203,8 @@ class _ContactViewState extends State<ContactView>
                         ContentText("and I’m looking for ", textColor: kBlack),
                         ConstrainedBox(
                           constraints: BoxConstraints(
-                            minWidth: context.isMobile ? s100.w : s50.w,
-                            maxWidth: context.isMobile ? s150.w : s100.w,
+                            minWidth: context.autoAdaptive(s150),
+                            maxWidth: context.autoAdaptive(s250),
                           ),
                           child: AnimatedUnderlineTextField(
                             hintText: "Job type",
@@ -219,8 +225,8 @@ class _ContactViewState extends State<ContactView>
                         ContentText("Reach me at ", textColor: kBlack),
                         ConstrainedBox(
                           constraints: BoxConstraints(
-                            minWidth: context.isMobile ? s100.w : s50.w,
-                            maxWidth: context.isMobile ? s150.w : s100.w,
+                            minWidth: context.autoAdaptive(s150),
+                            maxWidth: context.autoAdaptive(s250),
                           ),
                           child: AnimatedUnderlineTextField(
                             hintText: "Your email",
@@ -245,8 +251,8 @@ class _ContactViewState extends State<ContactView>
                         ),
                         ConstrainedBox(
                           constraints: BoxConstraints(
-                            minWidth: context.isMobile ? s150.w : s100.w,
-                            maxWidth: context.isMobile ? s200.w : s150.w,
+                            minWidth: context.autoAdaptive(s250),
+                            maxWidth: context.autoAdaptive(s350),
                           ),
                           child: AnimatedUnderlineTextField(
                             hintText: "Your message",
@@ -268,17 +274,18 @@ class _ContactViewState extends State<ContactView>
 
                     SizedBox().verticalSpaceMedium,
 
-                    // Send Button
                     Align(
                       alignment: Alignment.centerRight,
-                      child: HoverSlideButton(
-                        height: s50.h,
+                      child: AnimatedSlideButton(
+                        height: context.autoAdaptive(s30),
+                        width: context.autoAdaptive(s100),
                         title: 'Send Message',
-                        isLoading: vm.isSending,
                         buttonColor: vm.isFormValid ? kBlack : kGrey500,
-                        onPressed: vm.isFormValid
-                            ? _sendMessage
-                            : null, // disable if not valid
+                        borderColor: kGrey900,
+                        onHoverColor: kGrey800,
+                        isLoading: vm.isSending,
+                        iconData: Icons.send,
+                        onPressed: vm.isFormValid ? _sendMessage : null,
                       ),
                     ),
                   ],

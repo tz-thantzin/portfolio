@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/portfolio/project_card.dart';
 
@@ -31,7 +31,11 @@ class _PortfolioViewState extends State<PortfolioView> {
       width: double.infinity,
       constraints: BoxConstraints(minHeight: context.screenHeight),
       color: kPrimary,
-      padding: EdgeInsets.symmetric(vertical: s40.h, horizontal: s24.w),
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(s100),
+        vertical: context.autoAdaptive(s65),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,7 +47,7 @@ class _PortfolioViewState extends State<PortfolioView> {
             final direction = i % 2 == 0 ? Direction.right : Direction.left;
 
             return Padding(
-              padding: EdgeInsets.only(bottom: s38.h),
+              padding: EdgeInsets.only(bottom: context.autoAdaptive(s38)),
               child: ProjectCard(
                 projectList[i],
                 gradient: gradient,

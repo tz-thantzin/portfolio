@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/work_experience/title_period_view.dart';
@@ -21,7 +21,7 @@ class CompanyTitleAndPeriod extends StatelessWidget {
     );
 
     return Wrap(
-      spacing: s40.h,
+      spacing: context.autoAdaptive(s40),
       children: <Widget>[
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,13 +29,13 @@ class CompanyTitleAndPeriod extends StatelessWidget {
             TitlePeriodView(
               title: experience.title,
               period: experience.period,
-              titleStyle: context.blockTitleStyle.copyWith(color: kGrey100),
-              periodStyle: context.blockPeriodStyle,
+              titleStyle: context.bodyMedium.copyWith(color: kGrey100),
+              periodStyle: context.bodySmall.copyWith(color: kGrey100),
             ),
             if (experience.company.isNotEmpty)
               Text(
                 experience.company,
-                style: context.blockSubTitleStyle,
+                style: context.bodyMedium,
                 textHeightBehavior: textHeightBehavior,
                 overflow: TextOverflow.ellipsis,
               ),
