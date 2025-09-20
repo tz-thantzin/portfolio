@@ -145,4 +145,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get page_not_found => 'Page Not Found';
+
+  @override
+  String get let_work_together => 'Let\'s work Together';
+
+  @override
+  String get built_using => 'Built using';
+
+  @override
+  String get built_with => 'with ';
 }

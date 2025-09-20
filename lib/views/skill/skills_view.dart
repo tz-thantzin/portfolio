@@ -7,11 +7,45 @@ import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/widgets/text/content_text.dart';
 import 'package:portfolio/views/widgets/text/title_text.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../presentations/configs/constant_sizes.dart';
+import '../../presentations/configs/duration.dart';
+import '../widgets/animated_fade_widget.dart';
+import '../widgets/animated_slide_widget.dart';
 
-class SkillsView extends StatelessWidget {
+class SkillsView extends StatefulWidget {
   const SkillsView({super.key});
+
+  @override
+  State<SkillsView> createState() => _SkillsViewState();
+}
+
+class _SkillsViewState extends State<SkillsView>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  bool _hasAnimated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: duration1000);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onVisibilityChanged(VisibilityInfo info) {
+    if (info.visibleFraction > 0.2 && !_hasAnimated && mounted) {
+      Future.delayed(duration500, () {
+        if (mounted) _controller.forward();
+      });
+      _hasAnimated = true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +55,29 @@ class SkillsView extends StatelessWidget {
       color: kPrimary,
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s100),
+        horizontal: context.autoAdaptive(s60),
         vertical: context.autoAdaptive(s65),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          const LanguageAndTools(),
-          SizedBox().verticalSpaceEnormous,
-          const WorkFlows(),
+          AnimatedFadeWidget(
+            controller: _controller,
+            start: 0.0,
+            end: 0.4,
+            child: const LanguageAndTools(),
+          ),
+          verticalSpaceEnormous,
+          AnimatedFadeWidget(
+            controller: _controller,
+            start: 0.3,
+            end: 0.7,
+            child: _WorkFlows(controller: _controller),
+          ),
         ],
       ),
-    );
+    ).addVisibilityDetector(onDetectVisibility: _onVisibilityChanged);
   }
 }
 
@@ -44,24 +88,21 @@ class LanguageAndTools extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Skill> skills = languagesAndTools(context);
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(40)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          TitleText(context.localization.programming_languages_tools),
-          SizedBox().verticalSpaceMassive,
-          Wrap(
-            spacing: context.autoAdaptive(8),
-            runSpacing: context.autoAdaptive(16),
-            alignment: WrapAlignment.center,
-            children: skills.map((Skill skill) {
-              return _SkillItem(iconPath: skill.iconPath, name: skill.name);
-            }).toList(),
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        TitleText(context.localization.programming_languages_tools),
+        verticalSpaceMassive,
+        Wrap(
+          spacing: context.autoAdaptive(8),
+          runSpacing: context.autoAdaptive(16),
+          alignment: WrapAlignment.center,
+          children: skills.map((Skill skill) {
+            return _SkillItem(iconPath: skill.iconPath, name: skill.name);
+          }).toList(),
+        ),
+      ],
     );
   }
 }
@@ -77,8 +118,8 @@ class _SkillItem extends StatelessWidget {
     return Tooltip(
       message: name,
       child: Container(
-        width: context.autoAdaptive(s55),
-        height: context.autoAdaptive(s55),
+        width: context.autoAdaptive(s50),
+        height: context.autoAdaptive(s50),
         padding: EdgeInsets.all(context.autoAdaptive(s16)),
         decoration: BoxDecoration(
           color: kWhite,
@@ -93,8 +134,9 @@ class _SkillItem extends StatelessWidget {
   }
 }
 
-class WorkFlows extends StatelessWidget {
-  const WorkFlows({super.key});
+class _WorkFlows extends StatelessWidget {
+  final AnimationController controller;
+  const _WorkFlows({required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -104,11 +146,24 @@ class WorkFlows extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         TitleText(context.localization.workflows_title),
-        SizedBox().verticalSpaceMassive,
+        verticalSpaceMassive,
         Column(
-          children: items
-              .map((Workflow workflow) => _WorkflowItem(workflow))
-              .toList(),
+          children: items.asMap().entries.map((entry) {
+            final int index = entry.key;
+            final Workflow workflow = entry.value;
+
+            final double slideStart = 0.7 + index * 0.05;
+            final double slideEnd = (slideStart + 0.2).clamp(0.0, 1.0);
+
+            return AnimatedSlideWidget(
+              controller: controller,
+              start: slideStart,
+              end: slideEnd,
+              direction: SlideDirection.up,
+              duration: duration3000,
+              child: _WorkflowItem(workflow),
+            );
+          }).toList(),
         ),
       ],
     );
@@ -130,7 +185,7 @@ class _WorkflowItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           const Icon(Icons.check_circle_outline, color: Colors.green),
-          SizedBox().horizontalSpaceSmall,
+          horizontalSpaceSmall,
           Expanded(child: ContentText(workflow.description)),
         ],
       ),

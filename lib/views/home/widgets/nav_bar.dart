@@ -67,100 +67,99 @@ class _NavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     final Color textColor = context.isDesktop ? _getTextColor() : kWhite;
 
-    return AppBar(
-      elevation: 0,
-      backgroundColor: context.isDesktop ? _getAppBarColor(context) : kPrimary,
-      automaticallyImplyLeading: false,
-      title: Padding(
+    return Container(
+      height: context.appBarHeight,
+      color: context.isDesktop ? _getAppBarColor(context) : kPrimary,
+      child: Padding(
         padding: EdgeInsets.only(
           left: context.autoAdaptive(s42),
           right: context.isMobile ? s0 : context.autoAdaptive(s42),
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Thant Zin',
-              style: context.bodyMedium.copyWith(
-                color: textColor,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-            Spacer(),
-            if (context.isMobile)
-              IconButton(
-                icon: Icon(Icons.menu, color: textColor),
-                padding: EdgeInsets.zero,
-                onPressed: widget.toggleNavDrawer,
-              )
-            else ...<Widget>[
-              TextButton(
-                onPressed: () => widget.onNavItemClicked(kHome),
-                child: Text(
-                  context.localization.home,
-                  style: _navItemStyle(
-                    context,
-                    kHome,
-                  ).copyWith(color: textColor),
+        child:
+            [
+              Text(
+                'Thant Zin'.toUpperCase(),
+                style: context.bodyLarge.copyWith(
+                  color: textColor,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
-              TextButton(
-                onPressed: () => widget.onNavItemClicked(kAbout),
-                child: Text(
-                  context.localization.about,
-                  style: _navItemStyle(
-                    context,
-                    kAbout,
-                  ).copyWith(color: textColor),
+              Spacer(),
+              if (context.isMobile)
+                IconButton(
+                  icon: Icon(Icons.menu, color: textColor),
+                  padding: EdgeInsets.zero,
+                  onPressed: widget.toggleNavDrawer,
+                )
+              else ...<Widget>[
+                TextButton(
+                  onPressed: () => widget.onNavItemClicked(kHome),
+                  child: Text(
+                    context.localization.home,
+                    style: _navItemStyle(
+                      context,
+                      kHome,
+                    ).copyWith(color: textColor),
+                  ),
                 ),
-              ),
-              TextButton(
-                onPressed: () => widget.onNavItemClicked(kExperience),
-                child: Text(
-                  context.localization.work_experience,
-                  style: _navItemStyle(
-                    context,
-                    kExperience,
-                  ).copyWith(color: textColor),
+                TextButton(
+                  onPressed: () => widget.onNavItemClicked(kAbout),
+                  child: Text(
+                    context.localization.about,
+                    style: _navItemStyle(
+                      context,
+                      kAbout,
+                    ).copyWith(color: textColor),
+                  ),
                 ),
-              ),
-              TextButton(
-                onPressed: () => widget.onNavItemClicked(kPortfolio),
-                child: Text(
-                  context.localization.portfolio,
-                  style: _navItemStyle(
-                    context,
-                    kPortfolio,
-                  ).copyWith(color: textColor),
+                TextButton(
+                  onPressed: () => widget.onNavItemClicked(kExperience),
+                  child: Text(
+                    context.localization.work_experience,
+                    style: _navItemStyle(
+                      context,
+                      kExperience,
+                    ).copyWith(color: textColor),
+                  ),
                 ),
-              ),
+                TextButton(
+                  onPressed: () => widget.onNavItemClicked(kPortfolio),
+                  child: Text(
+                    context.localization.portfolio,
+                    style: _navItemStyle(
+                      context,
+                      kPortfolio,
+                    ).copyWith(color: textColor),
+                  ),
+                ),
 
-              TextButton(
-                onPressed: () => widget.onNavItemClicked(kSkill),
-                child: Text(
-                  context.localization.skill,
-                  style: _navItemStyle(
-                    context,
-                    kSkill,
-                  ).copyWith(color: textColor),
+                TextButton(
+                  onPressed: () => widget.onNavItemClicked(kSkill),
+                  child: Text(
+                    context.localization.skill,
+                    style: _navItemStyle(
+                      context,
+                      kSkill,
+                    ).copyWith(color: textColor),
+                  ),
                 ),
-              ),
-              TextButton(
-                onPressed: () => widget.onNavItemClicked(kContact),
-                child: Text(
-                  context.localization.contact,
-                  style: _navItemStyle(
-                    context,
-                    kContact,
-                  ).copyWith(color: textColor),
+                TextButton(
+                  onPressed: () => widget.onNavItemClicked(kContact),
+                  child: Text(
+                    context.localization.contact,
+                    style: _navItemStyle(
+                      context,
+                      kContact,
+                    ).copyWith(color: textColor),
+                  ),
                 ),
-              ),
-            ],
-            SizedBox().horizontalSpaceSmall,
-          ],
-        ),
+              ],
+              horizontalSpaceSmall,
+            ].addRow(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+            ),
       ),
     );
   }

@@ -66,7 +66,7 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
         : widget.textColor;
 
     return SizedBox(
-      height: context.autoAdaptive(40), // responsive height
+      height: context.autoAdaptive(s24), // responsive height
       child: MouseRegion(
         key: ValueKey('MouseRegion_Animated_Text_Button'),
         onEnter: (_) => _handleHover(true),
@@ -79,8 +79,8 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
             children: [
               if (widget.isLoading)
                 SizedBox(
-                  width: context.autoAdaptive(14),
-                  height: context.autoAdaptive(14),
+                  width: context.autoAdaptive(s14),
+                  height: context.autoAdaptive(s14),
                   child: const CircularProgressIndicator(
                     strokeWidth: 2,
                     valueColor: AlwaysStoppedAnimation<Color>(kIndigo),
@@ -103,8 +103,8 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
                   position: _arrowOffset,
                   child: Image.asset(
                     kRightArrow,
-                    height: context.autoAdaptive(14),
-                    width: context.autoAdaptive(14),
+                    height: context.autoAdaptive(s14),
+                    width: context.autoAdaptive(s14),
                     color: effectiveColor,
                   ),
                 ),

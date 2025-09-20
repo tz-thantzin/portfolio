@@ -368,6 +368,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Page Not Found'**
   String get page_not_found;
+
+  /// No description provided for @let_work_together.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s work Together'**
+  String get let_work_together;
+
+  /// No description provided for @built_using.
+  ///
+  /// In en, this message translates to:
+  /// **'Built using'**
+  String get built_using;
+
+  /// No description provided for @built_with.
+  ///
+  /// In en, this message translates to:
+  /// **'with '**
+  String get built_with;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

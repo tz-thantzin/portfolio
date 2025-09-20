@@ -67,9 +67,9 @@ extension ThemeEx on BuildContext {
 
   TextSelectionThemeData get textSelectionTheme {
     return TextSelectionThemeData(
-      cursorColor: kSecondary,
-      selectionColor: kSecondary,
-      selectionHandleColor: kSecondary,
+      cursorColor: kPrimary,
+      selectionColor: kGrey500,
+      selectionHandleColor: kPrimary,
     );
   }
 
@@ -106,7 +106,7 @@ extension ThemeEx on BuildContext {
   TextStyle get headlineSmall =>
       const TextStyle(fontSize: s64, fontWeight: bold);
 
-  TextStyle get titleLarge => const TextStyle(fontSize: s48, fontWeight: bold);
+  TextStyle get titleLarge => TextStyle(fontSize: s48, fontWeight: bold);
   TextStyle get titleMedium => const TextStyle(fontSize: s42, fontWeight: bold);
   TextStyle get titleSmall => const TextStyle(fontSize: s36, fontWeight: bold);
 

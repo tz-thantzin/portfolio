@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/presentations/configs/constant_colors.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
 
 import '../../../presentations/configs/constants.dart';
 import '../../../utils/extensions/context_ex.dart';
@@ -20,12 +21,36 @@ class CustomNavigationDrawer extends StatefulWidget {
   State<CustomNavigationDrawer> createState() => _CustomNavigationDrawerState();
 }
 
-class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
+class _CustomNavigationDrawerState extends State<CustomNavigationDrawer>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  final int _itemCount = 6;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    )..forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final double drawerWidth = context.autoAdaptive(
-      250,
-    ); // responsive drawer width
+    final items = [
+      [context.localization.home, kHome],
+      [context.localization.about, kAbout],
+      [context.localization.work_experience, kExperience],
+      [context.localization.portfolio, kPortfolio],
+      [context.localization.skill, kSkill],
+      [context.localization.contact, kContact],
+    ];
 
     return Stack(
       children: <Widget>[
@@ -34,31 +59,41 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
           child: Container(color: kTransparent),
         ),
         Container(
-          width: drawerWidth,
-          decoration: BoxDecoration(color: kPrimary),
+          width: double.infinity,
+          decoration: const BoxDecoration(color: kPrimary),
           margin: EdgeInsets.only(top: context.appBarHeight),
           padding: EdgeInsets.symmetric(
             vertical: context.autoAdaptive(16),
             horizontal: context.autoAdaptive(12),
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                _navItem(context, context.localization.home, kHome),
-                _navItem(context, context.localization.about, kAbout),
-                _navItem(
-                  context,
-                  context.localization.work_experience,
-                  kExperience,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List.generate(items.length, (index) {
+              final intervalStart = (index / _itemCount).clamp(0.0, 1.0);
+              final intervalEnd = ((index + 1) / _itemCount).clamp(0.0, 1.0);
+
+              final animation = CurvedAnimation(
+                parent: _controller,
+                curve: Interval(
+                  intervalStart,
+                  intervalEnd,
+                  curve: Curves.easeOut,
                 ),
-                _navItem(context, context.localization.portfolio, kPortfolio),
-                _navItem(context, context.localization.skill, kSkill),
-                _navItem(context, context.localization.contact, kContact),
-              ],
-            ),
-          ),
+              );
+
+              return FadeTransition(
+                opacity: animation,
+                child: SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(0.8, 0),
+                    end: Offset.zero,
+                  ).animate(animation),
+                  child: _navItem(context, items[index][0], items[index][1]),
+                ),
+              );
+            }),
+          ).addScrollView(),
         ),
       ],
     );
@@ -70,7 +105,7 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
         horizontal: context.autoAdaptive(8),
         vertical: context.autoAdaptive(4),
       ),
-      title: Text(title, style: context.bodyMedium.copyWith(color: kWhite)),
+      title: Text(title, style: context.bodySmall.copyWith(color: kWhite)),
       onTap: () => widget.onNavItemClicked(route),
     );
   }

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 const double s0 = 0.0;
 const double s03 = 0.3;
 const double s05 = 0.5;
@@ -11,6 +13,7 @@ const double s6 = 6.0;
 const double s8 = 8.0;
 const double s10 = 10.0;
 const double s12 = 12.0;
+const double s13 = 13.0;
 const double s14 = 14.0;
 const double s16 = 16.0;
 const double s18 = 18.0;
@@ -33,10 +36,13 @@ const double s64 = 64.0;
 const double s65 = 65.0;
 const double s70 = 70.0;
 const double s80 = 80.0;
+const double s85 = 85.0;
+const double s90 = 90.0;
 const double s96 = 96.0;
 const double s100 = 100.0;
 const double s120 = 120.0;
 const double s150 = 150.0;
+const double s165 = 165.0;
 const double s180 = 180.0;
 const double s200 = 200.0;
 const double s220 = 220.0;
@@ -47,3 +53,24 @@ const double s350 = 350.0;
 const double s400 = 400.0;
 const double s450 = 450.0;
 const double s600 = 600.0;
+
+const double _tiny = s4;
+const double _small = s8;
+const double _medium = s16;
+const double _large = s24;
+const double _massive = s32;
+const double _enormous = s40;
+
+const SizedBox horizontalSpaceTiny = SizedBox(width: _tiny);
+const SizedBox horizontalSpaceSmall = SizedBox(width: _small);
+const SizedBox horizontalSpaceMedium = SizedBox(width: _medium);
+const SizedBox horizontalSpaceLarge = SizedBox(width: _large);
+const SizedBox horizontalSpaceMassive = SizedBox(width: _massive);
+const SizedBox horizontalSpaceEnormous = SizedBox(width: _enormous);
+
+const SizedBox verticalSpaceTiny = SizedBox(height: _tiny);
+const SizedBox verticalSpaceSmall = SizedBox(height: _small);
+const SizedBox verticalSpaceMedium = SizedBox(height: _medium);
+const SizedBox verticalSpaceLarge = SizedBox(height: _large);
+const SizedBox verticalSpaceMassive = SizedBox(height: _massive);
+const SizedBox verticalSpaceEnormous = SizedBox(height: _enormous);

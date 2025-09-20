@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/presentations/configs/duration.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:provider/provider.dart';
 
 import '../../presentations/configs/constant_colors.dart';
@@ -77,47 +78,45 @@ class _SocialBannerState extends State<SocialBanner>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: List.generate(contactList.length, (i) {
-            return Padding(
-              padding: EdgeInsets.only(
-                bottom: i == contactList.length - 1
-                    ? 0
-                    : context.autoAdaptive(8),
-              ),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(50),
-                onTap: () => context.read<HomeViewModel>().onContactMePressed(
-                  contactList[i].link,
-                ),
-                child: SizedBox(
-                  width: context.autoAdaptive(s24),
-                  height: context.autoAdaptive(s24) * 1.1,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: <Widget>[
-                      AnimatedBuilder(
-                        animation: _bgScaleAnimations[i],
-                        builder: (_, child) => Transform.scale(
-                          scale: _bgScaleAnimations[i].value,
-                          child: Container(
-                            width: context.autoAdaptive(s24),
-                            height: context.autoAdaptive(s24),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: kBlue.withValues(alpha: 0.2),
-                            ),
-                          ),
+            return <Widget>[
+                  AnimatedBuilder(
+                    animation: _bgScaleAnimations[i],
+                    builder: (_, child) => Transform.scale(
+                      scale: _bgScaleAnimations[i].value,
+                      child: Container(
+                        width: context.autoAdaptive(s24),
+                        height: context.autoAdaptive(s24),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: kBlue.withValues(alpha: 0.2),
                         ),
                       ),
-                      Icon(
-                        contactList[i].icon,
-                        color: kGrey700,
-                        size: context.autoAdaptive(s18),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            );
+                  Icon(
+                    contactList[i].icon,
+                    color: kGrey700,
+                    size: context.autoAdaptive(s18),
+                  ),
+                ]
+                .addStack(alignment: Alignment.center)
+                .addSizedBox(
+                  width: context.autoAdaptive(s24),
+                  height: context.autoAdaptive(s24) * 1.1,
+                )
+                .addInkWell(
+                  borderRadius: BorderRadius.circular(50),
+                  onTap: () => context.read<HomeViewModel>().onContactMePressed(
+                    contactList[i].link,
+                  ),
+                )
+                .addPadding(
+                  padding: EdgeInsets.only(
+                    bottom: i == contactList.length - 1
+                        ? 0
+                        : context.autoAdaptive(8),
+                  ),
+                );
           }),
         ),
       ),

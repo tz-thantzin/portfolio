@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:portfolio/views/about_me/about_view.dart';
-import 'package:portfolio/views/contact/contact_view.dart';
-import 'package:portfolio/views/skill/skills_view.dart';
-import 'package:portfolio/views/work_experience/work_experiences_view.dart';
 
 import '../views/error_view.dart';
 import '../views/home/home_view.dart';
-import '../views/portfolio/portfolio_view.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/',
+    initialLocation: RoutePaths.home,
     routes: [
-      _animatedRoute(RoutePaths.home, const HomeView()),
-      _animatedRoute(RoutePaths.about, const AboutView()),
-      _animatedRoute(RoutePaths.experience, const WorkExperienceView()),
-      _animatedRoute(RoutePaths.portfolio, const PortfolioView()),
-      _animatedRoute(RoutePaths.skills, const SkillsView()),
-      _animatedRoute(RoutePaths.contact, const ContactView()),
+      _animatedRoute(RoutePaths.home, const HomeView(), name: RouteName.home),
+      // Uncomment and add your other routes here
+      // _animatedRoute(RoutePaths.about, const AboutView(), name: RouteName.about),
+      // _animatedRoute(RoutePaths.experience, const WorkExperienceView(), name: RouteName.experience),
+      // _animatedRoute(RoutePaths.portfolio, const PortfolioView(), name: RouteName.portfolio),
+      // _animatedRoute(RoutePaths.skills, const SkillsView(), name: RouteName.skills),
+      // _animatedRoute(RoutePaths.contact, const ContactView(), name: RouteName.contact),
     ],
     redirect: (context, state) {
       final uri = state.uri.toString();
@@ -31,15 +27,15 @@ class AppRouter {
   );
 
   // Helper to create routes with animated transitions
-  static GoRoute _animatedRoute(String path, Widget page) {
+  static GoRoute _animatedRoute(String path, Widget page, {String? name}) {
     return GoRoute(
+      name: name,
       path: path,
       pageBuilder: (context, state) {
         return CustomTransitionPage(
           key: state.pageKey,
           child: page,
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            // Slide from right + fade in
             final offsetAnimation = Tween<Offset>(
               begin: const Offset(1, 0),
               end: Offset.zero,
@@ -67,7 +63,7 @@ class RouteName {
   static const about = "about";
   static const experience = "experience";
   static const portfolio = "portfolio";
-  static const skills = "skill";
+  static const skills = "skills";
   static const contact = "contact";
 }
 
@@ -76,6 +72,6 @@ class RoutePaths {
   static const about = "/about";
   static const experience = "/experience";
   static const portfolio = "/portfolio";
-  static const skills = "/skill";
+  static const skills = "/skills";
   static const contact = "/contact";
 }

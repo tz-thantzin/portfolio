@@ -26,27 +26,30 @@ const String kContact = 'contact';
 const String myCV =
     'https://drive.google.com/file/d/1vocF0dz_r7ZHgdnguebKDXjmNeu-2rPM/view?usp=sharing';
 
-final List<String> technologies = <String>[
-  'Flutter (Dart)',
-  'Android (Java, Kotlin)',
-  'iOS (Swift, SwiftUI)',
-  'Unity (C#)',
-  'React',
-  'TypeScript',
-  'BLoC',
-  'GetX',
-  'Provider',
-  'Riverpod',
-  'Localization',
-  'MVVM',
-  'MVC',
-  'Responsive UI',
-  'REST API',
-  'Firebase',
-  'AWS',
-  'Google APIs',
-  'Git / Version Control',
-  'Third‑Party SDKs',
-  'SQLite',
-  '2C2P Payment',
-];
+final TextHeightBehavior textHeightBehavior = const TextHeightBehavior(
+  applyHeightToFirstAscent: false,
+  applyHeightToLastDescent: false,
+);
+
+// Mock data: category -> list of technologies
+final Map<String, List<String>> technologies = const {
+  'Mobile Technologies': [
+    'Flutter',
+    'Dart',
+    'iOS',
+    'Swift',
+    'SwiftUI',
+    'Android',
+    'Kotlin',
+  ],
+  'Web / Cloud / Design': [
+    'React JS',
+    'Typescript',
+    'Firebase',
+    'AWS',
+    'Google APIs',
+    'Figma',
+    'SQL',
+    'Git',
+  ],
+};

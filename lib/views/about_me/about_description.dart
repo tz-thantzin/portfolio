@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../presentations/configs/constant_sizes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
 import '../widgets/text/content_text.dart';
 import '../widgets/text/title_text.dart';
 
-class AboutMessages extends StatelessWidget {
-  const AboutMessages();
+class AboutDescription extends StatelessWidget {
+  const AboutDescription();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class AboutMessages extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           TitleText(context.localization.i_am_developer),
-          SizedBox().verticalSpaceMedium,
+          verticalSpaceMedium,
           ContentText(context.localization.about_me_description),
         ],
       ),

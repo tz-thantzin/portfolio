@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/presentations/configs/constant_sizes.dart';
+import 'package:portfolio/presentations/configs/constants.dart';
+import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import 'package:portfolio/utils/extensions/theme_ex.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
 
 import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../presentations/configs/constants.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
 import '../widgets/text/tag_text.dart';
 import '../widgets/text/title_text.dart';
 
@@ -15,53 +16,58 @@ class TechnologyGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(s8)),
+      padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(8)),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           TitleText(context.localization.technologies),
-          SizedBox().verticalSpaceMedium,
-          Wrap(
-            spacing: context.autoAdaptive(s2),
-            runSpacing: context.autoAdaptive(s8),
-            children: technologies.map((String tech) {
-              return Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: context.autoAdaptive(s4),
-                  vertical: context.autoAdaptive(s8),
-                ),
-                decoration: BoxDecoration(
-                  color: kGrey100,
-                  borderRadius: BorderRadius.circular(context.autoAdaptive(s4)),
-                  border: Border.all(
-                    color: kIndigo,
-                    width: context.autoAdaptive(s03),
-                  ),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: kGrey200.withValues(alpha: 0.05),
-                      blurRadius: context.autoAdaptive(s10),
-                      offset: const Offset(2, 2),
+          verticalSpaceMedium,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: technologies.entries.map((entry) {
+              return <Widget>[
+                    Text(
+                      entry.key,
+                      style: context.bodyMedium.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: kWhite,
+                      ),
                     ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Icon(
-                      Icons.arrow_right,
-                      size: context.autoAdaptive(s20),
-                      color: kPrimary,
+                    verticalSpaceSmall,
+                    ...entry.value.map(
+                      (tech) => Padding(
+                        padding: EdgeInsets.symmetric(
+                          vertical: context.autoAdaptive(4),
+                        ),
+                        child: TechnologyItem(technology: tech),
+                      ),
                     ),
-                    TagText(tech),
-                  ],
-                ),
-              );
+                  ]
+                  .addColumn(crossAxisAlignment: CrossAxisAlignment.start)
+                  .addPadding(
+                    padding: EdgeInsets.only(right: context.autoAdaptive(16)),
+                  )
+                  .addExpanded();
             }).toList(),
           ),
         ],
       ),
+    );
+  }
+}
+
+class TechnologyItem extends StatelessWidget {
+  final String technology;
+  const TechnologyItem({required this.technology, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(Icons.arrow_right, size: context.autoAdaptive(16), color: kWhite),
+        SizedBox(width: context.autoAdaptive(4)),
+        TagText(technology),
+      ],
     );
   }
 }

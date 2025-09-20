@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/presentations/configs/duration.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
@@ -167,7 +166,7 @@ class _AnimatedSlideButtonState extends State<AnimatedSlideButton>
               softWrap: false,
             ),
           ),
-          SizedBox().horizontalSpaceSmall,
+          horizontalSpaceSmall,
           SlideTransition(
             position: _offsetAnimation,
             child: widget.isLoading

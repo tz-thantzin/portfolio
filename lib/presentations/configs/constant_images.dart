@@ -3,6 +3,7 @@ const String kProfileBg = '$baseImagesPath/home_bg.jpg';
 const String kAboutMeIcon = '$baseImagesPath/about_me.png';
 const String kTZ = '$baseImagesPath/tz.png';
 const String kTypingIcon = '$baseImagesPath/developer_activity.svg';
+const String kNotFound = '$baseImagesPath/not_found.png';
 
 ///Icons
 const String baseIconsPath = 'assets/icons';
@@ -13,7 +14,7 @@ const String kRightArrow = '$baseIconsPath/right_arrow.png';
 
 ///Portfolio
 const String basePortfoliosPath = 'assets/portfolios';
-const String kAnimatedText = '$basePortfoliosPath/animated_text_demo.gif';
-const String kMyf = '$basePortfoliosPath/myf.png';
-const String kChat = '$basePortfoliosPath/chat_login.png';
-const String kMRate = '$basePortfoliosPath/mrate.png';
+const String kAnimatedText = '$basePortfoliosPath/animated_text.png';
+const String kMyf = '$basePortfoliosPath/my_flyn.png';
+const String kChat = '$basePortfoliosPath/chat.png';
+const String kMRate = '$basePortfoliosPath/forex.png';

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/presentations/configs/constant_colors.dart';
 import 'package:portfolio/presentations/configs/duration.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import 'package:portfolio/utils/extensions/theme_ex.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
+
+import '../../presentations/configs/constant_sizes.dart';
 
 class AnimatedUnderlineTextField extends StatefulWidget {
   final String? hintText;
@@ -11,7 +16,7 @@ class AnimatedUnderlineTextField extends StatefulWidget {
   final Color underlineColor;
   final bool isMultiline;
   final void Function(String)? onChanged;
-  final VoidCallback? onEditingComplete; // <-- new callback
+  final VoidCallback? onEditingComplete;
 
   const AnimatedUnderlineTextField({
     super.key,
@@ -97,12 +102,18 @@ class _AnimatedUnderlineTextFieldState extends State<AnimatedUnderlineTextField>
                     ? TextInputType.emailAddress
                     : TextInputType.text,
                 maxLines: widget.isMultiline ? null : 1,
+                style: context.bodySmall.copyWith(
+                  color: kPrimary,
+                  fontSize: context.autoAdaptive(s13),
+                  fontWeight: medium,
+                ),
                 decoration: InputDecoration(
                   hintText: widget.hintText,
                   border: InputBorder.none,
-                  hintStyle: TextStyle(
+                  hintStyle: context.bodySmall.copyWith(
                     color: kGrey500,
                     fontWeight: FontWeight.w400,
+                    fontSize: context.autoAdaptive(s13),
                   ),
                 ),
                 onChanged: (value) {
@@ -124,31 +135,28 @@ class _AnimatedUnderlineTextFieldState extends State<AnimatedUnderlineTextField>
               ),
           ],
         ),
-        SizedBox(
-          height: 2,
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return AnimatedBuilder(
-                animation: _animation,
-                builder: (context, child) {
-                  double width = constraints.maxWidth * _animation.value;
-                  return Align(
-                    alignment: _focusNode.hasFocus
-                        ? Alignment.centerLeft
-                        : Alignment.centerRight,
-                    child: Container(
-                      height: 2,
-                      width: width,
-                      color: _errorMessage == null
-                          ? widget.underlineColor
-                          : Colors.red,
-                    ),
-                  );
-                },
-              );
-            },
-          ),
-        ),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            return AnimatedBuilder(
+              animation: _animation,
+              builder: (context, child) {
+                double width = constraints.maxWidth * _animation.value;
+                return Align(
+                  alignment: _focusNode.hasFocus
+                      ? Alignment.centerLeft
+                      : Alignment.centerRight,
+                  child: Container(
+                    height: 2,
+                    width: width,
+                    color: _errorMessage == null
+                        ? widget.underlineColor
+                        : Colors.red,
+                  ),
+                );
+              },
+            );
+          },
+        ).addSizedBox(height: context.autoAdaptive(s2)),
       ],
     );
   }

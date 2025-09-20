@@ -45,5 +45,8 @@
   "get_in_touch": "Get in touch",
   "schedule_appointment" : "Schedule an Appointment",
   "go_home": "Go Home",
-  "page_not_found": "Page Not Found"
+  "page_not_found": "Page Not Found",
+  "let_work_together": "Let's work Together",
+  "built_using":"Built using",
+  "built_with":"with "
 }

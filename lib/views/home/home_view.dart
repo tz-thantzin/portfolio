@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/presentations/configs/constant_colors.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import 'package:portfolio/utils/extensions/theme_ex.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
+import 'package:portfolio/views/widgets/animated_loading_page.dart';
 import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:web/web.dart' as web;
@@ -8,7 +12,6 @@ import '../../../view_models/home_view_model.dart';
 import '../../presentations/configs/constant_images.dart';
 import '../../presentations/configs/constants.dart';
 import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
 import '../views.dart';
 
 class HomeView extends StatefulWidget {
@@ -37,7 +40,7 @@ class _HomeViewState extends State<HomeView> {
     _SectionConfig(
       key: experienceKey,
       sectionName: kExperience,
-      child: const WorkExperienceView(),
+      child: WorkExperienceView(),
     ),
     _SectionConfig(
       key: portfolioKey,
@@ -89,60 +92,68 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(context.appBarHeight),
-        child: Consumer<HomeViewModel>(
-          builder: (_, HomeViewModel homeViewModel, _) => NavBar(
-            onNavItemClicked: homeViewModel.handleNavigation,
-            toggleNavDrawer: homeViewModel.toggleDrawer,
-            selectedSection: homeViewModel.currentSelectedSection,
-            scrollController: _scrollController,
+
+      body: <Widget>[
+        //Background Image
+        Image.asset(
+          kProfileBg,
+          width: double.infinity,
+          height: context.screenHeight,
+          fit: BoxFit.cover,
+        ),
+
+        //Main Content
+        <Widget>[
+          ...List<Widget>.generate(
+            _sections.length,
+            (int index) => SectionWrapper(
+              key: ValueKey<String>('section_$index'),
+              sectionKey: _sections[index].key,
+              sectionName: _sections[index].sectionName,
+              index: index,
+              isVisible: _visibleList[index],
+              onVisible: () => setState(() => _visibleList[index] = true),
+              child: _sections[index].child,
+            ),
+          ),
+          const FooterSection(),
+        ].addColumn().addSingleChildScrollView(controller: _scrollController),
+
+        //Nav Drawer it will show when screen size is mobile
+        Consumer<HomeViewModel>(
+          builder: (_, HomeViewModel homeViewModel, _) => Visibility(
+            visible: homeViewModel.isDrawerOpen,
+            child: CustomNavigationDrawer(
+              onCloseDrawer: homeViewModel.closeDrawer,
+              onNavItemClicked: (String section) {
+                homeViewModel.closeDrawer();
+                homeViewModel.handleNavigation(section);
+              },
+            ),
           ),
         ),
-      ),
-      body: Stack(
-        children: <Widget>[
-          Image.asset(
-            kProfileBg,
-            width: double.infinity,
-            height: context.screenHeight,
-            fit: BoxFit.cover,
-          ),
-          SingleChildScrollView(
-            controller: _scrollController,
-            padding: EdgeInsets.zero,
-            child: Column(
-              children: [
-                ...List<Widget>.generate(
-                  _sections.length,
-                  (int index) => SectionWrapper(
-                    key: ValueKey<String>('section_$index'),
-                    sectionKey: _sections[index].key,
-                    sectionName: _sections[index].sectionName,
-                    index: index,
-                    isVisible: _visibleList[index],
-                    onVisible: () => setState(() => _visibleList[index] = true),
-                    child: _sections[index].child,
-                  ),
-                ),
-                const FooterSection(),
-              ],
+
+        //Nav Bar it will show when screen size is desktop
+        Container(
+          height: context.appBarHeight,
+          width: double.infinity,
+          alignment: Alignment.topCenter,
+          child: Consumer<HomeViewModel>(
+            builder: (_, HomeViewModel homeViewModel, _) => NavBar(
+              onNavItemClicked: homeViewModel.handleNavigation,
+              toggleNavDrawer: homeViewModel.toggleDrawer,
+              selectedSection: homeViewModel.currentSelectedSection,
+              scrollController: _scrollController,
             ),
           ),
-          Consumer<HomeViewModel>(
-            builder: (_, HomeViewModel homeViewModel, _) => Visibility(
-              visible: homeViewModel.isDrawerOpen,
-              child: CustomNavigationDrawer(
-                onCloseDrawer: homeViewModel.closeDrawer,
-                onNavItemClicked: (String section) {
-                  homeViewModel.closeDrawer();
-                  homeViewModel.handleNavigation(section);
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+        AnimatedLoadingPage(
+          text: "Thant Zin",
+          onLoadingDone: () {},
+          lineColor: kGrey100,
+          style: context.titleLarge.copyWith(color: kWhite),
+        ),
+      ].addStack(),
     );
   }
 }
