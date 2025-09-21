@@ -65,10 +65,10 @@ const LinearGradient kElectricBlueGradient = LinearGradient(
   end: Alignment.bottomRight,
 );
 
-const LinearGradient kLimeGreenGradient = LinearGradient(
+const LinearGradient kMintGreenGradient = LinearGradient(
   colors: <Color>[
-    Color(0xFF00E676), // Bright Green
-    Color(0xFFB2FF59), // Light Lime
+    Color(0xFF4CAF50), // Medium Green
+    Color(0xFF81C784), // Soft Mint
   ],
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
@@ -80,7 +80,7 @@ final List<LinearGradient> kProjectCardGradients = [
   kOrangeGradient,
   kPurplePinkGradient,
   kElectricBlueGradient,
-  kLimeGreenGradient,
+  kMintGreenGradient,
 ];
 // ===== TEXT COLORS PROJECT ======
 
@@ -89,7 +89,7 @@ final List<Color> kProjectTextColor = [
   Color(0xFF0D47A1),
   Color(0xFF2F4F4F),
   Color(0xFFFFD700),
-  Color(0xFFFF4500),
+  Color(0xFF00BCD4),
   Color(0xFFC71585),
 ];
 

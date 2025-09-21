@@ -41,6 +41,16 @@ class FooterSection extends StatelessWidget {
               ),
               delay: duration1000,
             ),
+            AnimatedFadeInText(
+              context.localization.available_freelancing,
+              style: GoogleFonts.caveat(
+                textStyle: context.bodySmall.copyWith(
+                  color: kWhite70,
+                  fontSize: context.autoAdaptive(s24),
+                ),
+              ),
+              delay: duration1000,
+            ),
             verticalSpaceMedium,
             _SocialMedia(contactList: contactList),
             verticalSpaceMedium,
@@ -71,13 +81,13 @@ class _BuiltWith extends StatelessWidget {
       textBaseline: TextBaseline.alphabetic,
       children: [
         Text(
-          'Built using ',
+          context.localization.built_using,
           style: context.bodySmall.copyWith(color: kGrey300),
           textAlign: TextAlign.center,
         ),
         FlutterLogo(size: context.autoAdaptive(s14)),
         Text(
-          " with ",
+          context.localization.built_with,
           style: context.bodySmall.copyWith(color: kGrey300),
           textAlign: TextAlign.center,
         ),
@@ -111,14 +121,10 @@ class _SocialMedia extends StatelessWidget {
           ),
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: context.autoAdaptive(s8)),
-            child: SizedBox(
-              width: context.autoAdaptive(s20),
-              height: context.autoAdaptive(s20),
-              child: Icon(
-                contactList[i].icon,
-                color: kGrey300,
-                size: context.autoAdaptive(s20),
-              ),
+            child: Icon(
+              contactList[i].icon,
+              color: kGrey300,
+              size: context.autoAdaptive(s25),
             ),
           ),
         );

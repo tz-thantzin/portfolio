@@ -94,21 +94,28 @@ List<Project> projects() {
       github: 'https://github.com/tz-thantzin/firebase_chat_flutter',
     ),
     Project(
-      projectName: 'Myflyn',
+      projectName: 'Myflyn-SwiftUI',
       description:
           'Experimental iOS app built with SwiftUI to explore and practice modern development techniques.',
       imagePath: kMyf,
       github: 'https://github.com/tz-thantzin/my_flyn_ios_swiftui',
     ),
     Project(
-      projectName: 'M-Ratex Flutter',
+      projectName: 'Myflyn-Flutter',
+      description:
+          'Experimental Android and iOS app built with flutter to explore and practice modern development techniques.',
+      imagePath: kMyf,
+      github: 'https://github.com/tz-thantzin/my_flyn',
+    ),
+    Project(
+      projectName: 'M-Ratex-Flutter',
       description:
           'A Flutter-based foreign currency application developed as a personal project.',
       imagePath: kMRate,
       github: 'https://github.com/tz-thantzin/myan_ratex',
     ),
     Project(
-      projectName: 'M-Ratex Swift',
+      projectName: 'M-Ratex-Swift',
       description:
           'A Swift-based foreign currency application developed as a personal project.',
       imagePath: kMRate,

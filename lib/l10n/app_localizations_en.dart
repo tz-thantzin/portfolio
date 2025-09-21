@@ -150,6 +150,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get let_work_together => 'Let\'s work Together';
 
   @override
+  String get available_freelancing => 'I\'m available for freelancing';
+
+  @override
   String get built_using => 'Built using';
 
   @override

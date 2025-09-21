@@ -375,6 +375,12 @@ abstract class AppLocalizations {
   /// **'Let\'s work Together'**
   String get let_work_together;
 
+  /// No description provided for @available_freelancing.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m available for freelancing'**
+  String get available_freelancing;
+
   /// No description provided for @built_using.
   ///
   /// In en, this message translates to:
