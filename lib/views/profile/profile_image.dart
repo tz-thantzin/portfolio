@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_animated_text/my_animated_text.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/widgets/text/content_text.dart';
 
@@ -67,14 +65,6 @@ class _DesktopView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
               ),
-        ),
-      ),
-      Positioned(
-        top: context.autoAdaptive(s100),
-        left: context.autoAdaptive(s250),
-        child: CirclingText(
-          context.localization.creative_mobile_app_developer,
-          style: context.bodyMedium.copyWith(color: kWhite70),
         ),
       ),
     ].addStack().addSizedBox(width: size, height: size);
