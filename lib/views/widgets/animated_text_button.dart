@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portfolio/presentations/configs/duration.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
@@ -101,8 +102,8 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
                 ), // spacing between text and arrow
                 SlideTransition(
                   position: _arrowOffset,
-                  child: Image.asset(
-                    kRightArrow,
+                  child: SvgPicture.asset(
+                    kRightArrowSVG,
                     height: context.autoAdaptive(s14),
                     width: context.autoAdaptive(s14),
                     color: effectiveColor,

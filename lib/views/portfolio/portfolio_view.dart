@@ -26,12 +26,6 @@ class _PortfolioViewState extends State<PortfolioView>
   late final AnimationController _controller;
   bool _hasAnimated = false;
 
-  final List<LinearGradient> _kGradients = [
-    kTomatoGradient,
-    kAmberGradient,
-    kOrangeGradient,
-  ];
-
   final PageController _pageController = PageController(viewportFraction: 0.8);
   double _currentPage = 0.0;
   Timer? _autoScrollTimer;
@@ -125,7 +119,11 @@ class _PortfolioViewState extends State<PortfolioView>
                   controller: _pageController,
                   itemCount: projectList.length,
                   itemBuilder: (context, i) {
-                    final gradient = _kGradients[i % _kGradients.length];
+                    final gradient =
+                        kProjectCardGradients[i % kProjectCardGradients.length];
+                    final textColor =
+                        kProjectTextColor[i % kProjectTextColor.length];
+
                     double scale = 0.9;
                     double diff = (_currentPage - i).abs();
                     if (diff < 1) scale = 0.9 + (1 - diff) * 0.1;
@@ -134,7 +132,11 @@ class _PortfolioViewState extends State<PortfolioView>
                       scale: scale,
                       duration: duration300,
                       curve: Curves.easeOut,
-                      child: ProjectCard(projectList[i], gradient: gradient),
+                      child: ProjectCard(
+                        projectList[i],
+                        gradient: gradient,
+                        textColor: textColor,
+                      ),
                     );
                   },
                 ),

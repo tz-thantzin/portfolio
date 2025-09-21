@@ -7,9 +7,9 @@ const String kNotFound = '$baseImagesPath/not_found.png';
 
 ///Icons
 const String baseIconsPath = 'assets/icons';
-const String kRightArrow = '$baseIconsPath/right_arrow.png';
 
 ///SVG ICONS
+const String kRightArrowSVG = '$baseIconsPath/right_arrow.svg';
 const String kSwiftNoBgSVG = '$baseIconsPath/swift_plain.svg';
 
 const String kFlutterSVG = '$baseIconsPath/flutter.svg';

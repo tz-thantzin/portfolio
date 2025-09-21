@@ -34,6 +34,7 @@ dependencies:
   layout: ^1.0.5
   google_fonts: ^6.3.1
   liquid_progress_indicator_v2: ^0.5.0
+  my_animated_text: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -64,20 +65,6 @@ flutter:
     - assets/portfolios/
 
   fonts:
-    - family: MulishLocal
+    - family: BungeeSpice
       fonts:
-        - asset: assets/fonts/Mulish-Regular.ttf
-        - asset: assets/fonts/Mulish-Bold.ttf
-
-    - family: RobotoCondensedLocal
-      fonts:
-        - asset: assets/fonts/RobotoCondensed-Regular.ttf
-        - asset: assets/fonts/RobotoCondensed-Bold.ttf
-
-    - family: BebasNeueLocal
-      fonts:
-        - asset: assets/fonts/BebasNeue-Regular.ttf
-
-    - family: BungeeLocal
-      fonts:
-        - asset: assets/fonts/Bungee-Regular.ttf
+        - asset: assets/fonts/BungeeSpice-Regular.ttf

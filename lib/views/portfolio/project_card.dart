@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/view_models/home_view_model.dart';
 import 'package:portfolio/views/portfolio/project_image.dart';
 import 'package:portfolio/views/widgets/animated_text_button.dart';
@@ -10,13 +11,18 @@ import 'package:provider/provider.dart';
 import '../../models/project.dart';
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
-import '../widgets/text/title_text.dart';
 
 class ProjectCard extends StatefulWidget {
   final Project project;
   final Gradient? gradient;
+  final Color textColor;
 
-  const ProjectCard(this.project, {this.gradient, super.key});
+  const ProjectCard(
+    this.project, {
+    this.gradient,
+    this.textColor = kIndigo,
+    super.key,
+  });
 
   @override
   State<ProjectCard> createState() => _ProjectCardState();
@@ -47,10 +53,13 @@ class _ProjectCardState extends State<ProjectCard> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TitleText(
+        Text(
           widget.project.projectName,
-          textColor: kIndigo,
-          textAlign: TextAlign.start,
+          style: context.titleSmall.copyWith(
+            color: widget.textColor,
+            fontSize: context.autoAdaptive(s20),
+            fontWeight: superBold,
+          ),
         ),
         verticalSpaceTiny,
         ContentText(

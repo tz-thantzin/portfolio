@@ -47,10 +47,83 @@ const LinearGradient kOrangeGradient = LinearGradient(
   end: Alignment.bottomRight,
 );
 
-const LinearGradient kSoftTealGradient = LinearGradient(
+const LinearGradient kPurplePinkGradient = LinearGradient(
   colors: <Color>[
-    Color(0xFFE0F7FA), // Light teal
-    Color(0xFFB2EBF2), // Soft aqua
+    Color(0xFF8E24AA), // Deep Purple
+    Color(0xFFFF4081), // Pink
+  ],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
+const LinearGradient kElectricBlueGradient = LinearGradient(
+  colors: <Color>[
+    Color(0xFF2979FF), // Bright Blue
+    Color(0xFF00E5FF), // Cyan
+  ],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
+const LinearGradient kLimeGreenGradient = LinearGradient(
+  colors: <Color>[
+    Color(0xFF00E676), // Bright Green
+    Color(0xFFB2FF59), // Light Lime
+  ],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
+final List<LinearGradient> kProjectCardGradients = [
+  kTomatoGradient,
+  kAmberGradient,
+  kOrangeGradient,
+  kPurplePinkGradient,
+  kElectricBlueGradient,
+  kLimeGreenGradient,
+];
+// ===== TEXT COLORS PROJECT ======
+
+final List<Color> kProjectTextColor = [
+  Color(0xFF000080),
+  Color(0xFF0D47A1),
+  Color(0xFF2F4F4F),
+  Color(0xFFFFD700),
+  Color(0xFFFF4500),
+  Color(0xFFC71585),
+];
+
+const LinearGradient kTealGreenTextGradient = LinearGradient(
+  colors: <Color>[
+    Color(0xFF008080), // Teal
+    Color(0xFF4CBB17), // Green
+  ],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
+const LinearGradient kTextTomatoGradient = LinearGradient(
+  colors: <Color>[
+    Color(0xFFFFFFFF), // White for contrast
+    Color(0xFFFFF176), // Soft yellow accent
+  ],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
+const LinearGradient kTextAmberGradient = LinearGradient(
+  colors: <Color>[
+    Color(0xFFD32F2F), // Dark red
+    Color(0xFF7B1FA2), // Deep purple
+  ],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
+const LinearGradient kTextOrangeGradient = LinearGradient(
+  colors: <Color>[
+    Color(0xFF0D47A1), // Dark Blue
+    Color(0xFF00BCD4), // Cyan
   ],
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,

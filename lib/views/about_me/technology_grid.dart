@@ -45,7 +45,7 @@ class TechnologyGrid extends StatelessWidget {
                   ]
                   .addColumn(crossAxisAlignment: CrossAxisAlignment.start)
                   .addPadding(
-                    padding: EdgeInsets.only(right: context.autoAdaptive(16)),
+                    padding: EdgeInsets.only(right: context.autoAdaptive(s24)),
                   )
                   .addExpanded();
             }).toList(),
