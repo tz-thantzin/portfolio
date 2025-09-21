@@ -128,23 +128,24 @@ List<Workflow> workflows(BuildContext context) {
 
 List<Skill> languagesAndTools(BuildContext context) {
   return <Skill>[
-    Skill(name: 'Flutter', iconPath: 'assets/icons/flutter_icon.png'),
-    Skill(name: 'React', iconPath: 'assets/icons/react.png'),
-    Skill(name: 'Swift', iconPath: 'assets/icons/swift_icon.png'),
-    Skill(name: 'SwiftUI', iconPath: 'assets/icons/swiftui.png'),
-    Skill(name: 'Firebase', iconPath: 'assets/icons/firebase_icon.png'),
-    Skill(name: 'AWS', iconPath: 'assets/icons/aws_icon.png'),
-    Skill(name: 'MySQL', iconPath: 'assets/icons/mysql.png'),
-    Skill(name: 'Postgresql', iconPath: 'assets/icons/postgresql.png'),
-    Skill(name: 'Postman', iconPath: 'assets/icons/postman.png'),
-    Skill(name: 'Git', iconPath: 'assets/icons/git.png'),
-    Skill(name: 'Fastlane', iconPath: 'assets/icons/fastlane_icon.png'),
-    Skill(
-      name: 'Android Studio',
-      iconPath: 'assets/icons/android_studio_icon.png',
-    ),
-    Skill(name: 'Xcode', iconPath: 'assets/icons/xcode_icon.png'),
-    Skill(name: 'VSCode', iconPath: 'assets/icons/visual_studio_code_icon.png'),
+    Skill(name: 'Flutter', iconPath: kFlutterSVG, percentage: 95),
+    Skill(name: 'Dart', iconPath: kDartSVG, percentage: 99),
+    Skill(name: 'Swift', iconPath: kSwiftSVG, percentage: 85),
+    Skill(name: 'SwiftUI', iconPath: kSwiftUISVG, percentage: 75),
+    Skill(name: 'Android', iconPath: kAndroidSVG, percentage: 60),
+    Skill(name: 'Kotlin', iconPath: kKotlinSVG, percentage: 45),
+    Skill(name: 'React', iconPath: kReactSVG, percentage: 65),
+    Skill(name: 'Typescript', iconPath: kTypescriptSVG, percentage: 65),
+    Skill(name: 'Firebase', iconPath: kFirebaseSVG, percentage: 90),
+    Skill(name: 'AWS', iconPath: kAwsSVG, percentage: 60),
+    Skill(name: 'SQLite', iconPath: kSQLiteSVG, percentage: 50),
+    Skill(name: 'Postman', iconPath: kPostmanSVG, percentage: 80),
+    Skill(name: 'Git', iconPath: kGitSVG, percentage: 90),
+    Skill(name: 'Github', iconPath: kGithubSVG, percentage: 90),
+    Skill(name: 'Fastlane', iconPath: kFastlaneSVG, percentage: 60),
+    Skill(name: 'Android Studio', iconPath: kAndroidStudioSVG, percentage: 95),
+    Skill(name: 'Xcode', iconPath: kXcodeSVG, percentage: 95),
+    Skill(name: 'VSCode', iconPath: kVSCodeSVG, percentage: 70),
   ];
 }
 

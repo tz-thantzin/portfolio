@@ -4,7 +4,9 @@ import 'package:portfolio/presentations/configs/constant_sizes.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/string_ex.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
 
+/// credit to [https://davidcobbina.com]
 class AnimatedLoadingPage extends StatefulWidget {
   final String text;
   final TextStyle? style;
@@ -139,19 +141,17 @@ class _AnimatedLoadingPageState extends State<AnimatedLoadingPage>
 
     return _isAnimationOver
         ? const SizedBox.shrink()
-        : Stack(
-            children: [
-              _buildTopContainer(screenWidth, halfScreenHeight),
-              _buildBottomContainer(screenWidth, halfScreenHeight),
-              _buildCenterContent(
-                context,
-                screenWidth,
-                leftLineWidth,
-                rightLineWidth,
-                leftContainerStart,
-              ),
-            ],
-          );
+        : <Widget>[
+            _buildTopContainer(screenWidth, halfScreenHeight),
+            _buildBottomContainer(screenWidth, halfScreenHeight),
+            _buildCenterContent(
+              context,
+              screenWidth,
+              leftLineWidth,
+              rightLineWidth,
+              leftContainerStart,
+            ),
+          ].addStack();
   }
 
   Widget _buildTopContainer(double screenWidth, double halfHeight) {
@@ -160,7 +160,7 @@ class _AnimatedLoadingPageState extends State<AnimatedLoadingPage>
       height: _leftRightAnimationDone ? 0 : halfHeight,
       duration: _scaleDuration,
       color: kBlack,
-      onEnd: () {
+      onEnd: () async {
         widget.onLoadingDone();
         setState(() => _isAnimationOver = true);
       },
@@ -186,23 +186,18 @@ class _AnimatedLoadingPageState extends State<AnimatedLoadingPage>
     double rightLineWidth,
     double leftContainerStart,
   ) {
-    return SizedBox(
-      width: screenWidth,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildAnimatedText(screenWidth),
-            verticalSpaceMedium,
-            _buildAnimatedLines(
-              leftLineWidth,
-              rightLineWidth,
-              leftContainerStart,
-            ),
-          ],
-        ),
-      ),
-    );
+    return <Widget>[
+          _buildAnimatedText(screenWidth),
+          verticalSpaceMedium,
+          _buildAnimatedLines(
+            leftLineWidth,
+            rightLineWidth,
+            leftContainerStart,
+          ),
+        ]
+        .addColumn(mainAxisAlignment: MainAxisAlignment.center)
+        .addCenter()
+        .addSizedBox(width: screenWidth);
   }
 
   Widget _buildAnimatedText(double screenWidth) {
@@ -260,20 +255,18 @@ class _AnimatedLoadingPageState extends State<AnimatedLoadingPage>
   }) {
     return SizedBox(
       width: width,
-      child: Stack(
-        children: [
-          Container(width: width, height: _lineHeight, color: _lineColor),
-          Positioned(
-            right: rightAligned ? 0 : null,
-            child: AnimatedContainer(
-              width: _leftRightAnimationStarted ? 0 : blockWidth,
-              height: _lineHeight,
-              color: kBlack,
-              duration: _lineDuration,
-            ),
+      child: <Widget>[
+        Container(width: width, height: _lineHeight, color: _lineColor),
+        Positioned(
+          right: rightAligned ? 0 : null,
+          child: AnimatedContainer(
+            width: _leftRightAnimationStarted ? 0 : blockWidth,
+            height: _lineHeight,
+            color: kBlack,
+            duration: _lineDuration,
           ),
-        ],
-      ),
+        ),
+      ].addStack(),
     );
   }
 

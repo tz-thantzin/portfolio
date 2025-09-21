@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/presentations/configs/duration.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
+import 'package:portfolio/views/widgets/animated_scale_widget.dart';
 
 import '../../presentations/configs/constant_images.dart';
 import '../../presentations/configs/constant_sizes.dart';
@@ -23,10 +24,6 @@ class _DesktopView extends StatefulWidget {
 }
 
 class _DesktopViewState extends State<_DesktopView> {
-  bool _isFlutterHovered = false;
-  bool _isSwiftHovered = false;
-  bool _isFirebaseHovered = false;
-
   @override
   Widget build(BuildContext context) {
     final double size = context.autoAdaptive(s250);
@@ -45,19 +42,11 @@ class _DesktopViewState extends State<_DesktopView> {
         Positioned(
           top: context.autoAdaptive(s80),
           left: context.autoAdaptive(s20),
-          child: MouseRegion(
-            key: ValueKey('MouseRegion_Flutter_Icon'),
-            onEnter: (_) => setState(() => _isFlutterHovered = true),
-            onExit: (_) => setState(() => _isFlutterHovered = false),
-            child: AnimatedScale(
-              scale: _isFlutterHovered ? 1.5 : 1.0,
-              duration: duration300,
-              curve: Curves.easeOut,
-              child: Image.asset(
-                kFlutterIcon,
-                width: context.autoAdaptive(s42),
-                height: context.autoAdaptive(s42),
-              ),
+          child: AnimatedScaleWidget(
+            child: SvgPicture.asset(
+              kFlutterSVG,
+              width: context.autoAdaptive(s42),
+              height: context.autoAdaptive(s42),
             ),
           ),
         ),
@@ -66,19 +55,11 @@ class _DesktopViewState extends State<_DesktopView> {
         Positioned(
           top: context.autoAdaptive(s20),
           left: context.autoAdaptive(s180),
-          child: MouseRegion(
-            key: ValueKey('MouseRegion_Swift_Icon'),
-            onEnter: (_) => setState(() => _isSwiftHovered = true),
-            onExit: (_) => setState(() => _isSwiftHovered = false),
-            child: AnimatedScale(
-              scale: _isSwiftHovered ? 1.5 : 1.0,
-              duration: duration300,
-              curve: Curves.easeOut,
-              child: Image.asset(
-                kSwiftIcon,
-                width: context.autoAdaptive(s42),
-                height: context.autoAdaptive(s42),
-              ),
+          child: AnimatedScaleWidget(
+            child: SvgPicture.asset(
+              kSwiftNoBgSVG,
+              width: context.autoAdaptive(s42),
+              height: context.autoAdaptive(s42),
             ),
           ),
         ),
@@ -87,19 +68,11 @@ class _DesktopViewState extends State<_DesktopView> {
         Positioned(
           top: context.autoAdaptive(s165),
           left: context.autoAdaptive(s100),
-          child: MouseRegion(
-            key: ValueKey('MouseRegion_Firebase_Icon'),
-            onEnter: (_) => setState(() => _isFirebaseHovered = true),
-            onExit: (_) => setState(() => _isFirebaseHovered = false),
-            child: AnimatedScale(
-              scale: _isFirebaseHovered ? 1.5 : 1.0,
-              duration: duration300,
-              curve: Curves.easeOut,
-              child: Image.asset(
-                kFirebaseIcon,
-                width: context.autoAdaptive(s42),
-                height: context.autoAdaptive(s42),
-              ),
+          child: AnimatedScaleWidget(
+            child: SvgPicture.asset(
+              kFirebaseSVG,
+              width: context.autoAdaptive(s42),
+              height: context.autoAdaptive(s42),
             ),
           ),
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:portfolio/my_portfolio_main.dart';
@@ -39,14 +38,9 @@ void main() {
   });
 
   Widget buildTestableWidget() {
-    return ScreenUtilInit(
-      designSize: const Size(390, 844),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (_, __) => ChangeNotifierProvider<HomeViewModel>.value(
-        value: mockHomeViewModel,
-        child: const MyPortfolioApp(),
-      ),
+    return ChangeNotifierProvider<HomeViewModel>.value(
+      value: mockHomeViewModel,
+      child: const MyPortfolioApp(),
     );
   }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:portfolio/models/skill.dart';
 import 'package:portfolio/presentations/configs/constant_colors.dart';
 import 'package:portfolio/presentations/configs/constant_data.dart';
@@ -99,7 +101,7 @@ class LanguageAndTools extends StatelessWidget {
           runSpacing: context.autoAdaptive(16),
           alignment: WrapAlignment.center,
           children: skills.map((Skill skill) {
-            return _SkillItem(iconPath: skill.iconPath, name: skill.name);
+            return _SkillItem(skill: skill);
           }).toList(),
         ),
       ],
@@ -108,27 +110,37 @@ class LanguageAndTools extends StatelessWidget {
 }
 
 class _SkillItem extends StatelessWidget {
-  final String iconPath;
-  final String name;
+  final Skill skill;
 
-  const _SkillItem({required this.iconPath, required this.name});
+  const _SkillItem({required this.skill});
 
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: name,
-      child: Container(
-        width: context.autoAdaptive(s50),
-        height: context.autoAdaptive(s50),
-        padding: EdgeInsets.all(context.autoAdaptive(s16)),
-        decoration: BoxDecoration(
-          color: kWhite,
-          borderRadius: BorderRadius.circular(context.autoAdaptive(s8)),
-          boxShadow: const <BoxShadow>[
-            BoxShadow(color: kGrey500, blurRadius: 3, offset: Offset(2, 2)),
+      message: skill.name,
+      child: SizedBox(
+        width: context.autoAdaptive(s48),
+        height: context.autoAdaptive(s48),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            LiquidLinearProgressIndicator(
+              value: skill.percentage / 100,
+              valueColor: AlwaysStoppedAnimation(
+                kIndigo.withValues(alpha: 0.5),
+              ),
+              backgroundColor: kWhite70,
+              borderRadius: context.autoAdaptive(s10),
+              direction: Axis.vertical,
+            ),
+            SvgPicture.asset(
+              skill.iconPath,
+              fit: BoxFit.contain,
+              width: context.autoAdaptive(s26),
+              height: context.autoAdaptive(s26),
+            ),
           ],
         ),
-        child: Image.asset(iconPath, fit: BoxFit.contain),
       ),
     );
   }
