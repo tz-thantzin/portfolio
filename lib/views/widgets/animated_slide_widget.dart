@@ -53,20 +53,20 @@ class _AnimatedSlideWidgetState extends State<AnimatedSlideWidget>
   }
 
   void _setupAnimations() {
-    // Slide offset
+    // Slide offset based on direction
     Offset beginOffset;
     switch (widget.direction) {
       case SlideDirection.up:
-        beginOffset = const Offset(0, 0.5);
+        beginOffset = const Offset(0, 1);
         break;
       case SlideDirection.down:
-        beginOffset = const Offset(0, -0.5);
+        beginOffset = const Offset(0, -1);
         break;
       case SlideDirection.left:
-        beginOffset = const Offset(0.5, 0);
+        beginOffset = const Offset(1, 0);
         break;
       case SlideDirection.right:
-        beginOffset = const Offset(-0.5, 0);
+        beginOffset = const Offset(-1, 0);
         break;
     }
 
@@ -78,7 +78,6 @@ class _AnimatedSlideWidgetState extends State<AnimatedSlideWidget>
           ),
         );
 
-    // Fade animation
     _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _controller,
@@ -101,8 +100,14 @@ class _AnimatedSlideWidgetState extends State<AnimatedSlideWidget>
       child: SlideTransition(
         position: _slideAnimation,
         transformHitTests: true,
-        child: IgnorePointer(
-          ignoring: _slideAnimation.value.dy > 0.99,
+        child: AnimatedBuilder(
+          animation: _slideAnimation,
+          builder: (context, child) {
+            return IgnorePointer(
+              ignoring: _slideAnimation.value.dy > 0.99,
+              child: child,
+            );
+          },
           child: Material(color: Colors.transparent, child: widget.child),
         ),
       ),

@@ -19,25 +19,42 @@ class AboutView extends StatefulWidget {
   State<AboutView> createState() => _AboutViewState();
 }
 
-class _AboutViewState extends State<AboutView>
-    with SingleTickerProviderStateMixin {
+class _AboutViewState extends State<AboutView> with TickerProviderStateMixin {
   late final AnimationController _controller;
+  late final AnimationController _technologyAnimationController;
+
   bool _hasAnimated = false;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: duration1000);
+    _technologyAnimationController = AnimationController(
+      vsync: this,
+      duration: duration3000,
+    );
+    _listenAnimations();
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _technologyAnimationController.dispose();
     super.dispose();
   }
 
+  Future<void> _listenAnimations() async {
+    _controller.addStatusListener((status) async {
+      if (status == AnimationStatus.completed) {
+        Future.delayed(duration500, () {
+          if (mounted) _technologyAnimationController.forward();
+        });
+      }
+    });
+  }
+
   void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction > 0.2 && !_hasAnimated && mounted) {
+    if (info.visibleFraction > 0.45 && !_hasAnimated && mounted) {
       Future.delayed(duration500, () {
         if (mounted) _controller.forward();
       });
@@ -116,8 +133,10 @@ class _AboutViewState extends State<AboutView>
     return AnimatedFadeWidget(
       controller: _controller,
       start: 0.6,
-      end: 1.0,
-      child: const TechnologyGrid(),
+      end: 0.9,
+      child: TechnologyGrid(
+        animationController: _technologyAnimationController,
+      ),
     );
   }
 }

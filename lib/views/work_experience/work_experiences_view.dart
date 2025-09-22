@@ -12,6 +12,7 @@ import '../../presentations/configs/duration.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
+import '../widgets/animated_slide_widget.dart';
 import '../widgets/text/title_text.dart';
 import 'timeline_indicator.dart';
 
@@ -23,8 +24,9 @@ class WorkExperienceView extends StatefulWidget {
 }
 
 class _WorkExperienceViewState extends State<WorkExperienceView>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late final AnimationController _controller;
+  late final AnimationController _itemSlideAnimationController;
 
   bool _hasAnimated = false;
 
@@ -32,21 +34,37 @@ class _WorkExperienceViewState extends State<WorkExperienceView>
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: duration1000);
-  }
-
-  void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction > 0.2 && !_hasAnimated && mounted) {
-      Future.delayed(duration500, () {
-        if (mounted) _controller.forward();
-      });
-      _hasAnimated = true;
-    }
+    _itemSlideAnimationController = AnimationController(
+      vsync: this,
+      duration: duration3000,
+    );
+    _listenAnimations();
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _itemSlideAnimationController.dispose();
     super.dispose();
+  }
+
+  Future<void> _listenAnimations() async {
+    _controller.addStatusListener((status) async {
+      if (status == AnimationStatus.completed) {
+        Future.delayed(duration500, () {
+          if (mounted) _itemSlideAnimationController.forward();
+        });
+      }
+    });
+  }
+
+  void _onVisibilityChanged(VisibilityInfo info) {
+    if (info.visibleFraction > 0.45 && !_hasAnimated && mounted) {
+      Future.delayed(duration500, () {
+        if (mounted) _controller.forward();
+      });
+      _hasAnimated = true;
+    }
   }
 
   @override
@@ -86,19 +104,32 @@ class _WorkExperienceViewState extends State<WorkExperienceView>
   }
 
   List<Widget> _buildTimelineItems(List<WorkExperience> items) {
-    return List<Widget>.generate(items.length, (int index) {
+    final int count = items.length;
+    final double step = 1.0 / count;
+
+    return List<Widget>.generate(count, (int index) {
       final WorkExperience exp = items[index];
-      final bool hasNext = index < items.length - 1;
+      final bool hasNext = index < count - 1;
       final bool continueLine =
           hasNext &&
           items[index + 1].company == exp.company &&
           exp.company.isNotEmpty;
 
+      final double start = (index * step).clamp(0.0, 1.0);
+      final double end = ((index + 1) * step).clamp(0.0, 1.0);
+
       return AnimatedFadeWidget(
         controller: _controller,
-        start: 0.5,
-        end: 1,
-        child: _TimelineItem(experience: exp, drawLineBelow: continueLine),
+        start: start,
+        end: end,
+        child: AnimatedSlideWidget(
+          controller: _itemSlideAnimationController,
+          start: start,
+          end: end,
+          duration: duration3000,
+          direction: SlideDirection.up,
+          child: _TimelineItem(experience: exp, drawLineBelow: continueLine),
+        ),
       );
     });
   }
@@ -107,7 +138,6 @@ class _WorkExperienceViewState extends State<WorkExperienceView>
 class _TimelineItem extends StatelessWidget {
   final WorkExperience experience;
   final bool drawLineBelow;
-
   const _TimelineItem({required this.experience, required this.drawLineBelow});
 
   @override

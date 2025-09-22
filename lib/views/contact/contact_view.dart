@@ -116,7 +116,7 @@ class _ContactViewState extends State<ContactView>
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction > 0.2 && !_hasAnimated && mounted) {
+    if (info.visibleFraction > 0.45 && !_hasAnimated && mounted) {
       Future.delayed(duration500, () {
         if (mounted) _fadeController.forward();
       });

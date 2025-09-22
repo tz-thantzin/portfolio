@@ -7,11 +7,13 @@ import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 
 import '../../presentations/configs/constant_colors.dart';
+import '../widgets/animated_slide_widget.dart';
 import '../widgets/text/tag_text.dart';
 import '../widgets/text/title_text.dart';
 
 class TechnologyGrid extends StatelessWidget {
-  const TechnologyGrid({super.key});
+  final AnimationController animationController;
+  const TechnologyGrid({super.key, required this.animationController});
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +36,32 @@ class TechnologyGrid extends StatelessWidget {
                       ),
                     ),
                     verticalSpaceSmall,
-                    ...entry.value.map(
-                      (tech) => Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: context.autoAdaptive(4),
+                    ...entry.value.asMap().entries.map((techEntry) {
+                      final int index = techEntry.key; // stagger index
+                      final tech = techEntry.value;
+
+                      final count = entry.value.length;
+                      final double step = 1.0 / (count + 1);
+
+                      final double slideStart = step * index;
+                      final double slideEnd = (slideStart + step).clamp(
+                        0.0,
+                        1.0,
+                      );
+
+                      return AnimatedSlideWidget(
+                        controller: animationController,
+                        start: slideStart,
+                        end: slideEnd,
+                        direction: SlideDirection.down,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: context.autoAdaptive(4),
+                          ),
+                          child: TechnologyItem(technology: tech),
                         ),
-                        child: TechnologyItem(technology: tech),
-                      ),
-                    ),
+                      );
+                    }),
                   ]
                   .addColumn(crossAxisAlignment: CrossAxisAlignment.start)
                   .addPadding(

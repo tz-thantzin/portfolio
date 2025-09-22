@@ -23,25 +23,41 @@ class SkillsView extends StatefulWidget {
   State<SkillsView> createState() => _SkillsViewState();
 }
 
-class _SkillsViewState extends State<SkillsView>
-    with SingleTickerProviderStateMixin {
+class _SkillsViewState extends State<SkillsView> with TickerProviderStateMixin {
   late final AnimationController _controller;
+  late final AnimationController _workFlowSlideAnimationController;
   bool _hasAnimated = false;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: duration1000);
+    _workFlowSlideAnimationController = AnimationController(
+      vsync: this,
+      duration: duration3000,
+    );
+    _listenAnimations();
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _workFlowSlideAnimationController.dispose();
     super.dispose();
   }
 
+  Future<void> _listenAnimations() async {
+    _controller.addStatusListener((status) async {
+      if (status == AnimationStatus.completed) {
+        Future.delayed(duration500, () {
+          if (mounted) _workFlowSlideAnimationController.forward();
+        });
+      }
+    });
+  }
+
   void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction > 0.2 && !_hasAnimated && mounted) {
+    if (info.visibleFraction > 0.45 && !_hasAnimated && mounted) {
       Future.delayed(duration500, () {
         if (mounted) _controller.forward();
       });
@@ -73,8 +89,8 @@ class _SkillsViewState extends State<SkillsView>
           verticalSpaceEnormous,
           AnimatedFadeWidget(
             controller: _controller,
-            start: 0.3,
-            end: 0.7,
+            start: 0.5,
+            end: 0.8,
             child: _WorkFlows(controller: _controller),
           ),
         ],
@@ -127,9 +143,9 @@ class _SkillItem extends StatelessWidget {
             LiquidLinearProgressIndicator(
               value: skill.percentage / 100,
               valueColor: AlwaysStoppedAnimation(
-                kIndigo.withValues(alpha: 0.5),
+                kSkillWavy.withValues(alpha: 0.2),
               ),
-              backgroundColor: kWhite70,
+              backgroundColor: kGrey200,
               borderRadius: context.autoAdaptive(s10),
               direction: Axis.vertical,
             ),
@@ -164,15 +180,18 @@ class _WorkFlows extends StatelessWidget {
             final int index = entry.key;
             final Workflow workflow = entry.value;
 
-            final double slideStart = 0.7 + index * 0.05;
-            final double slideEnd = (slideStart + 0.2).clamp(0.0, 1.0);
+            final int count = items.length;
+            final double step = 1.0 / count;
+
+            // Each item gets its own slice in the timeline
+            final double slideStart = (index * step).clamp(0.0, 1.0);
+            final double slideEnd = ((index + 1) * step).clamp(0.0, 1.0);
 
             return AnimatedSlideWidget(
               controller: controller,
               start: slideStart,
               end: slideEnd,
-              direction: SlideDirection.up,
-              duration: duration3000,
+              direction: SlideDirection.down,
               child: _WorkflowItem(workflow),
             );
           }).toList(),

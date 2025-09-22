@@ -17,6 +17,8 @@ const Color kGreen = Colors.green;
 final Color kRed100 = Colors.red.shade100;
 const Color kTomato = Color(0xFFFA523C);
 
+const Color kSkillWavy = Color(0xFF336B87);
+
 const Color kFooterBg = Color(0xFF363e57);
 
 // Gradients
