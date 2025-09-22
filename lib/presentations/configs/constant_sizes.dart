@@ -18,6 +18,7 @@ const double s14 = 14.0;
 const double s16 = 16.0;
 const double s18 = 18.0;
 const double s20 = 20.0;
+const double s22 = 22.0;
 const double s24 = 24.0;
 const double s25 = 25.0;
 const double s26 = 26.0;

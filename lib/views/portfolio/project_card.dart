@@ -14,15 +14,8 @@ import '../../presentations/configs/constant_sizes.dart';
 
 class ProjectCard extends StatefulWidget {
   final Project project;
-  final Gradient? gradient;
-  final Color textColor;
 
-  const ProjectCard(
-    this.project, {
-    this.gradient,
-    this.textColor = kIndigo,
-    super.key,
-  });
+  const ProjectCard(this.project, {super.key});
 
   @override
   State<ProjectCard> createState() => _ProjectCardState();
@@ -35,7 +28,8 @@ class _ProjectCardState extends State<ProjectCard> {
       width: double.infinity,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        gradient: widget.gradient,
+        color: kGrey1200.withValues(alpha: 0.6),
+        border: Border.all(color: kWhite70),
         borderRadius: BorderRadius.circular(context.autoAdaptive(s24)),
       ),
       padding: EdgeInsets.symmetric(
@@ -56,8 +50,8 @@ class _ProjectCardState extends State<ProjectCard> {
         Text(
           widget.project.projectName,
           style: context.titleSmall.copyWith(
-            color: widget.textColor,
-            fontSize: context.autoAdaptive(s20),
+            color: kTomato,
+            fontSize: context.autoAdaptive(s22),
             fontWeight: superBold,
           ),
         ),

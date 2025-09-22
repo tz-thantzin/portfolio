@@ -119,11 +119,6 @@ class _PortfolioViewState extends State<PortfolioView>
                   controller: _pageController,
                   itemCount: projectList.length,
                   itemBuilder: (context, i) {
-                    final gradient =
-                        kProjectCardGradients[i % kProjectCardGradients.length];
-                    final textColor =
-                        kProjectTextColor[i % kProjectTextColor.length];
-
                     double scale = 0.9;
                     double diff = (_currentPage - i).abs();
                     if (diff < 1) scale = 0.9 + (1 - diff) * 0.1;
@@ -132,11 +127,7 @@ class _PortfolioViewState extends State<PortfolioView>
                       scale: scale,
                       duration: duration300,
                       curve: Curves.easeOut,
-                      child: ProjectCard(
-                        projectList[i],
-                        gradient: gradient,
-                        textColor: textColor,
-                      ),
+                      child: ProjectCard(projectList[i]),
                     );
                   },
                 ),

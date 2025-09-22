@@ -15,7 +15,6 @@ class ProjectImage extends StatefulWidget {
 }
 
 class _ProjectImageState extends State<ProjectImage> {
-  bool _isHovered = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +28,7 @@ class _ProjectImageState extends State<ProjectImage> {
           child: Image.asset(
             widget.project.imagePath!,
             fit: BoxFit.contain,
-          ).addOpacity(opacity: 0.5),
+          ).addOpacity(opacity: 0.6),
         ),
       ),
     );
