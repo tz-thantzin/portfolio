@@ -69,8 +69,8 @@ class _SocialBannerState extends State<SocialBanner>
       margin: EdgeInsets.only(left: context.autoAdaptive(s16)),
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: context.autoAdaptive(s4),
-          vertical: context.autoAdaptive(s8),
+          horizontal: context.autoAdaptive(s6),
+          vertical: context.autoAdaptive(s12),
         ),
         decoration: BoxDecoration(
           color: kGrey100,

@@ -56,7 +56,7 @@ class _DesktopView extends StatelessWidget {
                   context.localization.year_of_work_experience,
                   style: GoogleFonts.abrilFatface(
                     textStyle: context.bodyLarge.copyWith(
-                      fontSize: context.autoAdaptive(s26),
+                      fontSize: context.autoAdaptive(s32),
                       color: kTomato,
                     ),
                   ),

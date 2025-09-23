@@ -12,20 +12,6 @@ class AboutImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return context.isDesktop ? const _DesktopView() : const _MobileView();
-  }
-}
-
-class _DesktopView extends StatefulWidget {
-  const _DesktopView();
-
-  @override
-  State<_DesktopView> createState() => _DesktopViewState();
-}
-
-class _DesktopViewState extends State<_DesktopView> {
-  @override
-  Widget build(BuildContext context) {
     final double size = context.autoAdaptive(s350);
 
     return SizedBox(
@@ -78,18 +64,5 @@ class _DesktopViewState extends State<_DesktopView> {
         ),
       ].addStack(),
     );
-  }
-}
-
-class _MobileView extends StatelessWidget {
-  const _MobileView();
-
-  @override
-  Widget build(BuildContext context) {
-    final double size = context.autoAdaptive(s350);
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Image.asset(kAboutMeIcon, fit: BoxFit.contain),
-    ).addSizedBox(height: size);
   }
 }

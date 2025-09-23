@@ -29,6 +29,10 @@ class _WorkListViewState extends State<WorkListView>
   Timer? _autoScrollTimer;
   bool _userDragging = false;
 
+  // Track drag
+  double _dragStartX = 0.0;
+  double _scrollStartOffset = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -76,6 +80,7 @@ class _WorkListViewState extends State<WorkListView>
   @override
   Widget build(BuildContext context) {
     final projectList = projects();
+    double cardHeight = context.autoAdaptive(context.isMobile ? s300 : s200);
 
     return Container(
       width: double.infinity,
@@ -97,15 +102,24 @@ class _WorkListViewState extends State<WorkListView>
           ).addVisibilityDetector(onDetectVisibility: _onVisibilityChanged),
           verticalSpaceMassive,
 
+          //Project List
           AnimatedFadeWidget(
             controller: _controller,
             start: 0.6,
             end: 1,
             child: SizedBox(
-              height: context.autoAdaptive(context.isMobile ? s300 : s200),
-              child: GestureDetector(
-                onHorizontalDragStart: (_) => _userDragging = true,
-                onHorizontalDragEnd: (_) {
+              height: cardHeight,
+              child: Listener(
+                onPointerDown: (event) {
+                  _userDragging = true;
+                  _dragStartX = event.position.dx;
+                  _scrollStartOffset = _pageController.offset;
+                },
+                onPointerMove: (event) {
+                  double delta = _dragStartX - event.position.dx;
+                  _pageController.jumpTo(_scrollStartOffset + delta);
+                },
+                onPointerUp: (event) {
                   _userDragging = false;
                   _startAutoScroll();
                 },
@@ -114,9 +128,8 @@ class _WorkListViewState extends State<WorkListView>
                   physics: const ClampingScrollPhysics(),
                   itemCount: projectList.length,
                   itemBuilder: (context, i) {
-                    double scale = 0.9;
                     double diff = (_currentPage - i).abs();
-                    if (diff < 1) scale = 0.9 + (1 - diff) * 0.1;
+                    double scale = diff < 1 ? 0.9 + (1 - diff) * 0.1 : 0.9;
 
                     return AnimatedScale(
                       scale: scale,
