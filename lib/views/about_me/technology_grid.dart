@@ -5,6 +5,7 @@ import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
+import 'package:portfolio/views/widgets/text/content_text.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../widgets/animated_slide_widget.dart';
@@ -18,21 +19,28 @@ class TechnologyGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(8)),
+      padding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(s60),
+        vertical: context.autoAdaptive(s24),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TitleText(context.localization.technologies),
+          TitleText(context.localization.technologies, fontSize: s16),
+          verticalSpaceMedium,
+          ContentText(context.localization.my_tools),
           verticalSpaceMedium,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: technologies.entries.map((entry) {
               return <Widget>[
                     Text(
                       entry.key,
                       style: context.bodyMedium.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: kWhite,
+                        fontWeight: semiBold,
+                        color: kBlack,
+                        fontSize: s14,
                       ),
                     ),
                     verticalSpaceSmall,
@@ -53,7 +61,7 @@ class TechnologyGrid extends StatelessWidget {
                         controller: animationController,
                         start: slideStart,
                         end: slideEnd,
-                        direction: SlideDirection.down,
+                        direction: SlideDirection.upToDown,
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                             vertical: context.autoAdaptive(4),
@@ -84,7 +92,11 @@ class TechnologyItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.arrow_right, size: context.autoAdaptive(16), color: kWhite),
+        Icon(
+          Icons.arrow_right,
+          size: context.autoAdaptive(16),
+          color: kGrey800,
+        ),
         SizedBox(width: context.autoAdaptive(4)),
         TagText(technology),
       ],

@@ -4,20 +4,21 @@ import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/widgets/animated_scale_widget.dart';
 
-import '../../presentations/configs/constant_sizes.dart';
+import '../../../presentations/configs/constant_sizes.dart';
 
-class ProjectImage extends StatefulWidget {
+class RecentProjectImage extends StatefulWidget {
   final Project project;
-  const ProjectImage(this.project, {super.key});
+  const RecentProjectImage(this.project, {super.key});
 
   @override
-  State<ProjectImage> createState() => _ProjectImageState();
+  State<RecentProjectImage> createState() => _RecentProjectImageState();
 }
 
-class _ProjectImageState extends State<ProjectImage> {
+class _RecentProjectImageState extends State<RecentProjectImage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: context.autoAdaptive(s150),
       padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(s24)),
       alignment: Alignment.centerRight,
       child: AnimatedScaleWidget(
@@ -28,7 +29,7 @@ class _ProjectImageState extends State<ProjectImage> {
           child: Image.asset(
             widget.project.imagePath!,
             fit: BoxFit.contain,
-          ).addOpacity(opacity: context.isMobile ? 0.2 : 0.6),
+          ).addOpacity(opacity: 0.6),
         ),
       ),
     );

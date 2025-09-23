@@ -1,165 +1,155 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
+import 'package:portfolio/presentations/configs/constant_colors.dart';
+import 'package:portfolio/presentations/configs/constants.dart';
+import 'package:portfolio/presentations/configs/duration.dart';
+import 'package:portfolio/utils/extensions/context_ex.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import 'package:portfolio/utils/extensions/theme_ex.dart';
 
-import '../../../presentations/configs/constant_colors.dart';
-import '../../../presentations/configs/constant_sizes.dart';
-import '../../../presentations/configs/constants.dart';
-import '../../../utils/extensions/context_ex.dart';
-import '../../../utils/extensions/layout_adapter_ex.dart';
-import '../../../utils/extensions/theme_ex.dart';
-
-class NavBar extends StatefulWidget {
-  final Function(String) onNavItemClicked;
-  final VoidCallback toggleNavDrawer;
-  final String selectedSection;
-  final ScrollController scrollController;
-
+/// Responsive NavBar (Mobile + Desktop)
+class NavBar extends StatelessWidget {
   const NavBar({
-    required this.onNavItemClicked,
-    required this.toggleNavDrawer,
-    required this.selectedSection,
-    required this.scrollController,
     super.key,
+    required this.selectedSection,
+    required this.onNavItemClicked,
+    required this.onMenuTap,
+    required this.controller,
+    this.hasSideTitle = false,
   });
 
-  @override
-  State<NavBar> createState() => _NavBarState();
-}
-
-class _NavBarState extends State<NavBar> {
-  double scrollOffset = 0.0;
-
-  @override
-  void initState() {
-    super.initState();
-    widget.scrollController.addListener(_onScroll);
-  }
-
-  void _onScroll() {
-    setState(() {
-      scrollOffset = widget.scrollController.offset;
-    });
-  }
-
-  @override
-  void dispose() {
-    widget.scrollController.removeListener(_onScroll);
-    super.dispose();
-  }
-
-  Color _getAppBarColor(BuildContext context) {
-    final double opacity = (scrollOffset / 200).clamp(0.0, 1.0);
-    return kPrimary.withValues(alpha: opacity);
-  }
-
-  TextStyle _navItemStyle(BuildContext context, String sectionKey) {
-    final bool isSelected = widget.selectedSection == sectionKey;
-    return isSelected
-        ? context.bodyMedium.copyWith(fontWeight: superBold)
-        : context.bodyMedium;
-  }
-
-  Color _getTextColor() {
-    return scrollOffset < 200 ? kPrimary : kWhite;
-  }
+  final String selectedSection;
+  final Function(String) onNavItemClicked;
+  final VoidCallback onMenuTap;
+  final AnimationController controller;
+  final bool hasSideTitle;
 
   @override
   Widget build(BuildContext context) {
-    final Color textColor = context.isDesktop ? _getTextColor() : kWhite;
+    if (context.isMobile) {
+      return _mobileNavBar(context);
+    } else {
+      return _webNavBar(context);
+    }
+  }
+
+  /// Mobile Navbar (Logo + Menu Icon)
+  Widget _mobileNavBar(BuildContext context) {
+    return Container(
+      width: context.screenWidth,
+      height: context.appBarHeight,
+      color: kPrimary,
+      padding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(24),
+        vertical: context.autoAdaptive(12),
+      ),
+      child: Row(
+        children: [
+          Text(
+            context.localization.thantzin.toUpperCase(),
+            style: context.bodyLarge.copyWith(
+              color: kWhite,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          const Spacer(),
+          GestureDetector(
+            onTap: onMenuTap,
+            child: Icon(
+              Icons.menu,
+              size: context.autoAdaptive(26),
+              color: kWhite,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Desktop Navbar (Logo + Nav Items)
+  Widget _webNavBar(BuildContext context) {
+    final navItems = [
+      [context.localization.home, kHome],
+      [context.localization.about, kAbout],
+      [context.localization.work_experience, kExperience],
+      [context.localization.portfolio, kPortfolio],
+      [context.localization.skill, kSkill],
+      [context.localization.contact, kContact],
+    ];
 
     return Container(
+      width: context.screenWidth,
       height: context.appBarHeight,
-      color: context.isDesktop ? _getAppBarColor(context) : kPrimary,
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: context.autoAdaptive(s42),
-          right: context.isMobile ? s0 : context.autoAdaptive(s42),
-        ),
-        child:
-            [
-              Text(
-                'Thant Zin'.toUpperCase(),
-                style: context.bodyLarge.copyWith(
-                  color: textColor,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              Spacer(),
-              if (context.isMobile)
-                IconButton(
-                  icon: Icon(Icons.menu, color: textColor),
-                  padding: EdgeInsets.zero,
-                  onPressed: widget.toggleNavDrawer,
-                )
-              else ...<Widget>[
-                TextButton(
-                  onPressed: () => widget.onNavItemClicked(kHome),
-                  child: Text(
-                    context.localization.home,
-                    style: _navItemStyle(
-                      context,
-                      kHome,
-                    ).copyWith(color: textColor),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => widget.onNavItemClicked(kAbout),
-                  child: Text(
-                    context.localization.about,
-                    style: _navItemStyle(
-                      context,
-                      kAbout,
-                    ).copyWith(color: textColor),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => widget.onNavItemClicked(kExperience),
-                  child: Text(
-                    context.localization.work_experience,
-                    style: _navItemStyle(
-                      context,
-                      kExperience,
-                    ).copyWith(color: textColor),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => widget.onNavItemClicked(kPortfolio),
-                  child: Text(
-                    context.localization.portfolio,
-                    style: _navItemStyle(
-                      context,
-                      kPortfolio,
-                    ).copyWith(color: textColor),
-                  ),
-                ),
-
-                TextButton(
-                  onPressed: () => widget.onNavItemClicked(kSkill),
-                  child: Text(
-                    context.localization.skill,
-                    style: _navItemStyle(
-                      context,
-                      kSkill,
-                    ).copyWith(color: textColor),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => widget.onNavItemClicked(kContact),
-                  child: Text(
-                    context.localization.contact,
-                    style: _navItemStyle(
-                      context,
-                      kContact,
-                    ).copyWith(color: textColor),
-                  ),
-                ),
-              ],
-              horizontalSpaceSmall,
-            ].addRow(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
+      padding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(42),
+        vertical: context.autoAdaptive(16),
+      ),
+      child: Row(
+        children: [
+          Text(
+            context.localization.thantzin.toUpperCase(),
+            style: context.bodyLarge.copyWith(
+              color: kBlack,
+              fontWeight: FontWeight.w800,
             ),
+          ),
+          const Spacer(),
+          ...navItems.map((item) {
+            final String label = item[0];
+            final String route = item[1];
+            final bool isSelected = route == selectedSection;
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: _NavItem(
+                label: label,
+                isSelected: isSelected,
+                onTap: () => onNavItemClicked(route),
+              ),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+}
+
+class _NavItem extends StatefulWidget {
+  final String label;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const _NavItem({
+    required this.label,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  State<_NavItem> createState() => _NavItemState();
+}
+
+class _NavItemState extends State<_NavItem> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final Color baseColor = widget.isSelected ? kBlack : kGrey800;
+    final Color hoverColor = widget.isSelected ? kBlack : kIndigo;
+
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedDefaultTextStyle(
+          duration: duration200,
+          style: context.bodyMedium.copyWith(
+            color: _isHovered ? hoverColor : baseColor,
+            fontWeight: widget.isSelected ? FontWeight.w700 : FontWeight.w400,
+          ),
+          child: Text(widget.label),
+        ),
       ),
     );
   }

@@ -13,6 +13,7 @@ class AnimatedTextButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final Color hoverColor;
   final Color textColor;
+  final double fontSize;
   final bool isLoading;
 
   const AnimatedTextButton(
@@ -21,6 +22,7 @@ class AnimatedTextButton extends StatefulWidget {
     this.hoverColor = kIndigo,
     this.textColor = kWhite,
     this.isLoading = false,
+    this.fontSize = s10,
     super.key,
   });
 
@@ -92,7 +94,7 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
                   duration: duration300,
                   curve: Curves.easeInOut,
                   style: context.labelLarge.copyWith(
-                    fontSize: context.autoAdaptive(s10),
+                    fontSize: context.autoAdaptive(widget.fontSize),
                     color: effectiveColor,
                   ),
                   child: Text(widget.title),

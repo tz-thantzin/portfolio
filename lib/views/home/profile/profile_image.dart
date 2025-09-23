@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/widgets/text/content_text.dart';
 
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_images.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../widgets/text/title_text.dart';
+import '../../../presentations/configs/constant_colors.dart';
+import '../../../presentations/configs/constant_images.dart';
+import '../../../presentations/configs/constant_sizes.dart';
 
 class ProfileImage extends StatelessWidget {
   const ProfileImage({super.key});
@@ -35,14 +36,14 @@ class _DesktopView extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: context.autoAdaptive(s8),
-            vertical: context.autoAdaptive(s8),
+            vertical: context.autoAdaptive(s4),
           ),
           decoration: BoxDecoration(
             color: kWhite,
-            borderRadius: BorderRadius.circular(context.autoAdaptive(16)),
+            borderRadius: BorderRadius.circular(context.autoAdaptive(s12)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                color: kBlack.withValues(alpha: 0.05),
+                color: kBlack.withValues(alpha: 0.1),
                 spreadRadius: 2,
                 blurRadius: 5,
                 offset: const Offset(0, 3),
@@ -51,9 +52,14 @@ class _DesktopView extends StatelessWidget {
           ),
           child:
               <Widget>[
-                TitleText(
+                SelectableText(
                   context.localization.year_of_work_experience,
-                  fontSize: context.autoAdaptive(s20),
+                  style: GoogleFonts.abrilFatface(
+                    textStyle: context.bodyLarge.copyWith(
+                      fontSize: context.autoAdaptive(s26),
+                      color: kTomato,
+                    ),
+                  ),
                 ),
                 horizontalSpaceSmall,
                 ContentText(

@@ -28,7 +28,7 @@ class _ProjectCardState extends State<ProjectCard> {
       width: double.infinity,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        color: kGrey1200.withValues(alpha: 0.6),
+        color: kPortfolioBg,
         border: Border.all(color: kWhite70),
         borderRadius: BorderRadius.circular(context.autoAdaptive(s24)),
       ),
@@ -50,7 +50,7 @@ class _ProjectCardState extends State<ProjectCard> {
         Text(
           widget.project.projectName,
           style: context.titleSmall.copyWith(
-            color: kTomato,
+            color: kPortfolioTitle,
             fontSize: context.autoAdaptive(s22),
             fontWeight: superBold,
           ),
@@ -58,13 +58,14 @@ class _ProjectCardState extends State<ProjectCard> {
         verticalSpaceTiny,
         ContentText(
           widget.project.description,
-          textColor: kWhite,
+          textColor: kIndigo,
           fontSize: s14,
         ),
         if (widget.project.github != null) ...[
           verticalSpaceSmall,
           AnimatedTextButton(
             context.localization.view_project,
+            textColor: kIndigo,
             onPressed: () => context.read<HomeViewModel>().onProjectView(
               widget.project.github!,
             ),
@@ -73,6 +74,7 @@ class _ProjectCardState extends State<ProjectCard> {
         if (widget.project.pubDev != null) ...[
           AnimatedTextButton(
             'Pub Dev',
+            textColor: kIndigo,
             onPressed: () => context.read<HomeViewModel>().onProjectView(
               widget.project.pubDev!,
             ),

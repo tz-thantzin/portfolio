@@ -4,10 +4,10 @@ import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:provider/provider.dart';
 
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_data.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../view_models/home_view_model.dart';
+import '../../../presentations/configs/constant_colors.dart';
+import '../../../presentations/configs/constant_data.dart';
+import '../../../presentations/configs/constant_sizes.dart';
+import '../../../view_models/home_view_model.dart';
 
 class SocialBanner extends StatefulWidget {
   const SocialBanner({super.key});
@@ -43,10 +43,11 @@ class _SocialBannerState extends State<SocialBanner>
   }
 
   Future<void> _runSequentialBackgroundAnimation() async {
+    if (!mounted) return;
     for (final controller in _bgControllers) {
-      await controller.forward();
+      if (mounted) await controller.forward();
       await Future.delayed(duration200);
-      await controller.reverse();
+      if (mounted) await controller.reverse();
     }
     _runSequentialBackgroundAnimation();
   }

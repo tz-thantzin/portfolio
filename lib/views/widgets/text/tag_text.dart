@@ -11,7 +11,7 @@ class TagText extends StatelessWidget {
   Widget build(BuildContext context) {
     return SelectableText(
       data,
-      style: context.bodySmall.copyWith(color: kWhite),
+      style: context.bodySmall.copyWith(color: kBlack),
     );
   }
 }

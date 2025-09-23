@@ -24,7 +24,7 @@ class TimeLineIndicator extends StatelessWidget {
         if (drawLineBelow)
           Container(
             width: context.autoAdaptive(s1),
-            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.6),
+            color: kGrey1000.withValues(alpha: 0.6),
           ).addExpanded(),
       ],
     );

@@ -1,64 +1,90 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:portfolio/views/about_me/about_page.dart';
+import 'package:portfolio/views/contact/contact_view.dart';
+import 'package:portfolio/views/error_view.dart';
+import 'package:portfolio/views/home/home_view.dart';
+import 'package:portfolio/views/portfolio/portfolio_page.dart';
+import 'package:portfolio/views/skill/skills_page.dart';
+import 'package:portfolio/views/work_experience/work_experiences_page.dart';
 
-import '../views/error_view.dart';
-import '../views/home/home_view.dart';
+class NavigationArguments {
+  final bool showCustomAnimation;
+
+  NavigationArguments({this.showCustomAnimation = true});
+}
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: RoutePaths.home,
+    initialLocation: RoutePaths.initial,
     routes: [
-      _animatedRoute(RoutePaths.home, const HomeView(), name: RouteName.home),
-      // Uncomment and add your other routes here
-      // _animatedRoute(RoutePaths.about, const AboutView(), name: RouteName.about),
-      // _animatedRoute(RoutePaths.experience, const WorkExperienceView(), name: RouteName.experience),
-      // _animatedRoute(RoutePaths.portfolio, const PortfolioView(), name: RouteName.portfolio),
-      // _animatedRoute(RoutePaths.skills, const SkillsView(), name: RouteName.skills),
-      // _animatedRoute(RoutePaths.contact, const ContactView(), name: RouteName.contact),
+      _route(
+        path: RoutePaths.initial,
+        name: RouteName.initial,
+        builder: (context, state) {
+          final args = state.extra as NavigationArguments?;
+          return HomeView(
+            showCustomAnimation: args?.showCustomAnimation ?? true,
+          );
+        },
+      ),
+      _route(
+        path: RoutePaths.home,
+        name: RouteName.home,
+        builder: (context, state) {
+          final args = state.extra as NavigationArguments?;
+          return HomeView(
+            showCustomAnimation: args?.showCustomAnimation ?? true,
+          );
+        },
+      ),
+      _route(
+        path: RoutePaths.about,
+        name: RouteName.about,
+        builder: (context, state) => const AboutMePage(),
+      ),
+      _route(
+        path: RoutePaths.experience,
+        name: RouteName.experience,
+        builder: (context, state) => const WorkExperiencePage(),
+      ),
+      _route(
+        path: RoutePaths.portfolio,
+        name: RouteName.portfolio,
+        builder: (context, state) => const PortfolioPage(),
+      ),
+      _route(
+        path: RoutePaths.skills,
+        name: RouteName.skills,
+        builder: (context, state) => const SkillsView(),
+      ),
+      _route(
+        path: RoutePaths.contact,
+        name: RouteName.contact,
+        builder: (context, state) => const ContactView(),
+      ),
     ],
-    redirect: (context, state) {
-      final uri = state.uri.toString();
-      if (uri.startsWith('/#')) {
-        return uri.replaceFirst('/#', '/'); // e.g. '/#about' → '/about'
-      }
-      return null;
-    },
     errorBuilder: (context, state) => const ErrorView(),
   );
 
-  // Helper to create routes with animated transitions
-  static GoRoute _animatedRoute(String path, Widget page, {String? name}) {
+  static GoRoute _route({
+    required String path,
+    required Widget Function(BuildContext, GoRouterState) builder,
+    String? name,
+  }) {
     return GoRoute(
-      name: name,
       path: path,
+      name: name,
       pageBuilder: (context, state) {
-        return CustomTransitionPage(
-          key: state.pageKey,
-          child: page,
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            final offsetAnimation = Tween<Offset>(
-              begin: const Offset(1, 0),
-              end: Offset.zero,
-            ).animate(animation);
-
-            final fadeAnimation = Tween<double>(
-              begin: 0.0,
-              end: 1.0,
-            ).animate(animation);
-
-            return SlideTransition(
-              position: offsetAnimation,
-              child: FadeTransition(opacity: fadeAnimation, child: child),
-            );
-          },
-          transitionDuration: const Duration(milliseconds: 400),
-        );
+        final child = builder(context, state);
+        return NoTransitionPage(key: state.pageKey, child: child);
       },
     );
   }
 }
 
 class RouteName {
+  static const initial = "/";
   static const home = "home";
   static const about = "about";
   static const experience = "experience";
@@ -68,7 +94,8 @@ class RouteName {
 }
 
 class RoutePaths {
-  static const home = "/";
+  static const initial = "/";
+  static const home = "/home";
   static const about = "/about";
   static const experience = "/experience";
   static const portfolio = "/portfolio";

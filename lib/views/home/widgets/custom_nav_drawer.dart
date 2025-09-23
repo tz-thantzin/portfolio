@@ -7,21 +7,21 @@ import 'package:portfolio/utils/extensions/widget_ex.dart';
 import '../../../presentations/configs/constants.dart';
 import '../../../utils/extensions/context_ex.dart';
 
-class CustomNavigationDrawer extends StatefulWidget {
+class MenuView extends StatefulWidget {
   final Function(String) onNavItemClicked;
   final VoidCallback onCloseDrawer;
 
-  const CustomNavigationDrawer({
+  const MenuView({
     required this.onNavItemClicked,
     required this.onCloseDrawer,
     super.key,
   });
 
   @override
-  State<CustomNavigationDrawer> createState() => _CustomNavigationDrawerState();
+  State<MenuView> createState() => _MenuViewState();
 }
 
-class _CustomNavigationDrawerState extends State<CustomNavigationDrawer>
+class _MenuViewState extends State<MenuView>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   final int _itemCount = 6;

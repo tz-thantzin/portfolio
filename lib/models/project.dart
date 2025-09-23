@@ -1,4 +1,6 @@
-class Project {
+import 'package:equatable/equatable.dart';
+
+class Project extends Equatable {
   final String projectName;
   final String description;
   final String? imagePath;
@@ -12,4 +14,13 @@ class Project {
     this.github,
     this.pubDev,
   });
+
+  @override
+  List<Object?> get props => [
+    projectName,
+    description,
+    imagePath,
+    github,
+    pubDev,
+  ];
 }

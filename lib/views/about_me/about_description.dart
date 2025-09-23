@@ -12,14 +12,18 @@ class AboutDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(24)),
+      padding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(s60),
+        vertical: context.autoAdaptive(s24),
+      ),
       child: Column(
-        crossAxisAlignment: context.isMobile
-            ? CrossAxisAlignment.center
-            : CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          TitleText(context.localization.i_am_developer),
+          TitleText(
+            context.localization.little_bit_about_myself,
+            fontSize: s16,
+          ),
           verticalSpaceMedium,
           ContentText(context.localization.about_me_description),
         ],

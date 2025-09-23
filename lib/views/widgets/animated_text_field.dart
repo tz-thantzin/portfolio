@@ -104,7 +104,7 @@ class _AnimatedUnderlineTextFieldState extends State<AnimatedUnderlineTextField>
                 maxLines: widget.isMultiline ? null : 1,
                 style: context.bodySmall.copyWith(
                   color: kPrimary,
-                  fontSize: context.autoAdaptive(s13),
+                  fontSize: context.autoAdaptive(context.isMobile ? s16 : s13),
                   fontWeight: medium,
                 ),
                 decoration: InputDecoration(
@@ -113,7 +113,9 @@ class _AnimatedUnderlineTextFieldState extends State<AnimatedUnderlineTextField>
                   hintStyle: context.bodySmall.copyWith(
                     color: kGrey500,
                     fontWeight: FontWeight.w400,
-                    fontSize: context.autoAdaptive(s13),
+                    fontSize: context.autoAdaptive(
+                      context.isMobile ? s16 : s13,
+                    ),
                   ),
                 ),
                 onChanged: (value) {

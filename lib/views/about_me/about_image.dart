@@ -26,7 +26,7 @@ class _DesktopView extends StatefulWidget {
 class _DesktopViewState extends State<_DesktopView> {
   @override
   Widget build(BuildContext context) {
-    final double size = context.autoAdaptive(s250);
+    final double size = context.autoAdaptive(s350);
 
     return SizedBox(
       width: size,
@@ -34,7 +34,7 @@ class _DesktopViewState extends State<_DesktopView> {
       child: <Widget>[
         // Base image
         AspectRatio(
-          aspectRatio: 1,
+          aspectRatio: 12 / 9,
           child: Image.asset(kAboutMeIcon, fit: BoxFit.contain),
         ).addSizedBox(height: size),
 
@@ -45,8 +45,8 @@ class _DesktopViewState extends State<_DesktopView> {
           child: AnimatedScaleWidget(
             child: SvgPicture.asset(
               kFlutterSVG,
-              width: context.autoAdaptive(s42),
-              height: context.autoAdaptive(s42),
+              width: context.autoAdaptive(s50),
+              height: context.autoAdaptive(s50),
             ),
           ),
         ),
@@ -54,25 +54,25 @@ class _DesktopViewState extends State<_DesktopView> {
         // Swift Icon
         Positioned(
           top: context.autoAdaptive(s20),
-          left: context.autoAdaptive(s180),
+          left: context.autoAdaptive(s250),
           child: AnimatedScaleWidget(
             child: SvgPicture.asset(
               kSwiftNoBgSVG,
-              width: context.autoAdaptive(s42),
-              height: context.autoAdaptive(s42),
+              width: context.autoAdaptive(s50),
+              height: context.autoAdaptive(s50),
             ),
           ),
         ),
 
         // Firebase Icon
         Positioned(
-          top: context.autoAdaptive(s165),
-          left: context.autoAdaptive(s100),
+          top: context.autoAdaptive(s220),
+          left: context.autoAdaptive(s150),
           child: AnimatedScaleWidget(
             child: SvgPicture.asset(
               kFirebaseSVG,
-              width: context.autoAdaptive(s42),
-              height: context.autoAdaptive(s42),
+              width: context.autoAdaptive(s50),
+              height: context.autoAdaptive(s50),
             ),
           ),
         ),
@@ -86,7 +86,7 @@ class _MobileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double size = context.autoAdaptive(s250);
+    final double size = context.autoAdaptive(s300);
     return AspectRatio(
       aspectRatio: 1,
       child: Image.asset(kAboutMeIcon, fit: BoxFit.contain),

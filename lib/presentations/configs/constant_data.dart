@@ -76,6 +76,40 @@ List<Social> footerContacts() {
   ];
 }
 
+List<Project> recentProjects() {
+  return <Project>[
+    Project(
+      projectName: 'My Animated Text',
+      description:
+          'Customizable Flutter animated text widgets for dynamic, engaging text effects.',
+      imagePath: kAnimatedText,
+      github: 'https://github.com/tz-thantzin/my_animated_text',
+      pubDev: 'https://pub.dev/packages/my_animated_text',
+    ),
+    Project(
+      projectName: 'Chat',
+      description:
+          'A Flutter-based chat application developed as a personal project to explore real-time messaging with Firebase.',
+      imagePath: kChat,
+      github: 'https://github.com/tz-thantzin/firebase_chat_flutter',
+    ),
+    Project(
+      projectName: 'M-Ratex-Flutter',
+      description:
+          'A Flutter-based foreign currency application developed as a personal project.',
+      imagePath: kMRate,
+      github: 'https://github.com/tz-thantzin/myan_ratex',
+    ),
+    Project(
+      projectName: 'M-Ratex-Swift',
+      description:
+          'A Swift-based foreign currency application developed as a personal project.',
+      imagePath: kMRate,
+      github: 'https://github.com/tz-thantzin/m-ratex-ios',
+    ),
+  ];
+}
+
 List<Project> projects() {
   return <Project>[
     Project(

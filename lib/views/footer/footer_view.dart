@@ -6,6 +6,7 @@ import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
+import 'package:portfolio/views/widgets/animated_scale_widget.dart';
 import 'package:portfolio/views/widgets/text/animated_fade_in_text.dart';
 import 'package:provider/provider.dart';
 
@@ -15,8 +16,9 @@ import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../view_models/home_view_model.dart';
 
-class FooterSection extends StatelessWidget {
-  const FooterSection({super.key});
+class FooterView extends StatelessWidget {
+  final bool isShowWorkTogether;
+  const FooterView({super.key, this.isShowWorkTogether = true});
 
   @override
   Widget build(BuildContext context) {
@@ -31,26 +33,28 @@ class FooterSection extends StatelessWidget {
       ),
       child:
           <Widget>[
-            AnimatedFadeInText(
-              context.localization.let_work_together,
-              style: GoogleFonts.poorStory(
-                textStyle: context.titleLarge.copyWith(
-                  color: kWhite,
-                  fontSize: context.autoAdaptive(s48),
+            if (isShowWorkTogether) ...[
+              AnimatedFadeInText(
+                context.localization.let_work_together,
+                style: GoogleFonts.poorStory(
+                  textStyle: context.titleLarge.copyWith(
+                    color: kWhite,
+                    fontSize: context.autoAdaptive(s48),
+                  ),
                 ),
+                delay: duration1000,
               ),
-              delay: duration1000,
-            ),
-            AnimatedFadeInText(
-              context.localization.available_freelancing,
-              style: GoogleFonts.caveat(
-                textStyle: context.bodySmall.copyWith(
-                  color: kWhite70,
-                  fontSize: context.autoAdaptive(s24),
+              AnimatedFadeInText(
+                context.localization.available_freelancing,
+                style: GoogleFonts.caveat(
+                  textStyle: context.bodySmall.copyWith(
+                    color: kWhite70,
+                    fontSize: context.autoAdaptive(s24),
+                  ),
                 ),
+                delay: duration1000,
               ),
-              delay: duration1000,
-            ),
+            ],
             verticalSpaceMedium,
             _SocialMedia(contactList: contactList),
             verticalSpaceMedium,
@@ -121,10 +125,13 @@ class _SocialMedia extends StatelessWidget {
           ),
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: context.autoAdaptive(s8)),
-            child: Icon(
-              contactList[i].icon,
-              color: kGrey300,
-              size: context.autoAdaptive(s25),
+            child: AnimatedScaleWidget(
+              maxScale: 1.2,
+              child: Icon(
+                contactList[i].icon,
+                color: kGrey300,
+                size: context.autoAdaptive(s20),
+              ),
             ),
           ),
         );

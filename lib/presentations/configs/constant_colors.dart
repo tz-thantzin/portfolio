@@ -18,6 +18,8 @@ final Color kRed100 = Colors.red.shade100;
 const Color kTomato = Color(0xFFFA523C);
 
 const Color kSkillWavy = Color(0xFF336B87);
+const Color kPortfolioBg = Color(0xFF98C9C4);
+const Color kPortfolioTitle = Color(0xFF3B5B7D);
 
 const Color kFooterBg = Color(0xFF363e57);
 

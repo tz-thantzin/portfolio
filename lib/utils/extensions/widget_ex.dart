@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 extension WidgetEx on Widget {
@@ -21,19 +20,6 @@ extension WidgetEx on Widget {
 
   Widget addSizedBox({double? width, double? height}) {
     return SizedBox(width: width, height: height, child: this);
-  }
-
-  Widget addSingleChildScrollView({
-    ScrollController? controller,
-    Axis? scrollDirection,
-    EdgeInsetsGeometry? padding,
-  }) {
-    return SingleChildScrollView(
-      controller: controller,
-      padding: padding,
-      scrollDirection: scrollDirection ?? Axis.vertical,
-      child: this,
-    );
   }
 
   Widget addContainer({
@@ -67,8 +53,12 @@ extension WidgetEx on Widget {
     return InkWell(onTap: onTap, child: this, borderRadius: borderRadius);
   }
 
-  Widget addScrollView({ScrollPhysics? physics}) {
-    return SingleChildScrollView(physics: physics, child: this);
+  Widget addScrollView({ScrollController? controller, ScrollPhysics? physics}) {
+    return SingleChildScrollView(
+      controller: controller,
+      physics: physics,
+      child: this,
+    );
   }
 
   Widget addVisibilityDetector({
@@ -114,46 +104,6 @@ extension WidgetListEx on List<Widget> {
       mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
       crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
       mainAxisSize: mainAxisSize ?? MainAxisSize.max,
-      children: this,
-    );
-  }
-
-  Widget addDesktopRowMobileColumn(
-    BuildContext context, {
-    MainAxisSize mSize = MainAxisSize.min,
-    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
-    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
-  }) {
-    return context.adaptive<Widget>(
-      addColumn(
-        mainAxisSize: mSize,
-        mainAxisAlignment: mainAxisAlignment,
-        crossAxisAlignment: crossAxisAlignment,
-      ),
-      addRow(
-        mainAxisSize: mSize,
-        mainAxisAlignment: mainAxisAlignment,
-        crossAxisAlignment: crossAxisAlignment,
-      ),
-      md: addColumn(
-        mainAxisSize: mSize,
-        mainAxisAlignment: mainAxisAlignment,
-        crossAxisAlignment: crossAxisAlignment,
-      ),
-    );
-  }
-
-  Widget addWrap({
-    double spacing = 0.0,
-    double vSpacing = 0.0,
-    WrapAlignment alignment = WrapAlignment.start,
-    WrapCrossAlignment crossAxisAlignment = WrapCrossAlignment.start,
-  }) {
-    return Wrap(
-      spacing: spacing,
-      runSpacing: vSpacing,
-      alignment: alignment,
-      crossAxisAlignment: crossAxisAlignment,
       children: this,
     );
   }

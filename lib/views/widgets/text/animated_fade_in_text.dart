@@ -9,6 +9,7 @@ class AnimatedFadeInText extends StatefulWidget {
   final Duration duration;
   final Duration delay;
   final Curve curve;
+  final AnimationController? controller; // optional external controller
 
   const AnimatedFadeInText(
     this.text, {
@@ -17,6 +18,7 @@ class AnimatedFadeInText extends StatefulWidget {
     this.duration = duration500,
     this.delay = Duration.zero,
     this.curve = Curves.easeIn,
+    this.controller,
   });
 
   @override
@@ -25,37 +27,40 @@ class AnimatedFadeInText extends StatefulWidget {
 
 class _AnimatedFadeInTextState extends State<AnimatedFadeInText>
     with TickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _fadeAnimation;
+  late final AnimationController _controller;
+  late final Animation<double> _fadeAnimation;
+  late final bool _ownsController; // track ownership
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: widget.duration);
+
+    // Use external controller if provided, otherwise create one
+    if (widget.controller != null) {
+      _controller = widget.controller!;
+      _ownsController = false;
+    } else {
+      _controller = AnimationController(vsync: this, duration: widget.duration);
+      _ownsController = true;
+    }
+
     _fadeAnimation = CurvedAnimation(parent: _controller, curve: widget.curve);
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (_ownsController) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 
   void _detectVisibility(VisibilityInfo info) {
     if (info.visibleFraction > 0.45) {
-      // Add optional delay before starting animation
       Future.delayed(widget.delay, () {
         if (mounted) _controller.forward();
       });
     }
-    // else {
-    //   if (_controller.isCompleted) {
-    //     _controller.reset();
-    //   }
-    //   if (_controller.isCompleted) {
-    //     _controller.reset();
-    //   }
-    // }
   }
 
   @override

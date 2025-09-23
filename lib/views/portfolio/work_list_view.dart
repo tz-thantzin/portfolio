@@ -1,31 +1,29 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:portfolio/presentations/configs/constant_colors.dart';
-import 'package:portfolio/presentations/configs/constant_data.dart';
-import 'package:portfolio/presentations/configs/constant_sizes.dart';
-import 'package:portfolio/presentations/configs/duration.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/portfolio/project_card.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_data.dart';
+import '../../presentations/configs/constant_sizes.dart';
+import '../../presentations/configs/duration.dart';
 import '../widgets/animated_fade_widget.dart';
 import '../widgets/text/title_text.dart';
 
-class PortfolioView extends StatefulWidget {
-  const PortfolioView({super.key});
+class WorkListView extends StatefulWidget {
+  const WorkListView({super.key});
 
   @override
-  State<PortfolioView> createState() => _PortfolioViewState();
+  State<WorkListView> createState() => _WorkListViewState();
 }
 
-class _PortfolioViewState extends State<PortfolioView>
+class _WorkListViewState extends State<WorkListView>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-  bool _hasAnimated = false;
-
   final PageController _pageController = PageController(viewportFraction: 0.8);
   double _currentPage = 0.0;
   Timer? _autoScrollTimer;
@@ -41,6 +39,8 @@ class _PortfolioViewState extends State<PortfolioView>
         _currentPage = _pageController.page ?? 0.0;
       });
     });
+
+    _startAutoScroll();
   }
 
   @override
@@ -66,14 +66,10 @@ class _PortfolioViewState extends State<PortfolioView>
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction > 0.45 && !_hasAnimated && mounted) {
-      Future.delayed(duration500, () {
-        if (mounted) {
-          _controller.forward();
-          _startAutoScroll();
-        }
+    if (info.visibleFraction > 0.45 && mounted) {
+      Future.delayed(duration300, () {
+        if (mounted) _controller.forward();
       });
-      _hasAnimated = true;
     }
   }
 
@@ -84,7 +80,6 @@ class _PortfolioViewState extends State<PortfolioView>
     return Container(
       width: double.infinity,
       constraints: BoxConstraints(minHeight: context.screenHeight),
-      color: kPrimary,
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(
         horizontal: context.autoAdaptive(s60),
@@ -102,21 +97,21 @@ class _PortfolioViewState extends State<PortfolioView>
           ).addVisibilityDetector(onDetectVisibility: _onVisibilityChanged),
           verticalSpaceMassive,
 
-          // PageView with drag detection (use AnimatedOpacity instead of FadeController for interaction)
           AnimatedFadeWidget(
             controller: _controller,
             start: 0.6,
             end: 1,
             child: SizedBox(
               height: context.autoAdaptive(context.isMobile ? s300 : s200),
-              child: Listener(
-                onPointerDown: (_) => _userDragging = true,
-                onPointerUp: (_) {
+              child: GestureDetector(
+                onHorizontalDragStart: (_) => _userDragging = true,
+                onHorizontalDragEnd: (_) {
                   _userDragging = false;
-                  _startAutoScroll(); // restart timer after drag
+                  _startAutoScroll();
                 },
                 child: PageView.builder(
                   controller: _pageController,
+                  physics: const ClampingScrollPhysics(),
                   itemCount: projectList.length,
                   itemBuilder: (context, i) {
                     double scale = 0.9;

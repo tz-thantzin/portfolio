@@ -117,13 +117,13 @@ extension ThemeEx on BuildContext {
       const TextStyle(fontSize: s20, fontWeight: semiBold);
 
   TextStyle get bodyLarge =>
-      const TextStyle(fontSize: s20, fontWeight: medium, color: kWhite);
+      const TextStyle(fontSize: s20, fontWeight: medium, color: kBlack);
   TextStyle get bodyMedium =>
-      const TextStyle(fontSize: s16, fontWeight: medium, color: kWhite);
+      const TextStyle(fontSize: s16, fontWeight: medium, color: kBlack);
   TextStyle get bodySmall => const TextStyle(fontSize: s14, fontWeight: medium);
 
   TextStyle get caption =>
-      const TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: kWhite);
+      const TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: kBlack);
   //
   // TextStyle get navTitleTextStyle => TextStyle(
   //   fontFamily: 'MulishLocal',

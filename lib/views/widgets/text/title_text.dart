@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/presentations/configs/constant_colors.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 
 import '../../../presentations/configs/constant_sizes.dart';
@@ -15,10 +17,12 @@ class TitleText extends StatelessWidget {
     return SelectableText(
       data.toUpperCase(),
 
-      style: context.titleLarge.copyWith(
-        fontFamily: 'BungeeSpice',
-        fontSize: context.autoAdaptive(fontSize),
-        fontWeight: bold,
+      style: GoogleFonts.roboto(
+        textStyle: context.titleLarge.copyWith(
+          fontSize: context.autoAdaptive(fontSize),
+          fontWeight: bold,
+          color: kBlack,
+        ),
       ),
       textAlign: textAlign ?? TextAlign.center,
     );

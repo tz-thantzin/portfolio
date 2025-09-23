@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/widgets/animated_fade_widget.dart';
+import 'package:portfolio/views/widgets/header_view.dart';
 import 'package:portfolio/views/work_experience/work_info_item.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../models/work_experience.dart';
-import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
-import '../../utils/extensions/context_ex.dart';
+import '../../route/routes.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
+import '../footer/footer_view.dart';
 import '../widgets/animated_slide_widget.dart';
-import '../widgets/text/title_text.dart';
+import '../wrapper.dart';
 import 'timeline_indicator.dart';
 
-class WorkExperienceView extends StatefulWidget {
-  const WorkExperienceView({super.key});
+class WorkExperiencePage extends StatefulWidget {
+  const WorkExperiencePage({super.key});
 
   @override
-  State<WorkExperienceView> createState() => _WorkExperienceViewState();
+  State<WorkExperiencePage> createState() => _WorkExperiencePageState();
 }
 
-class _WorkExperienceViewState extends State<WorkExperienceView>
+class _WorkExperiencePageState extends State<WorkExperiencePage>
     with TickerProviderStateMixin {
   late final AnimationController _controller;
   late final AnimationController _itemSlideAnimationController;
 
-  bool _hasAnimated = false;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -59,48 +61,51 @@ class _WorkExperienceViewState extends State<WorkExperienceView>
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction > 0.45 && !_hasAnimated && mounted) {
-      Future.delayed(duration500, () {
+    if (info.visibleFraction > 0.45 && mounted) {
+      Future.delayed(duration300, () {
         if (mounted) _controller.forward();
       });
-      _hasAnimated = true;
     }
+  }
+
+  void _onTapScrollDown() {
+    _scrollController.animateTo(
+      context.screenHeight,
+      duration: duration500,
+      curve: Curves.easeInOut,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final List<WorkExperience> items = experiences(context);
-
-    return Container(
-      width: double.infinity,
-      constraints: BoxConstraints(minHeight: context.screenHeight),
-      color: kPrimary,
-      alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s60),
-        vertical: context.autoAdaptive(s65),
-      ),
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        runAlignment: WrapAlignment.center,
-        runSpacing: context.autoAdaptive(s32),
-        children: <Widget>[
-          AnimatedFadeWidget(
-            controller: _controller,
-            start: 0.0,
-            end: 0.5,
-            child: TitleText(context.localization.work_experience),
+    return Wrapper(
+      selectedRoute: RoutePaths.experience,
+      selectedPageName: RouteName.experience,
+      child: Column(
+        children: [
+          HeaderView(
+            title: context.localization.work_experience,
+            onTapScrollDown: _onTapScrollDown,
           ),
-          verticalSpaceLarge,
-          context.isMobile
-              ? Column(children: _buildTimelineItems(items))
-              : Wrap(
-                  alignment: WrapAlignment.start,
-                  children: _buildTimelineItems(items),
-                ),
+          verticalSpaceMassive,
+          Container(
+            constraints: BoxConstraints(minHeight: context.screenHeight),
+            padding: EdgeInsets.symmetric(
+              horizontal: context.autoAdaptive(s60),
+              vertical: context.autoAdaptive(s50),
+            ),
+            child: context.isMobile
+                ? Column(children: _buildTimelineItems(items))
+                : Wrap(
+                    alignment: WrapAlignment.start,
+                    children: _buildTimelineItems(items),
+                  ),
+          ).addVisibilityDetector(onDetectVisibility: _onVisibilityChanged),
+          FooterView(),
         ],
-      ),
-    ).addVisibilityDetector(onDetectVisibility: _onVisibilityChanged);
+      ).addScrollView(controller: _scrollController),
+    );
   }
 
   List<Widget> _buildTimelineItems(List<WorkExperience> items) {
@@ -127,7 +132,7 @@ class _WorkExperienceViewState extends State<WorkExperienceView>
           start: start,
           end: end,
           duration: duration3000,
-          direction: SlideDirection.up,
+          direction: SlideDirection.downToUp,
           child: _TimelineItem(experience: exp, drawLineBelow: continueLine),
         ),
       );

@@ -26,13 +26,16 @@ class WorkInfoDetail extends StatelessWidget {
           _JobTitlePeriodView(
             title: experience.title.toUpperCase(),
             period: experience.period,
-            titleStyle: context.bodyMedium.copyWith(color: kGrey100),
-            periodStyle: context.bodySmall.copyWith(color: kGrey500),
+            titleStyle: context.bodyMedium.copyWith(
+              color: kBlack,
+              fontWeight: bold,
+            ),
+            periodStyle: context.bodySmall.copyWith(color: kGrey1000),
           ),
           if (experience.company.isNotEmpty)
             Text(
               experience.company,
-              style: context.bodySmall.copyWith(color: kGrey500),
+              style: context.bodySmall.copyWith(color: kGrey1000),
               textHeightBehavior: textHeightBehavior,
               overflow: TextOverflow.ellipsis,
             ),
