@@ -72,23 +72,24 @@ class _WrapperState extends State<Wrapper> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-  }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    createStaggeredIntervals();
     _loadingController = AnimationController(
       vsync: this,
       duration: slideDuration,
     );
     _menuController = AnimationController(vsync: this, duration: duration1000);
-    screenWidth = context.screenWidth;
-    sectorWidth = screenWidth / sectors;
 
     if (widget.customLoadingAnimation == null) {
       _startLoadingAnimation();
     }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    screenWidth = context.screenWidth;
+    sectorWidth = screenWidth / sectors;
+    createStaggeredIntervals();
   }
 
   @override
@@ -140,6 +141,7 @@ class _WrapperState extends State<Wrapper> with TickerProviderStateMixin {
       key: _globalKey,
       extendBodyBehindAppBar: true,
       backgroundColor: kWhite,
+      resizeToAvoidBottomInset: false,
       body: <Widget>[
         if (_showChild) ...[
           widget.child,

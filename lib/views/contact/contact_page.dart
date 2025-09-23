@@ -85,10 +85,6 @@ class _ContactPageState extends State<ContactPage>
       } else {
         controller.reverse();
       }
-
-      if (!focusNode.hasFocus) {
-        context.read<ContactViewModel>().validate();
-      }
     });
   }
 
@@ -115,6 +111,7 @@ class _ContactPageState extends State<ContactPage>
 
   Future<void> _sendMessage() async {
     final vm = context.read<ContactViewModel>();
+    vm.validate();
     bool hasSent = await vm.sendMessage();
 
     if (hasSent) {
@@ -143,19 +140,22 @@ class _ContactPageState extends State<ContactPage>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ContactViewModel>(
-      builder: (context, vm, _) {
-        return Wrapper(
-          selectedRoute: RoutePaths.contact,
-          selectedPageName: RouteName.contact,
-          child: Column(
+    return Wrapper(
+      selectedRoute: RoutePaths.contact,
+      selectedPageName: RouteName.contact,
+      child:
+          Column(
             children: [
-              _buildInputForm(context, vm),
+              Consumer<ContactViewModel>(
+                builder: (context, vm, _) => _buildInputForm(context, vm),
+              ),
               FooterView(isShowWorkTogether: false),
             ],
-          ).addScrollView(),
-        );
-      },
+          ).addScrollView(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+          ),
     );
   }
 
@@ -213,6 +213,7 @@ class _ContactPageState extends State<ContactPage>
                             "Hi there! I hope you are doing well. I'm ",
                             textColor: kBlack,
                           ),
+
                           ConstrainedBox(
                             constraints: BoxConstraints(
                               minWidth: context.autoAdaptive(s150),

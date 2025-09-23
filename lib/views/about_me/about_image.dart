@@ -86,7 +86,7 @@ class _MobileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double size = context.autoAdaptive(s300);
+    final double size = context.autoAdaptive(s350);
     return AspectRatio(
       aspectRatio: 1,
       child: Image.asset(kAboutMeIcon, fit: BoxFit.contain),

@@ -53,10 +53,15 @@ extension WidgetEx on Widget {
     return InkWell(onTap: onTap, child: this, borderRadius: borderRadius);
   }
 
-  Widget addScrollView({ScrollController? controller, ScrollPhysics? physics}) {
+  Widget addScrollView({
+    ScrollController? controller,
+    ScrollPhysics? physics,
+    EdgeInsetsGeometry? padding,
+  }) {
     return SingleChildScrollView(
       controller: controller,
       physics: physics,
+      padding: padding,
       child: this,
     );
   }

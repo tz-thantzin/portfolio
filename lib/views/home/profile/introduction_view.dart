@@ -63,7 +63,7 @@ class _IntroductionViewState extends State<IntroductionView>
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
-      children: [_buildIntro(), verticalSpaceMedium, _buildProfileImage()],
+      children: [_buildProfileImage(), verticalSpaceMedium, _buildIntro()],
     );
   }
 

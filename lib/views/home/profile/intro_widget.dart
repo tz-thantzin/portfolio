@@ -80,15 +80,11 @@ class _IntroWidgetState extends State<IntroWidget>
           },
         ),
       ].addRow(
-        mainAxisAlignment: context.isMobile
-            ? MainAxisAlignment.center
-            : MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
       ),
     ].addColumn(
-      crossAxisAlignment: context.isMobile
-          ? CrossAxisAlignment.center
-          : CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
     );
   }
