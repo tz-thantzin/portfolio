@@ -216,7 +216,7 @@ abstract class AppLocalizations {
   /// No description provided for @about_me_description.
   ///
   /// In en, this message translates to:
-  /// **'I am an experienced mobile application developer with over 11 years of expertise in Flutter and iOS development. Throughout my career, I have successfully led teams in delivering high-quality, user-friendly applications. I enjoy tackling complex technical challenges and mentoring team members to help them reach their full potential. My focus is on creating elegant, performant, and maintainable apps that provide exceptional user experiences.\n\nI graduated from the University of Computer Studies, Yangon, in November 2013. I started my career in February 2014 as an OJT and became a permanent full-time staff member in May 2014. In January 2019, I traveled to Tokyo, Japan, for professional training and returned on February 1, 2019. I went again in May 2019 for one month to attend additional technology training and learn about Japanese work culture.'**
+  /// **'I am an experienced mobile application developer with over 11 years of expertise in Flutter and iOS development. Throughout my career, I have successfully led teams in delivering high-quality, user-friendly applications. I enjoy tackling complex technical challenges and mentoring team members to help them reach their full potential. My focus is on creating elegant, performant, and maintainable apps that provide exceptional user experiences.\n\nI graduated from the University of Computer Studies, Yangon, in November 2013. I started my career in February 2014 as an OJT and became a permanent full-time staff member in May 2014. In January 2019, I traveled to Tokyo, Japan, for professional training. I went again in May 2019 to attend additional technology training and learn about Japanese work culture.\n\nOutside of work, I enjoy traveling, drinking coffee, and playing games.'**
   String get about_me_description;
 
   /// No description provided for @technologies.
@@ -228,7 +228,7 @@ abstract class AppLocalizations {
   /// No description provided for @my_tools.
   ///
   /// In en, this message translates to:
-  /// **'I work with multiple tools and technologies to make the development workflow more efficient.'**
+  /// **'I worked with multiple tools and technologies to make the development workflow more efficient.'**
   String get my_tools;
 
   /// No description provided for @quote.

@@ -1,7 +1,7 @@
 export 'about_me/about_page.dart';
-export 'contact/contact_view.dart';
+export 'contact/contact_page.dart';
 export 'footer/footer_view.dart';
-export 'home/home_view.dart';
+export 'home/home_page.dart';
 export 'home/profile/introduction_view.dart';
 export 'home/widgets/custom_nav_drawer.dart';
 export 'home/widgets/nav_bar.dart';

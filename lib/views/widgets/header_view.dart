@@ -35,6 +35,12 @@ class _HeaderViewState extends State<HeaderView>
   }
 
   @override
+  void dispose() {
+    _moreController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [

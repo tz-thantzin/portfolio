@@ -12,15 +12,15 @@ import 'package:visibility_detector/visibility_detector.dart';
 import '../../presentations/configs/duration.dart';
 import '../views.dart';
 
-class HomeView extends StatefulWidget {
+class HomePage extends StatefulWidget {
   final bool showCustomAnimation;
-  const HomeView({super.key, this.showCustomAnimation = false});
+  const HomePage({super.key, this.showCustomAnimation = false});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeViewState extends State<HomeView>
+class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   final ScrollController _scrollController = ScrollController();
 

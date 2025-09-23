@@ -36,4 +36,4 @@ const String basePortfoliosPath = 'assets/portfolios';
 const String kAnimatedText = '$basePortfoliosPath/animated_text.png';
 const String kMyf = '$basePortfoliosPath/my_flyn.png';
 const String kChat = '$basePortfoliosPath/chat.png';
-const String kMRate = '$basePortfoliosPath/forex.png';
+const String kMRate = '$basePortfoliosPath/exchange_rate.png';

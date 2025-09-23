@@ -18,14 +18,14 @@ import '../widgets/animated_fade_widget.dart';
 import '../widgets/text/title_text.dart';
 import '../wrapper.dart';
 
-class ContactView extends StatefulWidget {
-  const ContactView({super.key});
+class ContactPage extends StatefulWidget {
+  const ContactPage({super.key});
 
   @override
-  State<ContactView> createState() => _ContactViewState();
+  State<ContactPage> createState() => _ContactPageState();
 }
 
-class _ContactViewState extends State<ContactView>
+class _ContactPageState extends State<ContactPage>
     with TickerProviderStateMixin {
   late final AnimationController _fadeController;
 
@@ -164,6 +164,7 @@ class _ContactViewState extends State<ContactView>
       width: double.infinity,
       alignment: Alignment.center,
       constraints: BoxConstraints(minHeight: context.screenHeight),
+      margin: EdgeInsets.only(top: context.appBarHeight),
       padding: EdgeInsets.symmetric(
         horizontal: context.autoAdaptive(s60),
         vertical: context.autoAdaptive(s65),

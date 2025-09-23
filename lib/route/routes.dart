@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:portfolio/views/about_me/about_page.dart';
-import 'package:portfolio/views/contact/contact_view.dart';
+import 'package:portfolio/views/contact/contact_page.dart';
 import 'package:portfolio/views/error_view.dart';
-import 'package:portfolio/views/home/home_view.dart';
+import 'package:portfolio/views/home/home_page.dart';
 import 'package:portfolio/views/portfolio/portfolio_page.dart';
 import 'package:portfolio/views/skill/skills_page.dart';
 import 'package:portfolio/views/work_experience/work_experiences_page.dart';
@@ -23,7 +23,7 @@ class AppRouter {
         name: RouteName.initial,
         builder: (context, state) {
           final args = state.extra as NavigationArguments?;
-          return HomeView(
+          return HomePage(
             showCustomAnimation: args?.showCustomAnimation ?? true,
           );
         },
@@ -33,7 +33,7 @@ class AppRouter {
         name: RouteName.home,
         builder: (context, state) {
           final args = state.extra as NavigationArguments?;
-          return HomeView(
+          return HomePage(
             showCustomAnimation: args?.showCustomAnimation ?? true,
           );
         },
@@ -61,7 +61,7 @@ class AppRouter {
       _route(
         path: RoutePaths.contact,
         name: RouteName.contact,
-        builder: (context, state) => const ContactView(),
+        builder: (context, state) => const ContactPage(),
       ),
     ],
     errorBuilder: (context, state) => const ErrorView(),
