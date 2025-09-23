@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:layout/layout.dart';
 import 'package:portfolio/data/data_sources/contact_datasource.dart';
 import 'package:portfolio/data/repositories/contact_impl.dart';
 import 'package:portfolio/domain/use_cases/contact_usecase.dart';
+import 'package:portfolio/route/routes.dart';
 import 'package:portfolio/view_models/contact_view_model.dart';
 import 'package:provider/provider.dart';
 
 import 'l10n/app_localizations.dart';
 import 'utils/extensions/theme_ex.dart';
 import 'view_models/home_view_model.dart';
-import 'views/home/home_view.dart';
 
 class MyPortfolioMain extends StatelessWidget {
   const MyPortfolioMain({super.key});
@@ -40,11 +40,8 @@ class MyPortfolioApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(390, 844),
-      minTextAdapt: false,
-      splitScreenMode: true,
-      builder: (_, __) => MaterialApp(
+    return Layout(
+      child: MaterialApp.router(
         title: 'Thant Zin',
         theme: context.theme(),
         builder: (BuildContext context, Widget? child) {
@@ -62,7 +59,7 @@ class MyPortfolioApp extends StatelessWidget {
         locale: Locale('en'),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const HomeView(),
+        routerConfig: AppRouter.router,
       ),
     );
   }

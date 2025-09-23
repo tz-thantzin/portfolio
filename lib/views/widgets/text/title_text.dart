@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/presentations/configs/constant_colors.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 
+import '../../../presentations/configs/constant_sizes.dart';
 import '../../../utils/extensions/theme_ex.dart';
 
 class TitleText extends StatelessWidget {
   final String data;
-  final Color? textColor;
   final double fontSize;
-  const TitleText(
-    this.data, {
-    this.textColor = kTomato,
-    this.fontSize = 20,
-    super.key,
-  });
+  final TextAlign? textAlign;
+  TitleText(this.data, {this.fontSize = s24, this.textAlign, super.key});
 
   @override
   Widget build(BuildContext context) {
     return SelectableText(
-      data,
-      style: context.titleTextStyle.copyWith(
-        color: textColor,
-        fontSize: context.scaleFontSize(fontSize),
-        fontWeight: FontWeight.w300,
+      data.toUpperCase(),
+
+      style: GoogleFonts.roboto(
+        textStyle: context.titleLarge.copyWith(
+          fontSize: context.autoAdaptive(fontSize),
+          fontWeight: bold,
+          color: kBlack,
+        ),
       ),
-      textAlign: TextAlign.center,
+      textAlign: textAlign ?? TextAlign.center,
     );
   }
 }

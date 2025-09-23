@@ -24,6 +24,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get about => 'About';
 
   @override
+  String get my_specialization => 'Specializing in mobile technologies, I have expertise in Flutter and iOS development, delivering high-quality applications.';
+
+  @override
+  String get see_my_work => 'See My Works';
+
+  @override
+  String get view_all_projects => 'View All Projects';
+
+  @override
   String get work_experience => 'Experience';
 
   @override
@@ -33,7 +42,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get follow_me => 'Follow Me';
 
   @override
-  String get download_resume => 'Download Resume';
+  String get download_resume => 'Resume';
 
   @override
   String get creative_mobile_app_developer => 'Creative Mobile App Developer ';
@@ -45,19 +54,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get years_success => 'Years of \nSuccess';
 
   @override
-  String get senior_mobile_developer => 'Senior Mobile Application Developer | Team Lead';
+  String get freelance_mobile_developer => 'Freelance Mobile Application Developer';
+
+  @override
+  String get crafted_with_love => 'Crafted with love';
+
+  @override
+  String get recent_projects => 'Here is selection of my recent works.';
 
   @override
   String get about_me => 'About Me';
 
   @override
-  String get i_am_developer => 'I\'m Mobile App Developer';
+  String get little_bit_about_myself => 'A little bit about myself';
 
   @override
-  String get about_me_description => 'I am an experienced mobile application developer with over 11 years of expertise in Flutter and iOS development. Throughout my career, I have successfully led teams, delivering high-quality, user-friendly applications. I enjoy solving complex technical challenges and mentoring team members to achieve their full potential. My focus is on creating elegant, performant, and maintainable apps that provide exceptional user experiences.';
+  String get about_me_description => 'I am an experienced mobile application developer with over 11 years of expertise in Flutter and iOS development. Throughout my career, I have successfully led teams in delivering high-quality, user-friendly applications. I enjoy tackling complex technical challenges and mentoring team members to help them reach their full potential. My focus is on creating elegant, performant, and maintainable apps that provide exceptional user experiences.\n\nI graduated from the University of Computer Studies, Yangon, in November 2013. I started my career in February 2014 as an OJT and became a permanent full-time staff member in May 2014. In January 2019, I traveled to Tokyo, Japan, for professional training. I went again in May 2019 to attend additional technology training and learn about Japanese work culture.\n\nOutside of work, I enjoy traveling, drinking coffee, and playing games.';
 
   @override
   String get technologies => 'Technologies I have worked with:';
+
+  @override
+  String get my_tools => 'I worked with multiple tools and technologies to make the development workflow more efficient.';
+
+  @override
+  String get quote => '“Live as if you were to die tomorrow. Learn as if you were to live forever.”';
+
+  @override
+  String get author => 'Mahatma Gandhi';
 
   @override
   String get programming_languages_tools => 'Programming Languages & Tools';
@@ -136,4 +160,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get schedule_appointment => 'Schedule an Appointment';
+
+  @override
+  String get go_home => 'Go Home';
+
+  @override
+  String get page_not_found => 'Page Not Found';
+
+  @override
+  String get let_work_together => 'Let\'s work Together';
+
+  @override
+  String get available_freelancing => 'I\'m available for freelancing';
+
+  @override
+  String get built_using => 'Built using';
+
+  @override
+  String get built_with => 'with ';
 }

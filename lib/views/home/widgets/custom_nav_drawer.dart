@@ -2,27 +2,56 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/presentations/configs/constant_colors.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
 
 import '../../../presentations/configs/constants.dart';
 import '../../../utils/extensions/context_ex.dart';
 
-class CustomNavigationDrawer extends StatefulWidget {
+class MenuView extends StatefulWidget {
   final Function(String) onNavItemClicked;
   final VoidCallback onCloseDrawer;
 
-  const CustomNavigationDrawer({
+  const MenuView({
     required this.onNavItemClicked,
     required this.onCloseDrawer,
     super.key,
   });
 
   @override
-  State<CustomNavigationDrawer> createState() => _CustomNavigationDrawerState();
+  State<MenuView> createState() => _MenuViewState();
 }
 
-class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
+class _MenuViewState extends State<MenuView>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  final int _itemCount = 6;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 800),
+    )..forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final items = [
+      [context.localization.home, kHome],
+      [context.localization.about, kAbout],
+      [context.localization.work_experience, kExperience],
+      [context.localization.portfolio, kPortfolio],
+      [context.localization.skill, kSkill],
+      [context.localization.contact, kContact],
+    ];
+
     return Stack(
       children: <Widget>[
         GestureDetector(
@@ -30,61 +59,54 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
           child: Container(color: kTransparent),
         ),
         Container(
-          width: context.screenWidth,
-          decoration: BoxDecoration(color: kPrimary),
+          width: double.infinity,
+          decoration: const BoxDecoration(color: kPrimary),
           margin: EdgeInsets.only(top: context.appBarHeight),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                ListTile(
-                  title: Text(
-                    context.localization.home,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kHome),
-                ),
-                ListTile(
-                  title: Text(
-                    context.localization.about,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kAbout),
-                ),
-                ListTile(
-                  title: Text(
-                    context.localization.work_experience,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kExperience),
-                ),
-                ListTile(
-                  title: Text(
-                    context.localization.portfolio,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kPortfolio),
-                ),
-                ListTile(
-                  title: Text(
-                    context.localization.skill,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kSkill),
-                ),
-                ListTile(
-                  title: Text(
-                    context.localization.contact,
-                    style: context.navItemTextStyle.copyWith(color: kWhite),
-                  ),
-                  onTap: () => widget.onNavItemClicked(kContact),
-                ),
-              ],
-            ),
+          padding: EdgeInsets.symmetric(
+            vertical: context.autoAdaptive(16),
+            horizontal: context.autoAdaptive(12),
           ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List.generate(items.length, (index) {
+              final intervalStart = (index / _itemCount).clamp(0.0, 1.0);
+              final intervalEnd = ((index + 1) / _itemCount).clamp(0.0, 1.0);
+
+              final animation = CurvedAnimation(
+                parent: _controller,
+                curve: Interval(
+                  intervalStart,
+                  intervalEnd,
+                  curve: Curves.easeOut,
+                ),
+              );
+
+              return FadeTransition(
+                opacity: animation,
+                child: SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(0.8, 0),
+                    end: Offset.zero,
+                  ).animate(animation),
+                  child: _navItem(context, items[index][0], items[index][1]),
+                ),
+              );
+            }),
+          ).addScrollView(),
         ),
       ],
+    );
+  }
+
+  Widget _navItem(BuildContext context, String title, String route) {
+    return ListTile(
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(8),
+        vertical: context.autoAdaptive(4),
+      ),
+      title: Text(title, style: context.bodySmall.copyWith(color: kWhite)),
+      onTap: () => widget.onNavItemClicked(route),
     );
   }
 }

@@ -5,6 +5,8 @@ const Color kSecondary = Colors.deepPurple;
 const Color kWhite = Colors.white;
 const Color kWhite70 = Colors.white70;
 const Color kBlack = Colors.black;
+const Color kBlack100 = Color(0xFF303030);
+const Color kBlueAccent = Colors.blueAccent;
 final Color kBlue = Colors.blueAccent.shade200;
 const Color kTransparent = Colors.transparent;
 
@@ -15,44 +17,11 @@ const Color kGreen = Colors.green;
 final Color kRed100 = Colors.red.shade100;
 const Color kTomato = Color(0xFFFA523C);
 
+const Color kSkillWavy = Color(0xFF336B87);
+const Color kPortfolioBg = Color(0xFF98C9C4);
+const Color kPortfolioTitle = Color(0xFF3B5B7D);
+
 const Color kFooterBg = Color(0xFF363e57);
-
-// Gradients
-const LinearGradient kTomatoGradient = LinearGradient(
-  colors: <Color>[
-    Color(0xFFFA523C), // Tomato base
-    Color(0xFFFF7B5C), // Lighter shade
-  ],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
-);
-
-const LinearGradient kAmberGradient = LinearGradient(
-  colors: <Color>[
-    Color(0xFFFFC107), // Amber Yellow base
-    Color(0xFFFFE082), // Light Amber
-  ],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
-);
-
-const LinearGradient kOrangeGradient = LinearGradient(
-  colors: <Color>[
-    Color(0xFFFF9800), // Deep Orange
-    Color(0xFFFFB74D), // Light Orange
-  ],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
-);
-
-const LinearGradient kSoftTealGradient = LinearGradient(
-  colors: <Color>[
-    Color(0xFFE0F7FA), // Light teal
-    Color(0xFFB2EBF2), // Soft aqua
-  ],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
-);
 
 // ===== support colors =====
 const Color kGrey25 = Color(0xFFFCFCFC); //Grey/25 | #FCFCFC

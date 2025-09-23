@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
@@ -16,19 +17,15 @@ class TimeLineIndicator extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Container(
-          width: s16.w,
-          height: s16.h,
-          decoration: BoxDecoration(color: kBlue, shape: BoxShape.circle),
+          width: context.autoAdaptive(s8),
+          height: context.autoAdaptive(s8),
+          decoration: BoxDecoration(color: kTomato, shape: BoxShape.circle),
         ),
         if (drawLineBelow)
-          Expanded(
-            child: Container(
-              width: s1.w,
-              color: Theme.of(
-                context,
-              ).colorScheme.outline.withValues(alpha: 0.6),
-            ),
-          ),
+          Container(
+            width: context.autoAdaptive(s1),
+            color: kGrey1000.withValues(alpha: 0.6),
+          ).addExpanded(),
       ],
     );
   }

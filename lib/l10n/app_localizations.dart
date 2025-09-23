@@ -123,6 +123,24 @@ abstract class AppLocalizations {
   /// **'About'**
   String get about;
 
+  /// No description provided for @my_specialization.
+  ///
+  /// In en, this message translates to:
+  /// **'Specializing in mobile technologies, I have expertise in Flutter and iOS development, delivering high-quality applications.'**
+  String get my_specialization;
+
+  /// No description provided for @see_my_work.
+  ///
+  /// In en, this message translates to:
+  /// **'See My Works'**
+  String get see_my_work;
+
+  /// No description provided for @view_all_projects.
+  ///
+  /// In en, this message translates to:
+  /// **'View All Projects'**
+  String get view_all_projects;
+
   /// No description provided for @work_experience.
   ///
   /// In en, this message translates to:
@@ -144,7 +162,7 @@ abstract class AppLocalizations {
   /// No description provided for @download_resume.
   ///
   /// In en, this message translates to:
-  /// **'Download Resume'**
+  /// **'Resume'**
   String get download_resume;
 
   /// No description provided for @creative_mobile_app_developer.
@@ -165,11 +183,23 @@ abstract class AppLocalizations {
   /// **'Years of \nSuccess'**
   String get years_success;
 
-  /// No description provided for @senior_mobile_developer.
+  /// No description provided for @freelance_mobile_developer.
   ///
   /// In en, this message translates to:
-  /// **'Senior Mobile Application Developer | Team Lead'**
-  String get senior_mobile_developer;
+  /// **'Freelance Mobile Application Developer'**
+  String get freelance_mobile_developer;
+
+  /// No description provided for @crafted_with_love.
+  ///
+  /// In en, this message translates to:
+  /// **'Crafted with love'**
+  String get crafted_with_love;
+
+  /// No description provided for @recent_projects.
+  ///
+  /// In en, this message translates to:
+  /// **'Here is selection of my recent works.'**
+  String get recent_projects;
 
   /// No description provided for @about_me.
   ///
@@ -177,16 +207,16 @@ abstract class AppLocalizations {
   /// **'About Me'**
   String get about_me;
 
-  /// No description provided for @i_am_developer.
+  /// No description provided for @little_bit_about_myself.
   ///
   /// In en, this message translates to:
-  /// **'I\'m Mobile App Developer'**
-  String get i_am_developer;
+  /// **'A little bit about myself'**
+  String get little_bit_about_myself;
 
   /// No description provided for @about_me_description.
   ///
   /// In en, this message translates to:
-  /// **'I am an experienced mobile application developer with over 11 years of expertise in Flutter and iOS development. Throughout my career, I have successfully led teams, delivering high-quality, user-friendly applications. I enjoy solving complex technical challenges and mentoring team members to achieve their full potential. My focus is on creating elegant, performant, and maintainable apps that provide exceptional user experiences.'**
+  /// **'I am an experienced mobile application developer with over 11 years of expertise in Flutter and iOS development. Throughout my career, I have successfully led teams in delivering high-quality, user-friendly applications. I enjoy tackling complex technical challenges and mentoring team members to help them reach their full potential. My focus is on creating elegant, performant, and maintainable apps that provide exceptional user experiences.\n\nI graduated from the University of Computer Studies, Yangon, in November 2013. I started my career in February 2014 as an OJT and became a permanent full-time staff member in May 2014. In January 2019, I traveled to Tokyo, Japan, for professional training. I went again in May 2019 to attend additional technology training and learn about Japanese work culture.\n\nOutside of work, I enjoy traveling, drinking coffee, and playing games.'**
   String get about_me_description;
 
   /// No description provided for @technologies.
@@ -194,6 +224,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Technologies I have worked with:'**
   String get technologies;
+
+  /// No description provided for @my_tools.
+  ///
+  /// In en, this message translates to:
+  /// **'I worked with multiple tools and technologies to make the development workflow more efficient.'**
+  String get my_tools;
+
+  /// No description provided for @quote.
+  ///
+  /// In en, this message translates to:
+  /// **'“Live as if you were to die tomorrow. Learn as if you were to live forever.”'**
+  String get quote;
+
+  /// No description provided for @author.
+  ///
+  /// In en, this message translates to:
+  /// **'Mahatma Gandhi'**
+  String get author;
 
   /// No description provided for @programming_languages_tools.
   ///
@@ -350,6 +398,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Schedule an Appointment'**
   String get schedule_appointment;
+
+  /// No description provided for @go_home.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Home'**
+  String get go_home;
+
+  /// No description provided for @page_not_found.
+  ///
+  /// In en, this message translates to:
+  /// **'Page Not Found'**
+  String get page_not_found;
+
+  /// No description provided for @let_work_together.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s work Together'**
+  String get let_work_together;
+
+  /// No description provided for @available_freelancing.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m available for freelancing'**
+  String get available_freelancing;
+
+  /// No description provided for @built_using.
+  ///
+  /// In en, this message translates to:
+  /// **'Built using'**
+  String get built_using;
+
+  /// No description provided for @built_with.
+  ///
+  /// In en, this message translates to:
+  /// **'with '**
+  String get built_with;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
