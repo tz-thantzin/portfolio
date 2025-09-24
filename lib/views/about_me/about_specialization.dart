@@ -28,7 +28,7 @@ class _AboutSpecializationState extends State<AboutSpecialization>
   void initState() {
     super.initState();
     _textController = AnimationController(vsync: this, duration: duration1000);
-    _moreController = AnimationController(vsync: this, duration: duration3000)
+    _moreController = AnimationController(vsync: this, duration: duration1000)
       ..repeat(reverse: true);
 
     Future.delayed(duration1000, () {
@@ -103,8 +103,8 @@ class _AboutSpecializationState extends State<AboutSpecialization>
     return Container(
       constraints: BoxConstraints(minHeight: context.screenHeight),
       padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s60),
-        vertical: context.autoAdaptive(s50),
+        horizontal: context.autoAdaptive(42),
+        vertical: context.autoAdaptive(16),
       ),
       alignment: Alignment.center,
       child: Column(

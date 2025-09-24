@@ -20,8 +20,8 @@ class TechnologyGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s60),
-        vertical: context.autoAdaptive(s24),
+        horizontal: context.autoAdaptive(42),
+        vertical: context.autoAdaptive(16),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

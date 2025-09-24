@@ -9,6 +9,7 @@ import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/home/recent_projects/recent_project_card.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../../models/project.dart';
 import '../../../presentations/configs/constant_data.dart';
 import '../../../presentations/configs/constant_sizes.dart';
 import '../../../presentations/configs/duration.dart';
@@ -65,16 +66,14 @@ class _RecentProjectViewState extends State<RecentProjectView>
   @override
   Widget build(BuildContext context) {
     final projects = recentProjects();
-    final totalProjects = projects.length;
-    final double slice = 0.2;
 
     return Container(
       width: double.infinity,
       constraints: BoxConstraints(minHeight: context.screenHeight),
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s60),
-        vertical: context.autoAdaptive(s65),
+        horizontal: context.autoAdaptive(42),
+        vertical: context.autoAdaptive(16),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,16 +117,19 @@ class _RecentProjectViewState extends State<RecentProjectView>
 
           // show projects
           ...projects.asMap().entries.map((entry) {
-            final index = entry.key;
-            final project = entry.value;
+            final int index = entry.key;
+            final Project project = entry.value;
 
-            final start = 0.1 + (index * slice / totalProjects);
-            final end = start + slice / totalProjects;
+            final int count = projects.length;
+            final double step = 1.0 / count;
+
+            final double slideStart = (index * step).clamp(0.0, 1.0);
+            final double slideEnd = ((index + 1) * step).clamp(0.0, 1.0);
 
             return AnimatedSlideWidget(
               controller: _recentProjectController,
-              start: start.clamp(0.0, 1.0),
-              end: end.clamp(0.0, 1.0),
+              start: slideStart.clamp(0.0, 1.0),
+              end: slideEnd.clamp(0.0, 1.0),
               direction: SlideDirection.upToDown,
               child: RecentProjectCard(project),
             );

@@ -166,8 +166,8 @@ class _ContactPageState extends State<ContactPage>
       constraints: BoxConstraints(minHeight: context.screenHeight),
       margin: EdgeInsets.only(top: context.appBarHeight),
       padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s60),
-        vertical: context.autoAdaptive(s65),
+        horizontal: context.autoAdaptive(42),
+        vertical: context.autoAdaptive(16),
       ),
       child:
           [

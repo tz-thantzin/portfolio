@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/presentations/configs/duration.dart';
 
 enum SlideDirection { downToUp, upToDown, rightToLeft, leftToRight }
 
 class AnimatedSlideWidget extends StatefulWidget {
   final AnimationController? controller;
   final Widget child;
-
-  /// Start of the animation (0.0 - 1.0)
   final double start;
-
-  /// End of the animation (0.0 - 1.0)
   final double end;
-
-  /// Optional: how far the widget slides (0.0 = no movement, 1.0 = full offset)
   final double beginOffset;
-
-  /// Optional: end offset magnitude (default 0.0, so slides back to original position)
   final double endOffset;
-
   final Duration duration;
   final Duration delay;
   final SlideDirection direction;
   final bool reverse;
-  final bool fade; // enable/disable fade
+  final bool fade;
 
   const AnimatedSlideWidget({
     super.key,
@@ -30,9 +22,9 @@ class AnimatedSlideWidget extends StatefulWidget {
     required this.child,
     this.start = 0.0,
     this.end = 1.0,
-    this.beginOffset = 0.3, // default slide distance
-    this.endOffset = 0.0, // default end offset
-    this.duration = const Duration(milliseconds: 1000),
+    this.beginOffset = 0.3,
+    this.endOffset = 0.0,
+    this.duration = duration1000,
     this.delay = Duration.zero,
     this.direction = SlideDirection.downToUp,
     this.reverse = false,
@@ -73,7 +65,6 @@ class _AnimatedSlideWidgetState extends State<AnimatedSlideWidget>
   }
 
   void _setupAnimations() {
-    // Determine the slide offset direction
     Offset directionOffset;
     switch (widget.direction) {
       case SlideDirection.downToUp:
@@ -90,7 +81,6 @@ class _AnimatedSlideWidgetState extends State<AnimatedSlideWidget>
         break;
     }
 
-    // Swap begin/end if reverse is true
     final begin = widget.reverse ? Offset(0, 0) : directionOffset;
     final end = widget.reverse
         ? directionOffset
@@ -141,7 +131,6 @@ class _AnimatedSlideWidgetState extends State<AnimatedSlideWidget>
       child: widget.child,
     );
 
-    // Wrap with fade only if fade = true
     if (widget.fade) {
       animatedChild = FadeTransition(
         opacity: _fadeAnimation,

@@ -11,7 +11,7 @@ import '../../../presentations/configs/constants.dart';
 import '../../../utils/extensions/context_ex.dart';
 import '../../../view_models/home_view_model.dart';
 import '../../widgets/animated_slide_button.dart';
-import '../../widgets/text/typewrite_text.dart';
+import '../../widgets/text/animated_typewriter_text.dart';
 
 class IntroWidget extends StatefulWidget {
   final VoidCallback onTapScrollDown;
@@ -90,7 +90,7 @@ class _IntroWidgetState extends State<IntroWidget>
         )
         .addPadding(
           padding: EdgeInsetsGeometry.symmetric(
-            horizontal: context.autoAdaptive(s16),
+            horizontal: context.autoAdaptive(context.isMobile ? s0 : s24),
           ),
         );
   }

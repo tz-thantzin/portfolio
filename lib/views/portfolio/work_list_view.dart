@@ -87,8 +87,8 @@ class _WorkListViewState extends State<WorkListView>
       constraints: BoxConstraints(minHeight: context.screenHeight),
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s60),
-        vertical: context.autoAdaptive(s50),
+        horizontal: context.autoAdaptive(42),
+        vertical: context.autoAdaptive(16),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

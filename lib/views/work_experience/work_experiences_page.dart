@@ -92,8 +92,8 @@ class _WorkExperiencePageState extends State<WorkExperiencePage>
           Container(
             constraints: BoxConstraints(minHeight: context.screenHeight),
             padding: EdgeInsets.symmetric(
-              horizontal: context.autoAdaptive(s60),
-              vertical: context.autoAdaptive(s50),
+              horizontal: context.autoAdaptive(42),
+              vertical: context.autoAdaptive(16),
             ),
             child: context.isMobile
                 ? Column(children: _buildTimelineItems(items))

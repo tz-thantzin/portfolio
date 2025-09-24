@@ -50,8 +50,8 @@ class _WorkFlowsState extends State<WorkFlows>
 
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s60),
-        vertical: context.autoAdaptive(s50),
+        horizontal: context.autoAdaptive(42),
+        vertical: context.autoAdaptive(16),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

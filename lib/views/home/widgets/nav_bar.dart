@@ -6,7 +6,6 @@ import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
 
-/// Responsive NavBar (Mobile + Desktop)
 class NavBar extends StatelessWidget {
   const NavBar({
     super.key,

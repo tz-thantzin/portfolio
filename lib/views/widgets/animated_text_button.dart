@@ -69,7 +69,7 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
         : widget.textColor;
 
     return SizedBox(
-      height: context.autoAdaptive(s24), // responsive height
+      height: context.autoAdaptive(s24),
       child: MouseRegion(
         key: ValueKey('MouseRegion_Animated_Text_Button'),
         onEnter: (_) => _handleHover(true),
@@ -99,16 +99,17 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
                   ),
                   child: Text(widget.title),
                 ),
-                SizedBox(
-                  width: context.autoAdaptive(4),
-                ), // spacing between text and arrow
+                horizontalSpaceTiny,
                 SlideTransition(
                   position: _arrowOffset,
                   child: SvgPicture.asset(
                     kRightArrowSVG,
                     height: context.autoAdaptive(s14),
                     width: context.autoAdaptive(s14),
-                    color: effectiveColor,
+                    colorFilter: ColorFilter.mode(
+                      effectiveColor,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ],

@@ -36,7 +36,6 @@ class AnimatedSlideButton extends StatefulWidget {
   final Color buttonColor;
   final Color borderColor;
 
-  /// this is the color that shows when hovered
   final Color onHoverColor;
   final double width;
   final double borderWidth;

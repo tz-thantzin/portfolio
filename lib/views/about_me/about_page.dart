@@ -7,7 +7,7 @@ import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/about_me/about_specialization.dart';
 import 'package:portfolio/views/footer/footer_view.dart';
-import 'package:portfolio/views/widgets/text/typewrite_text.dart';
+import 'package:portfolio/views/widgets/text/animated_typewriter_text.dart';
 import 'package:portfolio/views/wrapper.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -27,15 +27,15 @@ class AboutMePage extends StatefulWidget {
 class _AboutMePageState extends State<AboutMePage>
     with TickerProviderStateMixin {
   late final AnimationController _controller;
+  late final AnimationController _quoteController;
   late final AnimationController _technologyAnimationController;
   final ScrollController _scrollController = ScrollController();
-
-  bool _hasAnimated = false;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: duration1000);
+    _quoteController = AnimationController(vsync: this, duration: duration3000);
     _technologyAnimationController = AnimationController(
       vsync: this,
       duration: duration3000,
@@ -46,6 +46,7 @@ class _AboutMePageState extends State<AboutMePage>
   @override
   void dispose() {
     _controller.dispose();
+    _quoteController.dispose();
     _technologyAnimationController.dispose();
     _scrollController.dispose();
     super.dispose();
@@ -62,11 +63,18 @@ class _AboutMePageState extends State<AboutMePage>
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction > 0.45 && !_hasAnimated && mounted) {
+    if (info.visibleFraction > 0.45 && mounted) {
       Future.delayed(duration300, () {
         if (mounted) _controller.forward();
       });
-      _hasAnimated = true;
+    }
+  }
+
+  void _onQuoteVisibilityChanged(VisibilityInfo info) {
+    if (info.visibleFraction > 0.45 && mounted) {
+      Future.delayed(duration300, () {
+        if (mounted) _quoteController.forward();
+      });
     }
   }
 
@@ -106,15 +114,15 @@ class _AboutMePageState extends State<AboutMePage>
   Widget _buildQuote(BuildContext context) {
     return AnimatedFadeWidget(
           controller: _controller,
-          start: 0.6,
-          end: 0.9,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               TypewriterText(
+                controller: _quoteController,
                 context.localization.quote,
-                speed: duration50,
+                speed: duration1000,
+                startDelay: duration500,
                 style: GoogleFonts.playfair(
                   textStyle: context.titleLarge.copyWith(
                     fontSize: context.autoAdaptive(s32),
@@ -128,10 +136,11 @@ class _AboutMePageState extends State<AboutMePage>
             ],
           ),
         )
+        .addVisibilityDetector(onDetectVisibility: _onQuoteVisibilityChanged)
         .addPadding(
           padding: EdgeInsets.symmetric(
-            horizontal: context.autoAdaptive(s60),
-            vertical: context.autoAdaptive(s50),
+            horizontal: context.autoAdaptive(42),
+            vertical: context.autoAdaptive(16),
           ),
         )
         .addSizedBox(width: double.infinity);

@@ -28,7 +28,7 @@ class AnimatedUnderlineTextField extends StatefulWidget {
     this.underlineColor = kTomato,
     this.isMultiline = false,
     this.onChanged,
-    this.onEditingComplete, // <-- initialize callback
+    this.onEditingComplete,
   });
 
   @override
@@ -65,7 +65,7 @@ class _AnimatedUnderlineTextFieldState extends State<AnimatedUnderlineTextField>
     } else {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _controller.reverse();
-        _validate(); // validate on unfocus
+        _validate();
         if (widget.onEditingComplete != null) widget.onEditingComplete!();
       });
     }
