@@ -44,7 +44,7 @@ class HomeViewModel extends ChangeNotifier {
 
   void onProjectView(String path) {
     EventAnalytics.sentEvent(
-      eventName: EventType.downloadResume,
+      eventName: EventType.projectView,
       parameters: <String, Object>{
         'timestamp': DateTime.now().toIso8601String(),
         'path': path,

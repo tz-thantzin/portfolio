@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/presentations/configs/constant_images.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/footer/footer_view.dart';
@@ -39,6 +40,7 @@ class _SkillsViewState extends State<SkillsView> {
           HeaderView(
             title: context.localization.skill,
             onTapScrollDown: _onTapScrollDown,
+            bgImagePath: kSkillBg,
           ),
           verticalSpaceMassive,
           LanguageAndTools(),

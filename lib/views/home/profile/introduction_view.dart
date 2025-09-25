@@ -101,8 +101,8 @@ class _IntroductionViewState extends State<IntroductionView>
           ].addStack(alignment: Alignment.center),
         ),
         Positioned(
-          right: context.autoAdaptive(s12),
-          bottom: context.autoAdaptive(s12),
+          right: context.autoAdaptive(s16),
+          bottom: context.autoAdaptive(s16),
           child: RotatedBox(
             quarterTurns: 1,
             child: AnimatedTextButton(

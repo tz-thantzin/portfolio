@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/presentations/configs/constant_images.dart';
 import 'package:portfolio/presentations/configs/constant_sizes.dart';
 import 'package:portfolio/presentations/configs/duration.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
@@ -38,6 +39,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
           HeaderView(
             title: context.localization.portfolio,
             onTapScrollDown: _onTapScrollDown,
+            bgImagePath: kPortfolioBg,
           ),
           verticalSpaceMassive,
           WorkListView(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/presentations/configs/constant_images.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/widgets/animated_fade_widget.dart';
@@ -87,6 +88,7 @@ class _WorkExperiencePageState extends State<WorkExperiencePage>
           HeaderView(
             title: context.localization.work_experience,
             onTapScrollDown: _onTapScrollDown,
+            bgImagePath: kExperienceBg,
           ),
           verticalSpaceMassive,
           Container(

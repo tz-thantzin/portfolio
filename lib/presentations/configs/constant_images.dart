@@ -4,6 +4,9 @@ const String kAboutMeIcon = '$baseImagesPath/about_me.png';
 const String kTZ = '$baseImagesPath/tz.png';
 const String kTypingIcon = '$baseImagesPath/developer_activity.svg';
 const String kNotFound = '$baseImagesPath/not_found.png';
+const String kExperienceBg = '$baseImagesPath/experience_bg.png';
+const String kPortfolioBg = '$baseImagesPath/portfolio_bg.png';
+const String kSkillBg = '$baseImagesPath/skill_bg.png';
 
 ///Icons
 const String baseIconsPath = 'assets/icons';
