@@ -21,8 +21,10 @@ const String kExperience = 'experience';
 const String kPortfolio = 'portfolio';
 const String kContact = 'contact';
 
-const String myCV =
+const String kMyCV =
     'https://drive.google.com/file/d/1vocF0dz_r7ZHgdnguebKDXjmNeu-2rPM/view?usp=sharing';
+
+const String kGithubRepo = 'https://github.com/tz-thantzin?tab=repositories';
 
 final TextHeightBehavior textHeightBehavior = const TextHeightBehavior(
   applyHeightToFirstAscent: false,

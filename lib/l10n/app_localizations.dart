@@ -216,7 +216,7 @@ abstract class AppLocalizations {
   /// No description provided for @about_me_description.
   ///
   /// In en, this message translates to:
-  /// **'I am an experienced mobile application developer with over 11 years of expertise in Flutter and iOS development. Throughout my career, I have successfully led teams in delivering high-quality, user-friendly applications. I enjoy tackling complex technical challenges and mentoring team members to help them reach their full potential. My focus is on creating elegant, performant, and maintainable apps that provide exceptional user experiences.\n\nI graduated from the University of Computer Studies, Yangon, in November 2013. I started my career in February 2014 as an OJT and became a permanent full-time staff member in May 2014. In January 2019, I traveled to Tokyo, Japan, for professional training. I went again in May 2019 to attend additional technology training and learn about Japanese work culture.\n\nOutside of work, I enjoy traveling, drinking coffee, and playing games.'**
+  /// **'I am an experienced mobile application developer with over 11 years in Flutter and iOS development. Throughout my career, I have successfully led teams to produce high-quality, user-friendly applications. I find joy in tackling complex technical challenges and mentoring my team members to reach their full potential. My main focus is on creating elegant, high-performance, and maintainable apps that provide exceptional user experiences.\n\nI graduated from the University of Computer Studies in Yangon in November 2013. I began my career in February 2014 as an OJT and moved into a permanent full-time role in May 2014. In 2019, I traveled to Tokyo, Japan, for professional training and to gain insights into Japanese work culture.\n\nIn my spare time, I enjoy traveling, exploring new technologies to sharpen my skills, savoring coffee, and playing games.'**
   String get about_me_description;
 
   /// No description provided for @technologies.
@@ -282,7 +282,7 @@ abstract class AppLocalizations {
   /// No description provided for @mobile_lead_title.
   ///
   /// In en, this message translates to:
-  /// **'Mobile Team Lead'**
+  /// **'Project Leader'**
   String get mobile_lead_title;
 
   /// No description provided for @mobile_lead_company.
@@ -380,6 +380,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View Project'**
   String get view_project;
+
+  /// No description provided for @see_github_project.
+  ///
+  /// In en, this message translates to:
+  /// **'See Github Projects'**
+  String get see_github_project;
 
   /// No description provided for @contact.
   ///

@@ -107,7 +107,7 @@ class _SocialBannerState extends State<SocialBanner>
                 )
                 .addInkWell(
                   borderRadius: BorderRadius.circular(50),
-                  onTap: () => context.read<HomeViewModel>().onContactMePressed(
+                  onTap: () => context.read<HomeViewModel>().onLaunchUrl(
                     contactList[i].link,
                   ),
                 )

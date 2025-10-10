@@ -5,13 +5,17 @@ import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/portfolio/project_card.dart';
+import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
+import '../../presentations/configs/constants.dart';
 import '../../presentations/configs/duration.dart';
+import '../../view_models/home_view_model.dart';
 import '../widgets/animated_fade_widget.dart';
+import '../widgets/animated_text_button.dart';
 import '../widgets/text/title_text.dart';
 
 class WorkListView extends StatefulWidget {
@@ -100,8 +104,17 @@ class _WorkListViewState extends State<WorkListView>
             end: 0.5,
             child: TitleText(context.localization.portfolio),
           ).addVisibilityDetector(onDetectVisibility: _onVisibilityChanged),
-          verticalSpaceMassive,
 
+          verticalSpaceMassive,
+          AnimatedTextButton(
+            context.localization.see_github_project,
+            hoverColor: kGrey700,
+            textColor: kBlack,
+            fontSize: context.autoAdaptive(s14),
+            onPressed: () {
+              context.read<HomeViewModel>().onLaunchUrl(kGithubRepo);
+            },
+          ).addAlign(alignment: Alignment.centerRight),
           //Project List
           AnimatedFadeWidget(
             controller: _controller,

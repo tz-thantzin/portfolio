@@ -39,7 +39,7 @@ class HomeViewModel extends ChangeNotifier {
       },
     );
 
-    launchUrlExternal(myCV);
+    launchUrlExternal(kMyCV);
   }
 
   void onProjectView(String path) {
@@ -54,7 +54,7 @@ class HomeViewModel extends ChangeNotifier {
     launchUrlExternal(path);
   }
 
-  void onContactMePressed(String url) {
+  void onLaunchUrl(String url) {
     launchUrlExternal(url);
   }
 }

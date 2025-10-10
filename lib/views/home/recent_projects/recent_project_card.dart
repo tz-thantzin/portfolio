@@ -86,7 +86,7 @@ class _ProjectImage extends StatelessWidget {
               style: GoogleFonts.permanentMarker(
                 textStyle: context.titleLarge.copyWith(
                   color: kPrimary,
-                  fontSize: context.autoAdaptive(s48),
+                  fontSize: context.autoAdaptive(s60),
                 ),
               ),
             ),
@@ -99,7 +99,7 @@ class _ProjectImage extends StatelessWidget {
               style: GoogleFonts.permanentMarker(
                 textStyle: context.titleLarge.copyWith(
                   color: kPrimary,
-                  fontSize: context.autoAdaptive(s48),
+                  fontSize: context.autoAdaptive(s60),
                 ),
               ),
             ),
@@ -112,9 +112,13 @@ class _ProjectImage extends StatelessWidget {
         border: Border.all(color: kWhite70),
         borderRadius: BorderRadius.circular(context.autoAdaptive(s24)),
       ),
-      padding: EdgeInsets.symmetric(vertical: context.autoAdaptive(s24)),
+      padding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(s48),
+        vertical: context.autoAdaptive(s24),
+      ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
         children: children,
       ),
     );

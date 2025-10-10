@@ -120,9 +120,8 @@ class _SocialMedia extends StatelessWidget {
       children: List<Widget>.generate(contactList.length, (int i) {
         return InkWell(
           borderRadius: BorderRadius.circular(50),
-          onTap: () => context.read<HomeViewModel>().onContactMePressed(
-            contactList[i].link,
-          ),
+          onTap: () =>
+              context.read<HomeViewModel>().onLaunchUrl(contactList[i].link),
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: context.autoAdaptive(s8)),
             child: AnimatedScaleWidget(

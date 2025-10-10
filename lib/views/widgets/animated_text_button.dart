@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portfolio/presentations/configs/duration.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
@@ -84,10 +85,7 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
                 SizedBox(
                   width: context.autoAdaptive(s14),
                   height: context.autoAdaptive(s14),
-                  child: const CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(kIndigo),
-                  ),
+                  child: SpinKitWanderingCubes(color: kIndigo, size: 16.0),
                 )
               else ...[
                 AnimatedDefaultTextStyle(

@@ -18,8 +18,7 @@ class _RecentProjectImageState extends State<RecentProjectImage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: context.autoAdaptive(s150),
-      padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(s24)),
+      width: context.autoAdaptive(s100),
       alignment: Alignment.centerRight,
       child: AnimatedScaleWidget(
         minScale: 1.5,

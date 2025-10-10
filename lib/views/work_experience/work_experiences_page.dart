@@ -54,7 +54,7 @@ class _WorkExperiencePageState extends State<WorkExperiencePage>
   Future<void> _listenAnimations() async {
     _controller.addStatusListener((status) async {
       if (status == AnimationStatus.completed) {
-        Future.delayed(duration500, () {
+        Future.delayed(duration300, () {
           if (mounted) _itemSlideAnimationController.forward();
         });
       }

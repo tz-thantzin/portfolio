@@ -85,10 +85,10 @@ class _RecentProjectViewState extends State<RecentProjectView>
                 child: Text(
                   context.localization.crafted_with_love,
                   textAlign: TextAlign.left,
-                  style: GoogleFonts.indieFlower(
+                  style: GoogleFonts.caveat(
                     textStyle: context.bodyLarge.copyWith(
                       color: kIndigo,
-                      fontSize: context.autoAdaptive(s24),
+                      fontSize: context.autoAdaptive(s36),
                       fontWeight: superBold,
                     ),
                   ),
