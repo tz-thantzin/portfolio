@@ -22,8 +22,8 @@ class _ProjectImageState extends State<ProjectImage> {
       padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(s24)),
       alignment: Alignment.centerRight,
       child: AnimatedScaleWidget(
-        minScale: 1.0,
-        maxScale: 1.2,
+        minScale: 0.5,
+        maxScale: 0.7,
         child: AspectRatio(
           aspectRatio: 1,
           child: SvgPicture.asset(
