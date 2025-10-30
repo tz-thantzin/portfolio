@@ -48,9 +48,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get creative_mobile_app_developer => 'Creative Mobile App Developer ';
 
   @override
-  String get year_of_work_experience => '11+';
-
-  @override
   String get years_success => 'Years of \nSuccess';
 
   @override
@@ -91,60 +88,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get workflows => 'Responsive Design|Cross Functional Teams|Waterfall Development|Agile Development & Scrum|Team Leading & Task Delegation|Conducting code reviews and sprint planning';
-
-  @override
-  String get freelance_title => 'Freelance Mobile Application Developer';
-
-  @override
-  String get freelance_company => '';
-
-  @override
-  String get freelance_period => 'Apr 2024 – Present';
-
-  @override
-  String get mobile_lead_title => 'Project Leader';
-
-  @override
-  String get mobile_lead_company => 'TechFun Myanmar Co., Ltd., Yangon';
-
-  @override
-  String get mobile_lead_period => 'Nov 2019 – Mar 2024';
-
-  @override
-  String get senior_dev_title => 'Senior Mobile Application Developer';
-
-  @override
-  String get senior_dev_company => 'TechFun Myanmar Co., Ltd., Yangon';
-
-  @override
-  String get senior_dev_period => 'Nov 2017 – Oct 2019';
-
-  @override
-  String get mid_senior_dev_title => 'Mid-Senior Mobile Application Developer';
-
-  @override
-  String get mid_senior_dev_company => 'TechFun Myanmar Co., Ltd., Yangon';
-
-  @override
-  String get mid_senior_dev_period => 'Apr 2016 – Oct 2017';
-
-  @override
-  String get research_leader_title => 'Researching Leader';
-
-  @override
-  String get research_leader_company => 'Acroquest Myanmar Technology Co., Ltd., Yangon';
-
-  @override
-  String get research_leader_period => 'Oct 2015 – Dec 2015';
-
-  @override
-  String get software_engineer_title => 'Software Engineer';
-
-  @override
-  String get software_engineer_company => 'Acroquest Myanmar Technology Co., Ltd., Yangon';
-
-  @override
-  String get software_engineer_period => 'May 2014 – Sep 2015';
 
   @override
   String get portfolio => 'Portfolio';

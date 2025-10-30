@@ -110,11 +110,12 @@ class _WorkListViewState extends State<WorkListView>
             context.localization.see_github_project,
             hoverColor: kGrey700,
             textColor: kBlack,
-            fontSize: context.autoAdaptive(s14),
+            fontSize: context.autoAdaptive(s10),
             onPressed: () {
               context.read<HomeViewModel>().onLaunchUrl(kGithubRepo);
             },
           ).addAlign(alignment: Alignment.centerRight),
+          verticalSpaceSmall,
           //Project List
           AnimatedFadeWidget(
             controller: _controller,

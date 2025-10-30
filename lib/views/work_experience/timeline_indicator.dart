@@ -19,7 +19,7 @@ class TimeLineIndicator extends StatelessWidget {
         Container(
           width: context.autoAdaptive(s8),
           height: context.autoAdaptive(s8),
-          decoration: BoxDecoration(color: kTomato, shape: BoxShape.circle),
+          decoration: BoxDecoration(color: kIndigo, shape: BoxShape.circle),
         ),
         if (drawLineBelow)
           Container(

@@ -9,7 +9,7 @@ import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/constants.dart';
 
 class WorkInfoDetail extends StatelessWidget {
-  const WorkInfoDetail({required this.experience});
+  const WorkInfoDetail({required this.experience, super.key});
 
   final WorkExperience experience;
 
@@ -20,7 +20,6 @@ class WorkInfoDetail extends StatelessWidget {
         horizontal: context.isMobile ? s0 : context.autoAdaptive(s24),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _JobTitlePeriodView(
@@ -32,6 +31,7 @@ class WorkInfoDetail extends StatelessWidget {
             ),
             periodStyle: context.bodySmall.copyWith(color: kGrey1000),
           ),
+
           if (experience.company.isNotEmpty)
             Text(
               experience.company,
@@ -39,10 +39,41 @@ class WorkInfoDetail extends StatelessWidget {
               textHeightBehavior: textHeightBehavior,
               overflow: TextOverflow.ellipsis,
             ),
+
+          // Display Work Mode
+          Padding(
+            padding: EdgeInsets.only(top: context.autoAdaptive(s4)),
+            child: Text(
+              _workModeToLabel(experience.workMode),
+              style: context.bodySmall.copyWith(
+                color: kGrey500,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ),
+
+          verticalSpaceMedium,
+
+          // Display responsibilities if not empty
+          if (experience.responsibilities != null &&
+              experience.responsibilities!.isNotEmpty)
+            _ResponsibilitiesList(items: experience.responsibilities!),
+
           verticalSpaceMassive,
         ],
       ),
     );
+  }
+
+  String _workModeToLabel(WorkMode mode) {
+    switch (mode) {
+      case WorkMode.remote:
+        return 'Remote';
+      case WorkMode.onsite:
+        return 'Onsite';
+      case WorkMode.hybrid:
+        return 'Hybrid';
+    }
   }
 }
 
@@ -85,6 +116,42 @@ class _JobTitlePeriodView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.baseline,
       textBaseline: TextBaseline.alphabetic,
       children: <Widget>[titleText.addExpanded(), periodText],
+    );
+  }
+}
+
+class _ResponsibilitiesList extends StatelessWidget {
+  const _ResponsibilitiesList({required this.items});
+
+  final List<String> items;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: items.map((item) {
+        return Padding(
+          padding: EdgeInsets.only(bottom: context.autoAdaptive(s6)),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '• ',
+                style: context.bodySmall.copyWith(
+                  color: kGrey1000,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  item,
+                  style: context.bodySmall.copyWith(color: kGrey1000),
+                ),
+              ),
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 }

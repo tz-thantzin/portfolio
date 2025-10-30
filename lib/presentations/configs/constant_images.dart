@@ -33,10 +33,3 @@ const String kFastlaneSVG = '$baseIconsPath/fastlane.svg';
 const String kAndroidStudioSVG = '$baseIconsPath/androidstudio.svg';
 const String kXcodeSVG = '$baseIconsPath/xcode.svg';
 const String kVSCodeSVG = '$baseIconsPath/vscode.svg';
-
-///Portfolio
-const String basePortfoliosPath = 'assets/portfolios';
-const String kAnimatedText = '$basePortfoliosPath/animated_text.png';
-const String kMyf = '$basePortfoliosPath/my_flyn.png';
-const String kChat = '$basePortfoliosPath/chat.png';
-const String kMRate = '$basePortfoliosPath/exchange_rate.png';

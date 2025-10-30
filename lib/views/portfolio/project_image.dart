@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:portfolio/models/project.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
@@ -21,14 +22,15 @@ class _ProjectImageState extends State<ProjectImage> {
       padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(s24)),
       alignment: Alignment.centerRight,
       child: AnimatedScaleWidget(
-        minScale: 1.5,
-        maxScale: 2.0,
+        minScale: 1.0,
+        maxScale: 1.2,
         child: AspectRatio(
           aspectRatio: 1,
-          child: Image.asset(
+          child: SvgPicture.asset(
             widget.project.imagePath!,
-            fit: BoxFit.contain,
-          ).addOpacity(opacity: context.isMobile ? 0.2 : 0.6),
+            width: context.autoAdaptive(s50),
+            height: context.autoAdaptive(s50),
+          ).addOpacity(opacity: context.isMobile ? 0.5 : 0.8),
         ),
       ),
     );

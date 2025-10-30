@@ -171,12 +171,6 @@ abstract class AppLocalizations {
   /// **'Creative Mobile App Developer '**
   String get creative_mobile_app_developer;
 
-  /// No description provided for @year_of_work_experience.
-  ///
-  /// In en, this message translates to:
-  /// **'11+'**
-  String get year_of_work_experience;
-
   /// No description provided for @years_success.
   ///
   /// In en, this message translates to:
@@ -260,114 +254,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Responsive Design|Cross Functional Teams|Waterfall Development|Agile Development & Scrum|Team Leading & Task Delegation|Conducting code reviews and sprint planning'**
   String get workflows;
-
-  /// No description provided for @freelance_title.
-  ///
-  /// In en, this message translates to:
-  /// **'Freelance Mobile Application Developer'**
-  String get freelance_title;
-
-  /// No description provided for @freelance_company.
-  ///
-  /// In en, this message translates to:
-  /// **''**
-  String get freelance_company;
-
-  /// No description provided for @freelance_period.
-  ///
-  /// In en, this message translates to:
-  /// **'Apr 2024 – Present'**
-  String get freelance_period;
-
-  /// No description provided for @mobile_lead_title.
-  ///
-  /// In en, this message translates to:
-  /// **'Project Leader'**
-  String get mobile_lead_title;
-
-  /// No description provided for @mobile_lead_company.
-  ///
-  /// In en, this message translates to:
-  /// **'TechFun Myanmar Co., Ltd., Yangon'**
-  String get mobile_lead_company;
-
-  /// No description provided for @mobile_lead_period.
-  ///
-  /// In en, this message translates to:
-  /// **'Nov 2019 – Mar 2024'**
-  String get mobile_lead_period;
-
-  /// No description provided for @senior_dev_title.
-  ///
-  /// In en, this message translates to:
-  /// **'Senior Mobile Application Developer'**
-  String get senior_dev_title;
-
-  /// No description provided for @senior_dev_company.
-  ///
-  /// In en, this message translates to:
-  /// **'TechFun Myanmar Co., Ltd., Yangon'**
-  String get senior_dev_company;
-
-  /// No description provided for @senior_dev_period.
-  ///
-  /// In en, this message translates to:
-  /// **'Nov 2017 – Oct 2019'**
-  String get senior_dev_period;
-
-  /// No description provided for @mid_senior_dev_title.
-  ///
-  /// In en, this message translates to:
-  /// **'Mid-Senior Mobile Application Developer'**
-  String get mid_senior_dev_title;
-
-  /// No description provided for @mid_senior_dev_company.
-  ///
-  /// In en, this message translates to:
-  /// **'TechFun Myanmar Co., Ltd., Yangon'**
-  String get mid_senior_dev_company;
-
-  /// No description provided for @mid_senior_dev_period.
-  ///
-  /// In en, this message translates to:
-  /// **'Apr 2016 – Oct 2017'**
-  String get mid_senior_dev_period;
-
-  /// No description provided for @research_leader_title.
-  ///
-  /// In en, this message translates to:
-  /// **'Researching Leader'**
-  String get research_leader_title;
-
-  /// No description provided for @research_leader_company.
-  ///
-  /// In en, this message translates to:
-  /// **'Acroquest Myanmar Technology Co., Ltd., Yangon'**
-  String get research_leader_company;
-
-  /// No description provided for @research_leader_period.
-  ///
-  /// In en, this message translates to:
-  /// **'Oct 2015 – Dec 2015'**
-  String get research_leader_period;
-
-  /// No description provided for @software_engineer_title.
-  ///
-  /// In en, this message translates to:
-  /// **'Software Engineer'**
-  String get software_engineer_title;
-
-  /// No description provided for @software_engineer_company.
-  ///
-  /// In en, this message translates to:
-  /// **'Acroquest Myanmar Technology Co., Ltd., Yangon'**
-  String get software_engineer_company;
-
-  /// No description provided for @software_engineer_period.
-  ///
-  /// In en, this message translates to:
-  /// **'May 2014 – Sep 2015'**
-  String get software_engineer_period;
 
   /// No description provided for @portfolio.
   ///

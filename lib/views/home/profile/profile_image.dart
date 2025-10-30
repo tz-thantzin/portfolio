@@ -9,6 +9,7 @@ import 'package:portfolio/views/widgets/text/content_text.dart';
 import '../../../presentations/configs/constant_colors.dart';
 import '../../../presentations/configs/constant_images.dart';
 import '../../../presentations/configs/constant_sizes.dart';
+import '../../../utils/utils.dart';
 
 class ProfileImage extends StatelessWidget {
   const ProfileImage({super.key});
@@ -25,6 +26,9 @@ class _DesktopView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double size = context.autoAdaptive(s350);
+    final String experienceDuration = calculateWorkExperience(
+      DateTime(2014, 2),
+    );
 
     return <Widget>[
       AspectRatio(
@@ -53,7 +57,7 @@ class _DesktopView extends StatelessWidget {
           child:
               <Widget>[
                 SelectableText(
-                  context.localization.year_of_work_experience,
+                  experienceDuration,
                   style: GoogleFonts.abrilFatface(
                     textStyle: context.bodyLarge.copyWith(
                       fontSize: context.autoAdaptive(s32),
