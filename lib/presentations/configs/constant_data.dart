@@ -227,7 +227,7 @@ List<WorkExperience> experiences() {
     WorkExperience(
       title: "Project Leader",
       company: "TechFun Myanmar Co., Ltd., Yangon",
-      period: "Nov 2017 – Oct 2019",
+      period: "Nov 2019 – Mar 2024",
       workMode: WorkMode.remote,
       responsibilities: [
         'Developed and managed project timelines in collaboration with stakeholders to ensure a clear understanding of requirements and expected deliverables.',
