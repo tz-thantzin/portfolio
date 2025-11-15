@@ -140,7 +140,7 @@ class _RecentProjectViewState extends State<RecentProjectView>
             context.localization.view_all_projects.toUpperCase(),
             hoverColor: kGrey700,
             textColor: kBlack,
-            fontSize: s16,
+            fontSize: s14,
             onPressed: () {
               GoRouter.of(context).goNamed(RouteName.portfolio);
             },

@@ -22,8 +22,8 @@ class _RecentProjectImageState extends State<RecentProjectImage> {
       width: context.autoAdaptive(s100),
       alignment: Alignment.centerRight,
       child: AnimatedScaleWidget(
-        minScale: 0.5,
-        maxScale: 0.7,
+        minScale: 0.7,
+        maxScale: 0.9,
         child: AspectRatio(
           aspectRatio: 1,
           child: SvgPicture.asset(

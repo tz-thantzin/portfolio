@@ -86,12 +86,18 @@ List<Social> footerContacts() {
 List<Project> recentProjects() {
   return <Project>[
     Project(
+      projectName: 'Toastify',
+      description:
+          'A customizable toast notification system for Flutter. Supports banners, snackbars, and advanced styling.',
+      imagePath: kFlutterSVG,
+      github: 'https://github.com/tz-thantzin/my_toastify',
+    ),
+    Project(
       projectName: 'My Animated Text',
       description:
           'Customizable Flutter animated text widgets for dynamic, engaging text effects.',
       imagePath: kFlutterSVG,
       github: 'https://github.com/tz-thantzin/my_animated_text',
-      pubDev: 'https://pub.dev/packages/my_animated_text',
     ),
     Project(
       projectName: 'Chat',
@@ -120,12 +126,18 @@ List<Project> recentProjects() {
 List<Project> projects() {
   return <Project>[
     Project(
+      projectName: 'Toastify',
+      description:
+          'A customizable toast notification system for Flutter. Supports banners, snackbars, and advanced styling.',
+      imagePath: kFlutterSVG,
+      github: 'https://github.com/tz-thantzin/my_toastify',
+    ),
+    Project(
       projectName: 'My Animated Text',
       description:
           'Customizable Flutter animated text widgets for dynamic, engaging text effects.',
       imagePath: kFlutterSVG,
       github: 'https://github.com/tz-thantzin/my_animated_text',
-      pubDev: 'https://pub.dev/packages/my_animated_text',
     ),
     Project(
       projectName: 'Chat',
@@ -140,20 +152,6 @@ List<Project> projects() {
           'Experimental Android and iOS app built with flutter to explore and practice modern development techniques.',
       imagePath: kFlutterSVG,
       github: 'https://github.com/tz-thantzin/my_flutter_riverpod',
-    ),
-    Project(
-      projectName: 'Myflyn-SwiftUI',
-      description:
-          'Experimental iOS app built with SwiftUI to explore and practice modern development techniques.',
-      imagePath: kSwiftUISVG,
-      github: 'https://github.com/tz-thantzin/my_flyn_ios_swiftui',
-    ),
-    Project(
-      projectName: 'Myflyn-Flutter',
-      description:
-          'Experimental Android and iOS app built with flutter to explore and practice modern development techniques.',
-      imagePath: kFlutterSVG,
-      github: 'https://github.com/tz-thantzin/my_flyn',
     ),
     Project(
       projectName: 'M-Ratex-Flutter',
