@@ -108,7 +108,7 @@ class _ProjectImage extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        color: kPortfolioBg,
+        color: kPortfolioBg.withValues(alpha: 0.3),
         border: Border.all(color: kWhite70),
         borderRadius: BorderRadius.circular(context.autoAdaptive(s24)),
       ),
@@ -154,15 +154,6 @@ class _ProjectDetail extends StatelessWidget {
             hoverColor: kGrey500,
             onPressed: () =>
                 context.read<HomeViewModel>().onProjectView(project.github!),
-          ),
-        ],
-        if (project.pubDev != null) ...[
-          AnimatedTextButton(
-            'Pub Dev',
-            textColor: kIndigo,
-            hoverColor: kGrey500,
-            onPressed: () =>
-                context.read<HomeViewModel>().onProjectView(project.pubDev!),
           ),
         ],
       ],

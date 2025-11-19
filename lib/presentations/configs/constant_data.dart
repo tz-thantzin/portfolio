@@ -57,7 +57,7 @@ List<Social> contacts() {
     ),
     Social(
       name: 'Medium',
-      link: 'https://medium.com/@dev.thantzin',
+      link: 'https://devthantzin.medium.com/',
       icon: _getIcon('Medium'),
     ),
   ];
@@ -91,6 +91,15 @@ List<Project> recentProjects() {
           'A customizable toast notification system for Flutter. Supports banners, snackbars, and advanced styling.',
       imagePath: kFlutterSVG,
       github: 'https://github.com/tz-thantzin/my_toastify',
+      language: Language.flutter,
+    ),
+    Project(
+      projectName: 'MUI Typography',
+      description:
+          'A Flutter package providing typography features similar to React MUI Typography.',
+      imagePath: kFlutterSVG,
+      github: 'https://github.com/tz-thantzin/mui_typography',
+      language: Language.flutter,
     ),
     Project(
       projectName: 'My Animated Text',
@@ -98,6 +107,7 @@ List<Project> recentProjects() {
           'Customizable Flutter animated text widgets for dynamic, engaging text effects.',
       imagePath: kFlutterSVG,
       github: 'https://github.com/tz-thantzin/my_animated_text',
+      language: Language.flutter,
     ),
     Project(
       projectName: 'Chat',
@@ -105,20 +115,15 @@ List<Project> recentProjects() {
           'A Flutter-based chat application developed as a personal project to explore real-time messaging with Firebase.',
       imagePath: kFlutterSVG,
       github: 'https://github.com/tz-thantzin/firebase_chat_flutter',
+      language: Language.flutter,
     ),
     Project(
-      projectName: 'M-Ratex-Flutter',
-      description:
-          'A Flutter-based foreign currency application developed as a personal project.',
-      imagePath: kFlutterSVG,
-      github: 'https://github.com/tz-thantzin/myan_ratex',
-    ),
-    Project(
-      projectName: 'M-Ratex-Swift',
+      projectName: 'M-Ratex',
       description:
           'A Swift-based foreign currency application developed as a personal project.',
       imagePath: kSwiftSVG,
       github: 'https://github.com/tz-thantzin/m-ratex-ios',
+      language: Language.iOS,
     ),
   ];
 }
@@ -131,6 +136,15 @@ List<Project> projects() {
           'A customizable toast notification system for Flutter. Supports banners, snackbars, and advanced styling.',
       imagePath: kFlutterSVG,
       github: 'https://github.com/tz-thantzin/my_toastify',
+      language: Language.flutter,
+    ),
+    Project(
+      projectName: 'MUI Typography',
+      description:
+          'A Flutter package providing typography features similar to React MUI Typography.',
+      imagePath: kFlutterSVG,
+      github: 'https://github.com/tz-thantzin/mui_typography',
+      language: Language.flutter,
     ),
     Project(
       projectName: 'My Animated Text',
@@ -138,6 +152,7 @@ List<Project> projects() {
           'Customizable Flutter animated text widgets for dynamic, engaging text effects.',
       imagePath: kFlutterSVG,
       github: 'https://github.com/tz-thantzin/my_animated_text',
+      language: Language.flutter,
     ),
     Project(
       projectName: 'Chat',
@@ -145,6 +160,7 @@ List<Project> projects() {
           'A Flutter-based chat application developed as a personal project to explore real-time messaging with Firebase.',
       imagePath: kFlutterSVG,
       github: 'https://github.com/tz-thantzin/firebase_chat_flutter',
+      language: Language.flutter,
     ),
     Project(
       projectName: 'Flutter Riverpod',
@@ -152,20 +168,31 @@ List<Project> projects() {
           'Experimental Android and iOS app built with flutter to explore and practice modern development techniques.',
       imagePath: kFlutterSVG,
       github: 'https://github.com/tz-thantzin/my_flutter_riverpod',
+      language: Language.flutter,
     ),
     Project(
-      projectName: 'M-Ratex-Flutter',
+      projectName: 'M-Ratex',
       description:
           'A Flutter-based foreign currency application developed as a personal project.',
       imagePath: kFlutterSVG,
       github: 'https://github.com/tz-thantzin/myan_ratex',
+      language: Language.flutter,
     ),
     Project(
-      projectName: 'M-Ratex-Swift',
+      projectName: 'M-Ratex',
       description:
           'A Swift-based foreign currency application developed as a personal project.',
       imagePath: kSwiftSVG,
       github: 'https://github.com/tz-thantzin/m-ratex-ios',
+      language: Language.iOS,
+    ),
+    Project(
+      projectName: 'Weather',
+      description:
+          'A Swift-based weather application developed as a personal project.',
+      imagePath: kSwiftSVG,
+      github: 'https://github.com/tz-thantzin/Weather-iOS',
+      language: Language.iOS,
     ),
   ];
 }

@@ -30,7 +30,7 @@ class _RecentProjectImageState extends State<RecentProjectImage> {
             widget.project.imagePath!,
             width: context.autoAdaptive(s50),
             height: context.autoAdaptive(s50),
-          ).addOpacity(opacity: context.isMobile ? 0.5 : 0.8),
+          ).addOpacity(opacity: context.isMobile ? 0.5 : 1.0),
         ),
       ),
     );

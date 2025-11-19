@@ -28,7 +28,7 @@ class _ProjectCardState extends State<ProjectCard> {
       width: double.infinity,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        color: kPortfolioBg,
+        color: kPortfolioBg.withValues(alpha: 0.3),
         border: Border.all(color: kWhite70),
         borderRadius: BorderRadius.circular(context.autoAdaptive(s24)),
       ),
@@ -68,15 +68,6 @@ class _ProjectCardState extends State<ProjectCard> {
             textColor: kIndigo,
             onPressed: () => context.read<HomeViewModel>().onProjectView(
               widget.project.github!,
-            ),
-          ),
-        ],
-        if (widget.project.pubDev != null) ...[
-          AnimatedTextButton(
-            'Pub Dev',
-            textColor: kIndigo,
-            onPressed: () => context.read<HomeViewModel>().onProjectView(
-              widget.project.pubDev!,
             ),
           ),
         ],
