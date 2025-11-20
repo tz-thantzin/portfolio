@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:portfolio/core/di/providers.dart';
-import 'package:portfolio/core/routing/routes.dart';
-import 'package:portfolio/presentations/configs/constant_colors.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/views/widgets/animated_loading_slider.dart';
+import '../../core/di/providers.dart';
+import '../../core/routing/routes.dart';
+import '../../presentations/configs/constant_colors.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../views/widgets/animated_loading_slider.dart';
 
 import '../presentations/configs/duration.dart';
 import 'home/widgets/custom_nav_drawer.dart';

@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/presentations/configs/duration.dart';
 
+import '../../../presentations/configs/duration.dart';
+
+/// A widget that displays text with a typewriter animation effect.
+/// The text appears character-by-character without any cursor.
 class TypewriterText extends StatefulWidget {
+  /// The full text to be displayed.
   final String text;
-  final Duration speed;
-  final Duration startDelay;
+
+  /// Style of the text.
   final TextStyle? style;
+
+  /// Duration for typing each character.
+  final Duration speed;
+
+  /// Delay before the typing animation starts.
+  final Duration startDelay;
+
+  /// Optional external AnimationController (useful for synchronizing with other animations).
   final AnimationController? controller;
 
   const TypewriterText(
@@ -23,39 +35,40 @@ class TypewriterText extends StatefulWidget {
 
 class _TypewriterTextState extends State<TypewriterText>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<int> _charCount;
-  bool _isExternalController = false;
+  late final AnimationController _controller;
+  late Animation<int> _charAnimation;
+
+  bool get _hasExternalController => widget.controller != null;
 
   @override
   void initState() {
     super.initState();
 
-    final totalDuration = widget.speed * widget.text.length + widget.startDelay;
+    _controller = _hasExternalController
+        ? widget.controller!
+        : AnimationController(vsync: this);
 
-    if (widget.controller != null) {
-      _controller = widget.controller!;
-      _isExternalController = true;
-    } else {
-      _controller = AnimationController(vsync: this, duration: totalDuration);
-    }
+    _setupAnimation();
 
-    _setupAnimation(totalDuration);
-
-    if (!_isExternalController) {
-      _controller.forward();
+    // Auto-start only if we own the controller
+    if (!_hasExternalController) {
+      Future.delayed(widget.startDelay, () {
+        if (mounted) {
+          _controller.duration = widget.speed * widget.text.length;
+          _controller.forward(from: 0);
+        }
+      });
     }
   }
 
-  void _setupAnimation(Duration totalDuration) {
-    _charCount = StepTween(begin: 0, end: widget.text.length).animate(
+  void _setupAnimation() {
+    final int charCount = widget.text.length;
+
+    // The actual typing part (after the start delay) should be linear
+    _charAnimation = IntTween(begin: 0, end: charCount).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Interval(
-          widget.startDelay.inMilliseconds / totalDuration.inMilliseconds,
-          1.0,
-          curve: Curves.linear,
-        ),
+        curve: Curves.linear, // typing is always uniform speed
       ),
     );
   }
@@ -64,23 +77,26 @@ class _TypewriterTextState extends State<TypewriterText>
   void didUpdateWidget(covariant TypewriterText oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.text != oldWidget.text) {
-      final totalDuration =
-          widget.speed * widget.text.length + widget.startDelay;
+    if (widget.text != oldWidget.text ||
+        widget.speed != oldWidget.speed ||
+        widget.startDelay != oldWidget.startDelay ||
+        widget.controller != oldWidget.controller) {
+      _setupAnimation();
 
-      if (!_isExternalController) {
-        _controller.dispose();
-        _controller = AnimationController(vsync: this, duration: totalDuration)
-          ..forward();
+      if (!_hasExternalController) {
+        _controller
+          ..reset()
+          ..duration = widget.speed * widget.text.length;
+        Future.delayed(widget.startDelay, () {
+          if (mounted) _controller.forward(from: 0);
+        });
       }
-
-      _setupAnimation(totalDuration);
     }
   }
 
   @override
   void dispose() {
-    if (!_isExternalController) {
+    if (!_hasExternalController) {
       _controller.dispose();
     }
     super.dispose();
@@ -89,16 +105,15 @@ class _TypewriterTextState extends State<TypewriterText>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _charCount,
+      animation: _controller,
       builder: (context, child) {
-        final count = _charCount.value;
-        final displayText = widget.text.substring(0, count);
-        final finished = count == widget.text.length;
-
-        return Text(
-          finished ? displayText : '$displayText|',
-          style: widget.style,
+        final int displayedChars = _charAnimation.value.clamp(
+          0,
+          widget.text.length,
         );
+        final String displayedText = widget.text.substring(0, displayedChars);
+
+        return Text(displayedText, style: widget.style);
       },
     );
   }

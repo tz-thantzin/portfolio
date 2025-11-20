@@ -1,15 +1,14 @@
-// lib/views/contact/contact_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/core/di/providers.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:portfolio/views/footer/footer_view.dart';
-import 'package:portfolio/views/widgets/animated_slide_button.dart';
-import 'package:portfolio/views/widgets/animated_text_field.dart';
-import 'package:portfolio/views/widgets/text/content_text.dart';
+import '../../core/di/providers.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/theme_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
+import '../../views/footer/footer_view.dart';
+import '../../views/widgets/animated_slide_button.dart';
+import '../../views/widgets/animated_text_field.dart';
+import '../../views/widgets/text/content_text.dart';
 
 import '../../core/routing/routes.dart';
 import '../../presentations/configs/constant_colors.dart';

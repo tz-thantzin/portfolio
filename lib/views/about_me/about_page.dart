@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/core/routing/routes.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:portfolio/views/about_me/about_specialization.dart';
-import 'package:portfolio/views/footer/footer_view.dart';
-import 'package:portfolio/views/widgets/text/animated_typewriter_text.dart';
-import 'package:portfolio/views/wrapper.dart';
+import '../../core/routing/routes.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/theme_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
+import '../../views/about_me/about_specialization.dart';
+import '../../views/footer/footer_view.dart';
+import '../../views/widgets/text/animated_typewriter_text.dart';
+import '../../views/wrapper.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../presentations/configs/constant_sizes.dart';

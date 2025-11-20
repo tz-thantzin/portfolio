@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/core/di/providers.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
-import 'package:portfolio/views/portfolio/project_image.dart';
-import 'package:portfolio/views/widgets/animated_text_button.dart';
-import 'package:portfolio/views/widgets/text/content_text.dart';
+import '../../core/di/providers.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/theme_ex.dart';
+import '../../views/portfolio/project_image.dart';
+import '../../views/widgets/animated_text_button.dart';
+import '../../views/widgets/text/content_text.dart';
 
 import '../../models/project.dart';
 import '../../presentations/configs/constant_colors.dart';

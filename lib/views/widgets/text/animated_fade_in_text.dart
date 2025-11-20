@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/presentations/configs/duration.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+
+import '../../../presentations/configs/duration.dart';
+import '../../../utils/extensions/widget_ex.dart';
 
 class AnimatedFadeInText extends StatefulWidget {
   final String text;

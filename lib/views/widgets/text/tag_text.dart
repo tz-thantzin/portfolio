@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/presentations/configs/constant_colors.dart';
 
+import '../../../presentations/configs/constant_colors.dart';
 import '../../../utils/extensions/theme_ex.dart';
 
 class TagText extends StatelessWidget {

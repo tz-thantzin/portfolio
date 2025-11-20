@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
 
 import '../../../presentations/configs/constant_colors.dart';
+import '../../../utils/extensions/theme_ex.dart';
 
 class CaptionText extends StatelessWidget {
   final String data;

@@ -1,16 +1,15 @@
-// lib/views/home/introduction/intro_widget.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/core/di/providers.dart';
-import 'package:portfolio/presentations/configs/duration.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
 
+import '../../../core/di/providers.dart';
 import '../../../presentations/configs/constant_colors.dart';
 import '../../../presentations/configs/constant_sizes.dart';
 import '../../../presentations/configs/constants.dart';
+import '../../../presentations/configs/duration.dart';
 import '../../../utils/extensions/context_ex.dart';
+import '../../../utils/extensions/layout_adapter_ex.dart';
+import '../../../utils/extensions/theme_ex.dart';
+import '../../../utils/extensions/widget_ex.dart';
 import '../../widgets/animated_slide_button.dart';
 import '../../widgets/text/animated_typewriter_text.dart';
 

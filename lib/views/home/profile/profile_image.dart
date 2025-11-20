@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:portfolio/views/widgets/text/content_text.dart';
 
 import '../../../presentations/configs/constant_colors.dart';
 import '../../../presentations/configs/constant_images.dart';
 import '../../../presentations/configs/constant_sizes.dart';
+import '../../../utils/extensions/context_ex.dart';
+import '../../../utils/extensions/layout_adapter_ex.dart';
+import '../../../utils/extensions/theme_ex.dart';
+import '../../../utils/extensions/widget_ex.dart';
 import '../../../utils/utils.dart';
+import '../../widgets/text/content_text.dart';
 
 class ProfileImage extends StatelessWidget {
   const ProfileImage({super.key});

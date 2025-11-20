@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:portfolio/presentations/configs/duration.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
+import '../../presentations/configs/duration.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/theme_ex.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_images.dart';

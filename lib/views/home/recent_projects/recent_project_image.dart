@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:portfolio/models/project.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:portfolio/views/widgets/animated_scale_widget.dart';
 
+import '../../../models/project.dart';
 import '../../../presentations/configs/constant_sizes.dart';
+import '../../../utils/extensions/layout_adapter_ex.dart';
+import '../../widgets/animated_scale_widget.dart';
 
 class RecentProjectImage extends StatefulWidget {
   final Project project;
@@ -30,7 +29,7 @@ class _RecentProjectImageState extends State<RecentProjectImage> {
             widget.project.imagePath!,
             width: context.autoAdaptive(s50),
             height: context.autoAdaptive(s50),
-          ).addOpacity(opacity: context.isMobile ? 0.5 : 1.0),
+          ),
         ),
       ),
     );

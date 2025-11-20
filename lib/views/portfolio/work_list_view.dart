@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/core/di/providers.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:portfolio/views/portfolio/project_card.dart';
+import '../../core/di/providers.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
+import '../../views/portfolio/project_card.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../presentations/configs/constant_colors.dart';

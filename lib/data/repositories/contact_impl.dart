@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart' as firebase_core;
 import 'package:logger/logger.dart';
-import 'package:portfolio/data/data_sources/contact_datasource.dart';
-import 'package:portfolio/domain/repositories/contact_repository.dart';
-import 'package:portfolio/models/contact.dart';
+import '../../data/data_sources/contact_datasource.dart';
+import '../../domain/repositories/contact_repository.dart';
+import '../../models/contact.dart';
 
 class ContactImpl extends ContactRepository {
   final ContactDatasource _datasource;

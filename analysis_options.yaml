@@ -30,5 +30,3 @@ dart:
   fix:
     sort-members: true
     use-rational-asserts: true
-  # plugins:
-  #   - custom_lint

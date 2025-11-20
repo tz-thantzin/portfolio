@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/presentations/configs/constant_images.dart';
-import 'package:portfolio/presentations/configs/constant_sizes.dart';
-import 'package:portfolio/presentations/configs/duration.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:portfolio/views/portfolio/work_list_view.dart';
-import 'package:portfolio/views/wrapper.dart';
+import '../../presentations/configs/constant_images.dart';
+import '../../presentations/configs/constant_sizes.dart';
+import '../../presentations/configs/duration.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
+import '../../views/portfolio/work_list_view.dart';
+import '../../views/wrapper.dart';
 
 import '../../core/routing/routes.dart';
 import '../footer/footer_view.dart';

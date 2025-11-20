@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/presentations/configs/constant_images.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:portfolio/views/footer/footer_view.dart';
-import 'package:portfolio/views/skill/language_tools.dart';
-import 'package:portfolio/views/skill/work_flows.dart';
+import '../../presentations/configs/constant_images.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
+import '../../views/footer/footer_view.dart';
+import '../../views/skill/language_tools.dart';
+import '../../views/skill/work_flows.dart';
 
 import '../../core/routing/routes.dart';
 import '../../presentations/configs/constant_sizes.dart';

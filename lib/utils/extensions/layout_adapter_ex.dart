@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:layout/layout.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
+import '../../utils/extensions/context_ex.dart';
 
 extension LayoutAdapter on BuildContext {
   T adaptive<T>(T xs, T lg, {T? sm, T? md, T? xl}) {

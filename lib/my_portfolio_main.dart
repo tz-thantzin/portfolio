@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:layout/layout.dart';
-import 'package:portfolio/core/routing/routes.dart';
-import 'package:portfolio/l10n/app_localizations.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
+import '../../core/routing/routes.dart';
+import '../../l10n/app_localizations.dart';
+import '../../utils/extensions/theme_ex.dart';
 
 class MyPortfolioMain extends ConsumerWidget {
   const MyPortfolioMain({super.key});

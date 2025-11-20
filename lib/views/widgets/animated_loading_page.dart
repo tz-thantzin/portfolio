@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/presentations/configs/constant_colors.dart';
-import 'package:portfolio/presentations/configs/constant_sizes.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/string_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
+import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_sizes.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/string_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
 
 /// credit to [https://davidcobbina.com]
 class AnimatedLoadingPage extends StatefulWidget {

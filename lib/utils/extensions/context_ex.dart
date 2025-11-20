@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
 
 import '../../l10n/app_localizations.dart';
 

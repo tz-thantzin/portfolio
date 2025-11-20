@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/core/routing/routes.dart';
-import 'package:portfolio/presentations/configs/constant_colors.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:portfolio/views/home/recent_projects/recent_project_view.dart';
-import 'package:portfolio/views/widgets/animated_loading_page.dart';
-import 'package:portfolio/views/wrapper.dart';
+import '../../core/routing/routes.dart';
+import '../../presentations/configs/constant_colors.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/theme_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
+import '../../views/home/recent_projects/recent_project_view.dart';
+import '../../views/widgets/animated_loading_page.dart';
+import '../../views/wrapper.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../presentations/configs/duration.dart';

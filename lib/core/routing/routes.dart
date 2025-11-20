@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:portfolio/views/about_me/about_page.dart';
-import 'package:portfolio/views/contact/contact_page.dart';
-import 'package:portfolio/views/error_view.dart';
-import 'package:portfolio/views/home/home_page.dart';
-import 'package:portfolio/views/portfolio/portfolio_page.dart';
-import 'package:portfolio/views/skill/skills_page.dart';
-import 'package:portfolio/views/work_experience/work_experiences_page.dart';
+import '../../views/about_me/about_page.dart';
+import '../../views/contact/contact_page.dart';
+import '../../views/error_view.dart';
+import '../../views/home/home_page.dart';
+import '../../views/portfolio/portfolio_page.dart';
+import '../../views/skill/skills_page.dart';
+import '../../views/work_experience/work_experiences_page.dart';
 
 class NavigationArguments {
   final bool showCustomAnimation;

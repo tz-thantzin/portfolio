@@ -2,12 +2,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:portfolio/data/data_sources/contact_datasource.dart';
-import 'package:portfolio/data/repositories/contact_impl.dart';
-import 'package:portfolio/domain/repositories/contact_repository.dart';
-import 'package:portfolio/domain/use_cases/contact_usecase.dart';
-import 'package:portfolio/view_models/contact_view_model.dart';
-import 'package:portfolio/view_models/home_view_model.dart';
+import '../../data/data_sources/contact_datasource.dart';
+import '../../data/repositories/contact_impl.dart';
+import '../../domain/repositories/contact_repository.dart';
+import '../../domain/use_cases/contact_usecase.dart';
+import '../../view_models/contact_view_model.dart';
+import '../../view_models/home_view_model.dart';
 
 // Firebase
 final firebaseFirestoreProvider = Provider<FirebaseFirestore>(

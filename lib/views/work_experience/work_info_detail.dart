@@ -1,10 +1,9 @@
-// lib/views/work_experience/work_info_detail.dart
 import 'package:flutter/material.dart';
-import 'package:portfolio/models/work_experience.dart';
-import 'package:portfolio/presentations/configs/constant_colors.dart';
-import 'package:portfolio/presentations/configs/constant_sizes.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
+import '../../models/work_experience.dart';
+import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_sizes.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/theme_ex.dart';
 
 class WorkInfoDetail extends StatelessWidget {
   final WorkExperience experience;

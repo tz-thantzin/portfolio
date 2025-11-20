@@ -1,5 +1,5 @@
 import 'package:logger/logger.dart';
-import 'package:portfolio/domain/repositories/contact_repository.dart';
+import '../../domain/repositories/contact_repository.dart';
 
 import '../../models/contact.dart';
 

@@ -1,16 +1,15 @@
-// lib/views/work_experience/work_info_view.dart
 import 'package:flutter/material.dart';
-import 'package:portfolio/models/work_experience.dart';
-import 'package:portfolio/presentations/configs/constant_data.dart';
-import 'package:portfolio/presentations/configs/duration.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/views/widgets/animated_slide_widget.dart';
-import 'package:portfolio/views/work_experience/timeline_indicator.dart';
-import 'package:portfolio/views/work_experience/work_info_detail.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../models/work_experience.dart';
+import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
+import '../../presentations/configs/duration.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../views/work_experience/timeline_indicator.dart';
+import '../../views/work_experience/work_info_detail.dart';
+import '../widgets/animated_slide_widget.dart';
 
 class WorkInfoView extends StatefulWidget {
   const WorkInfoView({super.key});

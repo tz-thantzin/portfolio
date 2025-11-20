@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/presentations/configs/duration.dart';
+import '../../presentations/configs/duration.dart';
 
 enum SlideDirection { downToUp, upToDown, rightToLeft, leftToRight }
 

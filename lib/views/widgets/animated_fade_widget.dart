@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/presentations/configs/constant_colors.dart';
-import 'package:portfolio/presentations/configs/duration.dart';
+import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/duration.dart';
 
 class AnimatedFadeWidget extends StatefulWidget {
   final AnimationController? controller;

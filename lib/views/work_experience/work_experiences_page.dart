@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/presentations/configs/constant_images.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:portfolio/views/widgets/header_view.dart';
-import 'package:portfolio/views/work_experience/work_info_view.dart';
 
 import '../../core/routing/routes.dart';
+import '../../presentations/configs/constant_images.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
+import '../../views/widgets/header_view.dart';
+import '../../views/work_experience/work_info_view.dart';
 import '../footer/footer_view.dart';
 import '../wrapper.dart';
 

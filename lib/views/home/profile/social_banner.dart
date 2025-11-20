@@ -1,14 +1,13 @@
-// lib/views/widgets/social_banner.dart  (or wherever it's located)
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/core/di/providers.dart';
-import 'package:portfolio/presentations/configs/duration.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
 
+import '../../../core/di/providers.dart';
 import '../../../presentations/configs/constant_colors.dart';
 import '../../../presentations/configs/constant_data.dart';
 import '../../../presentations/configs/constant_sizes.dart';
+import '../../../presentations/configs/duration.dart';
+import '../../../utils/extensions/layout_adapter_ex.dart';
+import '../../../utils/extensions/widget_ex.dart';
 
 class SocialBanner extends ConsumerStatefulWidget {
   const SocialBanner({super.key});

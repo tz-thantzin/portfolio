@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
+import '../../utils/extensions/context_ex.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/project.dart';
@@ -231,12 +231,12 @@ List<Skill> languagesAndTools(BuildContext context) {
 
 List<WorkExperience> experiences() {
   return <WorkExperience>[
-    WorkExperience(
-      title: "Senior Mobile Application Developer",
-      company: "mBridge Co., Ltd.",
-      period: "Nov 2025 – Present",
-      workMode: WorkMode.remote,
-    ),
+    // WorkExperience(
+    //   title: "Senior Mobile Application Developer",
+    //   company: "mBridge Co., Ltd.",
+    //   period: "Nov 2025 – Present",
+    //   workMode: WorkMode.remote,
+    // ),
     WorkExperience(
       title: "Freelance Mobile Application Developer",
       company: "",

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/presentations/configs/constant_colors.dart';
-import 'package:portfolio/presentations/configs/constant_sizes.dart';
-import 'package:portfolio/presentations/configs/duration.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:portfolio/views/widgets/text/animated_fade_in_text.dart';
 
+import '../../../presentations/configs/constant_colors.dart';
+import '../../../presentations/configs/constant_sizes.dart';
+import '../../../presentations/configs/duration.dart';
+import '../../../utils/extensions/theme_ex.dart';
+import '../../../utils/extensions/widget_ex.dart';
 import '../dotted_rectangle_painter.dart';
+import 'animated_fade_in_text.dart';
 
 class AnimatedHeaderText extends StatefulWidget {
   final String text;

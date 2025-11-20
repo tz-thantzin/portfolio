@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:portfolio/views/widgets/text/animated_header_text.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
+import '../../views/widgets/text/animated_header_text.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';

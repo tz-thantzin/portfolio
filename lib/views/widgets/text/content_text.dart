@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
 
 import '../../../presentations/configs/constant_sizes.dart';
+import '../../../utils/extensions/theme_ex.dart';
 
 class ContentText extends StatelessWidget {
   final String data;
@@ -18,10 +17,7 @@ class ContentText extends StatelessWidget {
   Widget build(BuildContext context) {
     return SelectableText(
       data,
-      style: context.bodyMedium.copyWith(
-        color: textColor,
-        fontSize: fontSize,
-      ),
+      style: context.bodyMedium.copyWith(color: textColor, fontSize: fontSize),
     );
   }
 }

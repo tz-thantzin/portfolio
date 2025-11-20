@@ -2,16 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/core/di/providers.dart';
-import 'package:portfolio/models/project.dart';
-import 'package:portfolio/presentations/configs/constant_colors.dart';
-import 'package:portfolio/presentations/configs/constant_data.dart';
-import 'package:portfolio/presentations/configs/constant_sizes.dart';
-import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/views/home/recent_projects/recent_project_image.dart';
 
+import '../../../core/di/providers.dart';
+import '../../../models/project.dart';
+import '../../../presentations/configs/constant_colors.dart';
+import '../../../presentations/configs/constant_data.dart';
+import '../../../presentations/configs/constant_sizes.dart';
+import '../../../utils/extensions/context_ex.dart';
+import '../../../utils/extensions/layout_adapter_ex.dart';
+import '../../../utils/extensions/theme_ex.dart';
 import '../../widgets/animated_text_button.dart';
 import '../../widgets/text/content_text.dart';
 
