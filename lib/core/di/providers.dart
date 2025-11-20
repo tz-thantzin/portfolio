@@ -29,7 +29,7 @@ final contactUseCaseProvider = Provider<ContactUseCase>(
   (ref) => ContactUseCase(ref.watch(contactRepositoryProvider)),
 );
 
-// ViewModels - Using ChangeNotifierProvider as requested
+// ViewModels
 final homeViewModelProvider = ChangeNotifierProvider<HomeViewModel>(
   (ref) => HomeViewModel(),
 );
