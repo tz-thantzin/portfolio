@@ -1,4 +1,7 @@
+// lib/views/contact/contact_page.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:portfolio/core/di/providers.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
@@ -7,12 +10,11 @@ import 'package:portfolio/views/footer/footer_view.dart';
 import 'package:portfolio/views/widgets/animated_slide_button.dart';
 import 'package:portfolio/views/widgets/animated_text_field.dart';
 import 'package:portfolio/views/widgets/text/content_text.dart';
-import 'package:provider/provider.dart';
 
+import '../../core/routing/routes.dart';
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
-import '../../route/routes.dart';
 import '../../view_models/contact_view_model.dart';
 import '../widgets/animated_fade_widget.dart';
 import '../widgets/text/title_text.dart';
@@ -28,7 +30,6 @@ class ContactPage extends StatefulWidget {
 class _ContactPageState extends State<ContactPage>
     with TickerProviderStateMixin {
   late final AnimationController _fadeController;
-
   late AnimationController _nameAnimationController;
   late AnimationController _jobAnimationController;
   late AnimationController _emailAnimationController;
@@ -67,16 +68,19 @@ class _ContactPageState extends State<ContactPage>
       duration: const Duration(milliseconds: 300),
     );
 
+    // Add listeners
     _addFocusListener(_nameFocus, _nameAnimationController);
     _addFocusListener(_jobFocus, _jobAnimationController);
     _addFocusListener(_emailFocus, _emailAnimationController);
     _addFocusListener(_messageFocus, _messageAnimationController);
 
+    // Start fade animation after delay
     Future.delayed(duration1500, () {
       if (mounted) _fadeController.forward();
     });
   }
 
+  // ←←← THIS WAS MISSING! ←←←
   void _addFocusListener(FocusNode focusNode, AnimationController controller) {
     focusNode.addListener(() {
       if (!mounted) return;
@@ -109,12 +113,15 @@ class _ContactPageState extends State<ContactPage>
     super.dispose();
   }
 
-  Future<void> _sendMessage() async {
-    final vm = context.read<ContactViewModel>();
+  Future<void> _sendMessage(WidgetRef ref) async {
+    final vm = ref.read(contactViewModelProvider);
     vm.validate();
-    bool hasSent = await vm.sendMessage();
 
-    if (hasSent) {
+    final success = await vm.sendMessage();
+
+    if (!mounted) return;
+
+    if (success) {
       _nameController.clear();
       _jobController.clear();
       _emailController.clear();
@@ -146,10 +153,13 @@ class _ContactPageState extends State<ContactPage>
       child:
           Column(
             children: [
-              Consumer<ContactViewModel>(
-                builder: (context, vm, _) => _buildInputForm(context, vm),
+              Consumer(
+                builder: (context, ref, child) {
+                  final vm = ref.watch(contactViewModelProvider);
+                  return _buildInputForm(context, vm, ref);
+                },
               ),
-              FooterView(isShowWorkTogether: false),
+              const FooterView(isShowWorkTogether: false),
             ],
           ).addScrollView(
             padding: EdgeInsets.only(
@@ -159,7 +169,11 @@ class _ContactPageState extends State<ContactPage>
     );
   }
 
-  Widget _buildInputForm(BuildContext context, ContactViewModel vm) {
+  Widget _buildInputForm(
+    BuildContext context,
+    ContactViewModel vm,
+    WidgetRef ref,
+  ) {
     return Container(
       width: double.infinity,
       alignment: Alignment.center,
@@ -202,7 +216,6 @@ class _ContactPageState extends State<ContactPage>
                         ),
                       ),
                       verticalSpaceMedium,
-
                       Wrap(
                         spacing: context.autoAdaptive(s8),
                         runSpacing: context.autoAdaptive(s12),
@@ -213,7 +226,6 @@ class _ContactPageState extends State<ContactPage>
                             "Hi there! I hope you are doing well. I'm ",
                             textColor: kBlack,
                           ),
-
                           ConstrainedBox(
                             constraints: BoxConstraints(
                               minWidth: context.autoAdaptive(s150),
@@ -228,12 +240,8 @@ class _ContactPageState extends State<ContactPage>
                                   : kPrimary,
                               validator: (_) => vm.nameError,
                               onChanged: (value) => vm.name = value,
-                              onEditingComplete: () {
-                                vm.name = _nameController.text;
-                              },
                             ),
                           ),
-
                           ContentText(
                             "and I’m looking for ",
                             textColor: kBlack,
@@ -252,13 +260,9 @@ class _ContactPageState extends State<ContactPage>
                                   : kPrimary,
                               validator: (_) => vm.jobError,
                               onChanged: (value) => vm.job = value,
-                              onEditingComplete: () {
-                                vm.job = _jobController.text;
-                              },
                             ),
                           ),
                           ContentText(".", textColor: kBlack),
-
                           ContentText("Reach me at ", textColor: kBlack),
                           ConstrainedBox(
                             constraints: BoxConstraints(
@@ -275,13 +279,9 @@ class _ContactPageState extends State<ContactPage>
                                   : kPrimary,
                               validator: (_) => vm.emailError,
                               onChanged: (value) => vm.email = value,
-                              onEditingComplete: () {
-                                vm.email = _emailController.text;
-                              },
                             ),
                           ),
                           ContentText("!", textColor: kBlack),
-
                           ContentText(
                             "Any additional info or special requests?",
                             textColor: kBlack,
@@ -301,16 +301,12 @@ class _ContactPageState extends State<ContactPage>
                                   : kPrimary,
                               validator: (_) => vm.messageError,
                               onChanged: (value) => vm.message = value,
-                              onEditingComplete: () {
-                                vm.message = _messageController.text;
-                              },
                             ),
                           ),
                         ],
                       ),
-
                       verticalSpaceEnormous,
-                      Divider(color: kBlack),
+                      const Divider(color: kBlack),
                       verticalSpaceMedium,
                       Align(
                         alignment: Alignment.centerRight,
@@ -325,7 +321,9 @@ class _ContactPageState extends State<ContactPage>
                           onHoverColor: kWhite70,
                           isLoading: vm.isSending,
                           iconData: Icons.send,
-                          onPressed: vm.isFormValid ? _sendMessage : null,
+                          onPressed: vm.isFormValid
+                              ? () => _sendMessage(ref)
+                              : null,
                         ),
                       ),
                     ].addColumn(

@@ -303,6 +303,12 @@ abstract class AppLocalizations {
   /// **'Page Not Found'**
   String get page_not_found;
 
+  /// No description provided for @sorry_page_not_exist.
+  ///
+  /// In en, this message translates to:
+  /// **'Sorry, the page you’re looking for does not exist or has been moved.'**
+  String get sorry_page_not_exist;
+
   /// No description provided for @let_work_together.
   ///
   /// In en, this message translates to:

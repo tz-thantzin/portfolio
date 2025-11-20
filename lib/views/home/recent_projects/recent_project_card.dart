@@ -1,36 +1,30 @@
+// lib/views/home/recent_projects/recent_project_card.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/core/di/providers.dart';
+import 'package:portfolio/models/project.dart';
+import 'package:portfolio/presentations/configs/constant_colors.dart';
 import 'package:portfolio/presentations/configs/constant_data.dart';
+import 'package:portfolio/presentations/configs/constant_sizes.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/views/home/recent_projects/recent_project_image.dart';
-import 'package:provider/provider.dart';
 
-import '../../../models/project.dart';
-import '../../../presentations/configs/constant_colors.dart';
-import '../../../presentations/configs/constant_sizes.dart';
-import '../../../view_models/home_view_model.dart';
 import '../../widgets/animated_text_button.dart';
 import '../../widgets/text/content_text.dart';
 
-class RecentProjectCard extends StatefulWidget {
+class RecentProjectCard extends ConsumerWidget {
   final Project project;
 
   const RecentProjectCard(this.project, {super.key});
 
   @override
-  State<RecentProjectCard> createState() => _RecentProjectCardState();
-}
-
-class _RecentProjectCardState extends State<RecentProjectCard> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: EdgeInsetsGeometry.only(bottom: context.autoAdaptive(s16)),
-      child: context.isMobile
-          ? _MobileView(widget.project)
-          : _WebView(widget.project),
+      padding: EdgeInsets.only(bottom: context.autoAdaptive(s16)),
+      child: context.isMobile ? _MobileView(project) : _WebView(project),
     );
   }
 }
@@ -125,12 +119,12 @@ class _ProjectImage extends StatelessWidget {
   }
 }
 
-class _ProjectDetail extends StatelessWidget {
+class _ProjectDetail extends ConsumerWidget {
   final Project project;
   const _ProjectDetail(this.project);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -152,8 +146,9 @@ class _ProjectDetail extends StatelessWidget {
             context.localization.view_project,
             textColor: kIndigo,
             hoverColor: kGrey500,
+
             onPressed: () =>
-                context.read<HomeViewModel>().onProjectView(project.github!),
+                ref.read(homeViewModelProvider).onProjectView(project.github!),
           ),
         ],
       ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/core/routing/routes.dart';
 import 'package:portfolio/presentations/configs/constant_colors.dart';
-import 'package:portfolio/route/routes.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';

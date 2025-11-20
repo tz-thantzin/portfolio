@@ -22,7 +22,7 @@ class _RecentProjectImageState extends State<RecentProjectImage> {
       width: context.autoAdaptive(s100),
       alignment: Alignment.centerRight,
       child: AnimatedScaleWidget(
-        minScale: 0.7,
+        minScale: widget.project.language == Language.iOS ? 0.6 : 0.7,
         maxScale: 0.9,
         child: AspectRatio(
           aspectRatio: 1,

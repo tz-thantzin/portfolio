@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:portfolio/core/di/providers.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/portfolio/project_card.dart';
-import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../presentations/configs/constant_colors.dart';
@@ -13,19 +14,18 @@ import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/constants.dart';
 import '../../presentations/configs/duration.dart';
-import '../../view_models/home_view_model.dart';
 import '../widgets/animated_fade_widget.dart';
 import '../widgets/animated_text_button.dart';
 import '../widgets/text/title_text.dart';
 
-class WorkListView extends StatefulWidget {
+class WorkListView extends ConsumerStatefulWidget {
   const WorkListView({super.key});
 
   @override
-  State<WorkListView> createState() => _WorkListViewState();
+  ConsumerState<WorkListView> createState() => _WorkListViewState();
 }
 
-class _WorkListViewState extends State<WorkListView>
+class _WorkListViewState extends ConsumerState<WorkListView>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   final PageController _pageController = PageController(viewportFraction: 0.8);
@@ -33,7 +33,6 @@ class _WorkListViewState extends State<WorkListView>
   Timer? _autoScrollTimer;
   bool _userDragging = false;
 
-  // Track drag
   double _dragStartX = 0.0;
   double _scrollStartOffset = 0.0;
 
@@ -97,7 +96,6 @@ class _WorkListViewState extends State<WorkListView>
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Fade title
           AnimatedFadeWidget(
             controller: _controller,
             start: 0.0,
@@ -112,11 +110,11 @@ class _WorkListViewState extends State<WorkListView>
             textColor: kBlack,
             fontSize: context.autoAdaptive(s10),
             onPressed: () {
-              context.read<HomeViewModel>().onLaunchUrl(kGithubRepo);
+              ref.read(homeViewModelProvider).onLaunchUrl(kGithubRepo);
             },
           ).addAlign(alignment: Alignment.centerRight),
           verticalSpaceSmall,
-          //Project List
+
           AnimatedFadeWidget(
             controller: _controller,
             start: 0.6,
@@ -158,7 +156,6 @@ class _WorkListViewState extends State<WorkListView>
           ),
           verticalSpaceMedium,
 
-          // Page indicators
           AnimatedFadeWidget(
             controller: _controller,
             start: 0.6,
@@ -179,7 +176,7 @@ class _WorkListViewState extends State<WorkListView>
                       duration: duration500,
                       curve: Curves.easeInOut,
                     );
-                    _startAutoScroll(); // reset timer
+                    _startAutoScroll();
                   },
                   child: AnimatedContainer(
                     duration: duration300,

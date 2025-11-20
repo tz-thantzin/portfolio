@@ -114,6 +114,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get page_not_found => 'Page Not Found';
 
   @override
+  String get sorry_page_not_exist => 'Sorry, the page you’re looking for does not exist or has been moved.';
+
+  @override
   String get let_work_together => 'Let\'s work Together';
 
   @override

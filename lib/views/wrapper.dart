@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:portfolio/core/di/providers.dart';
+import 'package:portfolio/core/routing/routes.dart';
 import 'package:portfolio/presentations/configs/constant_colors.dart';
-import 'package:portfolio/route/routes.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/widgets/animated_loading_slider.dart';
-import 'package:provider/provider.dart';
 
-import '../presentations/configs/constant_sizes.dart';
 import '../presentations/configs/duration.dart';
-import '../view_models/home_view_model.dart';
 import 'home/widgets/custom_nav_drawer.dart';
 import 'home/widgets/nav_bar.dart';
 
-class Wrapper extends StatefulWidget {
+class Wrapper extends ConsumerStatefulWidget {
   final String selectedRoute;
   final String selectedPageName;
   final VoidCallback? onLoadingAnimationDone;
@@ -30,66 +28,86 @@ class Wrapper extends StatefulWidget {
   });
 
   @override
-  State<Wrapper> createState() => _WrapperState();
+  ConsumerState<Wrapper> createState() => _WrapperState();
 }
 
-class _WrapperState extends State<Wrapper> with TickerProviderStateMixin {
-  late AnimationController _loadingController;
-  late AnimationController _menuController;
+class _WrapperState extends ConsumerState<Wrapper>
+    with TickerProviderStateMixin {
+  late final AnimationController _loadingController;
+  late final AnimationController _menuController;
 
-  int sectors = 10;
-  double screenWidth = s0;
-  double sectorWidth = s0;
+  static const int _sectors = 10;
+  final List<Interval> _slideIntervals = [];
+  final GlobalKey _scaffoldKey = GlobalKey();
 
-  final GlobalKey _globalKey = GlobalKey();
-
-  final List<Interval> _itemSlideIntervals = [];
   bool _isAnimating = false;
-  bool _showChild = true;
+  bool _showContent = true;
 
-  Duration get staggeredDuration => duration50;
-  Duration get itemSlideDuration => duration1000;
-  Duration get labelDuration => duration1000;
-  Duration get slideDuration =>
-      staggeredDuration +
-      (staggeredDuration * sectors) +
-      itemSlideDuration +
-      duration200;
-
-  void createStaggeredIntervals() {
-    for (int i = 0; i < sectors; i++) {
-      final Duration start = staggeredDuration + (staggeredDuration * i);
-      final Duration end = start + itemSlideDuration;
-      _itemSlideIntervals.add(
-        Interval(
-          start.inMilliseconds / slideDuration.inMilliseconds,
-          end.inMilliseconds / slideDuration.inMilliseconds,
-        ),
-      );
-    }
-  }
+  Duration get _totalDuration =>
+      duration50 * (1 + _sectors) + duration1000 + duration200;
 
   @override
   void initState() {
     super.initState();
-
     _loadingController = AnimationController(
       vsync: this,
-      duration: slideDuration,
+      duration: _totalDuration,
     );
     _menuController = AnimationController(vsync: this, duration: duration1000);
 
-    if (widget.customLoadingAnimation == null) {
-      _startLoadingAnimation();
-    }
+    _buildSlideIntervals();
+    if (widget.customLoadingAnimation == null) _startLoadingAnimation();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    screenWidth = context.screenWidth;
-    sectorWidth = screenWidth / sectors;
-    createStaggeredIntervals();
+    _buildSlideIntervals(); // Rebuild on screen size change
+  }
+
+  void _buildSlideIntervals() {
+    _slideIntervals.clear();
+    final double totalMs = _totalDuration.inMilliseconds.toDouble();
+
+    for (int i = 0; i < _sectors; i++) {
+      final start = (duration50 + duration50 * i).inMilliseconds / totalMs;
+      final end =
+          (duration50 + duration50 * i + duration1000).inMilliseconds / totalMs;
+      _slideIntervals.add(Interval(start, end, curve: Curves.easeOut));
+    }
+  }
+
+  void _startLoadingAnimation() {
+    setState(() {
+      _showContent = false;
+      _isAnimating = true;
+    });
+
+    _loadingController.forward(from: 0).then((_) {
+      if (!mounted) return;
+      setState(() {
+        _showContent = true;
+        _isAnimating = false;
+      });
+      widget.onLoadingAnimationDone?.call();
+    });
+  }
+
+  void _navigateTo(String routeName) {
+    if (GoRouterState.of(context).name == routeName) return;
+
+    ref.read(homeViewModelProvider).closeDrawer();
+    setState(() => _showContent = false);
+
+    final router = GoRouter.of(context);
+    if (routeName == RouteName.home) {
+      router.goNamed(
+        routeName,
+        extra: NavigationArguments(showCustomAnimation: false),
+      );
+    } else {
+      router.goNamed(routeName);
+    }
   }
 
   @override
@@ -99,91 +117,58 @@ class _WrapperState extends State<Wrapper> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void _startLoadingAnimation() {
-    setState(() {
-      _showChild = false;
-      _isAnimating = true;
-    });
-    _loadingController.forward();
-    _loadingController.forward(from: 0).then((_) {
-      setState(() {
-        _showChild = true;
-        _isAnimating = false;
-      });
-      if (widget.onLoadingAnimationDone != null) {
-        widget.onLoadingAnimationDone!();
-      }
-    });
-  }
-
-  void _handleNavigation(String routeName) {
-    final state = GoRouterState.of(context);
-    if (state.name == routeName) return;
-
-    final homeViewModel = context.read<HomeViewModel>();
-    homeViewModel.closeDrawer();
-
-    setState(() => _showChild = false);
-
-    if (routeName == RouteName.home) {
-      GoRouter.of(context).goNamed(
-        routeName,
-        extra: NavigationArguments(showCustomAnimation: false),
-      );
-    } else {
-      GoRouter.of(context).goNamed(routeName);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final homeVm = ref.watch(homeViewModelProvider);
+    final sectorWidth = context.screenWidth / _sectors;
+
     return Scaffold(
-      key: _globalKey,
+      key: _scaffoldKey,
       extendBodyBehindAppBar: true,
       backgroundColor: kWhite,
       resizeToAvoidBottomInset: false,
-      body: <Widget>[
-        if (_showChild) ...[
-          widget.child,
-          Consumer<HomeViewModel>(
-            builder: (_, homeViewModel, _) => NavBar(
+      body: Stack(
+        children: [
+          // Main content + Nav + Drawer
+          if (_showContent) ...[
+            widget.child,
+            NavBar(
               selectedSection: widget.selectedPageName,
-              onNavItemClicked: _handleNavigation,
-              onMenuTap: homeViewModel.toggleDrawer,
+              onNavItemClicked: _navigateTo,
+              onMenuTap: homeVm.toggleDrawer,
               controller: _menuController,
             ),
-          ),
-          Consumer<HomeViewModel>(
-            builder: (_, HomeViewModel homeViewModel, _) => Visibility(
-              visible: homeViewModel.isDrawerOpen,
-              child: MenuView(
-                onCloseDrawer: homeViewModel.closeDrawer,
-                onNavItemClicked: (String routeName) {
-                  homeViewModel.toggleDrawer();
-                  _handleNavigation(routeName);
+            if (homeVm.isDrawerOpen)
+              MenuView(
+                onCloseDrawer: homeVm.closeDrawer,
+                onNavItemClicked: (route) {
+                  homeVm.toggleDrawer();
+                  _navigateTo(route);
                 },
               ),
-            ),
-          ),
-        ],
-        // slide overlay
-        widget.customLoadingAnimation ?? const SizedBox.shrink(),
-        if (_isAnimating)
-          <Widget>[
-            ...List.generate(
-              sectors,
-              (index) => LoadingSliderTransition(
-                controller: _loadingController,
-                height: context.screenHeight,
-                width: sectorWidth,
-                boxColor: kBlack,
-                coverColor: kWhite,
-                index: index,
-                slideInterval: _itemSlideIntervals[index],
+          ],
+
+          // Custom loading (e.g. first launch)
+          widget.customLoadingAnimation ?? const SizedBox.shrink(),
+
+          // Slider loading overlay
+          if (_isAnimating)
+            Row(
+              children: List.generate(
+                _sectors,
+                (i) => LoadingSliderTransition(
+                  controller: _loadingController,
+                  height: context.screenHeight,
+                  width: sectorWidth,
+                  boxColor: kBlack,
+                  coverColor: kWhite,
+                  index: i,
+                  slideInterval: _slideIntervals[i],
+                ),
               ),
             ),
-          ].addRow(mainAxisAlignment: MainAxisAlignment.spaceEvenly),
-      ].addStack(),
+        ],
+      ),
     );
   }
 }

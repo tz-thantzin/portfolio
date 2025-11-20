@@ -9,11 +9,11 @@ import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/home/recent_projects/recent_project_card.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../../core/routing/routes.dart';
 import '../../../models/project.dart';
 import '../../../presentations/configs/constant_data.dart';
 import '../../../presentations/configs/constant_sizes.dart';
 import '../../../presentations/configs/duration.dart';
-import '../../../route/routes.dart';
 import '../../widgets/animated_fade_widget.dart';
 import '../../widgets/animated_slide_widget.dart';
 import '../../widgets/animated_text_button.dart';

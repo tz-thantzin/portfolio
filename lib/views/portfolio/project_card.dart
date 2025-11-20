@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:portfolio/core/di/providers.dart';
 import 'package:portfolio/utils/extensions/context_ex.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
-import 'package:portfolio/view_models/home_view_model.dart';
 import 'package:portfolio/views/portfolio/project_image.dart';
 import 'package:portfolio/views/widgets/animated_text_button.dart';
 import 'package:portfolio/views/widgets/text/content_text.dart';
-import 'package:provider/provider.dart';
 
 import '../../models/project.dart';
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
 
-class ProjectCard extends StatefulWidget {
+class ProjectCard extends ConsumerWidget {
   final Project project;
 
   const ProjectCard(this.project, {super.key});
 
   @override
-  State<ProjectCard> createState() => _ProjectCardState();
-}
-
-class _ProjectCardState extends State<ProjectCard> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: double.infinity,
       alignment: Alignment.centerLeft,
@@ -37,18 +32,18 @@ class _ProjectCardState extends State<ProjectCard> {
         vertical: context.autoAdaptive(s32),
       ),
       child: Stack(
-        children: [ProjectImage(widget.project), _buildTextColumn(context)],
+        children: [ProjectImage(project), _buildTextColumn(context, ref)],
       ),
     );
   }
 
-  Widget _buildTextColumn(BuildContext context) {
+  Widget _buildTextColumn(BuildContext context, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          widget.project.projectName,
+          project.projectName,
           style: context.titleSmall.copyWith(
             color: kPortfolioTitle,
             fontSize: context.autoAdaptive(s22),
@@ -56,19 +51,14 @@ class _ProjectCardState extends State<ProjectCard> {
           ),
         ),
         verticalSpaceTiny,
-        ContentText(
-          widget.project.description,
-          textColor: kIndigo,
-          fontSize: s14,
-        ),
-        if (widget.project.github != null) ...[
+        ContentText(project.description, textColor: kIndigo, fontSize: s14),
+        if (project.github != null) ...[
           verticalSpaceSmall,
           AnimatedTextButton(
             context.localization.view_project,
             textColor: kIndigo,
-            onPressed: () => context.read<HomeViewModel>().onProjectView(
-              widget.project.github!,
-            ),
+            onPressed: () =>
+                ref.read(homeViewModelProvider).onProjectView(project.github!),
           ),
         ],
       ],

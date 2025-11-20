@@ -1,22 +1,23 @@
+// lib/views/widgets/social_banner.dart  (or wherever it's located)
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:portfolio/core/di/providers.dart';
 import 'package:portfolio/presentations/configs/duration.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:provider/provider.dart';
 
 import '../../../presentations/configs/constant_colors.dart';
 import '../../../presentations/configs/constant_data.dart';
 import '../../../presentations/configs/constant_sizes.dart';
-import '../../../view_models/home_view_model.dart';
 
-class SocialBanner extends StatefulWidget {
+class SocialBanner extends ConsumerStatefulWidget {
   const SocialBanner({super.key});
 
   @override
-  State<SocialBanner> createState() => _SocialBannerState();
+  ConsumerState<SocialBanner> createState() => _SocialBannerState();
 }
 
-class _SocialBannerState extends State<SocialBanner>
+class _SocialBannerState extends ConsumerState<SocialBanner>
     with TickerProviderStateMixin {
   late final List<AnimationController> _bgControllers;
   late final List<Animation<double>> _bgScaleAnimations;
@@ -28,7 +29,7 @@ class _SocialBannerState extends State<SocialBanner>
 
     _bgControllers = List.generate(
       contactList.length,
-      (index) => AnimationController(vsync: this, duration: duration500),
+      (_) => AnimationController(vsync: this, duration: duration500),
     );
 
     _bgScaleAnimations = _bgControllers
@@ -45,9 +46,11 @@ class _SocialBannerState extends State<SocialBanner>
   Future<void> _runSequentialBackgroundAnimation() async {
     if (!mounted) return;
     for (final controller in _bgControllers) {
-      if (mounted) await controller.forward();
+      if (!mounted) return;
+      await controller.forward();
       await Future.delayed(duration200);
-      if (mounted) await controller.reverse();
+      if (!mounted) return;
+      await controller.reverse();
     }
     _runSequentialBackgroundAnimation();
   }
@@ -107,9 +110,9 @@ class _SocialBannerState extends State<SocialBanner>
                 )
                 .addInkWell(
                   borderRadius: BorderRadius.circular(50),
-                  onTap: () => context.read<HomeViewModel>().onLaunchUrl(
-                    contactList[i].link,
-                  ),
+                  onTap: () => ref
+                      .read(homeViewModelProvider)
+                      .onLaunchUrl(contactList[i].link),
                 )
                 .addPadding(
                   padding: EdgeInsets.only(

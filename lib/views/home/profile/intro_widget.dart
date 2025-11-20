@@ -1,27 +1,28 @@
+// lib/views/home/introduction/intro_widget.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:portfolio/core/di/providers.dart';
 import 'package:portfolio/presentations/configs/duration.dart';
 import 'package:portfolio/utils/extensions/layout_adapter_ex.dart';
 import 'package:portfolio/utils/extensions/theme_ex.dart';
 import 'package:portfolio/utils/extensions/widget_ex.dart';
-import 'package:provider/provider.dart';
 
 import '../../../presentations/configs/constant_colors.dart';
 import '../../../presentations/configs/constant_sizes.dart';
 import '../../../presentations/configs/constants.dart';
 import '../../../utils/extensions/context_ex.dart';
-import '../../../view_models/home_view_model.dart';
 import '../../widgets/animated_slide_button.dart';
 import '../../widgets/text/animated_typewriter_text.dart';
 
-class IntroWidget extends StatefulWidget {
+class IntroWidget extends ConsumerStatefulWidget {
   final VoidCallback onTapScrollDown;
   const IntroWidget({super.key, required this.onTapScrollDown});
 
   @override
-  State<IntroWidget> createState() => _IntroWidgetState();
+  ConsumerState<IntroWidget> createState() => _IntroWidgetState();
 }
 
-class _IntroWidgetState extends State<IntroWidget>
+class _IntroWidgetState extends ConsumerState<IntroWidget>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
@@ -76,7 +77,7 @@ class _IntroWidgetState extends State<IntroWidget>
               borderColor: kGrey900,
               onHoverColor: kGrey800,
               onPressed: () {
-                context.read<HomeViewModel>().onDownloadResumeBtnPressed();
+                ref.read(homeViewModelProvider).onDownloadResumeBtnPressed();
               },
             ),
           ].addRow(
@@ -89,7 +90,7 @@ class _IntroWidgetState extends State<IntroWidget>
           mainAxisAlignment: MainAxisAlignment.center,
         )
         .addPadding(
-          padding: EdgeInsetsGeometry.symmetric(
+          padding: EdgeInsets.symmetric(
             horizontal: context.autoAdaptive(context.isMobile ? s0 : s24),
           ),
         );

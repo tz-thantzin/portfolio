@@ -35,6 +35,7 @@
   "schedule_appointment" : "Schedule an Appointment",
   "go_home": "Go Home",
   "page_not_found": "Page Not Found",
+  "sorry_page_not_exist": "Sorry, the page you’re looking for does not exist or has been moved.",
   "let_work_together": "Let's work Together",
   "available_freelancing": "I'm available for freelancing",
   "built_using":"Built using",

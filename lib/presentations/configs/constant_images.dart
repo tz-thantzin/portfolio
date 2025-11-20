@@ -2,11 +2,11 @@ const String baseImagesPath = 'assets/images';
 const String kProfileBg = '$baseImagesPath/home_bg.jpg';
 const String kAboutMeIcon = '$baseImagesPath/about_me.png';
 const String kTZ = '$baseImagesPath/tz.png';
-const String kTypingIcon = '$baseImagesPath/developer_activity.svg';
 const String kNotFound = '$baseImagesPath/not_found.png';
 const String kExperienceBg = '$baseImagesPath/experience_bg.png';
 const String kPortfolioBg = '$baseImagesPath/portfolio_bg.png';
 const String kSkillBg = '$baseImagesPath/skill_bg.png';
+const String kPageNotFound = 'assets/images/page_not_found.png';
 
 ///Icons
 const String baseIconsPath = 'assets/icons';

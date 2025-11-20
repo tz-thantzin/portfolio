@@ -7,7 +7,7 @@ import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:portfolio/views/portfolio/work_list_view.dart';
 import 'package:portfolio/views/wrapper.dart';
 
-import '../../route/routes.dart';
+import '../../core/routing/routes.dart';
 import '../footer/footer_view.dart';
 import '../widgets/header_view.dart';
 

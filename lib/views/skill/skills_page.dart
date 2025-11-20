@@ -6,9 +6,9 @@ import 'package:portfolio/views/footer/footer_view.dart';
 import 'package:portfolio/views/skill/language_tools.dart';
 import 'package:portfolio/views/skill/work_flows.dart';
 
+import '../../core/routing/routes.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
-import '../../route/routes.dart';
 import '../widgets/header_view.dart';
 import '../wrapper.dart';
 
