@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../core/di/providers.dart';
 import '../../models/project.dart';
@@ -7,6 +8,7 @@ import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/constants.dart';
+import '../../presentations/configs/duration.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../views/portfolio/project_card.dart';
@@ -42,16 +44,68 @@ class ProjectListView extends ConsumerWidget {
 
           verticalSpaceMassive,
 
-          // Projects Grid / List
-          isDesktop
-              ? _buildDesktopGrid(projectList)
-              : _buildMobileList(projectList),
+          _ProjectsAnimatedSection(
+            projectList: projectList,
+            isDesktop: isDesktop,
+          ),
         ],
       ),
     );
   }
+}
 
-  Widget _buildDesktopGrid(List<Project> projectList) {
+class _ProjectsAnimatedSection extends StatefulWidget {
+  final List<Project> projectList;
+  final bool isDesktop;
+
+  const _ProjectsAnimatedSection({
+    required this.projectList,
+    required this.isDesktop,
+  });
+
+  @override
+  State<_ProjectsAnimatedSection> createState() =>
+      _ProjectsAnimatedSectionState();
+}
+
+class _ProjectsAnimatedSectionState extends State<_ProjectsAnimatedSection>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: duration2000);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onVisibilityChanged(VisibilityInfo info) {
+    if (info.visibleFraction > 0.2 &&
+        _controller.status == AnimationStatus.dismissed) {
+      _controller.forward();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return VisibilityDetector(
+      key: const ValueKey('projects-section'),
+      onVisibilityChanged: _onVisibilityChanged,
+      child: widget.isDesktop
+          ? _buildDesktopGrid(widget.projectList, _controller)
+          : _buildMobileList(widget.projectList, _controller),
+    );
+  }
+
+  Widget _buildDesktopGrid(
+    List<Project> projectList,
+    AnimationController controller,
+  ) {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -63,12 +117,20 @@ class ProjectListView extends ConsumerWidget {
       ),
       itemCount: projectList.length,
       itemBuilder: (context, index) {
-        return ProjectCard(projectList[index]);
+        return _AnimatedProjectCard(
+          key: ValueKey(projectList[index].projectName),
+          index: index,
+          controller: controller,
+          child: ProjectCard(projectList[index]),
+        );
       },
     );
   }
 
-  Widget _buildMobileList(List<Project> projectList) {
+  Widget _buildMobileList(
+    List<Project> projectList,
+    AnimationController controller,
+  ) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -76,9 +138,70 @@ class ProjectListView extends ConsumerWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 16.0),
-          child: ProjectCard(projectList[index]),
+          child: _AnimatedProjectCard(
+            index: index,
+            controller: controller,
+            child: ProjectCard(projectList[index]),
+          ),
         );
       },
+    );
+  }
+}
+
+class _AnimatedProjectCard extends StatefulWidget {
+  final Widget child;
+  final int index;
+  final AnimationController controller;
+
+  const _AnimatedProjectCard({
+    super.key,
+    required this.child,
+    required this.index,
+    required this.controller,
+  });
+
+  @override
+  State<_AnimatedProjectCard> createState() => _AnimatedProjectCardState();
+}
+
+class _AnimatedProjectCardState extends State<_AnimatedProjectCard>
+    with TickerProviderStateMixin {
+  late final Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: widget.controller,
+        curve: Interval(
+          (widget.index * 0.15).clamp(
+            0.0,
+            0.9,
+          ), // max ~1 second delay for many items
+          1.0,
+          curve: Curves.easeOutCubic,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeTransition(
+      opacity: _animation,
+      child: SlideTransition(
+        position: Tween<Offset>(begin: const Offset(0, 0.15), end: Offset.zero)
+            .animate(
+              CurvedAnimation(
+                parent: widget.controller,
+                curve: Curves.easeOutCubic,
+              ),
+            ),
+        child: widget.child,
+      ),
     );
   }
 }
