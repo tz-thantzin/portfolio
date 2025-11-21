@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../core/routing/routes.dart';
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
@@ -7,7 +8,6 @@ import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../../views/widgets/animated_slide_button.dart';
-
 import '../presentations/configs/constant_images.dart';
 
 class ErrorView extends StatelessWidget {
@@ -21,12 +21,13 @@ class ErrorView extends StatelessWidget {
       backgroundColor: kWhite,
       body: Center(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
-            horizontal: context.autoAdaptive(32),
-            vertical: context.autoAdaptive(48),
-          ),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 1400),
+          child: Container(
+            constraints: BoxConstraints(minHeight: context.screenHeight),
+            padding: EdgeInsets.symmetric(
+              horizontal: context.autoAdaptive(42),
+              vertical: context.autoAdaptive(16),
+            ),
+            alignment: Alignment.center,
             child: isMobile
                 ? _buildMobileLayout(context)
                 : _buildDesktopLayout(context),

@@ -1,37 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../models/project.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
-import '../../views/widgets/animated_scale_widget.dart';
 
-import '../../presentations/configs/constant_sizes.dart';
-
-class ProjectImage extends StatefulWidget {
+class ProjectImage extends StatelessWidget {
   final Project project;
   const ProjectImage(this.project, {super.key});
 
   @override
-  State<ProjectImage> createState() => _ProjectImageState();
-}
-
-class _ProjectImageState extends State<ProjectImage> {
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(s24)),
-      alignment: Alignment.centerRight,
-      child: AnimatedScaleWidget(
-        minScale: widget.project.language == Language.iOS ? 0.6 : 0.7,
-        maxScale: 0.9,
-        child: AspectRatio(
-          aspectRatio: 1,
-          child: SvgPicture.asset(
-            widget.project.imagePath!,
-            width: context.autoAdaptive(s50),
-            height: context.autoAdaptive(s50),
-          ).addOpacity(opacity: 0.8),
-        ),
+    final bool isMobile = context.isMobile;
+    final double aspectRatio = isMobile ? 6.9 : 1.0;
+    final double size = context.autoAdaptive(50.0);
+
+    return SizedBox(
+      height: size,
+      width: isMobile ? size * aspectRatio : size,
+      child: SvgPicture.asset(
+        project.imagePath!,
+        fit: BoxFit.contain,
+        alignment: Alignment.centerLeft,
       ),
     );
   }

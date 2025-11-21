@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+
+import '../../core/routing/routes.dart';
 import '../../presentations/configs/constant_images.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
-import '../../views/portfolio/work_list_view.dart';
+import '../../views/portfolio/project_list_view.dart';
 import '../../views/wrapper.dart';
-
-import '../../core/routing/routes.dart';
 import '../footer/footer_view.dart';
 import '../widgets/header_view.dart';
 
@@ -42,7 +42,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
             bgImagePath: kPortfolioBg,
           ),
           verticalSpaceMassive,
-          WorkListView(),
+          ProjectListView(),
           FooterView(),
         ],
       ).addScrollView(controller: _scrollController),

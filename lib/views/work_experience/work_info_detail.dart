@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../models/work_experience.dart';
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
@@ -130,7 +131,6 @@ class _ResponsibilitiesList extends StatelessWidget {
   }
 }
 
-// Extension for clean work mode labels
 extension WorkModeX on WorkMode {
   String get label => switch (this) {
     WorkMode.remote => 'Remote',
