@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../models/work_experience.dart';
+import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../views/work_experience/timeline_indicator.dart';
 import '../../views/work_experience/work_info_detail.dart';
 import '../widgets/animated_slide_widget.dart';
 
@@ -44,38 +45,42 @@ class _WorkInfoViewState extends State<WorkInfoView>
 
   List<Widget> _buildItems() {
     final workExperiences = experiences();
-    final itemCount = workExperiences.length;
 
-    return workExperiences.asMap().entries.map((entry) {
-      final index = entry.key;
-      final exp = entry.value;
-      final hasNext = index < itemCount - 1;
-      final continueLine =
-          hasNext &&
-          workExperiences[index + 1].company == exp.company &&
-          exp.company.isNotEmpty;
+    /// grouping experiences by company
+    final List<List<WorkExperience>> groupedExperiences = [];
+    if (workExperiences.isNotEmpty) {
+      List<WorkExperience> currentGroup = [workExperiences.first];
+      for (int i = 1; i < workExperiences.length; i++) {
+        if (workExperiences[i].company == workExperiences[i - 1].company &&
+            workExperiences[i].company.isNotEmpty) {
+          currentGroup.add(workExperiences[i]);
+        } else {
+          groupedExperiences.add(currentGroup);
+          currentGroup = [workExperiences[i]];
+        }
+      }
+      groupedExperiences.add(currentGroup);
+    }
 
-      final start = (index / itemCount).clamp(0.0, 1.0);
-      final end = ((index + 1) / itemCount).clamp(0.0, 1.0);
+    int overallIndex = 0;
+
+    return groupedExperiences.map((group) {
+      final start = (overallIndex / workExperiences.length).clamp(0.0, 1.0);
+      overallIndex += group.length;
+      final end = (overallIndex / workExperiences.length).clamp(0.0, 1.0);
 
       return AnimatedSlideWidget(
         controller: _slideController,
         start: start,
         end: end,
         direction: SlideDirection.downToUp,
-        child: _TimelineItem(experience: exp, drawLineBelow: continueLine),
+        child: _ExperienceGroup(group: group),
       );
     }).toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    final children = _buildItems();
-
-    final content = context.isMobile
-        ? Column(children: children)
-        : Wrap(alignment: WrapAlignment.start, children: children);
-
     return VisibilityDetector(
       key: const ValueKey('work-info-view'),
       onVisibilityChanged: _onVisibilityChanged,
@@ -85,38 +90,68 @@ class _WorkInfoViewState extends State<WorkInfoView>
           horizontal: context.autoAdaptive(42),
           vertical: context.autoAdaptive(16),
         ),
-        child: content,
+        child: Column(children: _buildItems()),
       ),
     );
   }
 }
 
-class _TimelineItem extends StatelessWidget {
-  final WorkExperience experience;
-  final bool drawLineBelow;
+class _ExperienceGroup extends StatelessWidget {
+  final List<WorkExperience> group;
 
-  const _TimelineItem({required this.experience, required this.drawLineBelow});
+  const _ExperienceGroup({required this.group});
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (!context.isMobile) ...[
-            TimeLineIndicator(drawLineBelow: drawLineBelow),
-            horizontalSpaceMedium,
-          ],
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(
-                bottom: drawLineBelow ? 0 : context.autoAdaptive(s14),
-              ),
-              child: WorkInfoDetail(experience: experience),
-            ),
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: context.autoAdaptive(s10)),
+      decoration: BoxDecoration(
+        color: kWhite,
+        borderRadius: BorderRadius.circular(context.autoAdaptive(s12)),
+        boxShadow: [
+          BoxShadow(
+            color: kGrey1000.withValues(alpha: 0.05),
+            blurRadius: context.autoAdaptive(s4),
+            offset: const Offset(0, 2),
           ),
         ],
+        border: Border.all(color: kGrey1000.withValues(alpha: 0.1), width: 1),
+      ),
+      child: Column(
+        children: group.asMap().entries.map((entry) {
+          final index = entry.key;
+          final experience = entry.value;
+
+          final isLastItem = index == group.length - 1;
+
+          return Column(
+            children: [
+              _CardItem(experience: experience).addPadding(
+                padding: EdgeInsets.only(top: context.autoAdaptive(s20)),
+              ),
+              if (!isLastItem)
+                Divider(
+                  height: 1,
+                  thickness: 1,
+                  color: kGrey1000.withValues(alpha: 0.1),
+                  indent: context.autoAdaptive(s20),
+                  endIndent: context.autoAdaptive(s20),
+                ),
+            ],
+          );
+        }).toList(),
       ),
     );
+  }
+}
+
+class _CardItem extends StatelessWidget {
+  final WorkExperience experience;
+
+  const _CardItem({required this.experience});
+
+  @override
+  Widget build(BuildContext context) {
+    return WorkInfoDetail(experience: experience);
   }
 }
