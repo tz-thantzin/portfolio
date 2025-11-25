@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 
 import '../../../presentations/configs/constant_colors.dart';
+import '../../../presentations/configs/constant_sizes.dart'; // Added this import for s26
 import '../../../presentations/configs/constants.dart';
 import '../../../presentations/configs/duration.dart';
 import '../../../utils/extensions/context_ex.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
 import '../../../utils/extensions/theme_ex.dart';
+import 'nav_logo.dart';
 
+/// Desktop View
+/// Mobile Navbar (Logo + Menu Icon)
 class NavBar extends StatelessWidget {
   const NavBar({
     super.key,
-    required this.selectedSection,
+    required this.currentRoute,
     required this.onNavItemClicked,
     required this.onMenuTap,
     required this.controller,
     this.hasSideTitle = false,
   });
 
-  final String selectedSection;
+  final String currentRoute;
   final Function(String) onNavItemClicked;
   final VoidCallback onMenuTap;
   final AnimationController controller;
@@ -43,22 +47,22 @@ class NavBar extends StatelessWidget {
         vertical: context.autoAdaptive(12),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            context.localization.thantzin.toUpperCase(),
-            style: context.bodyLarge.copyWith(
-              color: kWhite,
-              fontWeight: FontWeight.w800,
-            ),
+          NavLogo(
+            onTap: () => onNavItemClicked(kHome),
+            title: context.localization.thantzin,
+            currentRoute: currentRoute,
+            color: kWhite,
           ),
-          const Spacer(),
-          GestureDetector(
-            onTap: onMenuTap,
-            child: Icon(
+          IconButton(
+            padding: EdgeInsets.zero,
+            icon: Icon(
               Icons.menu,
-              size: context.autoAdaptive(26),
               color: kWhite,
+              size: context.autoAdaptive(s26),
             ),
+            onPressed: onMenuTap,
           ),
         ],
       ),
@@ -85,18 +89,18 @@ class NavBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Text(
-            context.localization.thantzin.toUpperCase(),
-            style: context.bodyLarge.copyWith(
-              color: kBlack,
-              fontWeight: FontWeight.w800,
-            ),
+          NavLogo(
+            onTap: () => onNavItemClicked(kHome),
+            title: context.localization.thantzin,
+            currentRoute: currentRoute,
+            color: kBlack,
           ),
+
           const Spacer(),
           ...navItems.map((item) {
             final String label = item[0];
             final String route = item[1];
-            final bool isSelected = route == selectedSection;
+            final bool isSelected = route == currentRoute;
 
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),

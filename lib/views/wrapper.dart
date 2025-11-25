@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../core/di/providers.dart';
 import '../../core/routing/routes.dart';
 import '../../presentations/configs/constant_colors.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../views/widgets/animated_loading_slider.dart';
-
 import '../presentations/configs/duration.dart';
-import 'home/widgets/custom_nav_drawer.dart';
 import 'home/widgets/nav_bar.dart';
+import 'home/widgets/nav_drawer.dart';
 
 class Wrapper extends ConsumerStatefulWidget {
   final String selectedRoute;
@@ -133,13 +133,14 @@ class _WrapperState extends ConsumerState<Wrapper>
           if (_showContent) ...[
             widget.child,
             NavBar(
-              selectedSection: widget.selectedPageName,
+              currentRoute: widget.selectedPageName,
               onNavItemClicked: _navigateTo,
               onMenuTap: homeVm.toggleDrawer,
               controller: _menuController,
             ),
             if (homeVm.isDrawerOpen)
-              MenuView(
+              NavDrawer(
+                currentRoute: widget.selectedPageName,
                 onCloseDrawer: homeVm.closeDrawer,
                 onNavItemClicked: (route) {
                   homeVm.toggleDrawer();
