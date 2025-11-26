@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../presentations/configs/constant_colors.dart';
-import '../../../presentations/configs/constant_sizes.dart'; // Added this import for s26
+import '../../../presentations/configs/constant_sizes.dart';
 import '../../../presentations/configs/constants.dart';
 import '../../../presentations/configs/duration.dart';
 import '../../../utils/extensions/context_ex.dart';
@@ -84,8 +84,8 @@ class NavBar extends StatelessWidget {
       width: context.screenWidth,
       height: context.appBarHeight,
       padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(42),
-        vertical: context.autoAdaptive(16),
+        horizontal: context.autoAdaptive(s42),
+        vertical: context.autoAdaptive(s16),
       ),
       child: Row(
         children: [
@@ -103,7 +103,7 @@ class NavBar extends StatelessWidget {
             final bool isSelected = route == currentRoute;
 
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(horizontal: s12),
               child: _NavItem(
                 label: label,
                 isSelected: isSelected,
@@ -150,7 +150,7 @@ class _NavItemState extends State<_NavItem> {
           duration: duration200,
           style: context.bodyMedium.copyWith(
             color: _isHovered ? hoverColor : baseColor,
-            fontWeight: widget.isSelected ? FontWeight.w700 : FontWeight.w400,
+            fontWeight: widget.isSelected ? bold : medium,
           ),
           child: Text(widget.label),
         ),

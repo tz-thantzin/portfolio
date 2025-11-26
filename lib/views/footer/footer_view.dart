@@ -13,8 +13,6 @@ import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
-import '../../views/widgets/animated_scale_widget.dart';
-import '../../views/widgets/text/animated_fade_in_text.dart';
 
 class FooterView extends ConsumerWidget {
   final bool isShowWorkTogether;
@@ -23,120 +21,280 @@ class FooterView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      color: kFooterBg,
-      alignment: Alignment.center,
+      width: double.infinity,
       padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s24),
-        vertical: context.autoAdaptive(s16),
+        horizontal: context.autoAdaptive(s42),
+        vertical: context.autoAdaptive(s50),
       ),
-      child:
-          [
-            if (isShowWorkTogether) ...[
-              AnimatedFadeInText(
+      decoration: BoxDecoration(
+        color: kBlack100,
+        border: Border(
+          top: BorderSide(color: kWhite.withValues(alpha: s008)),
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (isShowWorkTogether) ...[
+            _AnimatedSection(
+              delay: duration300,
+              child: Text(
                 context.localization.let_work_together,
-                style: GoogleFonts.poorStory(
-                  textStyle: context.titleLarge.copyWith(
-                    color: kWhite,
-                    fontSize: context.autoAdaptive(s48),
-                  ),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.syne(
+                  fontSize: context.autoAdaptive(s50),
+                  fontWeight: bold,
+                  color: kWhite,
                 ),
-                delay: duration1000,
               ),
-              verticalSpaceSmall,
-              AnimatedFadeInText(
+            ),
+            verticalSpaceMedium,
+            _AnimatedSection(
+              delay: duration300,
+              child: Text(
                 context.localization.available_freelancing,
+                textAlign: TextAlign.center,
                 style: GoogleFonts.caveat(
-                  textStyle: context.bodySmall.copyWith(
-                    color: kWhite70,
-                    fontSize: context.autoAdaptive(s24),
-                  ),
+                  fontSize: context.autoAdaptive(s32),
+                  fontWeight: medium,
+                  color: kWhite70,
                 ),
-                delay: duration1000,
               ),
-            ],
-            verticalSpaceLarge,
-            _SocialMedia(
+            ),
+            verticalSpaceEnormous,
+          ],
+
+          _AnimatedSection(
+            delay: isShowWorkTogether ? duration500 : duration300,
+            child: _SocialMediaGlow(
               onSocialTap: (link) =>
                   ref.read(homeViewModelProvider).onLaunchUrl(link),
             ),
-            verticalSpaceLarge,
-            Text(
-              '© 2025 Thant Zin. All rights reserved.',
-              style: context.bodySmall.copyWith(color: kGrey300),
-              textAlign: TextAlign.center,
-            ),
-            verticalSpaceMedium,
-            const _BuiltWith(),
-            verticalSpaceLarge,
-          ].addColumn(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
           ),
+
+          verticalSpaceMassive,
+          Divider(
+            height: 1,
+            thickness: 1,
+            color: kGrey1000.withValues(alpha: s08),
+            indent: context.autoAdaptive(s20),
+            endIndent: context.autoAdaptive(s20),
+          ),
+
+          verticalSpaceMassive,
+          _AnimatedSection(
+            delay: isShowWorkTogether ? duration800 : duration300,
+            child: Column(
+              children: [
+                Text(
+                  '© 2025 Thant Zin. All rights reserved.',
+                  style: GoogleFonts.inter(
+                    fontSize: context.autoAdaptive(s14),
+                    color: kGrey500,
+                  ),
+                ),
+                verticalSpaceLarge,
+                const _BuiltWithLove(),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
 
-class _BuiltWith extends StatelessWidget {
-  const _BuiltWith();
+class _AnimatedSection extends StatelessWidget {
+  final Widget child;
+  final Duration delay;
+
+  const _AnimatedSection({required this.child, required this.delay});
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.0, end: 1.0),
+      duration: duration1000,
+      curve: Curves.easeOutCubic,
+      builder: (context, value, _) {
+        return Opacity(
+          opacity: value,
+          child: Transform.translate(
+            offset: Offset(0, 50 * (1 - value)),
+            child: child,
+          ),
+        );
+      },
+    ).animate(delay);
+  }
+}
+
+class _SocialMediaGlow extends StatelessWidget {
+  final void Function(String link) onSocialTap;
+  const _SocialMediaGlow({required this.onSocialTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Social> socialContacts = contacts();
+
+    return Wrap(
+      spacing: context.autoAdaptive(s32),
+      runSpacing: context.autoAdaptive(s16),
+      alignment: WrapAlignment.center,
+      children: socialContacts.map((social) {
+        return _SocialIconButton(social: social, onTap: onSocialTap);
+      }).toList(),
+    );
+  }
+}
+
+class _SocialIconButton extends StatefulWidget {
+  final Social social;
+  final void Function(String) onTap;
+
+  const _SocialIconButton({required this.social, required this.onTap});
+
+  @override
+  State<_SocialIconButton> createState() => _SocialIconButtonState();
+}
+
+class _SocialIconButtonState extends State<_SocialIconButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  bool _isHovered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: duration500);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: GestureDetector(
+        onTap: () => widget.onTap(widget.social.link),
+        child: AnimatedBuilder(
+          animation: _controller,
+          builder: (context, child) {
+            if (_isHovered) {
+              _controller.forward();
+            } else {
+              _controller.reverse();
+            }
+
+            return Transform.scale(
+              scale: 1.0 + (_controller.value * 0.3),
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: kWhite.withValues(alpha: s005),
+                  boxShadow: _isHovered
+                      ? [
+                          BoxShadow(
+                            color: kWhite.withValues(alpha: s025),
+                            blurRadius: 20,
+                            spreadRadius: 5,
+                          ),
+                        ]
+                      : null,
+                ),
+                child: Icon(
+                  widget.social.icon,
+                  color: Colors.white,
+                  size: context.autoAdaptive(s25),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+// Pulsing heart "Built with love"
+class _BuiltWithLove extends StatelessWidget {
+  const _BuiltWithLove();
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           context.localization.built_using,
-          style: context.bodySmall.copyWith(color: kGrey300),
+          style: GoogleFonts.inter(
+            color: Colors.grey.shade500,
+            fontSize: context.autoAdaptive(s14),
+          ),
         ),
-        horizontalSpaceTiny,
-        FlutterLogo(size: context.autoAdaptive(s16)),
-        horizontalSpaceTiny,
+        horizontalSpaceSmall,
+        FlutterLogo(size: context.autoAdaptive(s18)),
+        horizontalSpaceSmall,
         Text(
           context.localization.built_with,
-          style: context.bodySmall.copyWith(color: kGrey300),
+          style: GoogleFonts.inter(
+            color: Colors.grey.shade500,
+            fontSize: context.autoAdaptive(s14),
+          ),
         ),
-        horizontalSpaceTiny,
-        Icon(
-          FontAwesomeIcons.solidHeart,
-          size: context.autoAdaptive(s16),
-          color: kRed,
-        ),
+        horizontalSpaceSmall,
+        _PulsingHeart(),
       ],
     );
   }
 }
 
-class _SocialMedia extends StatelessWidget {
-  final void Function(String link) onSocialTap;
+class _PulsingHeart extends StatefulWidget {
+  @override
+  State<_PulsingHeart> createState() => _PulsingHeartState();
+}
 
-  const _SocialMedia({required this.onSocialTap});
+class _PulsingHeartState extends State<_PulsingHeart>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final List<Social> contactList = contacts();
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: contactList.map((social) {
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(s12)),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(50),
-            hoverColor: kWhite.withValues(alpha: 0.1),
-            onTap: () => onSocialTap(social.link),
-            child: AnimatedScaleWidget(
-              maxScale: 1.3,
-              duration: duration300,
-              child: Icon(
-                social.icon,
-                color: kGrey300,
-                size: context.autoAdaptive(s28),
-              ),
-            ),
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        final scale =
+            1.0 + (0.2 * Curves.easeInOut.transform(_controller.value));
+        return Transform.scale(
+          scale: scale,
+          child: Icon(
+            FontAwesomeIcons.solidHeart,
+            color: kTomato,
+            size: context.autoAdaptive(s18),
           ),
         );
-      }).toList(),
+      },
     );
   }
 }

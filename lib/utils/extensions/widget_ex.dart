@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../presentations/configs/duration.dart';
+
 extension WidgetEx on Widget {
   Padding addPadding({required EdgeInsetsGeometry padding}) {
     return Padding(padding: padding, child: this);
@@ -129,6 +131,33 @@ extension WidgetListEx on List<Widget> {
       shrinkWrap: shrinkWrap ?? false,
       padding: padding,
       children: this,
+    );
+  }
+}
+
+extension AnimatedWidgetExt on Widget {
+  Widget animate(Duration delay) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.0, end: 1.0),
+      duration: duration800,
+      curve: Curves.easeOut,
+      builder: (context, value, child) {
+        return Opacity(opacity: value, child: child);
+      },
+      child: this,
+    ).delayed(delay);
+  }
+}
+
+extension DelayedAnimationExt on Widget {
+  Widget delayed(Duration delay) {
+    return FutureBuilder(
+      future: Future.delayed(delay),
+      builder: (context, snapshot) {
+        return snapshot.connectionState == ConnectionState.done
+            ? this
+            : const SizedBox.shrink();
+      },
     );
   }
 }

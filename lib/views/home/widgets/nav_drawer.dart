@@ -151,13 +151,13 @@ class _NavDrawerState extends State<NavDrawer>
   Widget _navItem(BuildContext context, String title, String route, int index) {
     final TextStyle largeTextStyle = context.labelLarge.copyWith(
       color: kWhite,
-      fontWeight: FontWeight.w800,
+      fontWeight: bold,
       letterSpacing: 0.5,
     );
 
     final TextStyle prefixTextStyle = largeTextStyle.copyWith(
       fontSize: largeTextStyle.fontSize! * 0.8,
-      fontWeight: FontWeight.w400,
+      fontWeight: medium,
       color: kWhite.withValues(alpha: 0.5),
     );
 

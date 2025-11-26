@@ -87,8 +87,8 @@ class _WorkInfoViewState extends State<WorkInfoView>
       child: Container(
         constraints: BoxConstraints(minHeight: context.screenHeight),
         padding: EdgeInsets.symmetric(
-          horizontal: context.autoAdaptive(42),
-          vertical: context.autoAdaptive(16),
+          horizontal: context.autoAdaptive(s42),
+          vertical: context.autoAdaptive(s16),
         ),
         child: Column(children: _buildItems()),
       ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../presentations/configs/duration.dart';
+import 'package:portfolio/utils/extensions/theme_ex.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
+import '../../presentations/configs/duration.dart';
 
 class AnimatedSlideButton extends StatefulWidget {
   AnimatedSlideButton({
@@ -91,7 +92,7 @@ class _AnimatedSlideButtonState extends State<AnimatedSlideButton>
     TextStyle? style = textTheme.bodyMedium?.copyWith(
       color: _textAndIconColor.value,
       fontSize: s14,
-      fontWeight: FontWeight.w400,
+      fontWeight: medium,
     );
     final ButtonStyle defaultButtonStyle = ElevatedButton.styleFrom(
       foregroundColor: widget.onHoverColor,
@@ -148,7 +149,7 @@ class _AnimatedSlideButtonState extends State<AnimatedSlideButton>
     TextStyle? style = textTheme.bodyMedium?.copyWith(
       color: _textAndIconColor.value,
       fontSize: s14,
-      fontWeight: FontWeight.w400,
+      fontWeight: medium,
     );
 
     return Center(

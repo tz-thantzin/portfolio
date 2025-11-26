@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:portfolio/presentations/configs/constant_sizes.dart';
 
 import '../../core/di/providers.dart';
 import '../../models/project.dart';
@@ -85,12 +86,12 @@ class ProjectCard extends ConsumerWidget {
         Text(
           project.projectName,
           style: context.textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.bold,
+            fontWeight: bold,
             color: kBlack,
             height: 1.2,
           ),
         ),
-        const SizedBox(height: 12),
+        verticalSpaceTiny,
         Text(
           project.description,
           style: context.textTheme.bodySmall?.copyWith(

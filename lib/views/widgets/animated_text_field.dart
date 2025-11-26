@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
-
-import '../../presentations/configs/constant_sizes.dart';
 
 class AnimatedUnderlineTextField extends StatefulWidget {
   final String? hintText;
@@ -112,7 +112,7 @@ class _AnimatedUnderlineTextFieldState extends State<AnimatedUnderlineTextField>
                   border: InputBorder.none,
                   hintStyle: context.bodySmall.copyWith(
                     color: kGrey500,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: medium,
                     fontSize: context.autoAdaptive(
                       context.isMobile ? s16 : s13,
                     ),

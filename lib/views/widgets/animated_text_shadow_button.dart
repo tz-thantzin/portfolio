@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../presentations/configs/duration.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
+import '../../presentations/configs/duration.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/theme_ex.dart';
 
 class AnimatedTextShadowButton extends StatefulWidget {
   const AnimatedTextShadowButton({
@@ -39,9 +40,9 @@ class _AnimatedTextShadowButtonState extends State<AnimatedTextShadowButton>
   @override
   Widget build(BuildContext context) {
     final defaultTextStyle = TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.bold,
-      color: Colors.white,
+      fontSize: s20,
+      fontWeight: bold,
+      color: kWhite,
     );
 
     return MouseRegion(

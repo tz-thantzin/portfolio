@@ -24,8 +24,8 @@ class ErrorView extends StatelessWidget {
           child: Container(
             constraints: BoxConstraints(minHeight: context.screenHeight),
             padding: EdgeInsets.symmetric(
-              horizontal: context.autoAdaptive(42),
-              vertical: context.autoAdaptive(16),
+              horizontal: context.autoAdaptive(s42),
+              vertical: context.autoAdaptive(s16),
             ),
             alignment: Alignment.center,
             child: isMobile
@@ -46,9 +46,9 @@ class ErrorView extends StatelessWidget {
         Text(
           "404",
           style: context.displayLarge.copyWith(
-            fontSize: context.autoAdaptive(140),
-            fontWeight: FontWeight.w900,
-            color: kGrey900.withValues(alpha: 0.3),
+            fontSize: context.autoAdaptive(s140),
+            fontWeight: superBold,
+            color: kGrey900.withValues(alpha: s03),
             letterSpacing: 8,
             height: 0.9,
           ),
@@ -57,10 +57,10 @@ class ErrorView extends StatelessWidget {
         verticalSpaceMedium,
 
         ClipRRect(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(s24),
           child: Image.asset(
             kNotFound,
-            height: context.autoAdaptive(260),
+            height: context.autoAdaptive(s260),
             fit: BoxFit.contain,
             width: double.infinity,
           ),
@@ -72,8 +72,8 @@ class ErrorView extends StatelessWidget {
         Text(
           context.localization.page_not_found,
           style: context.headlineLarge.copyWith(
-            fontSize: context.autoAdaptive(32),
-            fontWeight: FontWeight.bold,
+            fontSize: context.autoAdaptive(s32),
+            fontWeight: bold,
             color: kGrey1200,
           ),
           textAlign: TextAlign.center,
@@ -85,7 +85,7 @@ class ErrorView extends StatelessWidget {
         Text(
           context.localization.sorry_page_not_exist,
           style: context.bodyLarge.copyWith(
-            fontSize: context.autoAdaptive(18),
+            fontSize: context.autoAdaptive(s18),
             color: kGrey800,
             height: 1.6,
           ),
@@ -95,7 +95,7 @@ class ErrorView extends StatelessWidget {
         verticalSpaceMassive,
 
         AnimatedSlideButton(
-          height: context.autoAdaptive(56),
+          height: context.autoAdaptive(s55),
           title: context.localization.go_home.toUpperCase(),
           hasIcon: false,
           onPressed: () => GoRouter.of(context).goNamed(RouteName.home),
@@ -122,9 +122,9 @@ class ErrorView extends StatelessWidget {
                   Text(
                     "404",
                     style: context.displayLarge.copyWith(
-                      fontSize: context.autoAdaptive(180),
-                      fontWeight: FontWeight.w900,
-                      color: kGrey900.withValues(alpha: 0.3),
+                      fontSize: context.autoAdaptive(s180),
+                      fontWeight: superBold,
+                      color: kGrey900.withValues(alpha: s03),
                       letterSpacing: 16,
                       height: 0.9,
                     ),
@@ -135,8 +135,8 @@ class ErrorView extends StatelessWidget {
                   Text(
                     context.localization.page_not_found,
                     style: context.headlineLarge.copyWith(
-                      fontSize: context.autoAdaptive(48),
-                      fontWeight: FontWeight.bold,
+                      fontSize: context.autoAdaptive(s48),
+                      fontWeight: bold,
                       color: kGrey1200,
                     ),
                   ),
@@ -146,7 +146,7 @@ class ErrorView extends StatelessWidget {
                   Text(
                     context.localization.sorry_page_not_exist,
                     style: context.bodyLarge.copyWith(
-                      fontSize: context.autoAdaptive(20),
+                      fontSize: context.autoAdaptive(s20),
                       color: kGrey800,
                       height: 1.7,
                     ),
@@ -159,9 +159,9 @@ class ErrorView extends StatelessWidget {
 
             // Right side – Image
             SizedBox(
-              width: context.autoAdaptive(380),
+              width: context.autoAdaptive(s380),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(32),
+                borderRadius: BorderRadius.circular(s32),
                 child: Image.asset(kNotFound, fit: BoxFit.contain),
               ),
             ),
@@ -173,7 +173,7 @@ class ErrorView extends StatelessWidget {
         // Centered Go Home button
         Center(
           child: AnimatedSlideButton(
-            height: context.autoAdaptive(36),
+            height: context.autoAdaptive(s36),
             title: context.localization.go_home.toUpperCase(),
             hasIcon: false,
             onPressed: () => GoRouter.of(context).goNamed(RouteName.home),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 const double s0 = 0.0;
+const double s005 = 0.05;
+const double s008 = 0.08;
+const double s025 = 0.25;
 const double s03 = 0.3;
 const double s05 = 0.5;
 const double s08 = 0.8;
@@ -44,15 +47,18 @@ const double s96 = 96.0;
 const double s100 = 100.0;
 const double s110 = 110.0;
 const double s120 = 120.0;
+const double s140 = 140.0;
 const double s150 = 150.0;
 const double s165 = 165.0;
 const double s180 = 180.0;
 const double s200 = 200.0;
 const double s220 = 220.0;
 const double s250 = 250.0;
+const double s260 = 260.0;
 const double s280 = 280.0;
 const double s300 = 300.0;
 const double s350 = 350.0;
+const double s380 = 380.0;
 const double s400 = 400.0;
 const double s450 = 450.0;
 const double s600 = 600.0;

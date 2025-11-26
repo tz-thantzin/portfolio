@@ -42,7 +42,7 @@ class _NavLogoState extends State<NavLogo> {
           duration: duration200,
           style: context.bodyLarge.copyWith(
             color: _isHovered && !isHomeScreen ? kIndigo : widget.color,
-            fontWeight: FontWeight.w800,
+            fontWeight: bold,
           ),
           child: Text(widget.title.toUpperCase()),
         ),

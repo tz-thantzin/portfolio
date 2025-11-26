@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/views/home/recent_projects/recent_project_card.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../core/routing/routes.dart';
@@ -17,6 +16,7 @@ import '../../../utils/extensions/widget_ex.dart';
 import '../../widgets/animated_fade_widget.dart';
 import '../../widgets/animated_slide_widget.dart';
 import '../../widgets/animated_text_button.dart';
+import 'recent_project_card.dart';
 
 class RecentProjectView extends StatefulWidget {
   const RecentProjectView({super.key});
@@ -72,8 +72,8 @@ class _RecentProjectViewState extends State<RecentProjectView>
       constraints: BoxConstraints(minHeight: context.screenHeight),
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(42),
-        vertical: context.autoAdaptive(16),
+        horizontal: context.autoAdaptive(s42),
+        vertical: context.autoAdaptive(s50),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +88,7 @@ class _RecentProjectViewState extends State<RecentProjectView>
                   style: GoogleFonts.caveat(
                     textStyle: context.bodyLarge.copyWith(
                       color: kIndigo,
-                      fontSize: context.autoAdaptive(s36),
+                      fontSize: context.autoAdaptive(s42),
                       fontWeight: superBold,
                     ),
                   ),
@@ -131,7 +131,7 @@ class _RecentProjectViewState extends State<RecentProjectView>
               start: slideStart.clamp(0.0, 1.0),
               end: slideEnd.clamp(0.0, 1.0),
               direction: SlideDirection.upToDown,
-              child: RecentProjectCard(project),
+              child: RecentProjectCard(project, isOddIndex: index.isOdd),
             );
           }),
           verticalSpaceMassive,

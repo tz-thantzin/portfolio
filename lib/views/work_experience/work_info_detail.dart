@@ -113,7 +113,7 @@ class _ResponsibilitiesList extends StatelessWidget {
                     '• ',
                     style: context.bodySmall.copyWith(
                       color: kGrey1000,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: bold,
                     ),
                   ),
                   Expanded(

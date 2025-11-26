@@ -24,8 +24,10 @@ class ProjectListView extends ConsumerWidget {
 
     return Container(
       width: double.infinity,
-      constraints: BoxConstraints(minHeight: context.screenHeight * 0.8),
-      padding: const EdgeInsets.symmetric(horizontal: 42.0, vertical: 32.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(s42),
+        vertical: context.autoAdaptive(s16),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,7 +115,7 @@ class _ProjectsAnimatedSectionState extends State<_ProjectsAnimatedSection>
         maxCrossAxisExtent: 420,
         crossAxisSpacing: 24,
         mainAxisSpacing: 24,
-        childAspectRatio: 0.95,
+        childAspectRatio: 1.5,
       ),
       itemCount: projectList.length,
       itemBuilder: (context, index) {

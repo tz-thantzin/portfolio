@@ -102,20 +102,20 @@ List<Project> recentProjects() {
       language: Language.flutter,
     ),
     Project(
-      projectName: 'My Animated Text',
-      description:
-          'Customizable Flutter animated text widgets for dynamic, engaging text effects.',
-      imagePath: kFlutterSVG,
-      github: 'https://github.com/tz-thantzin/my_animated_text',
-      language: Language.flutter,
-    ),
-    Project(
       projectName: 'Chat',
       description:
           'A Flutter-based chat application developed as a personal project to explore real-time messaging with Firebase.',
       imagePath: kFlutterSVG,
       github: 'https://github.com/tz-thantzin/firebase_chat_flutter',
       language: Language.flutter,
+    ),
+    Project(
+      projectName: 'Weather',
+      description:
+          'A Swift-based weather application developed as a personal project.',
+      imagePath: kSwiftSVG,
+      github: 'https://github.com/tz-thantzin/Weather-iOS',
+      language: Language.iOS,
     ),
     Project(
       projectName: 'M-Ratex',
