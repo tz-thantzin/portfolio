@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/views/widgets/text/label_text.dart';
 
 import '../../../presentations/configs/constant_colors.dart';
 import '../../../presentations/configs/constant_sizes.dart';
@@ -8,6 +9,7 @@ import '../../../utils/extensions/context_ex.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
 import '../../../utils/extensions/theme_ex.dart';
 import '../../../utils/extensions/widget_ex.dart';
+import '../../widgets/text/app_text.dart';
 import 'nav_logo.dart';
 
 /// Mobile View (Full-Screen Nav Drawer Style)
@@ -68,7 +70,7 @@ class _NavDrawerState extends State<NavDrawer>
     return Scaffold(
       backgroundColor: kPrimary,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(s24)),
+        padding: EdgeInsets.symmetric(horizontal: context.autoAdaptive(s42)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -81,9 +83,9 @@ class _NavDrawerState extends State<NavDrawer>
             /// Menu Items Section
             Expanded(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(items.length, (index) {
                   final intervalStart = (index / itemCount) * 0.7;
                   final intervalEnd = ((index + 1) / itemCount) * 0.7 + 0.3;
@@ -134,14 +136,13 @@ class _NavDrawerState extends State<NavDrawer>
             currentRoute: widget.currentRoute,
             color: kWhite,
           ),
-          IconButton(
-            padding: EdgeInsets.zero,
-            icon: Icon(
+          GestureDetector(
+            onTap: _reverseAnimationAndClose,
+            child: Icon(
               Icons.close,
               color: kWhite,
               size: context.autoAdaptive(s26),
             ),
-            onPressed: _reverseAnimationAndClose,
           ),
         ],
       ),
@@ -149,18 +150,6 @@ class _NavDrawerState extends State<NavDrawer>
   }
 
   Widget _navItem(BuildContext context, String title, String route, int index) {
-    final TextStyle largeTextStyle = context.labelLarge.copyWith(
-      color: kWhite,
-      fontWeight: bold,
-      letterSpacing: 0.5,
-    );
-
-    final TextStyle prefixTextStyle = largeTextStyle.copyWith(
-      fontSize: largeTextStyle.fontSize! * 0.8,
-      fontWeight: medium,
-      color: kWhite.withValues(alpha: 0.5),
-    );
-
     return InkWell(
       onTap: () {
         widget.onNavItemClicked(route);
@@ -175,12 +164,22 @@ class _NavDrawerState extends State<NavDrawer>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Numerical Prefix (e.g., "01.")
-              Text('0${index + 1}.', style: prefixTextStyle).addPadding(
+              LabelText(
+                '0${index + 1}.',
+                fontWeight: medium,
+                color: kWhite.withValues(alpha: 0.5),
+              ).addPadding(
                 padding: EdgeInsets.only(right: context.autoAdaptive(16)),
               ),
 
               // Main Navigation Title
-              Text(title, style: largeTextStyle),
+              LabelText(
+                title,
+                fontSize: FontSize.medium,
+                fontWeight: bold,
+                color: kWhite,
+                letterSpacing: 0.5,
+              ),
             ],
           ),
         ),

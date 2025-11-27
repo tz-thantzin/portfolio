@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:layout/layout.dart';
+
 import '../../utils/extensions/context_ex.dart';
 
 extension LayoutAdapter on BuildContext {
@@ -25,8 +26,8 @@ extension LayoutAdapter on BuildContext {
     final double base = def;
 
     return layout.value(
-      xs: xs ?? base * 0.8, // smaller than default
-      sm: sm ?? base * 0.9, // slightly smaller
+      xs: xs ?? base * 0.85, // smaller than default
+      sm: sm ?? base * 0.95, // slightly smaller
       md: md ?? base, // default
       lg: lg ?? base * 1.4, // slightly bigger
       xl: xl ?? base * 1.8, // bigger

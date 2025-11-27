@@ -4,6 +4,8 @@ import 'package:portfolio/presentations/configs/constants.dart';
 import '../../../presentations/configs/constant_colors.dart';
 import '../../../presentations/configs/duration.dart';
 import '../../../utils/extensions/theme_ex.dart';
+import '../../widgets/text/app_text.dart';
+import '../../widgets/text/body_text.dart';
 
 class NavLogo extends StatefulWidget {
   final String title;
@@ -44,7 +46,11 @@ class _NavLogoState extends State<NavLogo> {
             color: _isHovered && !isHomeScreen ? kIndigo : widget.color,
             fontWeight: bold,
           ),
-          child: Text(widget.title.toUpperCase()),
+          child: BodyText(
+            widget.title.toUpperCase(),
+            fontSize: FontSize.small,
+            fontWeight: bold,
+          ),
         ),
       ),
     );

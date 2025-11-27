@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
+import 'package:portfolio/views/widgets/text/label_text.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../models/skill.dart';
@@ -11,7 +9,10 @@ import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
-import '../widgets/text/title_text.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
+import '../widgets/text/app_text.dart';
 
 class LanguageAndTools extends StatefulWidget {
   const LanguageAndTools({super.key});
@@ -57,9 +58,11 @@ class _LanguageAndToolsState extends State<LanguageAndTools>
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          TitleText(
-            context.localization.programming_languages_tools,
+          LabelText(
+            context.localization.programming_languages_tools.toUpperCase(),
+            fontSize: FontSize.small,
           ).addVisibilityDetector(onDetectVisibility: _onVisibilityChanged),
+
           verticalSpaceMassive,
           Wrap(
             spacing: context.autoAdaptive(8),

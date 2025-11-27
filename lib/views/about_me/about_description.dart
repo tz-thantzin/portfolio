@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/presentations/configs/constant_colors.dart';
+import 'package:portfolio/views/widgets/text/app_text.dart';
+import 'package:portfolio/views/widgets/text/body_text.dart';
 
 import '../../presentations/configs/constant_sizes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
-import '../widgets/text/content_text.dart';
-import '../widgets/text/title_text.dart';
+import '../../utils/extensions/theme_ex.dart';
 
 class AboutDescription extends StatelessWidget {
   const AboutDescription();
@@ -20,12 +22,17 @@ class AboutDescription extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          TitleText(
+          BodyText(
             context.localization.little_bit_about_myself,
-            fontSize: s16,
+            fontWeight: semiBold,
           ),
           verticalSpaceMedium,
-          ContentText(context.localization.about_me_description),
+          BodyText(
+            context.localization.about_me_description,
+            fontSize: FontSize.small,
+            fontWeight: light,
+            color: kBlack100,
+          ),
         ],
       ),
     );

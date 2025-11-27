@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
@@ -15,7 +16,7 @@ extension ThemeEx on BuildContext {
       useMaterial3: true,
       scaffoldBackgroundColor: kPrimary,
       appBarTheme: appBarTheme,
-      textTheme: textTheme,
+      textTheme: GoogleFonts.robotoTextTheme(textTheme),
       textSelectionTheme: textSelectionTheme,
       colorScheme: colorScheme,
       iconTheme: iconTheme,
@@ -117,131 +118,8 @@ extension ThemeEx on BuildContext {
       const TextStyle(fontSize: s20, fontWeight: semiBold);
 
   TextStyle get bodyLarge =>
-      const TextStyle(fontSize: s20, fontWeight: medium, color: kBlack);
-  TextStyle get bodyMedium =>
       const TextStyle(fontSize: s16, fontWeight: medium, color: kBlack);
-  TextStyle get bodySmall => const TextStyle(fontSize: s14, fontWeight: medium);
-
-  TextStyle get caption =>
-      const TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: kBlack);
-  //
-  // TextStyle get navTitleTextStyle => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontWeight: FontWeight.bold,
-  //   color: kBlue,
-  //   fontSize: scaleFontSize(16),
-  // );
-  //
-  // TextStyle get navItemTextStyle => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontWeight: FontWeight.w500,
-  //   color: kBlue,
-  //   fontSize: scaleFontSize(11),
-  // );
-
-  // TextStyle get navItemSelectedTextStyle =>
-  //     navItemTextStyle.copyWith(fontWeight: FontWeight.w900, color: kBlue);
-  //
-  // TextStyle get displayLarge => TextStyle(
-  //   fontFamily: 'RobotoCondensedLocal',
-  //   fontSize: scaleFontSize(32),
-  //   color: colorScheme.primary,
-  //   fontWeight: FontWeight.bold,
-  // );
-  //
-  // TextStyle get displayMedium => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(20),
-  //   color: colorScheme.onSurface,
-  //   fontWeight: FontWeight.bold,
-  // );
-  //
-  // TextStyle get displaySmall => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(14),
-  //   color: colorScheme.primary,
-  //   fontWeight: FontWeight.bold,
-  // );
-  //
-  // TextStyle get bodyLarge => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(14),
-  //   color: colorScheme.onSurface.withValues(alpha: 0.6),
-  // );
-  //
-  // TextStyle get headlineLarge => TextStyle(
-  //   fontFamily: 'BungeeLocal',
-  //   fontSize: scaleFontSize(20),
-  //   color: kBlue,
-  //   fontWeight: FontWeight.bold,
-  // );
-  //
-  // TextStyle get headlineMedium => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(14),
-  //   color: colorScheme.onSurface,
-  // );
-  //
-  // TextStyle get headlineSmall => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(11),
-  //   color: colorScheme.onSurface,
-  // );
-  //
-  // TextStyle get tagTextStyle => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(10),
-  //   color: colorScheme.primary,
-  // );
-  //
-  // TextStyle get titleLarge => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(14),
-  //   fontWeight: FontWeight.w600,
-  //   color: colorScheme.onSurface,
-  // );
-  //
-  // TextStyle get titleMedium => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(12),
-  //   fontWeight: FontWeight.normal,
-  //   color: colorScheme.onSurface,
-  // );
-  //
-  // TextStyle get titleSmall => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(10),
-  //   color: colorScheme.onSurface.withValues(alpha: 0.6),
-  // );
-  //
-  // TextStyle get bodySmall => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(10),
-  //   color: colorScheme.onSurface.withValues(alpha: 0.5),
-  // );
-  //
-  // TextStyle get bodyMedium => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(12),
-  //   color: colorScheme.onSurface.withValues(alpha: 0.6),
-  // );
-  //
-  // TextStyle get labelLarge => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(14),
-  //   color: kWhite,
-  // );
-  //
-  // TextStyle get navDrawerTitleTextStyle => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(16),
-  //   color: kWhite,
-  //   fontWeight: FontWeight.w600,
-  // );
-  //
-  // TextStyle get navDrawerDescriptionTextStyle => TextStyle(
-  //   fontFamily: 'MulishLocal',
-  //   fontSize: scaleFontSize(14),
-  //   color: kWhite70,
-  // );
+  TextStyle get bodyMedium =>
+      const TextStyle(fontSize: s14, fontWeight: medium, color: kBlack);
+  TextStyle get bodySmall => const TextStyle(fontSize: s10, fontWeight: medium);
 }

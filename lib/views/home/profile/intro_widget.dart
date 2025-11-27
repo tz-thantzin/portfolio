@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:portfolio/views/widgets/text/app_text.dart';
+import 'package:portfolio/views/widgets/text/body_text.dart';
+import 'package:portfolio/views/widgets/text/title_text.dart';
 
 import '../../../core/di/providers.dart';
 import '../../../presentations/configs/constant_colors.dart';
 import '../../../presentations/configs/constant_sizes.dart';
-import '../../../presentations/configs/constants.dart';
 import '../../../presentations/configs/duration.dart';
 import '../../../utils/extensions/context_ex.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
@@ -26,28 +28,27 @@ class _IntroWidgetState extends ConsumerState<IntroWidget>
   @override
   Widget build(BuildContext context) {
     return <Widget>[
-          Text(
+          TitleText(
             context.localization.hi,
-            style: context.displayMedium.copyWith(
-              color: kBlack,
-              fontSize: context.autoAdaptive(s32),
-            ),
+            fontSize: FontSize.small,
+            color: kBlack,
+            fontWeight: semiBold,
           ),
           verticalSpaceSmall,
+
           <Widget>[
-            Text(
+            TitleText(
               context.localization.i_am,
-              style: context.displayMedium.copyWith(
-                color: kBlack,
-                fontSize: context.autoAdaptive(s32),
-              ),
+              fontSize: FontSize.small,
+              color: kBlack,
+              fontWeight: semiBold,
             ),
             horizontalSpaceSmall,
             TypewriterText(
               context.localization.thantzin,
-              style: context.displayLarge.copyWith(
+              style: context.titleSmall.copyWith(
                 color: kTomato,
-                fontSize: context.autoAdaptive(s32),
+                fontSize: context.autoAdaptive(s36),
               ),
               startDelay: duration3000,
             ),
@@ -57,14 +58,10 @@ class _IntroWidgetState extends ConsumerState<IntroWidget>
             crossAxisAlignment: CrossAxisAlignment.center,
           ),
           verticalSpaceSmall,
-          Text(
+          BodyText(
             context.localization.freelance_mobile_developer,
-            textHeightBehavior: textHeightBehavior,
             textAlign: context.isMobile ? TextAlign.center : TextAlign.start,
-            style: context.bodyLarge.copyWith(
-              color: kGrey800,
-              fontSize: context.autoAdaptive(16),
-            ),
+            color: kGrey800,
           ),
           verticalSpaceMassive,
           <Widget>[

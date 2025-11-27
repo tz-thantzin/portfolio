@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/presentations/configs/constant_sizes.dart';
 
-import '../../../presentations/configs/constant_sizes.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
 import '../../../utils/extensions/theme_ex.dart';
 import 'app_text.dart';
 
-class TitleText extends AppText {
-  const TitleText(
+class LabelText extends AppText {
+  const LabelText(
     super.text, {
     super.key,
     super.fontSize = FontSize.medium,
@@ -26,18 +26,13 @@ class TitleText extends AppText {
   @override
   Widget build(BuildContext context) {
     final TextStyle baseStyle = switch (fontSize) {
-      FontSize.large => context.titleLarge.copyWith(
-        fontSize: context.autoAdaptive(s48),
-        fontStyle: fontStyle,
+      FontSize.large => context.labelLarge.copyWith(
+        fontSize: context.autoAdaptive(s28),
       ),
-      FontSize.medium => context.titleMedium.copyWith(
-        fontSize: context.autoAdaptive(s42),
-        fontStyle: fontStyle,
+      FontSize.medium => context.labelMedium.copyWith(
+        fontSize: context.autoAdaptive(s24),
       ),
-      _ => context.titleSmall.copyWith(
-        fontSize: context.autoAdaptive(s36),
-        fontStyle: fontStyle,
-      ),
+      _ => context.labelSmall.copyWith(fontSize: context.autoAdaptive(s20)),
     };
 
     final TextStyle textStyle = getStyle(context, baseStyle).copyWith(

@@ -10,7 +10,7 @@ class AnimatedFadeInText extends StatefulWidget {
   final Duration duration;
   final Duration delay;
   final Curve curve;
-  final AnimationController? controller; // optional external controller
+  final AnimationController? controller;
 
   const AnimatedFadeInText(
     this.text, {
@@ -30,7 +30,7 @@ class _AnimatedFadeInTextState extends State<AnimatedFadeInText>
     with TickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _fadeAnimation;
-  late final bool _ownsController; // track ownership
+  late final bool _ownsController;
 
   @override
   void initState() {

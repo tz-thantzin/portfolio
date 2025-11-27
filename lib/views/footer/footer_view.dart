@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/views/widgets/text/app_text.dart';
+import 'package:portfolio/views/widgets/text/label_text.dart';
 
 import '../../core/di/providers.dart';
 import '../../models/social.dart';
@@ -13,6 +15,7 @@ import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
+import '../widgets/text/body_text.dart';
 
 class FooterView extends ConsumerWidget {
   final bool isShowWorkTogether;
@@ -38,27 +41,27 @@ class FooterView extends ConsumerWidget {
           if (isShowWorkTogether) ...[
             _AnimatedSection(
               delay: duration300,
-              child: Text(
+              child: LabelText(
                 context.localization.let_work_together,
+                fontSize: FontSize.large,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.syne(
-                  fontSize: context.autoAdaptive(s50),
-                  fontWeight: bold,
-                  color: kWhite,
-                ),
+                fontWeight: bold,
+                color: kWhite,
+                style: GoogleFonts.syne(),
+                letterSpacing: 5,
               ),
             ),
             verticalSpaceMedium,
             _AnimatedSection(
               delay: duration300,
-              child: Text(
+              child: LabelText(
                 context.localization.available_freelancing,
+                fontSize: FontSize.medium,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.caveat(
-                  fontSize: context.autoAdaptive(s32),
-                  fontWeight: medium,
-                  color: kWhite70,
-                ),
+                fontWeight: medium,
+                color: kWhite70,
+                style: GoogleFonts.caveat(),
+                letterSpacing: 5,
               ),
             ),
             verticalSpaceEnormous,
@@ -86,12 +89,11 @@ class FooterView extends ConsumerWidget {
             delay: isShowWorkTogether ? duration800 : duration300,
             child: Column(
               children: [
-                Text(
+                BodyText(
                   '© 2025 Thant Zin. All rights reserved.',
-                  style: GoogleFonts.inter(
-                    fontSize: context.autoAdaptive(s14),
-                    color: kGrey500,
-                  ),
+                  fontSize: FontSize.small,
+                  color: kGrey500,
+                  style: GoogleFonts.inter(),
                 ),
                 verticalSpaceLarge,
                 const _BuiltWithLove(),
@@ -194,7 +196,7 @@ class _SocialIconButtonState extends State<_SocialIconButton>
             return Transform.scale(
               scale: 1.0 + (_controller.value * 0.3),
               child: Container(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(s16),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: kWhite.withValues(alpha: s005),
@@ -211,7 +213,7 @@ class _SocialIconButtonState extends State<_SocialIconButton>
                 child: Icon(
                   widget.social.icon,
                   color: Colors.white,
-                  size: context.autoAdaptive(s25),
+                  size: context.autoAdaptive(s20),
                 ),
               ),
             );
@@ -231,22 +233,20 @@ class _BuiltWithLove extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
+        BodyText(
           context.localization.built_using,
-          style: GoogleFonts.inter(
-            color: Colors.grey.shade500,
-            fontSize: context.autoAdaptive(s14),
-          ),
+          fontSize: FontSize.small,
+          color: Colors.grey.shade500,
+          style: GoogleFonts.inter(),
         ),
         horizontalSpaceSmall,
         FlutterLogo(size: context.autoAdaptive(s18)),
         horizontalSpaceSmall,
-        Text(
+        BodyText(
           context.localization.built_with,
-          style: GoogleFonts.inter(
-            color: Colors.grey.shade500,
-            fontSize: context.autoAdaptive(s14),
-          ),
+          fontSize: FontSize.small,
+          color: Colors.grey.shade500,
+          style: GoogleFonts.inter(),
         ),
         horizontalSpaceSmall,
         _PulsingHeart(),
@@ -267,10 +267,8 @@ class _PulsingHeartState extends State<_PulsingHeart>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1200),
-    )..repeat();
+    _controller = AnimationController(vsync: this, duration: duration1500)
+      ..repeat();
   }
 
   @override

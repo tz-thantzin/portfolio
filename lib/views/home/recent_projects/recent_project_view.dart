@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/views/widgets/text/app_text.dart';
+import 'package:portfolio/views/widgets/text/title_text.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../core/routing/routes.dart';
@@ -16,6 +18,7 @@ import '../../../utils/extensions/widget_ex.dart';
 import '../../widgets/animated_fade_widget.dart';
 import '../../widgets/animated_slide_widget.dart';
 import '../../widgets/animated_text_button.dart';
+import '../../widgets/text/body_text.dart';
 import 'recent_project_card.dart';
 
 class RecentProjectView extends StatefulWidget {
@@ -82,16 +85,13 @@ class _RecentProjectViewState extends State<RecentProjectView>
                 controller: _controller,
                 start: 0.0,
                 end: 0.5,
-                child: Text(
+                child: TitleText(
                   context.localization.crafted_with_love,
+                  fontSize: FontSize.medium,
                   textAlign: TextAlign.left,
-                  style: GoogleFonts.caveat(
-                    textStyle: context.bodyLarge.copyWith(
-                      color: kIndigo,
-                      fontSize: context.autoAdaptive(s42),
-                      fontWeight: superBold,
-                    ),
-                  ),
+                  color: kIndigo,
+                  fontWeight: superBold,
+                  style: GoogleFonts.caveat(),
                 ),
               )
               .addAlign(alignment: Alignment.centerLeft)
@@ -103,13 +103,11 @@ class _RecentProjectViewState extends State<RecentProjectView>
             controller: _controller,
             start: 0.5,
             end: 0.8,
-            child: Text(
+            child: BodyText(
               context.localization.recent_projects,
+              fontSize: FontSize.small,
               textAlign: TextAlign.left,
-              style: context.bodySmall.copyWith(
-                color: kGrey1000,
-                fontSize: context.autoAdaptive(s14),
-              ),
+              color: kGrey1000,
             ),
           ).addAlign(alignment: Alignment.centerLeft),
 

@@ -5,8 +5,8 @@ import '../../../utils/extensions/layout_adapter_ex.dart';
 import '../../../utils/extensions/theme_ex.dart';
 import 'app_text.dart';
 
-class TitleText extends AppText {
-  const TitleText(
+class DisplayText extends AppText {
+  const DisplayText(
     super.text, {
     super.key,
     super.fontSize = FontSize.medium,
@@ -26,18 +26,13 @@ class TitleText extends AppText {
   @override
   Widget build(BuildContext context) {
     final TextStyle baseStyle = switch (fontSize) {
-      FontSize.large => context.titleLarge.copyWith(
-        fontSize: context.autoAdaptive(s48),
-        fontStyle: fontStyle,
+      FontSize.large => context.displayLarge.copyWith(
+        fontSize: context.autoAdaptive(s96),
       ),
-      FontSize.medium => context.titleMedium.copyWith(
-        fontSize: context.autoAdaptive(s42),
-        fontStyle: fontStyle,
+      FontSize.medium => context.displayLarge.copyWith(
+        fontSize: context.autoAdaptive(s70),
       ),
-      _ => context.titleSmall.copyWith(
-        fontSize: context.autoAdaptive(s36),
-        fontStyle: fontStyle,
-      ),
+      _ => context.displayLarge.copyWith(fontSize: context.autoAdaptive(s60)),
     };
 
     final TextStyle textStyle = getStyle(context, baseStyle).copyWith(

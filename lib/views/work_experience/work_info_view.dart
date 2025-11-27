@@ -127,7 +127,11 @@ class _ExperienceGroup extends StatelessWidget {
           return Column(
             children: [
               _CardItem(experience: experience).addPadding(
-                padding: EdgeInsets.only(top: context.autoAdaptive(s20)),
+                padding: EdgeInsets.only(
+                  top: context.autoAdaptive(s20),
+                  left: context.autoAdaptive(s20),
+                  right: context.autoAdaptive(s20),
+                ),
               ),
               if (!isLastItem)
                 Divider(

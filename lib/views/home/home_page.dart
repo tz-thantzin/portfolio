@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:visibility_detector/visibility_detector.dart';
+
 import '../../core/routing/routes.dart';
 import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/duration.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
 import '../../views/home/recent_projects/recent_project_view.dart';
 import '../../views/widgets/animated_loading_page.dart';
 import '../../views/wrapper.dart';
-import 'package:visibility_detector/visibility_detector.dart';
-
-import '../../presentations/configs/duration.dart';
 import '../views.dart';
 
 class HomePage extends StatefulWidget {

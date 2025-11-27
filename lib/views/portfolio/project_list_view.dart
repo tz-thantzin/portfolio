@@ -115,7 +115,7 @@ class _ProjectsAnimatedSectionState extends State<_ProjectsAnimatedSection>
         maxCrossAxisExtent: 420,
         crossAxisSpacing: 24,
         mainAxisSpacing: 24,
-        childAspectRatio: 1.5,
+        childAspectRatio: 1.4,
       ),
       itemCount: projectList.length,
       itemBuilder: (context, index) {
@@ -137,14 +137,12 @@ class _ProjectsAnimatedSectionState extends State<_ProjectsAnimatedSection>
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: projectList.length,
+      padding: EdgeInsets.zero,
       itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
-          child: _AnimatedProjectCard(
-            index: index,
-            controller: controller,
-            child: ProjectCard(projectList[index]),
-          ),
+        return _AnimatedProjectCard(
+          index: index,
+          controller: controller,
+          child: ProjectCard(projectList[index]),
         );
       },
     );

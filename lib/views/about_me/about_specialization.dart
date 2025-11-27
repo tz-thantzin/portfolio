@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../presentations/configs/constant_colors.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/theme_ex.dart';
-import '../../views/widgets/animated_slide_widget.dart';
+import 'package:portfolio/views/widgets/text/label_text.dart';
 
+import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../views/widgets/animated_slide_widget.dart';
 import '../widgets/animated_fade_widget.dart';
 import 'about_image.dart';
 
@@ -50,16 +50,12 @@ class _AboutSpecializationState extends State<AboutSpecialization>
       controller: _textController,
       start: 0.0,
       end: 0.4,
-      child: Text(
+      child: LabelText(
         context.localization.my_specialization,
         softWrap: true,
         overflow: TextOverflow.visible,
         textAlign: TextAlign.start,
-        style: GoogleFonts.roboto(
-          textStyle: context.titleSmall.copyWith(
-            fontSize: context.autoAdaptive(s26),
-          ),
-        ),
+        style: GoogleFonts.roboto(),
       ),
     );
   }

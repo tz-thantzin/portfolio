@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/views/widgets/text/app_text.dart';
+import 'package:portfolio/views/widgets/text/title_text.dart';
 
 import '../../../presentations/configs/constant_colors.dart';
 import '../../../presentations/configs/constant_images.dart';
 import '../../../presentations/configs/constant_sizes.dart';
 import '../../../utils/extensions/context_ex.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
-import '../../../utils/extensions/theme_ex.dart';
 import '../../../utils/extensions/widget_ex.dart';
 import '../../../utils/utils.dart';
-import '../../widgets/text/content_text.dart';
+import '../../widgets/text/body_text.dart';
 
 class ProfileImage extends StatelessWidget {
   const ProfileImage({super.key});
@@ -39,7 +40,7 @@ class _DesktopView extends StatelessWidget {
         top: context.autoAdaptive(s40),
         child: Container(
           padding: EdgeInsets.symmetric(
-            horizontal: context.autoAdaptive(s8),
+            horizontal: context.autoAdaptive(s12),
             vertical: context.autoAdaptive(s4),
           ),
           decoration: BoxDecoration(
@@ -56,20 +57,17 @@ class _DesktopView extends StatelessWidget {
           ),
           child:
               <Widget>[
-                SelectableText(
+                TitleText(
                   experienceDuration,
-                  style: GoogleFonts.abrilFatface(
-                    textStyle: context.bodyLarge.copyWith(
-                      fontSize: context.autoAdaptive(s32),
-                      color: kTomato,
-                    ),
-                  ),
+                  fontSize: FontSize.small,
+                  color: kTomato,
+                  style: GoogleFonts.abrilFatface(),
                 ),
                 horizontalSpaceSmall,
-                ContentText(
+                BodyText(
                   context.localization.years_success,
-                  fontSize: context.autoAdaptive(s10),
-                  textColor: kPrimary,
+                  fontSize: FontSize.small,
+                  color: kPrimary,
                 ),
               ].addRow(
                 mainAxisSize: MainAxisSize.min,

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:portfolio/views/widgets/text/app_text.dart';
+import 'package:portfolio/views/widgets/text/body_text.dart';
+import 'package:portfolio/views/widgets/text/custom_text.dart';
+import 'package:portfolio/views/widgets/text/headline_text.dart';
+import 'package:portfolio/views/widgets/text/title_text.dart';
 
 import '../../core/routing/routes.dart';
 import '../../presentations/configs/constant_colors.dart';
@@ -43,15 +48,13 @@ class ErrorView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Subtle 404 watermark
-        Text(
+        HeadlineText(
           "404",
-          style: context.displayLarge.copyWith(
-            fontSize: context.autoAdaptive(s140),
-            fontWeight: superBold,
-            color: kGrey900.withValues(alpha: s03),
-            letterSpacing: 8,
-            height: 0.9,
-          ),
+          fontSize: FontSize.large,
+          fontWeight: superBold,
+          color: kGrey900.withValues(alpha: s03),
+          letterSpacing: 8,
+          height: 0.9,
         ),
 
         verticalSpaceMedium,
@@ -69,26 +72,21 @@ class ErrorView extends StatelessWidget {
         verticalSpaceLarge,
 
         // Title
-        Text(
+        TitleText(
           context.localization.page_not_found,
-          style: context.headlineLarge.copyWith(
-            fontSize: context.autoAdaptive(s32),
-            fontWeight: bold,
-            color: kGrey1200,
-          ),
+          fontSize: FontSize.small,
+          fontWeight: bold,
+          color: kGrey1200,
           textAlign: TextAlign.center,
         ),
 
         verticalSpaceMedium,
 
         // Subtitle
-        Text(
+        BodyText(
           context.localization.sorry_page_not_exist,
-          style: context.bodyLarge.copyWith(
-            fontSize: context.autoAdaptive(s18),
-            color: kGrey800,
-            height: 1.6,
-          ),
+          color: kGrey800,
+          height: 1.6,
           textAlign: TextAlign.center,
         ),
 
@@ -119,7 +117,7 @@ class ErrorView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Huge subtle 404
-                  Text(
+                  CustomText(
                     "404",
                     style: context.displayLarge.copyWith(
                       fontSize: context.autoAdaptive(s180),
@@ -132,24 +130,21 @@ class ErrorView extends StatelessWidget {
 
                   verticalSpaceMedium,
 
-                  Text(
+                  TitleText(
                     context.localization.page_not_found,
-                    style: context.headlineLarge.copyWith(
-                      fontSize: context.autoAdaptive(s48),
-                      fontWeight: bold,
-                      color: kGrey1200,
-                    ),
+                    fontSize: FontSize.large,
+                    fontWeight: bold,
+                    color: kGrey1200,
+                    textAlign: TextAlign.center,
                   ),
 
                   verticalSpaceMedium,
 
-                  Text(
+                  BodyText(
                     context.localization.sorry_page_not_exist,
-                    style: context.bodyLarge.copyWith(
-                      fontSize: context.autoAdaptive(s20),
-                      color: kGrey800,
-                      height: 1.7,
-                    ),
+                    fontSize: FontSize.large,
+                    color: kGrey800,
+                    height: 1.7,
                   ),
                 ],
               ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:portfolio/presentations/configs/constant_sizes.dart';
+import 'package:portfolio/views/widgets/text/app_text.dart';
+import 'package:portfolio/views/widgets/text/body_text.dart';
 
 import '../../core/di/providers.dart';
 import '../../models/project.dart';
@@ -20,10 +22,10 @@ class ProjectCard extends ConsumerWidget {
     final bool hasGithub = project.github != null;
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 12),
+      margin: const EdgeInsets.symmetric(vertical: s8),
       decoration: BoxDecoration(
         color: kWhite,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(s24),
         boxShadow: [
           BoxShadow(
             color: kBlack.withValues(alpha: 0.12),
@@ -40,9 +42,9 @@ class ProjectCard extends ConsumerWidget {
       ),
       child: Material(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(s24),
         child: InkWell(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(s24),
           splashColor: kIndigo.withValues(alpha: 0.1),
           highlightColor: kIndigo.withValues(alpha: 0.05),
           onTap: hasGithub
@@ -83,21 +85,19 @@ class ProjectCard extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
+        BodyText(
           project.projectName,
-          style: context.textTheme.bodyMedium?.copyWith(
-            fontWeight: bold,
-            color: kBlack,
-            height: 1.2,
-          ),
+          fontSize: FontSize.small,
+          fontWeight: semiBold,
+          color: kBlack,
+          height: 1.2,
         ),
         verticalSpaceTiny,
-        Text(
+        BodyText(
           project.description,
-          style: context.textTheme.bodySmall?.copyWith(
-            color: kGrey700,
-            height: 1.6,
-          ),
+          fontSize: FontSize.small,
+          color: kGrey700,
+          height: 1.6,
           maxLines: 5,
           overflow: TextOverflow.ellipsis,
         ),
