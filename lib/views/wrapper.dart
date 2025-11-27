@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:portfolio/views/widgets/stripe_transition.dart';
 
 import '../../core/di/providers.dart';
 import '../../core/routing/routes.dart';
@@ -10,6 +9,7 @@ import '../../utils/extensions/context_ex.dart';
 import '../presentations/configs/duration.dart';
 import 'home/widgets/nav_bar.dart';
 import 'home/widgets/nav_drawer.dart';
+import 'widgets/stripe_transition.dart';
 
 class Wrapper extends ConsumerStatefulWidget {
   final String selectedRoute;

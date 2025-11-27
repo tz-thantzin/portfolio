@@ -3,6 +3,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../presentations/configs/duration.dart';
 import '../../../utils/extensions/widget_ex.dart';
+import 'custom_text.dart';
 
 class AnimatedFadeInText extends StatefulWidget {
   final String text;
@@ -68,7 +69,7 @@ class _AnimatedFadeInTextState extends State<AnimatedFadeInText>
   Widget build(BuildContext context) {
     return FadeTransition(
       opacity: _fadeAnimation,
-      child: Text(widget.text, style: widget.style),
+      child: CustomText(widget.text, style: widget.style),
     ).addVisibilityDetector(onDetectVisibility: _detectVisibility);
   }
 }

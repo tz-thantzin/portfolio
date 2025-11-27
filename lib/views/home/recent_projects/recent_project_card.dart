@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/views/widgets/text/app_text.dart';
-import 'package:portfolio/views/widgets/text/body_text.dart';
-import 'package:portfolio/views/widgets/text/display_text.dart';
 
 import '../../../core/di/providers.dart';
 import '../../../models/project.dart';
@@ -14,6 +11,9 @@ import '../../../utils/extensions/context_ex.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
 import '../../../utils/extensions/theme_ex.dart';
 import '../../widgets/animated_text_button.dart';
+import '../../widgets/text/app_text.dart';
+import '../../widgets/text/body_text.dart';
+import '../../widgets/text/display_text.dart';
 import 'recent_project_image.dart';
 
 class RecentProjectCard extends ConsumerWidget {

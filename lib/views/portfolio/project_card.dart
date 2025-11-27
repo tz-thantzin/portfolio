@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/presentations/configs/constant_sizes.dart';
-import 'package:portfolio/views/widgets/text/app_text.dart';
-import 'package:portfolio/views/widgets/text/body_text.dart';
 
 import '../../core/di/providers.dart';
 import '../../models/project.dart';
 import '../../presentations/configs/constant_colors.dart';
+import '../../presentations/configs/constant_sizes.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../../views/portfolio/project_image.dart';
+import '../widgets/text/app_text.dart';
+import '../widgets/text/body_text.dart';
 
 class ProjectCard extends ConsumerWidget {
   final Project project;
@@ -53,13 +53,13 @@ class ProjectCard extends ConsumerWidget {
                     .onProjectView(project.github!)
               : null,
           child: Padding(
-            padding: const EdgeInsets.all(28.0),
+            padding: const EdgeInsets.all(s28),
             child: isDesktop
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(flex: 4, child: ProjectImage(project)),
-                      const SizedBox(width: 32),
+                      horizontalSpaceMassive,
                       Expanded(
                         flex: 5,
                         child: _buildContent(context, ref, hasGithub),
@@ -70,7 +70,7 @@ class ProjectCard extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ProjectImage(project),
-                      const SizedBox(height: 24),
+                      verticalSpaceLarge,
                       _buildContent(context, ref, hasGithub),
                     ],
                   ),

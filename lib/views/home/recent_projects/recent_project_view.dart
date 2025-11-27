@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/views/widgets/text/app_text.dart';
-import 'package:portfolio/views/widgets/text/title_text.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../core/routing/routes.dart';
@@ -18,7 +16,9 @@ import '../../../utils/extensions/widget_ex.dart';
 import '../../widgets/animated_fade_widget.dart';
 import '../../widgets/animated_slide_widget.dart';
 import '../../widgets/animated_text_button.dart';
+import '../../widgets/text/app_text.dart';
 import '../../widgets/text/body_text.dart';
+import '../../widgets/text/title_text.dart';
 import 'recent_project_card.dart';
 
 class RecentProjectView extends StatefulWidget {
@@ -87,7 +87,6 @@ class _RecentProjectViewState extends State<RecentProjectView>
                 end: 0.5,
                 child: TitleText(
                   context.localization.crafted_with_love,
-                  fontSize: FontSize.medium,
                   textAlign: TextAlign.left,
                   color: kIndigo,
                   fontWeight: superBold,

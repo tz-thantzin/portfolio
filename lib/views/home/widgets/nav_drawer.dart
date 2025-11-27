@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/views/widgets/text/label_text.dart';
 
 import '../../../presentations/configs/constant_colors.dart';
 import '../../../presentations/configs/constant_sizes.dart';
@@ -10,6 +9,7 @@ import '../../../utils/extensions/layout_adapter_ex.dart';
 import '../../../utils/extensions/theme_ex.dart';
 import '../../../utils/extensions/widget_ex.dart';
 import '../../widgets/text/app_text.dart';
+import '../../widgets/text/label_text.dart';
 import 'nav_logo.dart';
 
 /// Mobile View (Full-Screen Nav Drawer Style)

@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:portfolio/views/widgets/text/app_text.dart';
-import 'package:portfolio/views/widgets/text/body_text.dart';
-import 'package:portfolio/views/widgets/text/custom_text.dart';
-import 'package:portfolio/views/widgets/text/headline_text.dart';
-import 'package:portfolio/views/widgets/text/title_text.dart';
 
 import '../../core/routing/routes.dart';
 import '../../presentations/configs/constant_colors.dart';
@@ -14,6 +9,11 @@ import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../../views/widgets/animated_slide_button.dart';
 import '../presentations/configs/constant_images.dart';
+import 'widgets/text/app_text.dart';
+import 'widgets/text/body_text.dart';
+import 'widgets/text/custom_text.dart';
+import 'widgets/text/headline_text.dart';
+import 'widgets/text/title_text.dart';
 
 class ErrorView extends StatelessWidget {
   const ErrorView({super.key});

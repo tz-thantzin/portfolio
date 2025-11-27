@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/views/widgets/text/label_text.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
@@ -9,6 +8,7 @@ import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../views/widgets/animated_slide_widget.dart';
 import '../widgets/animated_fade_widget.dart';
+import '../widgets/text/label_text.dart';
 import 'about_image.dart';
 
 class AboutSpecialization extends StatefulWidget {

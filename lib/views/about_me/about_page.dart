@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/views/widgets/text/app_text.dart';
-import 'package:portfolio/views/widgets/text/body_text.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../core/routing/routes.dart';
@@ -16,6 +14,8 @@ import '../../views/footer/footer_view.dart';
 import '../../views/widgets/text/animated_typewriter_text.dart';
 import '../../views/wrapper.dart';
 import '../widgets/animated_fade_widget.dart';
+import '../widgets/text/app_text.dart';
+import '../widgets/text/body_text.dart';
 import 'about_description.dart';
 import 'technology_grid.dart';
 

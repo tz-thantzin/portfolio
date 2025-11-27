@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:portfolio/views/widgets/text/app_text.dart';
-import 'package:portfolio/views/widgets/text/body_text.dart';
-import 'package:portfolio/views/widgets/text/title_text.dart';
 
 import '../../../core/di/providers.dart';
 import '../../../presentations/configs/constant_colors.dart';
@@ -14,6 +11,9 @@ import '../../../utils/extensions/theme_ex.dart';
 import '../../../utils/extensions/widget_ex.dart';
 import '../../widgets/animated_slide_button.dart';
 import '../../widgets/text/animated_typewriter_text.dart';
+import '../../widgets/text/app_text.dart';
+import '../../widgets/text/body_text.dart';
+import '../../widgets/text/title_text.dart';
 
 class IntroWidget extends ConsumerStatefulWidget {
   final VoidCallback onTapScrollDown;

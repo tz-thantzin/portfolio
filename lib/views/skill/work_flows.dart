@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/views/widgets/text/body_text.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../models/skill.dart';
@@ -12,6 +11,7 @@ import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
 import '../widgets/animated_slide_widget.dart';
 import '../widgets/text/app_text.dart';
+import '../widgets/text/body_text.dart';
 import '../widgets/text/label_text.dart';
 
 class WorkFlows extends StatefulWidget {

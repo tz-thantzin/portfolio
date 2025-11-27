@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/utils/extensions/widget_ex.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../models/work_experience.dart';
@@ -9,6 +8,7 @@ import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
 import '../../views/work_experience/work_info_detail.dart';
 import '../widgets/animated_slide_widget.dart';
 

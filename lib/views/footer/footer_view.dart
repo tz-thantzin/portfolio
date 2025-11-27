@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portfolio/views/widgets/text/app_text.dart';
-import 'package:portfolio/views/widgets/text/label_text.dart';
 
 import '../../core/di/providers.dart';
 import '../../models/social.dart';
@@ -15,7 +13,9 @@ import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
+import '../widgets/text/app_text.dart';
 import '../widgets/text/body_text.dart';
+import '../widgets/text/label_text.dart';
 
 class FooterView extends ConsumerWidget {
   final bool isShowWorkTogether;
