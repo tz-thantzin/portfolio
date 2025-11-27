@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../core/di/providers.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/theme_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
-import '../../views/footer/footer_view.dart';
-import '../../views/widgets/animated_slide_button.dart';
-import '../../views/widgets/animated_text_field.dart';
-import '../../views/widgets/text/content_text.dart';
 
+import '../../core/di/providers.dart';
 import '../../core/routing/routes.dart';
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/theme_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
 import '../../view_models/contact_view_model.dart';
+import '../../views/footer/footer_view.dart';
+import '../../views/widgets/animated_slide_button.dart';
 import '../widgets/animated_fade_widget.dart';
-import '../widgets/text/title_text.dart';
+import '../widgets/animated_text_field.dart';
+import '../widgets/text/app_text.dart';
+import '../widgets/text/body_text.dart';
+import '../widgets/text/label_text.dart';
 import '../wrapper.dart';
 
 class ContactPage extends StatefulWidget {
@@ -127,7 +128,10 @@ class _ContactPageState extends State<ContactPage>
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Message sent successfully!"),
+          content: BodyText(
+            "Message sent successfully!",
+            fontSize: FontSize.small,
+          ),
           backgroundColor: kGreen,
           duration: Duration(seconds: 2),
         ),
@@ -135,7 +139,10 @@ class _ContactPageState extends State<ContactPage>
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Failed to send message."),
+          content: BodyText(
+            "Failed to send message.",
+            fontSize: FontSize.small,
+          ),
           backgroundColor: kRed,
           duration: Duration(seconds: 2),
         ),
@@ -187,7 +194,10 @@ class _ContactPageState extends State<ContactPage>
               controller: _fadeController,
               start: 0.0,
               end: 0.4,
-              child: TitleText(context.localization.get_in_touch),
+              child: LabelText(
+                context.localization.get_in_touch.toUpperCase(),
+                fontSize: FontSize.small,
+              ),
             ),
             verticalSpaceLarge,
             AnimatedFadeWidget(
@@ -206,12 +216,10 @@ class _ContactPageState extends State<ContactPage>
                 ),
                 child:
                     [
-                      Text(
+                      BodyText(
                         context.localization.schedule_appointment,
-                        style: context.titleSmall.copyWith(
-                          color: kIndigo,
-                          fontSize: context.autoAdaptive(s18),
-                        ),
+                        color: kIndigo,
+                        fontWeight: semiBold,
                       ),
                       verticalSpaceMedium,
                       Wrap(
@@ -220,9 +228,9 @@ class _ContactPageState extends State<ContactPage>
                         alignment: WrapAlignment.start,
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
-                          ContentText(
+                          BodyText(
                             "Hi there! I hope you are doing well. I'm ",
-                            textColor: kBlack,
+                            color: kBlack,
                           ),
                           ConstrainedBox(
                             constraints: BoxConstraints(
@@ -240,10 +248,7 @@ class _ContactPageState extends State<ContactPage>
                               onChanged: (value) => vm.name = value,
                             ),
                           ),
-                          ContentText(
-                            "and I’m looking for ",
-                            textColor: kBlack,
-                          ),
+                          BodyText("and I’m looking for ", color: kBlack),
                           ConstrainedBox(
                             constraints: BoxConstraints(
                               minWidth: context.autoAdaptive(s150),
@@ -260,8 +265,8 @@ class _ContactPageState extends State<ContactPage>
                               onChanged: (value) => vm.job = value,
                             ),
                           ),
-                          ContentText(".", textColor: kBlack),
-                          ContentText("Reach me at ", textColor: kBlack),
+                          BodyText(".", color: kBlack),
+                          BodyText("Reach me at ", color: kBlack),
                           ConstrainedBox(
                             constraints: BoxConstraints(
                               minWidth: context.autoAdaptive(s150),
@@ -279,10 +284,10 @@ class _ContactPageState extends State<ContactPage>
                               onChanged: (value) => vm.email = value,
                             ),
                           ),
-                          ContentText("!", textColor: kBlack),
-                          ContentText(
+                          BodyText("!", color: kBlack),
+                          BodyText(
                             "Any additional info or special requests?",
-                            textColor: kBlack,
+                            color: kBlack,
                           ),
                           ConstrainedBox(
                             constraints: BoxConstraints(

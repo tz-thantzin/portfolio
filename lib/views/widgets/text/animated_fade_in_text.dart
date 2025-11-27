@@ -3,6 +3,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../presentations/configs/duration.dart';
 import '../../../utils/extensions/widget_ex.dart';
+import 'custom_text.dart';
 
 class AnimatedFadeInText extends StatefulWidget {
   final String text;
@@ -10,7 +11,7 @@ class AnimatedFadeInText extends StatefulWidget {
   final Duration duration;
   final Duration delay;
   final Curve curve;
-  final AnimationController? controller; // optional external controller
+  final AnimationController? controller;
 
   const AnimatedFadeInText(
     this.text, {
@@ -30,7 +31,7 @@ class _AnimatedFadeInTextState extends State<AnimatedFadeInText>
     with TickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _fadeAnimation;
-  late final bool _ownsController; // track ownership
+  late final bool _ownsController;
 
   @override
   void initState() {
@@ -68,7 +69,7 @@ class _AnimatedFadeInTextState extends State<AnimatedFadeInText>
   Widget build(BuildContext context) {
     return FadeTransition(
       opacity: _fadeAnimation,
-      child: Text(widget.text, style: widget.style),
+      child: CustomText(widget.text, style: widget.style),
     ).addVisibilityDetector(onDetectVisibility: _detectVisibility);
   }
 }

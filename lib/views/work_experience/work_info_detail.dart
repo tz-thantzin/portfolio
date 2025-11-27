@@ -5,6 +5,8 @@ import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
+import '../widgets/text/app_text.dart';
+import '../widgets/text/body_text.dart';
 
 class WorkInfoDetail extends StatelessWidget {
   final WorkExperience experience;
@@ -27,20 +29,20 @@ class WorkInfoDetail extends StatelessWidget {
 
           if (experience.company.isNotEmpty) ...[
             verticalSpaceTiny,
-            Text(
+            BodyText(
               experience.company,
-              style: context.bodySmall.copyWith(color: kGrey1000),
+              fontSize: FontSize.small,
+              color: kGrey1000,
               overflow: TextOverflow.ellipsis,
             ),
           ],
 
           verticalSpaceTiny,
-          Text(
+          BodyText(
             experience.workMode.label,
-            style: context.bodySmall.copyWith(
-              color: kGrey500,
-              fontStyle: FontStyle.italic,
-            ),
+            fontSize: FontSize.small,
+            color: kGrey500,
+            fontStyle: FontStyle.italic,
           ),
 
           verticalSpaceMedium,
@@ -64,14 +66,17 @@ class _JobHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final titleWidget = Text(
+    final titleWidget = BodyText(
       title,
-      style: context.bodyMedium.copyWith(color: kBlack, fontWeight: bold),
+      fontSize: FontSize.small,
+      color: kBlack,
+      fontWeight: bold,
     );
 
-    final periodWidget = Text(
+    final periodWidget = BodyText(
       period,
-      style: context.bodySmall.copyWith(color: kGrey1000),
+      fontSize: FontSize.small,
+      color: kGrey1000,
       softWrap: false,
       overflow: TextOverflow.ellipsis,
     );
@@ -109,17 +114,17 @@ class _ResponsibilitiesList extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  BodyText(
                     '• ',
-                    style: context.bodySmall.copyWith(
-                      color: kGrey1000,
-                      fontWeight: bold,
-                    ),
+                    fontSize: FontSize.small,
+                    color: kGrey1000,
+                    fontWeight: bold,
                   ),
                   Expanded(
-                    child: Text(
+                    child: BodyText(
                       item,
-                      style: context.bodySmall.copyWith(color: kGrey1000),
+                      fontSize: FontSize.small,
+                      color: kGrey1000,
                     ),
                   ),
                 ],

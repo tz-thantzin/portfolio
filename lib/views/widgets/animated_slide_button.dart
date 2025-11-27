@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:portfolio/utils/extensions/theme_ex.dart';
 
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
+import '../../utils/extensions/theme_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
+import 'text/custom_text.dart';
 
 class AnimatedSlideButton extends StatefulWidget {
   AnimatedSlideButton({
@@ -118,12 +120,10 @@ class _AnimatedSlideButtonState extends State<AnimatedSlideButton>
               : Stack(
                   children: [
                     animatedBackground(),
-                    Center(
-                      child: Text(
-                        widget.title,
-                        style: widget.titleStyle ?? style,
-                      ),
-                    ),
+                    CustomText(
+                      widget.title,
+                      style: widget.titleStyle ?? style,
+                    ).addCenter(),
                   ],
                 ),
         ),
@@ -158,7 +158,7 @@ class _AnimatedSlideButtonState extends State<AnimatedSlideButton>
         mainAxisSize: MainAxisSize.min,
         children: [
           Flexible(
-            child: Text(
+            child: CustomText(
               widget.title,
               style: widget.titleStyle ?? style,
               overflow: TextOverflow.ellipsis, // prevent overflow

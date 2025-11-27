@@ -7,10 +7,10 @@ import '../../../presentations/configs/duration.dart';
 import '../../../utils/extensions/context_ex.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
 import '../../../utils/extensions/theme_ex.dart';
+import '../../widgets/text/app_text.dart';
+import '../../widgets/text/body_text.dart';
 import 'nav_logo.dart';
 
-/// Desktop View
-/// Mobile Navbar (Logo + Menu Icon)
 class NavBar extends StatelessWidget {
   const NavBar({
     super.key,
@@ -29,22 +29,17 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (context.isMobile) {
-      return _mobileNavBar(context);
-    } else {
-      return _webNavBar(context);
-    }
+    return context.isMobile ? _mobileNavBar(context) : _webNavBar(context);
   }
 
-  /// Mobile Navbar (Logo + Menu Icon)
   Widget _mobileNavBar(BuildContext context) {
     return Container(
       width: context.screenWidth,
       height: context.appBarHeight,
       color: kPrimary,
       padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(24),
-        vertical: context.autoAdaptive(12),
+        horizontal: context.autoAdaptive(s42),
+        vertical: context.autoAdaptive(s12),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,21 +50,19 @@ class NavBar extends StatelessWidget {
             currentRoute: currentRoute,
             color: kWhite,
           ),
-          IconButton(
-            padding: EdgeInsets.zero,
-            icon: Icon(
+          GestureDetector(
+            onTap: onMenuTap,
+            child: Icon(
               Icons.menu,
               color: kWhite,
               size: context.autoAdaptive(s26),
             ),
-            onPressed: onMenuTap,
           ),
         ],
       ),
     );
   }
 
-  /// Desktop Navbar (Logo + Nav Items)
   Widget _webNavBar(BuildContext context) {
     final navItems = [
       [context.localization.home, kHome],
@@ -95,7 +88,6 @@ class NavBar extends StatelessWidget {
             currentRoute: currentRoute,
             color: kBlack,
           ),
-
           const Spacer(),
           ...navItems.map((item) {
             final String label = item[0];
@@ -104,7 +96,7 @@ class NavBar extends StatelessWidget {
 
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: s12),
-              child: _NavItem(
+              child: NavItem(
                 label: label,
                 isSelected: isSelected,
                 onTap: () => onNavItemClicked(route),
@@ -117,42 +109,43 @@ class NavBar extends StatelessWidget {
   }
 }
 
-class _NavItem extends StatefulWidget {
+class NavItem extends StatelessWidget {
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
 
-  const _NavItem({
+  final ValueNotifier<bool> _isHovered = ValueNotifier(false);
+
+  NavItem({
+    super.key,
     required this.label,
     required this.isSelected,
     required this.onTap,
   });
 
   @override
-  State<_NavItem> createState() => _NavItemState();
-}
-
-class _NavItemState extends State<_NavItem> {
-  bool _isHovered = false;
-
-  @override
   Widget build(BuildContext context) {
-    final Color baseColor = widget.isSelected ? kBlack : kGrey800;
-    final Color hoverColor = widget.isSelected ? kBlack : kIndigo;
+    final Color baseColor = isSelected ? kBlack : kGrey800;
+    final Color hoverColor = isSelected ? kBlack : kIndigo;
 
     return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
+      onEnter: (_) => _isHovered.value = true,
+      onExit: (_) => _isHovered.value = false,
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: widget.onTap,
-        child: AnimatedDefaultTextStyle(
-          duration: duration200,
-          style: context.bodyMedium.copyWith(
-            color: _isHovered ? hoverColor : baseColor,
-            fontWeight: widget.isSelected ? bold : medium,
-          ),
-          child: Text(widget.label),
+        onTap: onTap,
+        child: ValueListenableBuilder<bool>(
+          valueListenable: _isHovered,
+          builder: (context, isHovered, child) {
+            return AnimatedDefaultTextStyle(
+              duration: duration200,
+              style: context.bodyLarge.copyWith(
+                color: isHovered ? hoverColor : baseColor,
+                fontWeight: isSelected ? bold : medium,
+              ),
+              child: BodyText(label, fontSize: FontSize.small),
+            );
+          },
         ),
       ),
     );

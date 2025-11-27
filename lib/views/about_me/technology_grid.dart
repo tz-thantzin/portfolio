@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+
+import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/constants.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
-import '../../views/widgets/text/content_text.dart';
-
-import '../../presentations/configs/constant_colors.dart';
 import '../widgets/animated_slide_widget.dart';
-import '../widgets/text/tag_text.dart';
-import '../widgets/text/title_text.dart';
+import '../widgets/text/app_text.dart';
+import '../widgets/text/body_text.dart';
 
 class TechnologyGrid extends StatelessWidget {
   final AnimationController animationController;
@@ -26,22 +25,24 @@ class TechnologyGrid extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TitleText(context.localization.technologies, fontSize: s16),
+          BodyText(context.localization.technologies, fontWeight: bold),
           verticalSpaceMedium,
-          ContentText(context.localization.my_tools),
+          BodyText(
+            context.localization.my_tools,
+            fontSize: FontSize.small,
+            color: kBlack100,
+          ),
           verticalSpaceMedium,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: technologies.entries.map((entry) {
               return <Widget>[
-                    Text(
+                    BodyText(
                       entry.key,
-                      style: context.bodyMedium.copyWith(
-                        fontWeight: semiBold,
-                        color: kBlack,
-                        fontSize: s14,
-                      ),
+                      fontSize: FontSize.small,
+                      fontWeight: semiBold,
+                      color: kBlack100,
                     ),
                     verticalSpaceSmall,
                     ...entry.value.asMap().entries.map((techEntry) {
@@ -98,7 +99,7 @@ class TechnologyItem extends StatelessWidget {
           color: kGrey800,
         ),
         SizedBox(width: context.autoAdaptive(4)),
-        TagText(technology),
+        BodyText(technology, fontSize: FontSize.small, color: kBlack100),
       ],
     );
   }

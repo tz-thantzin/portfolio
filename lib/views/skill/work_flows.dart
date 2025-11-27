@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import '../../models/skill.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../models/skill.dart';
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_data.dart';
 import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
+import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/widget_ex.dart';
 import '../widgets/animated_slide_widget.dart';
-import '../widgets/text/content_text.dart';
-import '../widgets/text/title_text.dart';
+import '../widgets/text/app_text.dart';
+import '../widgets/text/body_text.dart';
+import '../widgets/text/label_text.dart';
 
 class WorkFlows extends StatefulWidget {
   const WorkFlows({super.key});
@@ -56,8 +57,9 @@ class _WorkFlowsState extends State<WorkFlows>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          TitleText(
-            context.localization.workflows_title,
+          LabelText(
+            context.localization.workflows_title.toUpperCase(),
+            fontSize: FontSize.small,
           ).addVisibilityDetector(onDetectVisibility: _onVisibilityChanged),
           verticalSpaceMassive,
           Column(
@@ -99,7 +101,9 @@ class _WorkflowItem extends StatelessWidget {
         children: <Widget>[
           const Icon(Icons.check_circle_outline, color: kPrimary),
           horizontalSpaceSmall,
-          Expanded(child: ContentText(workflow.description)),
+          Expanded(
+            child: BodyText(workflow.description, fontSize: FontSize.small),
+          ),
         ],
       ),
     );

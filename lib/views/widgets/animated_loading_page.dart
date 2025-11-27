@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../../presentations/configs/constant_colors.dart';
 import '../../presentations/configs/constant_sizes.dart';
+import '../../presentations/configs/duration.dart';
 import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/string_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
+import 'text/body_text.dart';
 
-/// credit to [https://davidcobbina.com]
 class AnimatedLoadingPage extends StatefulWidget {
   final String text;
   final TextStyle? style;
@@ -26,257 +25,144 @@ class AnimatedLoadingPage extends StatefulWidget {
 }
 
 class _AnimatedLoadingPageState extends State<AnimatedLoadingPage>
-    with TickerProviderStateMixin {
-  late final AnimationController _fadeOutController;
-  late final AnimationController _containerController;
-  late final AnimationController _scaleOpacityController;
-
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
   late final Animation<double> _scaleAnimation;
   late final Animation<double> _opacityAnimation;
-  late final Animation<double> _fadeAnimation;
-  late final Animation<double> _containerAnimation;
+  late final Animation<double> _lineProgressAnimation;
+  late final Animation<double> _lineWidthAnimation;
 
-  final Duration _scaleDuration = const Duration(milliseconds: 750);
-  final Duration _lineDuration = const Duration(milliseconds: 750);
-  final Duration _containerDuration = const Duration(milliseconds: 2000);
+  final Duration _rippleDuration = duration2000;
 
-  final double _lineHeight = 2;
-  final Color _defaultLineColor = kGrey300.withValues(alpha: 0.35);
-
-  bool _leftRightAnimationStarted = false;
-  bool _leftRightAnimationDone = false;
-  bool _isAnimationOver = false;
-
-  late Size _textSize;
-  late double _textWidth;
-  late Color _lineColor;
+  bool _isAnimationFinished = false;
 
   @override
   void initState() {
     super.initState();
-    _setTextMetrics();
-    _lineColor = widget.lineColor ?? _defaultLineColor;
 
-    _initControllers();
-    _initAnimations();
-    _startAnimations();
-  }
+    _controller = AnimationController(vsync: this, duration: _rippleDuration);
 
-  void _initControllers() {
-    _scaleOpacityController = AnimationController(
-      vsync: this,
-      duration: _scaleDuration,
-    );
-    _containerController = AnimationController(
-      vsync: this,
-      duration: _containerDuration,
-    );
-    _fadeOutController = AnimationController(
-      vsync: this,
-      duration: _lineDuration,
-    );
-  }
-
-  void _initAnimations() {
-    _scaleAnimation = Tween<double>(begin: 0.9, end: 0.5).animate(
+    _scaleAnimation = Tween<double>(begin: 0.0, end: 5.0).animate(
       CurvedAnimation(
-        parent: _scaleOpacityController,
-        curve: Curves.fastOutSlowIn,
+        parent: _controller,
+        curve: const Interval(0.0, 0.8, curve: Curves.easeOut),
       ),
     );
-    _opacityAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
-      CurvedAnimation(parent: _scaleOpacityController, curve: Curves.easeIn),
+
+    _opacityAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.4, 1.0, curve: Curves.easeOut),
+      ),
     );
-    _fadeAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
-      CurvedAnimation(parent: _fadeOutController, curve: Curves.easeIn),
+
+    _lineProgressAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.7, curve: Curves.linear),
+      ),
     );
-    _containerAnimation = Tween<double>(begin: 0, end: _textWidth).animate(
-      CurvedAnimation(parent: _containerController, curve: Curves.ease),
+
+    _lineWidthAnimation = Tween<double>(begin: 50.0, end: 200.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(
+          0.0,
+          0.6,
+          curve: Curves.easeOutCubic,
+        ), // Animates width early
+      ),
     );
+
+    _startAnimation();
   }
 
-  void _startAnimations() {
-    _scaleOpacityController.forward();
-    _scaleOpacityController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _containerController.forward();
-      }
+  void _startAnimation() {
+    Future.delayed(const Duration(milliseconds: 500), () {
+      if (!mounted) return;
+      _controller.forward().then((_) {
+        if (!mounted) return;
+        setState(() => _isAnimationFinished = true);
+        widget.onLoadingDone();
+      });
     });
-    _containerController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        setState(() => _leftRightAnimationStarted = true);
-        _fadeOutController.forward();
-      }
-    });
-    _fadeOutController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        setState(() => _leftRightAnimationDone = true);
-      }
-    });
-  }
-
-  void _setTextMetrics() {
-    _textSize = widget.text.textSize(style: widget.style);
-    _textWidth = _textSize.width;
   }
 
   @override
   void dispose() {
-    _fadeOutController.dispose();
-    _scaleOpacityController.dispose();
-    _containerController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    _setTextMetrics();
-    final screenWidth = context.screenWidth;
-    final screenHeight = context.screenHeight;
+    if (_isAnimationFinished) {
+      return const SizedBox.shrink();
+    }
 
-    final halfScreenHeight = screenHeight / 2;
-    final leftLineWidth = context.assignWidth(0.5) - (_textWidth / 2);
-    final rightLineWidth = screenWidth - (leftLineWidth + _textWidth);
-    final leftContainerStart = (screenWidth / 2) - (_textWidth / 2);
+    final rippleColor = widget.lineColor ?? kBlack;
+    final textColor = widget.style?.color ?? kWhite;
 
-    return _isAnimationOver
-        ? const SizedBox.shrink()
-        : <Widget>[
-            _buildTopContainer(screenWidth, halfScreenHeight),
-            _buildBottomContainer(screenWidth, halfScreenHeight),
-            _buildCenterContent(
-              context,
-              screenWidth,
-              leftLineWidth,
-              rightLineWidth,
-              leftContainerStart,
-            ),
-          ].addStack();
-  }
-
-  Widget _buildTopContainer(double screenWidth, double halfHeight) {
-    return AnimatedContainer(
-      width: screenWidth,
-      height: _leftRightAnimationDone ? 0 : halfHeight,
-      duration: _scaleDuration,
+    return Container(
       color: kBlack,
-      onEnd: () async {
-        widget.onLoadingDone();
-        setState(() => _isAnimationOver = true);
-      },
-    );
-  }
+      alignment: Alignment.center,
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          final scale = _scaleAnimation.value;
+          final opacity = _opacityAnimation.value;
+          final lineProgress = _lineProgressAnimation.value;
+          final currentLineWidth = _lineWidthAnimation.value;
 
-  Widget _buildBottomContainer(double screenWidth, double halfHeight) {
-    return Positioned(
-      bottom: 0,
-      child: AnimatedContainer(
-        width: screenWidth,
-        height: _leftRightAnimationDone ? 0 : halfHeight,
-        duration: _scaleDuration,
-        color: kBlack,
-      ),
-    );
-  }
+          return Opacity(
+            opacity: opacity,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Transform.scale(
+                  scale: scale * context.screenWidth / 100,
+                  child: Container(
+                    width: 100.0,
+                    height: 100.0,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: rippleColor,
+                    ),
+                  ),
+                ),
 
-  Widget _buildCenterContent(
-    BuildContext context,
-    double screenWidth,
-    double leftLineWidth,
-    double rightLineWidth,
-    double leftContainerStart,
-  ) {
-    return <Widget>[
-          _buildAnimatedText(screenWidth),
-          verticalSpaceMedium,
-          _buildAnimatedLines(
-            leftLineWidth,
-            rightLineWidth,
-            leftContainerStart,
-          ),
-        ]
-        .addColumn(mainAxisAlignment: MainAxisAlignment.center)
-        .addCenter()
-        .addSizedBox(width: screenWidth);
-  }
-
-  Widget _buildAnimatedText(double screenWidth) {
-    return SizedBox(
-      width: screenWidth,
-      child: FadeTransition(
-        opacity: _fadeAnimation,
-        child: AnimatedBuilder(
-          animation: _scaleOpacityController,
-          child: Text(
-            widget.text,
-            textAlign: TextAlign.center,
-            style: widget.style,
-          ),
-          builder: (context, child) => Transform.scale(
-            scale: 2 * _scaleAnimation.value,
-            alignment: Alignment.center,
-            child: AnimatedOpacity(
-              opacity: _opacityAnimation.value,
-              duration: _scaleDuration,
-              child: child,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    BodyText(widget.text, style: widget.style),
+                    verticalSpaceSmall,
+                    Container(
+                      width: currentLineWidth,
+                      height: s4,
+                      decoration: BoxDecoration(
+                        color: textColor.withValues(alpha: 0.3),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: FractionallySizedBox(
+                          widthFactor: lineProgress,
+                          child: Container(
+                            height: 4,
+                            decoration: BoxDecoration(
+                              color: textColor,
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAnimatedLines(
-    double leftLineWidth,
-    double rightLineWidth,
-    double leftContainerStart,
-  ) {
-    return Row(
-      children: [
-        _buildLineSegment(
-          width: leftLineWidth,
-          rightAligned: false,
-          blockWidth: leftContainerStart,
-        ),
-        _buildCenterLine(),
-        _buildLineSegment(
-          width: rightLineWidth,
-          rightAligned: true,
-          blockWidth: rightLineWidth,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildLineSegment({
-    required double width,
-    required bool rightAligned,
-    required double blockWidth,
-  }) {
-    return SizedBox(
-      width: width,
-      child: <Widget>[
-        Container(width: width, height: _lineHeight, color: _lineColor),
-        Positioned(
-          right: rightAligned ? 0 : null,
-          child: AnimatedContainer(
-            width: _leftRightAnimationStarted ? 0 : blockWidth,
-            height: _lineHeight,
-            color: kBlack,
-            duration: _lineDuration,
-          ),
-        ),
-      ].addStack(),
-    );
-  }
-
-  Widget _buildCenterLine() {
-    return AnimatedBuilder(
-      animation: _containerController,
-      builder: (context, child) => Container(
-        height: _lineHeight,
-        width: _containerAnimation.value,
-        color: _lineColor,
+          );
+        },
       ),
     );
   }

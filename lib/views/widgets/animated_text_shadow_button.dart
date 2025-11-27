@@ -5,6 +5,7 @@ import '../../presentations/configs/constant_sizes.dart';
 import '../../presentations/configs/duration.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
+import 'text/custom_text.dart';
 
 class AnimatedTextShadowButton extends StatefulWidget {
   const AnimatedTextShadowButton({
@@ -86,7 +87,7 @@ class _AnimatedTextShadowButtonState extends State<AnimatedTextShadowButton>
                     ]
                   : [],
             ),
-            child: Text(widget.title),
+            child: CustomText(widget.title),
           ),
         ),
       ),

@@ -11,7 +11,9 @@ import '../../../utils/extensions/context_ex.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
 import '../../../utils/extensions/theme_ex.dart';
 import '../../widgets/animated_text_button.dart';
-import '../../widgets/text/content_text.dart';
+import '../../widgets/text/app_text.dart';
+import '../../widgets/text/body_text.dart';
+import '../../widgets/text/display_text.dart';
 import 'recent_project_image.dart';
 
 class RecentProjectCard extends ConsumerWidget {
@@ -116,14 +118,12 @@ class _ProjectImage extends StatelessWidget {
             verticalSpaceSmall,
 
             // PROJECT NAME
-            Text(
+            BodyText(
               project.projectName,
+              fontSize: FontSize.large,
               textAlign: TextAlign.center,
-              style: context.titleSmall.copyWith(
-                color: kPortfolioTitle,
-                fontSize: context.autoAdaptive(s20),
-                fontWeight: semiBold,
-              ),
+              color: kPortfolioTitle,
+              fontWeight: semiBold,
             ),
           ],
         ),
@@ -135,25 +135,17 @@ class _ProjectImage extends StatelessWidget {
           ? [
               RecentProjectImage(project, isOddIndex: isOddIndex),
               horizontalSpaceMedium,
-              Text(
+              DisplayText(
                 formattedIndex,
-                style: GoogleFonts.permanentMarker(
-                  textStyle: context.titleLarge.copyWith(
-                    color: kPrimary.withValues(alpha: s05),
-                    fontSize: context.autoAdaptive(s70),
-                  ),
-                ),
+                color: kPrimary.withValues(alpha: s05),
+                style: GoogleFonts.permanentMarker(),
               ),
             ]
           : [
-              Text(
+              DisplayText(
                 formattedIndex,
-                style: GoogleFonts.permanentMarker(
-                  textStyle: context.titleLarge.copyWith(
-                    color: kPrimary.withValues(alpha: s05),
-                    fontSize: context.autoAdaptive(s70),
-                  ),
-                ),
+                color: kPrimary.withValues(alpha: s05),
+                style: GoogleFonts.permanentMarker(),
               ),
               horizontalSpaceMedium,
               RecentProjectImage(project, isOddIndex: isOddIndex),
@@ -193,21 +185,19 @@ class _ProjectDetail extends ConsumerWidget {
       mainAxisSize: MainAxisSize.max,
       children: [
         if (!context.isMobile) ...[
-          Text(
+          BodyText(
             project.projectName,
-            style: context.titleSmall.copyWith(
-              color: kPortfolioTitle,
-              fontSize: context.autoAdaptive(s20),
-              fontWeight: superBold,
-            ),
+            fontSize: FontSize.large,
+            fontWeight: superBold,
+            color: kPortfolioTitle,
           ),
           verticalSpaceTiny,
         ],
 
-        ContentText(
+        BodyText(
           project.description,
-          textColor: kGrey1000.withValues(alpha: s08),
-          fontSize: s16,
+          fontSize: FontSize.small,
+          color: kGrey1000.withValues(alpha: s08),
         ),
         if (project.github != null) ...[
           verticalSpaceMedium,
