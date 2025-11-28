@@ -3,16 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../core/di/providers.dart';
 import '../../models/social.dart';
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_data.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../presentations/configs/duration.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/theme_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import '../widgets/text/app_text.dart';
 import '../widgets/text/body_text.dart';
 import '../widgets/text/label_text.dart';
@@ -25,10 +19,7 @@ class FooterView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s42),
-        vertical: context.autoAdaptive(s50),
-      ),
+      padding: context.defaultPagePadding(isFooter: true),
       decoration: BoxDecoration(
         color: kBlack100,
         border: Border(
@@ -90,7 +81,7 @@ class FooterView extends ConsumerWidget {
             child: Column(
               children: [
                 BodyText(
-                  '© 2025 Thant Zin. All rights reserved.',
+                  context.localization.all_right_reserved,
                   fontSize: FontSize.small,
                   color: kGrey500,
                   style: GoogleFonts.inter(),
@@ -160,62 +151,55 @@ class _SocialIconButton extends StatefulWidget {
   State<_SocialIconButton> createState() => _SocialIconButtonState();
 }
 
-class _SocialIconButtonState extends State<_SocialIconButton>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  bool _isHovered = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this, duration: duration500);
-  }
+class _SocialIconButtonState extends State<_SocialIconButton> {
+  final ValueNotifier<bool> _isHovered = ValueNotifier(false);
 
   @override
   void dispose() {
-    _controller.dispose();
+    _isHovered.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
+      onEnter: (_) => _isHovered.value = true,
+      onExit: (_) => _isHovered.value = false,
       child: GestureDetector(
         onTap: () => widget.onTap(widget.social.link),
-        child: AnimatedBuilder(
-          animation: _controller,
-          builder: (context, child) {
-            if (_isHovered) {
-              _controller.forward();
-            } else {
-              _controller.reverse();
-            }
-
-            return Transform.scale(
-              scale: 1.0 + (_controller.value * 0.3),
-              child: Container(
-                padding: const EdgeInsets.all(s16),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: kWhite.withValues(alpha: s005),
-                  boxShadow: _isHovered
-                      ? [
-                          BoxShadow(
-                            color: kWhite.withValues(alpha: s025),
-                            blurRadius: 20,
-                            spreadRadius: 5,
-                          ),
-                        ]
-                      : null,
-                ),
-                child: Icon(
-                  widget.social.icon,
-                  color: Colors.white,
-                  size: context.autoAdaptive(s20),
-                ),
-              ),
+        child: ValueListenableBuilder<bool>(
+          valueListenable: _isHovered,
+          builder: (context, hovered, _) {
+            return TweenAnimationBuilder<double>(
+              tween: Tween(begin: 1.0, end: hovered ? 1.3 : 1.0),
+              duration: duration500,
+              curve: Curves.easeOut,
+              builder: (context, scale, child) {
+                return Transform.scale(
+                  scale: scale,
+                  child: Container(
+                    padding: const EdgeInsets.all(s16),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: kWhite.withValues(alpha: s005),
+                      boxShadow: hovered
+                          ? [
+                              BoxShadow(
+                                color: kWhite.withValues(alpha: s025),
+                                blurRadius: 20,
+                                spreadRadius: 5,
+                              ),
+                            ]
+                          : null,
+                    ),
+                    child: Icon(
+                      widget.social.icon,
+                      color: Colors.white,
+                      size: context.autoAdaptive(s20),
+                    ),
+                  ),
+                );
+              },
             );
           },
         ),

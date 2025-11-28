@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../presentations/configs/constant_colors.dart';
-import '../../../presentations/configs/constants.dart';
-import '../../../presentations/configs/duration.dart';
+import '../../../core/configs/configs.dart';
 import '../../../utils/extensions/theme_ex.dart';
 import '../../widgets/text/app_text.dart';
 import '../../widgets/text/body_text.dart';

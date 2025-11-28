@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../presentations/configs/constant_sizes.dart';
-import '../../../utils/extensions/layout_adapter_ex.dart';
-import '../../../utils/extensions/theme_ex.dart';
+import '../../../core/configs/constant_sizes.dart';
+import '../../../utils/extensions/extensions.dart';
 import 'app_text.dart';
 
 class TitleText extends AppText {

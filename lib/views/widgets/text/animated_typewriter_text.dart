@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../presentations/configs/duration.dart';
+import '../../../core/configs/duration.dart';
 import 'custom_text.dart';
 
 /// A widget that displays text with a typewriter animation effect.

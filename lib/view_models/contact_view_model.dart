@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
+import '../../core/configs/constants.dart';
 import '../../domain/use_cases/contact_usecase.dart';
 import '../../models/contact.dart';
-import '../../presentations/configs/constants.dart';
 
 class ContactViewModel extends ChangeNotifier {
   final ContactUseCase contactUseCase;

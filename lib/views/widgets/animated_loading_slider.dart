@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../utils/extensions/widget_ex.dart';
 
-import '../../presentations/configs/constant_colors.dart';
+import '../../../core/configs/configs.dart';
+import '../../utils/extensions/extensions.dart';
 
 class LoadingSliderTransition extends AnimatedWidget {
   const LoadingSliderTransition({

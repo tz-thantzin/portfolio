@@ -3,16 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../../core/routing/routes.dart';
 import '../../../models/project.dart';
-import '../../../presentations/configs/constant_colors.dart';
-import '../../../presentations/configs/constant_data.dart';
-import '../../../presentations/configs/constant_sizes.dart';
-import '../../../presentations/configs/duration.dart';
-import '../../../utils/extensions/context_ex.dart';
-import '../../../utils/extensions/layout_adapter_ex.dart';
-import '../../../utils/extensions/theme_ex.dart';
-import '../../../utils/extensions/widget_ex.dart';
+import '../../../utils/extensions/extensions.dart';
 import '../../widgets/animated_fade_widget.dart';
 import '../../widgets/animated_slide_widget.dart';
 import '../../widgets/animated_text_button.dart';
@@ -74,10 +68,7 @@ class _RecentProjectViewState extends State<RecentProjectView>
       width: double.infinity,
       constraints: BoxConstraints(minHeight: context.screenHeight),
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s42),
-        vertical: context.autoAdaptive(s50),
-      ),
+      padding: context.defaultPagePadding(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

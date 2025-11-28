@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../presentations/configs/constant_colors.dart';
-import '../../../presentations/configs/constant_sizes.dart';
-import '../../../utils/extensions/context_ex.dart';
-import '../../../utils/extensions/layout_adapter_ex.dart';
-import '../../../utils/extensions/widget_ex.dart';
+import '../../../core/configs/configs.dart';
+import '../../../utils/extensions/extensions.dart';
 import '../../widgets/animated_text_button.dart';
 import 'intro_widget.dart';
 import 'profile_image.dart';
@@ -90,11 +87,8 @@ class _IntroductionViewState extends State<IntroductionView>
                 child: const SocialBanner(),
               ),
             Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: context.autoAdaptive(42),
-                vertical: context.autoAdaptive(16),
-              ),
               height: context.screenHeight,
+              padding: context.defaultPagePadding(),
               alignment: Alignment.center,
               child: context.isMobile ? _mobileView() : _desktopView(),
             ),

@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../core/routing/routes.dart';
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/theme_ex.dart';
+import '../../../core/configs/configs.dart';
+import '../../utils/extensions/extensions.dart';
 import '../../views/widgets/animated_slide_button.dart';
-import '../presentations/configs/constant_images.dart';
+import '../core/routing/routes.dart';
 import 'widgets/text/app_text.dart';
 import 'widgets/text/body_text.dart';
 import 'widgets/text/custom_text.dart';
@@ -28,10 +24,7 @@ class ErrorView extends StatelessWidget {
         child: SingleChildScrollView(
           child: Container(
             constraints: BoxConstraints(minHeight: context.screenHeight),
-            padding: EdgeInsets.symmetric(
-              horizontal: context.autoAdaptive(s42),
-              vertical: context.autoAdaptive(s16),
-            ),
+            padding: context.defaultPagePadding(),
             alignment: Alignment.center,
             child: isMobile
                 ? _buildMobileLayout(context)

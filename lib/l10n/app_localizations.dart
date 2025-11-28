@@ -321,6 +321,12 @@ abstract class AppLocalizations {
   /// **'I\'m available for freelancing'**
   String get available_freelancing;
 
+  /// No description provided for @all_right_reserved.
+  ///
+  /// In en, this message translates to:
+  /// **'© 2025 Thant Zin. All rights reserved.'**
+  String get all_right_reserved;
+
   /// No description provided for @built_using.
   ///
   /// In en, this message translates to:
@@ -332,6 +338,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'with '**
   String get built_with;
+
+  /// No description provided for @doing_well.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi there! I hope you are doing well. I\'m '**
+  String get doing_well;
+
+  /// No description provided for @your_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Your name'**
+  String get your_name;
+
+  /// No description provided for @looking_for.
+  ///
+  /// In en, this message translates to:
+  /// **'and I\'m reaching out because I need help with'**
+  String get looking_for;
+
+  /// No description provided for @job_type.
+  ///
+  /// In en, this message translates to:
+  /// **'Job type / project'**
+  String get job_type;
+
+  /// No description provided for @get_back_me.
+  ///
+  /// In en, this message translates to:
+  /// **'You can get back to me at'**
+  String get get_back_me;
+
+  /// No description provided for @your_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Your email'**
+  String get your_email;
+
+  /// No description provided for @any_request.
+  ///
+  /// In en, this message translates to:
+  /// **'Any details about timeline, budget, or special requests?'**
+  String get any_request;
+
+  /// No description provided for @your_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Your message (optional but helpful!)'**
+  String get your_message;
+
+  /// No description provided for @send_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Message'**
+  String get send_message;
+
+  /// No description provided for @message_sent_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you! Your message has been sent successfully.\\nI’ll get back to you soon.'**
+  String get message_sent_successfully;
+
+  /// No description provided for @failed_sent_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Oops! Something went wrong.\\nPlease try again later.'**
+  String get failed_sent_message;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

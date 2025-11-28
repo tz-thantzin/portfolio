@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../presentations/configs/constant_images.dart';
-import '../../presentations/configs/constant_sizes.dart';
+import '../../../core/configs/configs.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../views/widgets/animated_scale_widget.dart';
 

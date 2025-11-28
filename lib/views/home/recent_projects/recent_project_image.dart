@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../../models/project.dart';
-import '../../../presentations/configs/constant_colors.dart';
-import '../../../presentations/configs/constant_sizes.dart';
-import '../../../utils/extensions/context_ex.dart';
-import '../../../utils/extensions/layout_adapter_ex.dart';
+import '../../../utils/extensions/extensions.dart';
 import '../../widgets/animated_scale_widget.dart';
 
 class RecentProjectImage extends StatefulWidget {

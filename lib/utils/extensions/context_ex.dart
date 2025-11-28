@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../utils/extensions/layout_adapter_ex.dart';
 
 extension ContextX on BuildContext {
   double get screenWidth => MediaQuery.of(this).size.width;

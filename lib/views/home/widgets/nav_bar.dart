@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../presentations/configs/constant_colors.dart';
-import '../../../presentations/configs/constant_sizes.dart';
-import '../../../presentations/configs/constants.dart';
-import '../../../presentations/configs/duration.dart';
-import '../../../utils/extensions/context_ex.dart';
-import '../../../utils/extensions/layout_adapter_ex.dart';
-import '../../../utils/extensions/theme_ex.dart';
+import '../../../core/configs/configs.dart';
+import '../../../utils/extensions/extensions.dart';
 import '../../widgets/text/app_text.dart';
 import '../../widgets/text/body_text.dart';
 import 'nav_logo.dart';
@@ -76,10 +71,7 @@ class NavBar extends StatelessWidget {
     return Container(
       width: context.screenWidth,
       height: context.appBarHeight,
-      padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s42),
-        vertical: context.autoAdaptive(s16),
-      ),
+      padding: context.defaultPagePadding(),
       child: Row(
         children: [
           NavLogo(

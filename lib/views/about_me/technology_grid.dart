@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../presentations/configs/constants.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/theme_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
+import '../../../core/configs/configs.dart';
+import '../../utils/extensions/extensions.dart';
 import '../widgets/animated_slide_widget.dart';
 import '../widgets/text/app_text.dart';
 import '../widgets/text/body_text.dart';
@@ -18,10 +13,7 @@ class TechnologyGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(42),
-        vertical: context.autoAdaptive(16),
-      ),
+      padding: context.defaultPagePadding(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

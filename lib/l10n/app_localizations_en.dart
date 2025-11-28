@@ -123,8 +123,44 @@ class AppLocalizationsEn extends AppLocalizations {
   String get available_freelancing => 'I\'m available for freelancing';
 
   @override
+  String get all_right_reserved => '© 2025 Thant Zin. All rights reserved.';
+
+  @override
   String get built_using => 'Built using';
 
   @override
   String get built_with => 'with ';
+
+  @override
+  String get doing_well => 'Hi there! I hope you are doing well. I\'m ';
+
+  @override
+  String get your_name => 'Your name';
+
+  @override
+  String get looking_for => 'and I\'m reaching out because I need help with';
+
+  @override
+  String get job_type => 'Job type / project';
+
+  @override
+  String get get_back_me => 'You can get back to me at';
+
+  @override
+  String get your_email => 'Your email';
+
+  @override
+  String get any_request => 'Any details about timeline, budget, or special requests?';
+
+  @override
+  String get your_message => 'Your message (optional but helpful!)';
+
+  @override
+  String get send_message => 'Send Message';
+
+  @override
+  String get message_sent_successfully => 'Thank you! Your message has been sent successfully.\\nI’ll get back to you soon.';
+
+  @override
+  String get failed_sent_message => 'Oops! Something went wrong.\\nPlease try again later.';
 }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../presentations/configs/duration.dart';
-import '../../utils/extensions/context_ex.dart';
+import '../../../core/configs/configs.dart';
+import '../../utils/extensions/extensions.dart';
 import 'text/body_text.dart';
 
 class AnimatedLoadingPage extends StatefulWidget {

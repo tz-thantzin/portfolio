@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../core/di/providers.dart';
 import '../../models/project.dart';
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_data.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../presentations/configs/constants.dart';
-import '../../presentations/configs/duration.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import '../../views/portfolio/project_card.dart';
 import '../widgets/animated_text_button.dart';
 
@@ -24,10 +19,7 @@ class ProjectListView extends ConsumerWidget {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(s42),
-        vertical: context.autoAdaptive(s16),
-      ),
+      padding: context.defaultPagePadding(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../core/routing/routes.dart';
-import '../../presentations/configs/constant_images.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../presentations/configs/duration.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import '../../views/portfolio/project_list_view.dart';
 import '../../views/wrapper.dart';
 import '../footer/footer_view.dart';
@@ -39,7 +36,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
           HeaderView(
             title: context.localization.portfolio,
             onTapScrollDown: _onTapScrollDown,
-            bgImagePath: kPortfolioBg,
+            bgImagePath: kPortfolioBgImg,
           ),
           verticalSpaceMassive,
           ProjectListView(),

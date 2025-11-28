@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../models/work_experience.dart';
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_data.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../presentations/configs/duration.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import '../../views/work_experience/work_info_detail.dart';
 import '../widgets/animated_slide_widget.dart';
 
@@ -86,10 +81,7 @@ class _WorkInfoViewState extends State<WorkInfoView>
       onVisibilityChanged: _onVisibilityChanged,
       child: Container(
         constraints: BoxConstraints(minHeight: context.screenHeight),
-        padding: EdgeInsets.symmetric(
-          horizontal: context.autoAdaptive(s42),
-          vertical: context.autoAdaptive(s16),
-        ),
+        padding: context.defaultPagePadding(),
         child: Column(children: _buildItems()),
       ),
     );

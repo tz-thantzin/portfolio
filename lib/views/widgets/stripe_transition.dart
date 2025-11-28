@@ -2,9 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../utils/extensions/context_ex.dart';
+import '../../../core/configs/configs.dart';
+import '../../utils/extensions/extensions.dart';
 
 class StripeTransition extends StatelessWidget {
   const StripeTransition({
