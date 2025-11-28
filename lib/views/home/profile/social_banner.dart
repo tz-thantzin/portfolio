@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../../core/di/providers.dart';
-import '../../../presentations/configs/constant_colors.dart';
-import '../../../presentations/configs/constant_data.dart';
-import '../../../presentations/configs/constant_sizes.dart';
-import '../../../presentations/configs/duration.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
 import '../../../utils/extensions/widget_ex.dart';
 

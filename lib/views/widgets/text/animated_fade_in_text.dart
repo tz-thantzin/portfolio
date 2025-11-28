@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-import '../../../presentations/configs/duration.dart';
+import '../../../core/configs/duration.dart';
 import '../../../utils/extensions/widget_ex.dart';
 import 'custom_text.dart';
 

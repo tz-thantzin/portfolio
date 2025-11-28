@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_sizes.dart';
+import '../../../core/configs/configs.dart';
 
 const superBold = FontWeight.w900;
 const bold = FontWeight.w700;

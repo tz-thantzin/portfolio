@@ -222,10 +222,10 @@ List<Skill> languagesAndTools(BuildContext context) {
     Skill(name: 'Postman', iconPath: kPostmanSVG, percentage: 80),
     Skill(name: 'Git', iconPath: kGitSVG, percentage: 90),
     Skill(name: 'Github', iconPath: kGithubSVG, percentage: 90),
-    Skill(name: 'Fastlane', iconPath: kFastlaneSVG, percentage: 60),
+    Skill(name: 'Fastlane', iconPath: kFastlaneSVG, percentage: 75),
     Skill(name: 'Android Studio', iconPath: kAndroidStudioSVG, percentage: 95),
     Skill(name: 'Xcode', iconPath: kXcodeSVG, percentage: 95),
-    Skill(name: 'VSCode', iconPath: kVSCodeSVG, percentage: 70),
+    Skill(name: 'VSCode', iconPath: kVSCodeSVG, percentage: 80),
   ];
 }
 

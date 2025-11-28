@@ -1,6 +1,6 @@
 import 'package:url_launcher/url_launcher.dart';
 
-import '../presentations/configs/constants.dart';
+import '../core/configs/constants.dart';
 import 'event_analytics.dart';
 
 Future<void> launchUrlExternal(String url) async {

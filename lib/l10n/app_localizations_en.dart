@@ -24,7 +24,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get about => 'About';
 
   @override
-  String get my_specialization => 'Specializing in mobile technologies, I have expertise in Flutter and iOS development, delivering high-quality applications.';
+  String get my_specialization =>
+      'Specializing in mobile technologies, I have expertise in Flutter and iOS development, delivering high-quality applications.';
 
   @override
   String get see_my_work => 'See My Works';
@@ -51,7 +52,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get years_success => 'Years of \nSuccess';
 
   @override
-  String get freelance_mobile_developer => 'Freelance Mobile Application Developer';
+  String get freelance_mobile_developer =>
+      'Freelance Mobile Application Developer';
 
   @override
   String get crafted_with_love => 'Crafted with love';
@@ -66,16 +68,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get little_bit_about_myself => 'A little bit about myself';
 
   @override
-  String get about_me_description => 'I am an experienced mobile application developer with over 11 years in Flutter and iOS development. Throughout my career, I have successfully led teams to produce high-quality, user-friendly applications. I find joy in tackling complex technical challenges and mentoring my team members to reach their full potential. My main focus is on creating elegant, high-performance, and maintainable apps that provide exceptional user experiences.\n\nI graduated from the University of Computer Studies in Yangon in November 2013. I began my career in February 2014 as an OJT and moved into a permanent full-time role in May 2014. In 2019, I traveled to Tokyo, Japan, for professional training and to gain insights into Japanese work culture.\n\nIn my spare time, I enjoy traveling, exploring new technologies to sharpen my skills, savoring coffee, and playing games.';
+  String get about_me_description =>
+      'I am an experienced mobile application developer with over 11 years in Flutter and iOS development. Throughout my career, I have successfully led teams to produce high-quality, user-friendly applications. I find joy in tackling complex technical challenges and mentoring my team members to reach their full potential. My main focus is on creating elegant, high-performance, and maintainable apps that provide exceptional user experiences.\n\nI graduated from the University of Computer Studies in Yangon in November 2013. I began my career in February 2014 as an OJT and moved into a permanent full-time role in May 2014. In 2019, I traveled to Tokyo, Japan, for professional training and to gain insights into Japanese work culture.\n\nIn my spare time, I enjoy traveling, exploring new technologies to sharpen my skills, savoring coffee, and playing games.';
 
   @override
   String get technologies => 'Technologies I have worked with:';
 
   @override
-  String get my_tools => 'I worked with multiple tools and technologies to make the development workflow more efficient.';
+  String get my_tools =>
+      'I worked with multiple tools and technologies to make the development workflow more efficient.';
 
   @override
-  String get quote => '“Live as if you were to die tomorrow. Learn as if you were to live forever.”';
+  String get quote =>
+      '“Live as if you were to die tomorrow. Learn as if you were to live forever.”';
 
   @override
   String get author => 'Mahatma Gandhi';
@@ -87,7 +92,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get workflows_title => 'Workflows';
 
   @override
-  String get workflows => 'Responsive Design|Cross Functional Teams|Waterfall Development|Agile Development & Scrum|Team Leading & Task Delegation|Conducting code reviews and sprint planning';
+  String get workflows =>
+      'Responsive Design|Cross Functional Teams|Waterfall Development|Agile Development & Scrum|Team Leading & Task Delegation|Conducting code reviews and sprint planning';
 
   @override
   String get portfolio => 'Portfolio';
@@ -114,7 +120,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get page_not_found => 'Page Not Found';
 
   @override
-  String get sorry_page_not_exist => 'Sorry, the page you’re looking for does not exist or has been moved.';
+  String get sorry_page_not_exist =>
+      'Sorry, the page you’re looking for does not exist or has been moved.';
 
   @override
   String get let_work_together => 'Let\'s work Together';

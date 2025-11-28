@@ -3,13 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../models/skill.dart';
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_data.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../presentations/configs/duration.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/padding_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
 import '../widgets/text/app_text.dart';
 import '../widgets/text/label_text.dart';
@@ -50,10 +48,7 @@ class _LanguageAndToolsState extends State<LanguageAndTools>
     final List<Skill> skills = languagesAndTools(context);
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(42),
-        vertical: context.autoAdaptive(16),
-      ),
+      padding: context.defaultPagePadding(),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

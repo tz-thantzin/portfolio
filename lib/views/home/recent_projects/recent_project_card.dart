@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../../core/di/providers.dart';
 import '../../../models/project.dart';
-import '../../../presentations/configs/constant_colors.dart';
-import '../../../presentations/configs/constant_data.dart';
-import '../../../presentations/configs/constant_sizes.dart';
 import '../../../utils/extensions/context_ex.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
 import '../../../utils/extensions/theme_ex.dart';
@@ -106,10 +104,7 @@ class _ProjectImage extends StatelessWidget {
           borderRadius: BorderRadius.circular(context.autoAdaptive(s24)),
           border: Border.all(color: kPrimary.withValues(alpha: s03)),
         ),
-        padding: EdgeInsets.symmetric(
-          horizontal: context.autoAdaptive(s16),
-          vertical: context.autoAdaptive(s16),
-        ),
+        padding: EdgeInsets.all(context.autoAdaptive(s16)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -159,10 +154,7 @@ class _ProjectImage extends StatelessWidget {
           borderRadius: BorderRadius.circular(context.autoAdaptive(s24)),
           border: Border.all(color: kPrimary.withValues(alpha: s03)),
         ),
-        padding: EdgeInsets.symmetric(
-          horizontal: context.autoAdaptive(s32),
-          vertical: context.autoAdaptive(s32),
-        ),
+        padding: EdgeInsets.all(context.autoAdaptive(s32)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.max,

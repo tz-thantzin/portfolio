@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../core/di/providers.dart';
 import '../../core/routing/routes.dart';
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../presentations/configs/duration.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/padding_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
 import '../../view_models/contact_view_model.dart';
@@ -53,19 +52,19 @@ class _ContactPageState extends State<ContactPage>
 
     _nameAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: duration300,
     );
     _jobAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: duration300,
     );
     _emailAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: duration300,
     );
     _messageAnimationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: duration300,
     );
 
     // Add listeners
@@ -184,10 +183,7 @@ class _ContactPageState extends State<ContactPage>
       alignment: Alignment.center,
       constraints: BoxConstraints(minHeight: context.screenHeight),
       margin: EdgeInsets.only(top: context.appBarHeight),
-      padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(42),
-        vertical: context.autoAdaptive(16),
-      ),
+      padding: context.defaultPagePadding(),
       child:
           [
             AnimatedFadeWidget(

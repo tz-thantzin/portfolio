@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../core/di/providers.dart';
 import '../../models/project.dart';
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_sizes.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../../views/portfolio/project_image.dart';
@@ -53,7 +52,7 @@ class ProjectCard extends ConsumerWidget {
                     .onProjectView(project.github!)
               : null,
           child: Padding(
-            padding: const EdgeInsets.all(s28),
+            padding: EdgeInsets.all(context.autoAdaptive(s28)),
             child: isDesktop
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

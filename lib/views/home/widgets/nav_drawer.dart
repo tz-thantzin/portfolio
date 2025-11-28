@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '../../../presentations/configs/constant_colors.dart';
-import '../../../presentations/configs/constant_sizes.dart';
-import '../../../presentations/configs/constants.dart';
-import '../../../presentations/configs/duration.dart';
+import '../../../core/configs/configs.dart';
 import '../../../utils/extensions/context_ex.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
 import '../../../utils/extensions/theme_ex.dart';
 import '../../../utils/extensions/widget_ex.dart';
 import '../../widgets/text/app_text.dart';
+import '../../widgets/text/body_text.dart';
 import '../../widgets/text/label_text.dart';
 import 'nav_logo.dart';
 
@@ -47,10 +46,7 @@ class _NavDrawerState extends State<NavDrawer>
   }
 
   Future<void> _reverseAnimationAndClose() async {
-    // Reverse animation
     await _controller.reverse();
-
-    // close function after the animation is complete
     widget.onCloseDrawer();
   }
 
@@ -77,7 +73,6 @@ class _NavDrawerState extends State<NavDrawer>
             /// Close Button
             _buildCloseButton(context),
 
-            /// Space between items
             verticalSpaceEnormous,
 
             /// Menu Items Section
@@ -85,7 +80,7 @@ class _NavDrawerState extends State<NavDrawer>
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(items.length, (index) {
                   final intervalStart = (index / itemCount) * 0.7;
                   final intervalEnd = ((index + 1) / itemCount) * 0.7 + 0.3;
@@ -117,6 +112,15 @@ class _NavDrawerState extends State<NavDrawer>
                 }),
               ).addScrollView(),
             ),
+            BodyText(
+              '© 2025 Thant Zin. All rights reserved.',
+              fontSize: FontSize.small,
+              color: kGrey500,
+              style: GoogleFonts.inter(),
+              textAlign: TextAlign.center,
+            ).addCenter(),
+
+            verticalSpaceMedium,
           ],
         ),
       ),
@@ -124,7 +128,7 @@ class _NavDrawerState extends State<NavDrawer>
   }
 
   Widget _buildCloseButton(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: context.screenWidth,
       height: context.appBarHeight,
       child: Row(
@@ -158,21 +162,17 @@ class _NavDrawerState extends State<NavDrawer>
       child: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: context.autoAdaptive(14)),
+          padding: EdgeInsets.symmetric(vertical: context.autoAdaptive(s14)),
           child: Row(
-            mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Numerical Prefix (e.g., "01.")
               LabelText(
                 '0${index + 1}.',
                 fontWeight: medium,
                 color: kWhite.withValues(alpha: 0.5),
               ).addPadding(
-                padding: EdgeInsets.only(right: context.autoAdaptive(16)),
+                padding: EdgeInsets.only(right: context.autoAdaptive(s16)),
               ),
-
-              // Main Navigation Title
               LabelText(
                 title,
                 fontSize: FontSize.medium,

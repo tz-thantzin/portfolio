@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../presentations/configs/constant_sizes.dart';
+import '../../../core/configs/constant_sizes.dart';
 import '../../../utils/extensions/layout_adapter_ex.dart';
 import '../../../utils/extensions/theme_ex.dart';
 import 'app_text.dart';
@@ -30,7 +30,7 @@ class BodyText extends AppText {
         fontSize: context.autoAdaptive(s24),
       ),
       FontSize.medium => context.bodyMedium.copyWith(
-        fontSize: context.autoAdaptive(s18),
+        fontSize: context.autoAdaptive(s16),
       ),
       _ => context.bodySmall.copyWith(
         fontSize: context.autoAdaptive(context.isMobile ? s16 : s12),

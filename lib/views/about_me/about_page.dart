@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../core/routing/routes.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../presentations/configs/duration.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/padding_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
 import '../../views/about_me/about_specialization.dart';
@@ -140,12 +140,7 @@ class _AboutMePageState extends State<AboutMePage>
           ),
         )
         .addVisibilityDetector(onDetectVisibility: _onQuoteVisibilityChanged)
-        .addPadding(
-          padding: EdgeInsets.symmetric(
-            horizontal: context.autoAdaptive(42),
-            vertical: context.autoAdaptive(16),
-          ),
-        )
+        .addPadding(padding: context.defaultPagePadding())
         .addSizedBox(width: double.infinity);
   }
 

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../presentations/configs/duration.dart';
+import '../../../core/configs/configs.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
+import '../../utils/extensions/padding_ex.dart';
 import '../../views/widgets/animated_slide_widget.dart';
 import '../widgets/animated_fade_widget.dart';
 import '../widgets/text/label_text.dart';
@@ -98,10 +97,7 @@ class _AboutSpecializationState extends State<AboutSpecialization>
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(minHeight: context.screenHeight),
-      padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(42),
-        vertical: context.autoAdaptive(16),
-      ),
+      padding: context.defaultPagePadding(),
       alignment: Alignment.center,
       child: Column(
         children: [

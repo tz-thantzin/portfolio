@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/configs/configs.dart';
 import '../../models/work_experience.dart';
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_sizes.dart';
 import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../widgets/text/app_text.dart';

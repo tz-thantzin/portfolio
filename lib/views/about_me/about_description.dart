@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/utils/extensions/padding_ex.dart';
 
-import '../../presentations/configs/constant_colors.dart';
-import '../../presentations/configs/constant_sizes.dart';
+import '../../../core/configs/configs.dart';
 import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
 import '../../utils/extensions/theme_ex.dart';
 import '../widgets/text/app_text.dart';
 import '../widgets/text/body_text.dart';
@@ -14,10 +13,7 @@ class AboutDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: context.autoAdaptive(42),
-        vertical: context.autoAdaptive(16),
-      ),
+      padding: context.defaultPagePadding(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,

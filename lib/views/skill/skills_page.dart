@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import '../../presentations/configs/constant_images.dart';
+
+import '../../../core/configs/configs.dart';
+import '../../core/routing/routes.dart';
 import '../../utils/extensions/context_ex.dart';
 import '../../utils/extensions/widget_ex.dart';
 import '../../views/footer/footer_view.dart';
 import '../../views/skill/language_tools.dart';
-import '../../views/skill/work_flows.dart';
-
-import '../../core/routing/routes.dart';
-import '../../presentations/configs/constant_sizes.dart';
-import '../../presentations/configs/duration.dart';
 import '../widgets/header_view.dart';
 import '../wrapper.dart';
+import 'work_flows.dart';
 
 class SkillsView extends StatefulWidget {
   const SkillsView({super.key});
