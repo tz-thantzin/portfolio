@@ -38,6 +38,18 @@
   "sorry_page_not_exist": "Sorry, the page you’re looking for does not exist or has been moved.",
   "let_work_together": "Let's work Together",
   "available_freelancing": "I'm available for freelancing",
+  "all_right_reserved": "© 2025 Thant Zin. All rights reserved.",
   "built_using":"Built using",
-  "built_with":"with "
+  "built_with":"with ",
+  "doing_well": "Hi there! I hope you are doing well. I'm ",
+  "your_name": "Your name",
+  "looking_for": "and I'm reaching out because I need help with",
+  "job_type": "Job type / project",
+  "get_back_me": "You can get back to me at",
+  "your_email": "Your email",
+  "any_request": "Any details about timeline, budget, or special requests?",
+  "your_message": "Your message (optional but helpful!)",
+  "send_message": "Send Message",
+  "message_sent_successfully": "Thank you! Your message has been sent successfully.\\nI’ll get back to you soon.",
+  "failed_sent_message": "Oops! Something went wrong.\\nPlease try again later."
 }

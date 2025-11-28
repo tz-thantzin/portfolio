@@ -122,24 +122,24 @@ class _ContactPageState extends State<ContactPage>
       _messageController.clear();
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: BodyText(
-            "Message sent successfully!",
+            context.localization.message_sent_successfully,
             fontSize: FontSize.small,
           ),
           backgroundColor: kGreen,
-          duration: Duration(seconds: 2),
+          duration: duration3000,
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: BodyText(
-            "Failed to send message.",
+            context.localization.failed_sent_message,
             fontSize: FontSize.small,
           ),
           backgroundColor: kRed,
-          duration: Duration(seconds: 2),
+          duration: duration3000,
         ),
       );
     }
@@ -221,7 +221,7 @@ class _ContactPageState extends State<ContactPage>
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           BodyText(
-                            "Hi there! I hope you are doing well. I'm ",
+                            context.localization.doing_well,
                             color: kBlack,
                             fontSize: FontSize.small,
                           ),
@@ -231,7 +231,7 @@ class _ContactPageState extends State<ContactPage>
                               maxWidth: context.autoAdaptive(s250),
                             ),
                             child: AnimatedUnderlineTextField(
-                              hintText: "Your name",
+                              hintText: context.localization.your_name,
                               controller: _nameController,
                               focusNode: _nameFocus,
                               underlineColor: vm.nameError != null
@@ -242,7 +242,7 @@ class _ContactPageState extends State<ContactPage>
                             ),
                           ),
                           BodyText(
-                            "and I’m looking for ",
+                            context.localization.looking_for,
                             color: kBlack,
                             fontSize: FontSize.small,
                           ),
@@ -252,7 +252,7 @@ class _ContactPageState extends State<ContactPage>
                               maxWidth: context.autoAdaptive(s250),
                             ),
                             child: AnimatedUnderlineTextField(
-                              hintText: "Job type",
+                              hintText: context.localization.job_type,
                               controller: _jobController,
                               focusNode: _jobFocus,
                               underlineColor: vm.jobError != null
@@ -268,7 +268,7 @@ class _ContactPageState extends State<ContactPage>
                             fontSize: FontSize.small,
                           ),
                           BodyText(
-                            "Reach me at ",
+                            context.localization.get_back_me,
                             color: kBlack,
                             fontSize: FontSize.small,
                           ),
@@ -278,7 +278,7 @@ class _ContactPageState extends State<ContactPage>
                               maxWidth: context.autoAdaptive(s250),
                             ),
                             child: AnimatedUnderlineTextField(
-                              hintText: "Your email",
+                              hintText: context.localization.your_email,
                               controller: _emailController,
                               focusNode: _emailFocus,
                               isEmail: true,
@@ -291,7 +291,7 @@ class _ContactPageState extends State<ContactPage>
                           ),
                           BodyText("!", color: kBlack),
                           BodyText(
-                            "Any additional info or special requests?",
+                            context.localization.any_request,
                             color: kBlack,
                             fontSize: FontSize.small,
                           ),
@@ -301,7 +301,7 @@ class _ContactPageState extends State<ContactPage>
                               maxWidth: context.autoAdaptive(s350),
                             ),
                             child: AnimatedUnderlineTextField(
-                              hintText: "Your message",
+                              hintText: context.localization.your_message,
                               controller: _messageController,
                               focusNode: _messageFocus,
                               isMultiline: true,
@@ -324,7 +324,7 @@ class _ContactPageState extends State<ContactPage>
                           width: context.autoAdaptive(
                             context.isMobile ? s200 : s120,
                           ),
-                          title: 'Send Message',
+                          title: context.localization.send_message,
                           buttonColor: vm.isFormValid ? kBlack : kGrey500,
                           borderColor: kGrey900,
                           onHoverColor: kWhite70,

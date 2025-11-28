@@ -81,7 +81,7 @@ class FooterView extends ConsumerWidget {
             child: Column(
               children: [
                 BodyText(
-                  '© 2025 Thant Zin. All rights reserved.',
+                  context.localization.all_right_reserved,
                   fontSize: FontSize.small,
                   color: kGrey500,
                   style: GoogleFonts.inter(),
