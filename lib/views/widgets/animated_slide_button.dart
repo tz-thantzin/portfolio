@@ -3,8 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../core/configs/configs.dart';
-import '../../utils/extensions/theme_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import 'text/custom_text.dart';
 
 class AnimatedSlideButton extends StatefulWidget {

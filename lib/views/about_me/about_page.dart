@@ -4,11 +4,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../core/configs/configs.dart';
 import '../../core/routing/routes.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/padding_ex.dart';
-import '../../utils/extensions/theme_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import '../../views/about_me/about_specialization.dart';
 import '../../views/footer/footer_view.dart';
 import '../../views/widgets/text/animated_typewriter_text.dart';

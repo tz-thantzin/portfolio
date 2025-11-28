@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/utils/extensions/padding_ex.dart';
 
 import '../../../core/configs/configs.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/theme_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import '../widgets/text/app_text.dart';
 import '../widgets/text/body_text.dart';
 

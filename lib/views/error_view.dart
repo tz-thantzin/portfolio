@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/configs/configs.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/theme_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import '../../views/widgets/animated_slide_button.dart';
 import '../core/routing/routes.dart';
-import '../utils/extensions/padding_ex.dart';
 import 'widgets/text/app_text.dart';
 import 'widgets/text/body_text.dart';
 import 'widgets/text/custom_text.dart';

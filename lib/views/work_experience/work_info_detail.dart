@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/configs/configs.dart';
 import '../../models/work_experience.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/theme_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import '../widgets/text/app_text.dart';
 import '../widgets/text/body_text.dart';
 

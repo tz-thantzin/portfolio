@@ -4,11 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/configs/configs.dart';
 import '../../core/di/providers.dart';
 import '../../core/routing/routes.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/padding_ex.dart';
-import '../../utils/extensions/theme_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import '../../view_models/contact_view_model.dart';
 import '../../views/footer/footer_view.dart';
 import '../../views/widgets/animated_slide_button.dart';
@@ -227,6 +223,7 @@ class _ContactPageState extends State<ContactPage>
                           BodyText(
                             "Hi there! I hope you are doing well. I'm ",
                             color: kBlack,
+                            fontSize: FontSize.small,
                           ),
                           ConstrainedBox(
                             constraints: BoxConstraints(
@@ -244,7 +241,11 @@ class _ContactPageState extends State<ContactPage>
                               onChanged: (value) => vm.name = value,
                             ),
                           ),
-                          BodyText("and I’m looking for ", color: kBlack),
+                          BodyText(
+                            "and I’m looking for ",
+                            color: kBlack,
+                            fontSize: FontSize.small,
+                          ),
                           ConstrainedBox(
                             constraints: BoxConstraints(
                               minWidth: context.autoAdaptive(s150),
@@ -261,8 +262,16 @@ class _ContactPageState extends State<ContactPage>
                               onChanged: (value) => vm.job = value,
                             ),
                           ),
-                          BodyText(".", color: kBlack),
-                          BodyText("Reach me at ", color: kBlack),
+                          BodyText(
+                            ".",
+                            color: kBlack,
+                            fontSize: FontSize.small,
+                          ),
+                          BodyText(
+                            "Reach me at ",
+                            color: kBlack,
+                            fontSize: FontSize.small,
+                          ),
                           ConstrainedBox(
                             constraints: BoxConstraints(
                               minWidth: context.autoAdaptive(s150),
@@ -284,6 +293,7 @@ class _ContactPageState extends State<ContactPage>
                           BodyText(
                             "Any additional info or special requests?",
                             color: kBlack,
+                            fontSize: FontSize.small,
                           ),
                           ConstrainedBox(
                             constraints: BoxConstraints(

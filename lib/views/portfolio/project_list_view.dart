@@ -5,9 +5,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 import '../../../core/configs/configs.dart';
 import '../../core/di/providers.dart';
 import '../../models/project.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/padding_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import '../../views/portfolio/project_card.dart';
 import '../widgets/animated_text_button.dart';
 

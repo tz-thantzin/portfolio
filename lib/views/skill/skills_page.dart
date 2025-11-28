@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/configs/configs.dart';
 import '../../core/routing/routes.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import '../../views/footer/footer_view.dart';
 import '../../views/skill/language_tools.dart';
 import '../widgets/header_view.dart';

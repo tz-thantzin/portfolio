@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/configs/configs.dart';
-import '../../../utils/extensions/context_ex.dart';
-import '../../../utils/extensions/layout_adapter_ex.dart';
-import '../../../utils/extensions/widget_ex.dart';
+import '../../../utils/extensions/extensions.dart';
 import '../../../utils/utils.dart';
 import '../../widgets/text/app_text.dart';
 import '../../widgets/text/body_text.dart';

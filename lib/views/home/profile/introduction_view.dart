@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/configs/configs.dart';
-import '../../../utils/extensions/context_ex.dart';
-import '../../../utils/extensions/layout_adapter_ex.dart';
-import '../../../utils/extensions/padding_ex.dart';
-import '../../../utils/extensions/widget_ex.dart';
+import '../../../utils/extensions/extensions.dart';
 import '../../widgets/animated_text_button.dart';
 import 'intro_widget.dart';
 import 'profile_image.dart';

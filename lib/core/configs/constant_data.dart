@@ -6,7 +6,7 @@ import '../../models/project.dart';
 import '../../models/skill.dart';
 import '../../models/social.dart';
 import '../../models/work_experience.dart';
-import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import 'constant_images.dart';
 
 IconData _getIcon(String name) {

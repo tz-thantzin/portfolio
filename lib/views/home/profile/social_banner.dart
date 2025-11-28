@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/configs/configs.dart';
 import '../../../core/di/providers.dart';
-import '../../../utils/extensions/layout_adapter_ex.dart';
-import '../../../utils/extensions/widget_ex.dart';
+import '../../../utils/extensions/extensions.dart';
 
 class SocialBanner extends ConsumerStatefulWidget {
   const SocialBanner({super.key});

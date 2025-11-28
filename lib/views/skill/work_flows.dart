@@ -3,10 +3,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../core/configs/configs.dart';
 import '../../models/skill.dart';
-import '../../utils/extensions/context_ex.dart';
-import '../../utils/extensions/layout_adapter_ex.dart';
-import '../../utils/extensions/padding_ex.dart';
-import '../../utils/extensions/widget_ex.dart';
+import '../../utils/extensions/extensions.dart';
 import '../widgets/animated_slide_widget.dart';
 import '../widgets/text/app_text.dart';
 import '../widgets/text/body_text.dart';

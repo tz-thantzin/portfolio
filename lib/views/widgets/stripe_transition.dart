@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import '../../../core/configs/configs.dart';
-import '../../utils/extensions/context_ex.dart';
+import '../../utils/extensions/extensions.dart';
 
 class StripeTransition extends StatelessWidget {
   const StripeTransition({
