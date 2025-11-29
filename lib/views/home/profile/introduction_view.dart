@@ -20,39 +20,50 @@ class IntroductionView extends StatefulWidget {
   State<IntroductionView> createState() => _IntroductionViewState();
 }
 
-class _IntroductionViewState extends State<IntroductionView>
-    with SingleTickerProviderStateMixin {
-  late final Animation<double> _fadeIntro;
-  late final Animation<double> _fadeProfile;
-
+class _IntroductionViewState extends State<IntroductionView> {
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
+    final bool isDesktop = !context.isMobile;
 
-    _fadeIntro = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(
-        parent: widget.animationController,
-        curve: const Interval(0.0, 0.5, curve: Curves.easeIn),
-      ),
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: RadialGradient(
+                center: Alignment(isDesktop ? 0.3 : 0, -0.2),
+                radius: 1.5,
+                colors: [kGrey100.withValues(alpha: 0.5), kWhite],
+              ),
+            ),
+          ),
+        ),
+
+        // Main Content
+        Container(
+          constraints: BoxConstraints(minHeight: context.screenHeight),
+          padding: context.defaultPagePadding(),
+          alignment: Alignment.center,
+          child: context.isMobile ? _mobileView() : _desktopView(),
+        ),
+
+        // Social Banner (Fixed left on desktop)
+        if (isDesktop)
+          Positioned(
+            left: 0,
+            top: 0,
+            bottom: 0,
+            child: const Center(child: SocialBanner()),
+          ),
+
+        // "See My Work" Indicator
+        Positioned(
+          right: context.autoAdaptive(s16),
+          bottom: context.autoAdaptive(s32),
+          child: _buildScrollIndicator(),
+        ),
+      ],
     );
-
-    _fadeProfile = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(
-        parent: widget.animationController,
-        curve: const Interval(0.5, 1.0, curve: Curves.easeIn),
-      ),
-    );
-  }
-
-  Widget _buildIntro() {
-    return FadeTransition(
-      opacity: _fadeIntro,
-      child: IntroWidget(onTapScrollDown: widget.onTapScrollDown),
-    );
-  }
-
-  Widget _buildProfileImage() {
-    return FadeTransition(opacity: _fadeProfile, child: const ProfileImage());
   }
 
   Widget _mobileView() {
@@ -60,56 +71,67 @@ class _IntroductionViewState extends State<IntroductionView>
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
-      children: [_buildProfileImage(), verticalSpaceMedium, _buildIntro()],
+      children: [
+        const ProfileImage(),
+        verticalSpaceMedium,
+        IntroWidget(
+          onTapScrollDown: widget.onTapScrollDown,
+          controller: widget.animationController,
+        ),
+      ],
     );
   }
 
   Widget _desktopView() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: [_buildIntro(), Spacer(), _buildProfileImage()],
+      children: [
+        // Text Section
+        Expanded(
+          flex: 5,
+          child:
+              IntroWidget(
+                onTapScrollDown: widget.onTapScrollDown,
+                controller: widget.animationController,
+              ).addPadding(
+                padding: EdgeInsets.only(left: context.autoAdaptive(s48)),
+              ),
+        ),
+
+        // Image Section
+        Expanded(flex: 4, child: const Center(child: ProfileImage())),
+      ],
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          constraints: BoxConstraints(minHeight: context.screenHeight),
-          alignment: Alignment.center,
-          child: [
-            if (!context.isMobile)
-              Container(
-                height: context.screenHeight,
-                alignment: Alignment.centerLeft,
-                child: const SocialBanner(),
-              ),
-            Container(
-              height: context.screenHeight,
-              padding: context.defaultPagePadding(),
-              alignment: Alignment.center,
-              child: context.isMobile ? _mobileView() : _desktopView(),
-            ),
-          ].addStack(alignment: Alignment.center),
-        ),
-        Positioned(
-          right: context.autoAdaptive(s16),
-          bottom: context.autoAdaptive(s16),
-          child: RotatedBox(
+  Widget _buildScrollIndicator() {
+    return FadeTransition(
+      opacity: CurvedAnimation(
+        parent: widget.animationController,
+        curve: const Interval(0.8, 1.0, curve: Curves.easeIn),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          RotatedBox(
             quarterTurns: 1,
             child: AnimatedTextButton(
               context.localization.see_my_work.toUpperCase(),
-              hoverColor: kGrey700,
-              textColor: kBlack,
-              onPressed: () {
-                widget.onTapScrollDown();
-              },
+              hoverColor: kTomato,
+              textColor: kGrey800,
+              onPressed: widget.onTapScrollDown,
+              style: context.labelSmall.copyWith(letterSpacing: 2),
             ),
           ),
-        ),
-      ],
+          verticalSpaceSmall,
+          Container(
+            width: 1,
+            height: context.autoAdaptive(40),
+            color: kGrey800,
+          ),
+        ],
+      ),
     );
   }
 }

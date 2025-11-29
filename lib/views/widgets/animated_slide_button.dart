@@ -7,7 +7,7 @@ import '../../utils/extensions/extensions.dart';
 import 'text/custom_text.dart';
 
 class AnimatedSlideButton extends StatefulWidget {
-  AnimatedSlideButton({
+  const AnimatedSlideButton({
     super.key,
     required this.title,
     this.titleStyle,
@@ -16,11 +16,12 @@ class AnimatedSlideButton extends StatefulWidget {
     this.height = s48,
     this.onPressed,
     this.hasIcon = true,
-    this.iconColor = kWhite,
+    this.textColor = kWhite,
+    this.iconColor,
     this.buttonColor = kBlack,
     this.borderColor = kBlack,
     this.onHoverColor = kWhite,
-    this.iconData = FontAwesomeIcons.telegram,
+    this.icon = FontAwesomeIcons.telegram,
     this.iconSize = s14,
     this.duration = duration1000,
     this.curve = Curves.fastOutSlowIn,
@@ -30,12 +31,12 @@ class AnimatedSlideButton extends StatefulWidget {
 
   final String title;
   final TextStyle? titleStyle;
-  final IconData iconData;
+  final IconData icon;
   final double iconSize;
-  final Color iconColor;
+  final Color textColor;
+  final Color? iconColor;
   final Color buttonColor;
   final Color borderColor;
-
   final Color onHoverColor;
   final double width;
   final double borderWidth;
@@ -63,20 +64,20 @@ class _AnimatedSlideButtonState extends State<AnimatedSlideButton>
     super.initState();
     _controller = AnimationController(vsync: this, duration: widget.duration);
     _textAndIconColor =
-        ColorTween(
-          begin: widget.onHoverColor,
-          end: widget.buttonColor,
-        ).animate(_controller)..addListener(() {
+        ColorTween(begin: widget.textColor, end: widget.buttonColor).animate(
+          CurvedAnimation(parent: _controller, curve: widget.curve),
+        )..addListener(() {
           setState(() {});
         });
 
     _offsetAnimation =
         Tween<Offset>(
-          begin: Offset(0, 0),
-          end: Offset(0.5, 0),
-        ).animate(_controller)..addListener(() {
-          setState(() {});
-        });
+            begin: const Offset(0, 0),
+            end: const Offset(0.5, 0),
+          ).animate(CurvedAnimation(parent: _controller, curve: widget.curve))
+          ..addListener(() {
+            setState(() {});
+          });
   }
 
   @override
@@ -88,41 +89,55 @@ class _AnimatedSlideButtonState extends State<AnimatedSlideButton>
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
-    TextStyle? style = textTheme.bodyMedium?.copyWith(
-      color: _textAndIconColor.value,
-      fontSize: s14,
-      fontWeight: medium,
-    );
+
+    // Fallback style if titleStyle not provided
+    TextStyle style =
+        textTheme.bodyMedium?.copyWith(
+          color: _textAndIconColor.value,
+          fontSize: s14,
+          fontWeight: medium,
+        ) ??
+        TextStyle(color: _textAndIconColor.value);
+
     final ButtonStyle defaultButtonStyle = ElevatedButton.styleFrom(
       foregroundColor: widget.onHoverColor,
       backgroundColor: widget.onHoverColor,
-      padding: EdgeInsets.all(0),
+      padding: const EdgeInsets.all(0),
+      elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(0)),
-        side: BorderSide(width: 1, color: widget.borderColor),
+        borderRadius: const BorderRadius.all(Radius.circular(0)),
+        side: BorderSide(width: widget.borderWidth, color: widget.borderColor),
       ),
     );
+
     return MouseRegion(
-      key: ValueKey('MouseRegion_Animated_Slide_Button'),
+      key: const ValueKey('MouseRegion_Animated_Slide_Button'),
       onEnter: (e) => _mouseEnter(true),
       onExit: (e) => _mouseEnter(false),
-      child: Container(
+      child: SizedBox(
         width: widget.width,
         height: widget.height,
         child: ElevatedButton(
           onPressed: widget.onPressed,
           style: widget.buttonStyle ?? defaultButtonStyle,
-          child: widget.hasIcon
-              ? Stack(children: [animatedBackground(), childWithIcon()])
-              : Stack(
-                  children: [
-                    animatedBackground(),
-                    CustomText(
-                      widget.title,
-                      style: widget.titleStyle ?? style,
-                    ).addCenter(),
-                  ],
+          child: Stack(
+            children: [
+              animatedBackground(),
+              if (widget.hasIcon)
+                childWithIcon(style)
+              else
+                Center(
+                  child: CustomText(
+                    widget.title,
+                    style:
+                        widget.titleStyle?.copyWith(
+                          color: _textAndIconColor.value,
+                        ) ??
+                        style,
+                  ),
                 ),
+            ],
+          ),
         ),
       ),
     );
@@ -141,14 +156,7 @@ class _AnimatedSlideButtonState extends State<AnimatedSlideButton>
     );
   }
 
-  Widget childWithIcon() {
-    TextTheme textTheme = Theme.of(context).textTheme;
-    TextStyle? style = textTheme.bodyMedium?.copyWith(
-      color: _textAndIconColor.value,
-      fontSize: s14,
-      fontWeight: medium,
-    );
-
+  Widget childWithIcon(TextStyle defaultStyle) {
     return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -157,8 +165,10 @@ class _AnimatedSlideButtonState extends State<AnimatedSlideButton>
           Flexible(
             child: CustomText(
               widget.title,
-              style: widget.titleStyle ?? style,
-              overflow: TextOverflow.ellipsis, // prevent overflow
+              style:
+                  widget.titleStyle?.copyWith(color: _textAndIconColor.value) ??
+                  defaultStyle,
+              overflow: TextOverflow.ellipsis,
               maxLines: 1,
               softWrap: false,
             ),
@@ -172,9 +182,9 @@ class _AnimatedSlideButtonState extends State<AnimatedSlideButton>
                     size: 16.0,
                   )
                 : Icon(
-                    widget.iconData,
+                    widget.icon,
                     size: widget.iconSize,
-                    color: _textAndIconColor.value,
+                    color: widget.iconColor ?? _textAndIconColor.value,
                   ),
           ),
         ],
@@ -183,18 +193,16 @@ class _AnimatedSlideButtonState extends State<AnimatedSlideButton>
   }
 
   void _mouseEnter(bool hovering) {
+    if (widget.onPressed == null) return;
+
+    setState(() {
+      _isHovering = hovering;
+    });
+
     if (hovering) {
-      setState(() {
-        if (widget.onPressed != null) {
-          _controller.forward();
-          _isHovering = hovering;
-        }
-      });
+      _controller.forward();
     } else {
-      setState(() {
-        _controller.reverse();
-        _isHovering = hovering;
-      });
+      _controller.reverse();
     }
   }
 }

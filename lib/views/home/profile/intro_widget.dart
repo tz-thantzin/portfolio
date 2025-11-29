@@ -12,78 +12,147 @@ import '../../widgets/text/title_text.dart';
 
 class IntroWidget extends ConsumerStatefulWidget {
   final VoidCallback onTapScrollDown;
-  const IntroWidget({super.key, required this.onTapScrollDown});
+  final AnimationController controller;
+
+  const IntroWidget({
+    super.key,
+    required this.onTapScrollDown,
+    required this.controller,
+  });
 
   @override
   ConsumerState<IntroWidget> createState() => _IntroWidgetState();
 }
 
-class _IntroWidgetState extends ConsumerState<IntroWidget>
-    with TickerProviderStateMixin {
+class _IntroWidgetState extends ConsumerState<IntroWidget> {
+  Animation<Offset> _getSlideAnim(double start, double end) {
+    return Tween<Offset>(begin: const Offset(0, 0.2), end: Offset.zero).animate(
+      CurvedAnimation(
+        parent: widget.controller,
+        curve: Interval(start, end, curve: Curves.easeOutBack),
+      ),
+    );
+  }
+
+  Animation<double> _getFadeAnim(double start, double end) {
+    return Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(
+        parent: widget.controller,
+        curve: Interval(start, end, curve: Curves.easeOut),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return <Widget>[
-          TitleText(
-            context.localization.hi,
-            fontSize: FontSize.small,
-            color: kBlack,
-            fontWeight: semiBold,
-          ),
-          verticalSpaceSmall,
+    // Staggered Timings
+    final helloSlide = _getSlideAnim(0.0, 0.4);
+    final helloFade = _getFadeAnim(0.0, 0.4);
 
-          <Widget>[
-            TitleText(
-              context.localization.i_am,
+    final nameFade = _getFadeAnim(0.2, 0.6); // Name fades in while typing
+
+    final roleSlide = _getSlideAnim(0.5, 0.8);
+    final roleFade = _getFadeAnim(0.5, 0.8);
+
+    final btnSlide = _getSlideAnim(0.7, 1.0);
+    final btnFade = _getFadeAnim(0.7, 1.0);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // 1. "Hi"
+        SlideTransition(
+          position: helloSlide,
+          child: FadeTransition(
+            opacity: helloFade,
+            child: TitleText(
+              context.localization.hi,
               fontSize: FontSize.small,
-              color: kBlack,
+              color: kTomato,
               fontWeight: semiBold,
+              style: const TextStyle(letterSpacing: 1.5),
+            ),
+          ),
+        ),
+        verticalSpaceSmall,
+
+        // 2. Name Block
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            SlideTransition(
+              position: helloSlide,
+              child: FadeTransition(
+                opacity: helloFade,
+                child: TitleText(
+                  context.localization.i_am,
+                  fontSize: FontSize.small,
+                  color: kBlack,
+                  fontWeight: bold,
+                ),
+              ),
             ),
             horizontalSpaceSmall,
-            TypewriterText(
-              context.localization.thantzin,
-              style: context.titleSmall.copyWith(
-                color: kTomato,
-                fontSize: context.autoAdaptive(s36),
+            FadeTransition(
+              opacity: nameFade,
+              child: TypewriterText(
+                context.localization.thantzin,
+                style: context.titleLarge.copyWith(
+                  color: kBlack,
+                  fontSize: context.autoAdaptive(s48),
+                  fontWeight: FontWeight.w900,
+                  height: 1.1,
+                ),
+                startDelay: duration500,
               ),
-              startDelay: duration3000,
             ),
-          ].addRow(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          ],
+        ),
+        verticalSpaceMedium,
+
+        // 3. Role Description
+        SlideTransition(
+          position: roleSlide,
+          child: FadeTransition(
+            opacity: roleFade,
+            child: BodyText(
+              context.localization.freelance_mobile_developer,
+              textAlign: context.isMobile ? TextAlign.center : TextAlign.start,
+              color: kGrey700,
+              height: 1.5,
+              maxLines: 3,
+            ),
           ),
-          verticalSpaceSmall,
-          BodyText(
-            context.localization.freelance_mobile_developer,
-            textAlign: context.isMobile ? TextAlign.center : TextAlign.start,
-            color: kGrey800,
-          ),
-          verticalSpaceMassive,
-          <Widget>[
-            AnimatedSlideButton(
-              height: context.autoAdaptive(s36),
+        ),
+        verticalSpaceMassive,
+
+        // 4. Action Button
+        SlideTransition(
+          position: btnSlide,
+          child: FadeTransition(
+            opacity: btnFade,
+            child: AnimatedSlideButton(
+              height: context.autoAdaptive(s48),
+              width: context.autoAdaptive(200),
               title: context.localization.download_resume.toUpperCase(),
-              hasIcon: false,
-              buttonColor: kWhite,
+              hasIcon: true,
+              icon: Icons.download_rounded,
+              buttonColor: kGrey900,
+              textColor: kWhite,
               borderColor: kGrey900,
-              onHoverColor: kGrey800,
+              onHoverColor: kWhite70,
               onPressed: () {
                 ref.read(homeViewModelProvider).onDownloadResumeBtnPressed();
               },
             ),
-          ].addRow(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
           ),
-        ]
-        .addColumn(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-        )
-        .addPadding(
-          padding: EdgeInsets.symmetric(
-            horizontal: context.autoAdaptive(context.isMobile ? s0 : s24),
-          ),
-        );
+        ),
+      ],
+    ).addPadding(
+      padding: EdgeInsets.symmetric(
+        horizontal: context.autoAdaptive(context.isMobile ? s0 : s24),
+      ),
+    );
   }
 }

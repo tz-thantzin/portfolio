@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -5,118 +7,108 @@ import '../../../core/configs/configs.dart';
 import '../../../core/di/providers.dart';
 import '../../../utils/extensions/extensions.dart';
 
-class SocialBanner extends ConsumerStatefulWidget {
+class SocialBanner extends ConsumerWidget {
   const SocialBanner({super.key});
 
   @override
-  ConsumerState<SocialBanner> createState() => _SocialBannerState();
-}
-
-class _SocialBannerState extends ConsumerState<SocialBanner>
-    with TickerProviderStateMixin {
-  late final List<AnimationController> _bgControllers;
-  late final List<Animation<double>> _bgScaleAnimations;
-
-  @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context, WidgetRef ref) {
     final contactList = contacts();
 
-    _bgControllers = List.generate(
-      contactList.length,
-      (_) => AnimationController(vsync: this, duration: duration500),
-    );
-
-    _bgScaleAnimations = _bgControllers
-        .map(
-          (controller) => Tween<double>(begin: 0, end: 1.2).animate(
-            CurvedAnimation(parent: controller, curve: Curves.easeInOut),
+    // Slide in from left
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: -100, end: 0),
+      duration: duration1000,
+      curve: Curves.easeOutCubic,
+      builder: (context, value, child) {
+        return Transform.translate(offset: Offset(value, 0), child: child);
+      },
+      child: Container(
+        margin: EdgeInsets.only(left: context.autoAdaptive(s24)),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(context.autoAdaptive(s32)),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: context.autoAdaptive(s8),
+                vertical: context.autoAdaptive(s16),
+              ),
+              decoration: BoxDecoration(
+                color: kWhite.withValues(alpha: 0.7),
+                borderRadius: BorderRadius.circular(context.autoAdaptive(s32)),
+                border: Border.all(color: kWhite.withValues(alpha: 0.5)),
+                boxShadow: [
+                  BoxShadow(
+                    color: kBlack.withValues(alpha: 0.05),
+                    blurRadius: 10,
+                    offset: const Offset(2, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(contactList.length, (index) {
+                  return _SocialIcon(
+                    iconData: contactList[index].icon,
+                    onTap: () => ref
+                        .read(homeViewModelProvider)
+                        .onLaunchUrl(contactList[index].link),
+                    isLast: index == contactList.length - 1,
+                  );
+                }),
+              ),
+            ),
           ),
-        )
-        .toList();
-
-    _runSequentialBackgroundAnimation();
+        ),
+      ),
+    );
   }
+}
 
-  Future<void> _runSequentialBackgroundAnimation() async {
-    if (!mounted) return;
-    for (final controller in _bgControllers) {
-      if (!mounted) return;
-      await controller.forward();
-      await Future.delayed(duration200);
-      if (!mounted) return;
-      await controller.reverse();
-    }
-    _runSequentialBackgroundAnimation();
-  }
+class _SocialIcon extends StatefulWidget {
+  final IconData iconData;
+  final VoidCallback onTap;
+  final bool isLast;
+
+  const _SocialIcon({
+    required this.iconData,
+    required this.onTap,
+    this.isLast = false,
+  });
 
   @override
-  void dispose() {
-    for (final controller in _bgControllers) {
-      controller.dispose();
-    }
-    super.dispose();
-  }
+  State<_SocialIcon> createState() => _SocialIconState();
+}
+
+class _SocialIconState extends State<_SocialIcon> {
+  bool _isHovered = false;
 
   @override
   Widget build(BuildContext context) {
-    final contactList = contacts();
+    final scale = _isHovered ? 1.2 : 1.0;
 
-    return Container(
-      alignment: Alignment.centerLeft,
-      margin: EdgeInsets.only(left: context.autoAdaptive(s16)),
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: context.autoAdaptive(s6),
-          vertical: context.autoAdaptive(s12),
-        ),
-        decoration: BoxDecoration(
-          color: kGrey100,
-          borderRadius: BorderRadius.circular(context.autoAdaptive(24)),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: List.generate(contactList.length, (i) {
-            return <Widget>[
-                  AnimatedBuilder(
-                    animation: _bgScaleAnimations[i],
-                    builder: (_, child) => Transform.scale(
-                      scale: _bgScaleAnimations[i].value,
-                      child: Container(
-                        width: context.autoAdaptive(s24),
-                        height: context.autoAdaptive(s24),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: kBlue.withValues(alpha: 0.2),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Icon(
-                    contactList[i].icon,
-                    color: kGrey700,
-                    size: context.autoAdaptive(s18),
-                  ),
-                ]
-                .addStack(alignment: Alignment.center)
-                .addSizedBox(
-                  width: context.autoAdaptive(s24),
-                  height: context.autoAdaptive(s24) * 1.1,
-                )
-                .addInkWell(
-                  borderRadius: BorderRadius.circular(50),
-                  onTap: () => ref
-                      .read(homeViewModelProvider)
-                      .onLaunchUrl(contactList[i].link),
-                )
-                .addPadding(
-                  padding: EdgeInsets.only(
-                    bottom: i == contactList.length - 1
-                        ? 0
-                        : context.autoAdaptive(8),
-                  ),
-                );
-          }),
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: AnimatedContainer(
+          duration: duration200,
+          curve: Curves.easeOutBack,
+          margin: EdgeInsets.only(
+            bottom: widget.isLast ? 0 : context.autoAdaptive(12),
+          ),
+          padding: EdgeInsets.all(context.autoAdaptive(s10)),
+          transform: Matrix4.diagonal3Values(scale, scale, 1.0),
+          decoration: BoxDecoration(
+            color: _isHovered ? kGrey800 : Colors.transparent,
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            widget.iconData,
+            color: _isHovered ? kWhite : kGrey800,
+            size: context.autoAdaptive(s20),
+          ),
         ),
       ),
     );

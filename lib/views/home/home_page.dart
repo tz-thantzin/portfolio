@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../core/configs/configs.dart';
 import '../../core/routing/routes.dart';
@@ -21,18 +20,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   final ScrollController _scrollController = ScrollController();
-
   late final AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: duration1000);
-  }
+    // Controls the entrance of the IntroductionView elements
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    );
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+    // If no custom animation (navigating back), start entrance immediately
+    if (!widget.showCustomAnimation) {
+      _controller.forward();
+    }
   }
 
   @override
@@ -45,17 +47,14 @@ class _HomePageState extends State<HomePage>
   void _onTapScrollDown() {
     _scrollController.animateTo(
       context.screenHeight,
-      duration: duration500,
-      curve: Curves.easeInOut,
+      duration: duration800,
+      curve: Curves.fastOutSlowIn,
     );
   }
 
-  void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction > 0.45 && mounted) {
-      Future.delayed(duration300, () {
-        if (mounted) _controller.forward();
-      });
-    }
+  void _onLoadingDone() {
+    // Start entrance animation after splash screen finishes
+    if (mounted) _controller.forward();
   }
 
   @override
@@ -63,25 +62,29 @@ class _HomePageState extends State<HomePage>
     return Wrapper(
       selectedRoute: RoutePaths.home,
       selectedPageName: RouteName.home,
+      onLoadingAnimationDone: _onLoadingDone,
       customLoadingAnimation: widget.showCustomAnimation
           ? AnimatedLoadingPage(
               text: context.localization.thantzin,
-              onLoadingDone: () {},
+              onLoadingDone: _onLoadingDone,
               lineColor: kGrey100,
               style: context.titleMedium.copyWith(color: kWhite),
             )
           : null,
-
-      child: Column(
-        children: [
-          IntroductionView(
-            animationController: _controller,
-            onTapScrollDown: _onTapScrollDown,
-          ).addVisibilityDetector(onDetectVisibility: _onVisibilityChanged),
-          RecentProjectView(),
-          FooterView(),
-        ],
-      ).addScrollView(controller: _scrollController),
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        physics: const ClampingScrollPhysics(), // Better for web/desktop feel
+        child: Column(
+          children: [
+            IntroductionView(
+              animationController: _controller,
+              onTapScrollDown: _onTapScrollDown,
+            ),
+            RecentProjectView(),
+            FooterView(),
+          ],
+        ),
+      ),
     );
   }
 }

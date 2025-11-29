@@ -329,7 +329,7 @@ class _ContactPageState extends State<ContactPage>
                           borderColor: kGrey900,
                           onHoverColor: kWhite70,
                           isLoading: vm.isSending,
-                          iconData: Icons.send,
+                          icon: Icons.send,
                           onPressed: vm.isFormValid
                               ? () => _sendMessage(ref)
                               : null,
