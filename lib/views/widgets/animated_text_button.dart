@@ -14,6 +14,7 @@ class AnimatedTextButton extends StatefulWidget {
   final Color textColor;
   final double fontSize;
   final bool isLoading;
+  final TextStyle? style;
 
   const AnimatedTextButton(
     this.title, {
@@ -22,6 +23,7 @@ class AnimatedTextButton extends StatefulWidget {
     this.textColor = kWhite,
     this.isLoading = false,
     this.fontSize = s10,
+    this.style,
     super.key,
   });
 
@@ -42,7 +44,7 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
 
     _arrowOffset = Tween<Offset>(
       begin: Offset.zero,
-      end: const Offset(0.2, 0), // slide arrow slightly right
+      end: const Offset(0.2, 0),
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
@@ -67,10 +69,16 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
         ? widget.hoverColor
         : widget.textColor;
 
+    final TextStyle effectiveStyle = (widget.style ?? context.labelLarge)
+        .copyWith(
+          fontSize: context.autoAdaptive(widget.fontSize),
+          color: effectiveColor,
+        );
+
     return SizedBox(
       height: context.autoAdaptive(s24),
       child: MouseRegion(
-        key: ValueKey('MouseRegion_Animated_Text_Button'),
+        key: const ValueKey('MouseRegion_Animated_Text_Button'),
         onEnter: (_) => _handleHover(true),
         onExit: (_) => _handleHover(false),
         child: GestureDetector(
@@ -89,11 +97,12 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
                 AnimatedDefaultTextStyle(
                   duration: duration300,
                   curve: Curves.easeInOut,
-                  style: context.labelLarge.copyWith(
-                    fontSize: context.autoAdaptive(widget.fontSize),
-                    color: effectiveColor,
+                  style: effectiveStyle,
+                  child: BodyText(
+                    widget.title,
+                    style: effectiveStyle,
+                    fontSize: FontSize.small,
                   ),
-                  child: BodyText(widget.title, fontSize: FontSize.small),
                 ),
                 horizontalSpaceTiny,
                 SlideTransition(

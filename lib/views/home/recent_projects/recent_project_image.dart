@@ -28,7 +28,7 @@ class _RecentProjectImageState extends State<RecentProjectImage> {
       alignment: alignment,
       child: AnimatedScaleWidget(
         minScale: context.isMobile ? 0.6 : 0.8,
-        maxScale: 0.9,
+        maxScale: 1.0,
         child: Container(
           constraints: context.isMobile
               ? BoxConstraints(maxWidth: context.screenWidth * 0.3)
@@ -36,9 +36,9 @@ class _RecentProjectImageState extends State<RecentProjectImage> {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: kBlack.withValues(alpha: 0.2),
-                blurRadius: 10,
-                offset: const Offset(0, 5),
+                color: kBlack.withValues(alpha: 0.3),
+                blurRadius: 15,
+                offset: const Offset(0, 8),
               ),
             ],
             borderRadius: BorderRadius.circular(context.autoAdaptive(s16)),
@@ -47,7 +47,11 @@ class _RecentProjectImageState extends State<RecentProjectImage> {
           padding: EdgeInsets.all(context.autoAdaptive(s12)),
           child: AspectRatio(
             aspectRatio: 1,
-            child: SvgPicture.asset(widget.project.imagePath!),
+            child: SvgPicture.asset(
+              widget.project.imagePath!,
+              fit: BoxFit.contain,
+              height: context.autoAdaptive(s55),
+            ),
           ),
         ),
       ),

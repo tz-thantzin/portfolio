@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/views/widgets/text/label_text.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../../core/configs/configs.dart';
@@ -12,7 +12,6 @@ import '../../widgets/animated_slide_widget.dart';
 import '../../widgets/animated_text_button.dart';
 import '../../widgets/text/app_text.dart';
 import '../../widgets/text/body_text.dart';
-import '../../widgets/text/title_text.dart';
 import 'recent_project_card.dart';
 
 class RecentProjectView extends StatefulWidget {
@@ -29,10 +28,12 @@ class _RecentProjectViewState extends State<RecentProjectView>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: duration1000);
+
+    _controller = AnimationController(vsync: this, duration: duration500);
+
     _recentProjectController = AnimationController(
       vsync: this,
-      duration: duration3000,
+      duration: duration1500,
     );
   }
 
@@ -52,7 +53,7 @@ class _RecentProjectViewState extends State<RecentProjectView>
   void _startAnimations() {
     _controller.forward();
     _controller.addStatusListener((status) {
-      Future.delayed(duration300, () {
+      Future.delayed(duration200, () {
         if (mounted) {
           _recentProjectController.forward();
         }
@@ -76,12 +77,11 @@ class _RecentProjectViewState extends State<RecentProjectView>
                 controller: _controller,
                 start: 0.0,
                 end: 0.5,
-                child: TitleText(
+                child: LabelText(
                   context.localization.crafted_with_love,
                   textAlign: TextAlign.left,
                   color: kIndigo,
                   fontWeight: superBold,
-                  style: GoogleFonts.caveat(),
                 ),
               )
               .addAlign(alignment: Alignment.centerLeft)
@@ -95,7 +95,7 @@ class _RecentProjectViewState extends State<RecentProjectView>
             end: 0.8,
             child: BodyText(
               context.localization.recent_projects,
-              fontSize: FontSize.small,
+              fontSize: FontSize.medium,
               textAlign: TextAlign.left,
               color: kGrey1000,
             ),
@@ -118,21 +118,35 @@ class _RecentProjectViewState extends State<RecentProjectView>
               controller: _recentProjectController,
               start: slideStart.clamp(0.0, 1.0),
               end: slideEnd.clamp(0.0, 1.0),
-              direction: SlideDirection.upToDown,
+              direction: index.isOdd
+                  ? SlideDirection.upToDown
+                  : SlideDirection.downToUp,
               child: RecentProjectCard(project, isOddIndex: index.isOdd),
             );
           }),
+
           verticalSpaceMassive,
 
-          AnimatedTextButton(
-            context.localization.view_all_projects.toUpperCase(),
-            hoverColor: kGrey700,
-            textColor: kBlack,
-            fontSize: s14,
-            onPressed: () {
-              GoRouter.of(context).goNamed(RouteName.portfolio);
-            },
+          // View All Projects Button
+          AnimatedFadeWidget(
+            controller: _recentProjectController,
+            start: 0.8,
+            end: 1.0,
+            child: AnimatedTextButton(
+              context.localization.view_all_projects.toUpperCase(),
+              hoverColor: kGrey700,
+              textColor: kBlack,
+              fontSize: s14,
+              onPressed: () {
+                GoRouter.of(context).goNamed(RouteName.portfolio);
+              },
+              style: context.labelSmall.copyWith(
+                letterSpacing: 2.0,
+                fontWeight: bold,
+              ),
+            ).addAlign(alignment: Alignment.center),
           ),
+          verticalSpaceMassive,
         ],
       ),
     );

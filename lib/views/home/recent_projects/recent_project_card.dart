@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portfolio/views/widgets/text/title_text.dart';
 
 import '../../../core/configs/configs.dart';
 import '../../../core/di/providers.dart';
@@ -9,7 +10,6 @@ import '../../../utils/extensions/extensions.dart';
 import '../../widgets/animated_text_button.dart';
 import '../../widgets/text/app_text.dart';
 import '../../widgets/text/body_text.dart';
-import '../../widgets/text/display_text.dart';
 import 'recent_project_image.dart';
 
 class RecentProjectCard extends ConsumerWidget {
@@ -21,7 +21,7 @@ class RecentProjectCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: EdgeInsets.only(bottom: context.autoAdaptive(s40)),
+      padding: EdgeInsets.only(bottom: context.autoAdaptive(s64)),
       child: context.isMobile
           ? _MobileView(project)
           : _DesktopView(project, isOddIndex: isOddIndex),
@@ -30,8 +30,6 @@ class RecentProjectCard extends ConsumerWidget {
 }
 
 /// Mobile view
-/// The combined image/title card
-/// The full project description and link button
 class _MobileView extends StatelessWidget {
   final Project project;
   const _MobileView(this.project);
@@ -124,22 +122,22 @@ class _ProjectImage extends StatelessWidget {
     }
     /// DESKTOP VIEW
     else {
+      final Widget indexText = TitleText(
+        formattedIndex,
+        fontSize: FontSize.large,
+        color: kPrimary.withValues(alpha: s03),
+        fontWeight: superBold,
+        style: GoogleFonts.poppins(),
+      );
+
       final children = isOddIndex
           ? [
               RecentProjectImage(project, isOddIndex: isOddIndex),
               horizontalSpaceMedium,
-              DisplayText(
-                formattedIndex,
-                color: kPrimary.withValues(alpha: s05),
-                style: GoogleFonts.permanentMarker(),
-              ),
+              indexText,
             ]
           : [
-              DisplayText(
-                formattedIndex,
-                color: kPrimary.withValues(alpha: s05),
-                style: GoogleFonts.permanentMarker(),
-              ),
+              indexText,
               horizontalSpaceMedium,
               RecentProjectImage(project, isOddIndex: isOddIndex),
             ];
@@ -148,9 +146,17 @@ class _ProjectImage extends StatelessWidget {
         width: double.infinity,
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-          color: kPortfolioBg.withValues(alpha: s005),
+          color: kBlack.withValues(alpha: s005),
           borderRadius: BorderRadius.circular(context.autoAdaptive(s24)),
-          border: Border.all(color: kPrimary.withValues(alpha: s03)),
+
+          border: Border.all(color: kGrey200.withValues(alpha: s05)),
+          boxShadow: [
+            BoxShadow(
+              color: kBlack.withValues(alpha: 0.03),
+              blurRadius: 10,
+              offset: const Offset(0, 5),
+            ),
+          ],
         ),
         padding: EdgeInsets.all(context.autoAdaptive(s32)),
         child: Row(
@@ -198,6 +204,7 @@ class _ProjectDetail extends ConsumerWidget {
             fontSize: context.isMobile ? s14 : s12,
             onPressed: () =>
                 ref.read(homeViewModelProvider).onProjectView(project.github!),
+            style: context.labelSmall,
           ),
         ],
       ],
