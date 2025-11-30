@@ -8,15 +8,13 @@ import 'animated_fade_in_text.dart';
 class AnimatedHeaderText extends StatefulWidget {
   final String text;
   final TextStyle? style;
-  final Duration delay;
-  final Duration duration;
+  final AnimationController controller; // Requires controller from parent
 
   const AnimatedHeaderText({
     super.key,
     required this.text,
+    required this.controller,
     this.style,
-    this.delay = duration200,
-    this.duration = duration2000,
   });
 
   @override
@@ -25,87 +23,79 @@ class AnimatedHeaderText extends StatefulWidget {
 
 class _AnimatedHeaderTextState extends State<AnimatedHeaderText>
     with TickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final AnimationController _controller2;
+  late final Animation<double> _scaleAnimation;
   late final AnimationController _textController;
-  late final Animation<double> _primaryTween;
-  late final Animation<double> _whiteTween;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(vsync: this, duration: duration3000)
-      ..forward();
-    _controller2 = AnimationController(vsync: this, duration: duration3000);
+    // Re-use the parent controller's duration for the box scale-up effect
+    _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: widget.controller,
+        curve: const Interval(0.0, 0.7, curve: Curves.easeOutCubic),
+      ),
+    );
+
+    // Dedicated controller for staggered text reveal
     _textController = AnimationController(vsync: this, duration: duration1000);
 
-    _primaryTween = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn),
-    );
-
-    _whiteTween = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller2, curve: Curves.fastOutSlowIn),
-    );
-
-    _startAnimations();
+    // Start text animation after the box animation begins/progresses
+    widget.controller.addListener(_startTextAnimation);
   }
 
-  void _startAnimations() {
-    Future.delayed(duration500, () => _controller2.forward());
-
-    _controller2.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        Future.delayed(duration500, () => _textController.forward());
-      }
-    });
+  void _startTextAnimation() {
+    if (widget.controller.value > 0.3 &&
+        !_textController.isAnimating &&
+        !_textController.isCompleted) {
+      _textController.forward();
+      // Remove listener once text animation is triggered
+      widget.controller.removeListener(_startTextAnimation);
+    }
   }
 
   @override
   void dispose() {
-    _controller.dispose();
-    _controller2.dispose();
     _textController.dispose();
+    widget.controller.removeListener(_startTextAnimation);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return <Widget>[
-      // Two stacked dotted rectangles
-      <Widget>[
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        // Subtle Dotted Rectangle Box
         ScaleTransition(
-          scale: _primaryTween,
+          scale: _scaleAnimation,
           child: CustomPaint(
-            size: const Size(s200, s100),
+            size: context.isMobile
+                ? Size(context.autoAdaptive(s250), context.autoAdaptive(s150))
+                : Size(context.autoAdaptive(s350), context.autoAdaptive(s180)),
             painter: DottedRectanglePainter(
-              color: kPrimary,
-              strokeWidth: 2,
-              dashLength: 8,
-              gapLength: 4,
-            ),
-          ),
-        ),
-        ScaleTransition(
-          scale: _whiteTween,
-          child: CustomPaint(
-            size: const Size(s200, s100),
-            painter: DottedRectanglePainter(
-              color: kWhite,
-              strokeWidth: 2,
+              color: kBlack.withValues(alpha: 0.5), // Subtle color
+              strokeWidth: 1.5,
               dashLength: 5,
               gapLength: 3,
             ),
           ),
         ),
-      ].addStack().addSizedBox(width: s200, height: s100),
 
-      // Animated fade-in text
-      AnimatedFadeInText(
-        widget.text,
-        controller: _textController,
-        style: widget.style ?? context.titleMedium.copyWith(fontSize: s30),
-      ),
-    ].addStack(alignment: Alignment.center);
+        // Animated fade-in text
+        AnimatedFadeInText(
+          widget.text,
+          controller: _textController,
+          style:
+              widget.style ??
+              context.titleMedium.copyWith(
+                fontSize: context.autoAdaptive(s32),
+                fontWeight: bold,
+                color: kBlack,
+              ),
+        ),
+      ],
+    );
   }
 }

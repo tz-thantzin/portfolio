@@ -121,6 +121,7 @@ class _IntroductionViewState extends State<IntroductionView> {
               hoverColor: kTomato,
               textColor: kGrey800,
               onPressed: widget.onTapScrollDown,
+              showLeading: false,
               style: context.labelSmall.copyWith(letterSpacing: 2),
             ),
           ),

@@ -163,4 +163,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get failed_sent_message => 'Oops! Something went wrong.\\nPlease try again later.';
+
+  @override
+  String get scroll_down => 'Scroll down';
 }

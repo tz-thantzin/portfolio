@@ -51,5 +51,6 @@
   "your_message": "Your message (optional but helpful!)",
   "send_message": "Send Message",
   "message_sent_successfully": "Thank you! Your message has been sent successfully.\\nI’ll get back to you soon.",
-  "failed_sent_message": "Oops! Something went wrong.\\nPlease try again later."
+  "failed_sent_message": "Oops! Something went wrong.\\nPlease try again later.",
+  "scroll_down": "Scroll down"
 }

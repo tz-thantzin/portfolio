@@ -41,5 +41,14 @@ class DottedRectanglePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    // Repaint only if any of the properties change
+    if (oldDelegate is DottedRectanglePainter) {
+      return oldDelegate.color != color ||
+          oldDelegate.strokeWidth != strokeWidth ||
+          oldDelegate.dashLength != dashLength ||
+          oldDelegate.gapLength != gapLength;
+    }
+    return true;
+  }
 }

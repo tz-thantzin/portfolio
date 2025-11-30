@@ -404,6 +404,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Oops! Something went wrong.\\nPlease try again later.'**
   String get failed_sent_message;
+
+  /// No description provided for @scroll_down.
+  ///
+  /// In en, this message translates to:
+  /// **'Scroll down'**
+  String get scroll_down;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -15,6 +15,7 @@ class AnimatedTextButton extends StatefulWidget {
   final double fontSize;
   final bool isLoading;
   final TextStyle? style;
+  final bool showLeading;
 
   const AnimatedTextButton(
     this.title, {
@@ -24,6 +25,7 @@ class AnimatedTextButton extends StatefulWidget {
     this.isLoading = false,
     this.fontSize = s10,
     this.style,
+    this.showLeading = true,
     super.key,
   });
 
@@ -55,11 +57,15 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
   }
 
   void _handleHover(bool hover) {
-    setState(() => _isButtonHovered = hover);
-    if (hover) {
-      _controller.forward();
+    if (widget.showLeading) {
+      setState(() => _isButtonHovered = hover);
+      if (hover) {
+        _controller.forward();
+      } else {
+        _controller.reverse();
+      }
     } else {
-      _controller.reverse();
+      setState(() => _isButtonHovered = hover);
     }
   }
 
@@ -104,19 +110,21 @@ class _AnimatedTextButtonState extends State<AnimatedTextButton>
                     fontSize: FontSize.small,
                   ),
                 ),
-                horizontalSpaceTiny,
-                SlideTransition(
-                  position: _arrowOffset,
-                  child: SvgPicture.asset(
-                    kRightArrowSVG,
-                    height: context.autoAdaptive(s14),
-                    width: context.autoAdaptive(s14),
-                    colorFilter: ColorFilter.mode(
-                      effectiveColor,
-                      BlendMode.srcIn,
+                if (widget.showLeading) ...[
+                  horizontalSpaceTiny,
+                  SlideTransition(
+                    position: _arrowOffset,
+                    child: SvgPicture.asset(
+                      kRightArrowSVG,
+                      height: context.autoAdaptive(s14),
+                      width: context.autoAdaptive(s14),
+                      colorFilter: ColorFilter.mode(
+                        effectiveColor,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
-                ),
+                ],
               ],
             ],
           ),
