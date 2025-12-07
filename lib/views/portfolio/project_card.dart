@@ -17,7 +17,7 @@ class ProjectCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDesktop = context.isDesktop;
-    final bool hasGithub = project.github != null;
+    final bool hasGithub = project.link != null;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: s8),
@@ -46,9 +46,8 @@ class ProjectCard extends ConsumerWidget {
           splashColor: kIndigo.withValues(alpha: 0.1),
           highlightColor: kIndigo.withValues(alpha: 0.05),
           onTap: hasGithub
-              ? () => ref
-                    .read(homeViewModelProvider)
-                    .onProjectView(project.github!)
+              ? () =>
+                    ref.read(homeViewModelProvider).onProjectView(project.link!)
               : null,
           child: Padding(
             padding: EdgeInsets.all(context.autoAdaptive(s28)),
@@ -96,7 +95,7 @@ class ProjectCard extends ConsumerWidget {
           fontSize: FontSize.small,
           color: kGrey700,
           height: 1.6,
-          maxLines: 5,
+          maxLines: 3,
           overflow: TextOverflow.ellipsis,
         ),
       ],

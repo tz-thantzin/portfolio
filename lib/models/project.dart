@@ -6,14 +6,14 @@ class Project extends Equatable {
   final String projectName;
   final String description;
   final String? imagePath;
-  final String? github;
+  final String? link;
   final Language language;
 
   const Project({
     required this.projectName,
     required this.description,
     this.imagePath,
-    this.github,
+    this.link,
     this.language = Language.flutter,
   });
 
@@ -22,7 +22,7 @@ class Project extends Equatable {
     projectName,
     description,
     imagePath,
-    github,
+    link,
     language,
   ];
 }

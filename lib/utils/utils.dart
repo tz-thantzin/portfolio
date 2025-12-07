@@ -5,12 +5,9 @@ import 'event_analytics.dart';
 
 Future<void> launchUrlExternal(String url) async {
   final Uri uri = Uri.parse(url);
-  EventAnalytics.sentEvent(
+  AnalyticsService().sentEvent(
     eventName: EventType.launchUrl,
-    parameters: <String, Object>{
-      'url': url,
-      'timestamp': DateTime.now().toIso8601String(),
-    },
+    parameters: <String, Object>{'url': url},
   );
   if (await canLaunchUrl(uri)) {
     await launchUrl(uri, mode: LaunchMode.externalApplication);

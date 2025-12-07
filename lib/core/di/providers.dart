@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
+
 import '../../data/data_sources/contact_datasource.dart';
 import '../../data/repositories/contact_impl.dart';
 import '../../domain/repositories/contact_repository.dart';
@@ -30,9 +31,11 @@ final contactUseCaseProvider = Provider<ContactUseCase>(
 );
 
 // ViewModels
-final homeViewModelProvider = ChangeNotifierProvider<HomeViewModel>(
-  (ref) => HomeViewModel(),
-);
+final homeViewModelProvider = ChangeNotifierProvider<HomeViewModel>((ref) {
+  final vm = HomeViewModel();
+  vm.initState();
+  return vm;
+});
 
 final contactViewModelProvider = ChangeNotifierProvider<ContactViewModel>(
   (ref) => ContactViewModel(ref.watch(contactUseCaseProvider)),

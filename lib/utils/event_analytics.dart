@@ -1,13 +1,26 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-class EventAnalytics {
-  static Future<void> sentEvent({
+class AnalyticsService {
+  static final AnalyticsService _instance = AnalyticsService._internal();
+  factory AnalyticsService() => _instance;
+  AnalyticsService._internal();
+
+  final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
+
+  Future<void> logAppOpen() async {
+    await _analytics.logAppOpen();
+  }
+
+  Future<void> sentEvent({
     required String eventName,
     Map<String, Object>? parameters,
   }) async {
-    FirebaseAnalytics.instance.logEvent(
+    _analytics.logEvent(
       name: eventName,
-      parameters: parameters,
+      parameters: {
+        ...parameters ?? {},
+        'timestamp': DateTime.now().toIso8601String(),
+      },
     );
   }
 }

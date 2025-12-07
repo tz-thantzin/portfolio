@@ -86,11 +86,19 @@ List<Social> footerContacts() {
 List<Project> recentProjects() {
   return <Project>[
     Project(
+      projectName: 'CodeSphere',
+      description:
+          'CodeSphere is a mobile app development service where I create fast, secure, and modern Android/iOS applications tailored for business needs — from HRM and e-commerce to real-estate and custom solutions.',
+      imagePath: kFlutterSVG,
+      link: 'https://www.codespheremm.com/',
+      language: Language.flutter,
+    ),
+    Project(
       projectName: 'Toastify',
       description:
-          'A customizable toast notification system for Flutter. Supports banners, snackbars, and advanced styling.',
+          'CodeSphere is a personal mobile app development studio delivering fast, secure, and modern Android/iOS applications for businesses.',
       imagePath: kFlutterSVG,
-      github: 'https://github.com/tz-thantzin/my_toastify',
+      link: 'https://github.com/tz-thantzin/my_toastify',
       language: Language.flutter,
     ),
     Project(
@@ -98,7 +106,7 @@ List<Project> recentProjects() {
       description:
           'A Flutter package providing typography features similar to React MUI Typography.',
       imagePath: kFlutterSVG,
-      github: 'https://github.com/tz-thantzin/mui_typography',
+      link: 'https://github.com/tz-thantzin/mui_typography',
       language: Language.flutter,
     ),
     Project(
@@ -106,7 +114,7 @@ List<Project> recentProjects() {
       description:
           'A Flutter-based chat application developed as a personal project to explore real-time messaging with Firebase.',
       imagePath: kFlutterSVG,
-      github: 'https://github.com/tz-thantzin/firebase_chat_flutter',
+      link: 'https://github.com/tz-thantzin/firebase_chat_flutter',
       language: Language.flutter,
     ),
     Project(
@@ -114,7 +122,7 @@ List<Project> recentProjects() {
       description:
           'A Swift-based weather application developed as a personal project.',
       imagePath: kSwiftSVG,
-      github: 'https://github.com/tz-thantzin/Weather-iOS',
+      link: 'https://github.com/tz-thantzin/Weather-iOS',
       language: Language.iOS,
     ),
     Project(
@@ -122,7 +130,7 @@ List<Project> recentProjects() {
       description:
           'A Swift-based foreign currency application developed as a personal project.',
       imagePath: kSwiftSVG,
-      github: 'https://github.com/tz-thantzin/m-ratex-ios',
+      link: 'https://github.com/tz-thantzin/m-ratex-ios',
       language: Language.iOS,
     ),
   ];
@@ -131,11 +139,19 @@ List<Project> recentProjects() {
 List<Project> projects() {
   return <Project>[
     Project(
+      projectName: 'CodeSphere',
+      description:
+          'CodeSphere is a personal mobile app development studio delivering fast, secure, and modern Android/iOS applications for businesses.',
+      imagePath: kFlutterSVG,
+      link: 'https://www.codespheremm.com/',
+      language: Language.flutter,
+    ),
+    Project(
       projectName: 'Toastify',
       description:
           'A customizable toast notification system for Flutter. Supports banners, snackbars, and advanced styling.',
       imagePath: kFlutterSVG,
-      github: 'https://github.com/tz-thantzin/my_toastify',
+      link: 'https://github.com/tz-thantzin/my_toastify',
       language: Language.flutter,
     ),
     Project(
@@ -143,7 +159,7 @@ List<Project> projects() {
       description:
           'A Flutter package providing typography features similar to React MUI Typography.',
       imagePath: kFlutterSVG,
-      github: 'https://github.com/tz-thantzin/mui_typography',
+      link: 'https://github.com/tz-thantzin/mui_typography',
       language: Language.flutter,
     ),
     Project(
@@ -151,7 +167,7 @@ List<Project> projects() {
       description:
           'Customizable Flutter animated text widgets for dynamic, engaging text effects.',
       imagePath: kFlutterSVG,
-      github: 'https://github.com/tz-thantzin/my_animated_text',
+      link: 'https://github.com/tz-thantzin/my_animated_text',
       language: Language.flutter,
     ),
     Project(
@@ -159,7 +175,7 @@ List<Project> projects() {
       description:
           'A Flutter-based chat application developed as a personal project to explore real-time messaging with Firebase.',
       imagePath: kFlutterSVG,
-      github: 'https://github.com/tz-thantzin/firebase_chat_flutter',
+      link: 'https://github.com/tz-thantzin/firebase_chat_flutter',
       language: Language.flutter,
     ),
     Project(
@@ -167,7 +183,7 @@ List<Project> projects() {
       description:
           'Experimental Android and iOS app built with flutter to explore and practice modern development techniques.',
       imagePath: kFlutterSVG,
-      github: 'https://github.com/tz-thantzin/my_flutter_riverpod',
+      link: 'https://github.com/tz-thantzin/my_flutter_riverpod',
       language: Language.flutter,
     ),
     Project(
@@ -175,7 +191,7 @@ List<Project> projects() {
       description:
           'A Flutter-based foreign currency application developed as a personal project.',
       imagePath: kFlutterSVG,
-      github: 'https://github.com/tz-thantzin/myan_ratex',
+      link: 'https://github.com/tz-thantzin/myan_ratex',
       language: Language.flutter,
     ),
     Project(
@@ -183,7 +199,7 @@ List<Project> projects() {
       description:
           'A Swift-based foreign currency application developed as a personal project.',
       imagePath: kSwiftSVG,
-      github: 'https://github.com/tz-thantzin/m-ratex-ios',
+      link: 'https://github.com/tz-thantzin/m-ratex-ios',
       language: Language.iOS,
     ),
     Project(
@@ -191,7 +207,7 @@ List<Project> projects() {
       description:
           'A Swift-based weather application developed as a personal project.',
       imagePath: kSwiftSVG,
-      github: 'https://github.com/tz-thantzin/Weather-iOS',
+      link: 'https://github.com/tz-thantzin/Weather-iOS',
       language: Language.iOS,
     ),
   ];

@@ -195,7 +195,7 @@ class _ProjectDetail extends ConsumerWidget {
           fontSize: FontSize.small,
           color: kGrey1000.withValues(alpha: s08),
         ),
-        if (project.github != null) ...[
+        if (project.link != null) ...[
           verticalSpaceMedium,
           AnimatedTextButton(
             context.localization.view_project,
@@ -203,7 +203,7 @@ class _ProjectDetail extends ConsumerWidget {
             hoverColor: kPrimary.withValues(alpha: s05),
             fontSize: context.isMobile ? s14 : s12,
             onPressed: () =>
-                ref.read(homeViewModelProvider).onProjectView(project.github!),
+                ref.read(homeViewModelProvider).onProjectView(project.link!),
             style: context.labelSmall,
           ),
         ],

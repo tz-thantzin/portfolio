@@ -8,6 +8,9 @@ class HomeViewModel extends ChangeNotifier {
   bool _isDrawerOpen = false;
 
   bool get isDrawerOpen => _isDrawerOpen;
+  void initState() {
+    AnalyticsService().logAppOpen();
+  }
 
   void closeDrawer() {
     _isDrawerOpen = false;
@@ -31,23 +34,14 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   void onDownloadResumeBtnPressed() {
-    EventAnalytics.sentEvent(
-      eventName: EventType.downloadResume,
-      parameters: <String, Object>{
-        'timestamp': DateTime.now().toIso8601String(),
-      },
-    );
-
+    AnalyticsService().sentEvent(eventName: EventType.downloadResume);
     launchUrlExternal(kMyCV);
   }
 
   void onProjectView(String path) {
-    EventAnalytics.sentEvent(
+    AnalyticsService().sentEvent(
       eventName: EventType.projectView,
-      parameters: <String, Object>{
-        'timestamp': DateTime.now().toIso8601String(),
-        'path': path,
-      },
+      parameters: <String, Object>{'path': path},
     );
 
     launchUrlExternal(path);
