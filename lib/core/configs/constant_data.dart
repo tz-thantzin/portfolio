@@ -47,7 +47,7 @@ List<Social> contacts() {
     ),
     Social(
       name: 'Facebook',
-      link: 'https://www.facebook.com/devthantzin/',
+      link: 'https://www.facebook.com/devtzlogic/',
       icon: _getIcon('Facebook'),
     ),
     Social(
@@ -247,6 +247,20 @@ List<Skill> languagesAndTools(BuildContext context) {
 
 List<WorkExperience> experiences() {
   return <WorkExperience>[
+    WorkExperience(
+      title: "Senior Mobile Application Developer",
+      company: "mBridge Co., Ltd",
+      period: "Nov 2025 – Present",
+      workMode: WorkMode.remote,
+      responsibilities: [
+        'Designed, developed, and maintained high-quality mobile applications using Flutter and Native Android (Kotlin) for both iOS and Android platforms.',
+        'Built scalable, maintainable, and performance-optimized applications following clean architecture principles.',
+        'Collaborated closely with cross-functional teams including UI/UX designers, product managers, and backend developers to deliver cohesive and user-friendly solutions.',
+        'Implemented new features, improved existing functionalities, and optimized app performance.',
+        'Identified, debugged, and resolved complex technical issues and bugs to ensure application stability and reliability.',
+        'Managed state management, API integrations, and local database implementation.',
+      ],
+    ),
     WorkExperience(
       title: "Freelance Mobile Application Developer",
       company: "",
