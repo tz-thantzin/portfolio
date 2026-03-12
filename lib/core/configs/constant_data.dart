@@ -86,6 +86,14 @@ List<Social> footerContacts() {
 List<Project> recentProjects() {
   return <Project>[
     Project(
+      projectName: 'HomeFindr',
+      description:
+      'Homez is a modern real estate web application for buying, selling, and renting properties, built with Flutter.',
+      imagePath: kFlutterSVG,
+      link: 'https://homefindr-a3c0b.web.app/',
+      language: Language.flutter,
+    ),
+    Project(
       projectName: 'CodeSphere',
       description:
           'CodeSphere is a mobile app development service where I create fast, secure, and modern Android/iOS applications tailored for business needs — from HRM and e-commerce to real-estate and custom solutions.',
@@ -138,6 +146,14 @@ List<Project> recentProjects() {
 
 List<Project> projects() {
   return <Project>[
+    Project(
+      projectName: 'HomeFindr',
+      description:
+      'Homez is a modern real estate web application for buying, selling, and renting properties, built with Flutter.',
+      imagePath: kFlutterSVG,
+      link: 'https://homefindr-a3c0b.web.app/',
+      language: Language.flutter,
+    ),
     Project(
       projectName: 'CodeSphere',
       description:
